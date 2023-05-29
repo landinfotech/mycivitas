@@ -1,0 +1,6 @@
+{% load i18n %}
+
+<label for='st_reopened' class="radio-inline">
+    <input type='radio' name='new_status' value='2' id='st_reopened' {% if checked %}checked='checked'{% endif %}>
+    {% trans "Reopened" %}
+</label>

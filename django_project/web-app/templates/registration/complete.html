@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Signup Complete
+{% endblock %}
+
+{% block stylesheet %}
+{% endblock stylesheet %}
+
+{% block content %}
+    <br><br><br><br>
+    <h3>Your account and organisation subscription is now active!</h3>
+    <br><br>
+    <a class="btn btn-primary text-light" href="{% url "organisation_detail" pk=object.id %}#manage-access">Manage Users</a>
+    <br><br>
+    <br><br>
+{% endblock %}

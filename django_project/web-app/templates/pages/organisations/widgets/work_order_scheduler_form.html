@@ -1,0 +1,43 @@
+{% load i18n static %}
+<div class="modal fade" tabindex="-1" role="dialog" id="scheduler-form">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <form method='post' enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="modal-body">
+                    {% for field in scheduled_form %}
+                        <div class="form-group">
+                            <label for='id_{{ field.name }}'>
+                                {{ field.label }}
+                                {% if not field.field.required %}
+                                    ({% trans "Optional" %})
+                                {% endif %}
+                            </label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <small class='error'>{{ field.errors }}</small>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <small class='form_help_text help-block'>{% trans field.help_text %}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer row">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block col" style="margin-top: 0">
+                        {% trans "Save" %}
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-lg btn-block col" style="margin-top: 0" data-dismiss="modal">
+                        {% trans "Close" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

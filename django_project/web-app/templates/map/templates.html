@@ -1,0 +1,42 @@
+<script type='text/template' id='_row_property'>
+    <tr class="extra-property">
+        <td><%= key %></td>
+        <td><%= value %></td>
+    </tr>
+</script>
+<script type='text/template' id='_widget-content'>
+    <div id="<%= id %>" class="content full widget" style="display: none">
+        <div class="title">
+            <div><%= name %></div>
+            <i><%= description %></i>
+            <button class="action-button">
+                <%= actionButton %>
+            </button>
+        </div>
+        <div class="content-widget"></div>
+    </div>
+</script>
+<script type='text/template' id='_widget-button'>
+    <div id="<%= id %>-button" class="toggle-button" data-toggle="tooltip" title="<%= name %>">
+        <%= icon %>
+        <div class="widget-notification"><i class="fa fa-exclamation" aria-hidden="true"></i></div>
+        <div class="widget-notification-message">
+            This is message
+        </div>
+    </div>
+</script>
+<script type='text/template' id='_layer-selection-row'>
+    <div class="layer-row active" data-layername="<%= layername %>">
+        <a aria-hidden="true" data-toggle="collapse" href="#<%= id %>"
+           role="button" aria-expanded="false" aria-controls="collapseExample" class="collapsed button-collapse">
+            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-caret-up"></i>
+        </a>
+        <i class="fa fa-check-square" aria-hidden="true"></i>
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+        <%= layername %>
+        <div class="layer-list collapse" id="<%= id %>">
+            <img src="<%= legendURL %>">
+        </div>
+    </div>
+</script>

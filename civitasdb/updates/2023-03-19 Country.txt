@@ -1,0 +1,32 @@
+-- create country table
+CREATE TABLE IF NOT EXISTS public.country
+(
+    id SERIAL PRIMARY KEY,
+    code character varying(128) COLLATE pg_catalog."default" NOT NULL,
+    name character varying(512) COLLATE pg_catalog."default" NOT NULL,
+    geometry geometry(MultiPolygon,4326),
+    CONSTRAINT country_code_key UNIQUE (code)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.country
+    OWNER to doadmin;
+
+GRANT SELECT ON TABLE public.country TO reader;
+
+GRANT ALL ON TABLE public.country TO doadmin;
+
+GRANT SELECT ON TABLE public.country TO technician;
+
+-- alter province table and add relation to country table
+ALTER TABLE province
+ADD COLUMN	country_id integer;
+
+ALTER TABLE province
+ADD CONSTRAINT province_id_country_id FOREIGN KEY (country_id)
+        REFERENCES public.country (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        DEFERRABLE INITIALLY DEFERRED
+;

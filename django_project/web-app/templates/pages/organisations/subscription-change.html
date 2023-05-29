@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        #price-list {
+            padding: 0 20px;
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block content %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <h2>
+        <a href='{% url "organisation_detail" pk=object.id %}'>Back to {{ object.name }}</a>
+        Subscription plan
+    </h2>
+    <hr>{% load static %}
+    <link href="{% static 'css/widget/subscription.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <script src="https://js.stripe.com/v3/"></script>
+    {% include "widgets/price-list.html" %}
+    <br>
+    <div class="checkout">
+        <div class="card-title font-weight-bold">Checkout</div>
+        <div id="max-user-errors" role="alert" class="error">
+            The current plan max user access is {{ object.max_user }} which is more than new plan.<br>
+            The new one max user access will be <span id="max-user-count"></span>.<br>
+            Please remove some user access on organisation edit page first before subscribe.<br>
+            The exceeded user access will be removed automatically after subscribed.
+            <br>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-6 text-muted">
+                <p>Plan:</p>
+                <p>Price:</p>
+            </div>
+            <div class="col-6 text-right">
+                <p id="plan-indicator"></p>
+                <p id="price-indicator"></p>
+                <p hidden id="price-id"></p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6 text-muted">
+                <p><b>Balance</b></p>
+                <p>Start:</p>
+                <p>End:</p>
+            </div>
+            <div class="col-6 text-right">
+                <p style="color: white">|</p>
+                <p id="start-balance-id">{{ balance }}</p>
+                <p id="ending-balance-id"></p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6 text-muted">
+                <p>Charged:</p>
+            </div>
+            <div class="col-6 text-right">
+                <p class="charged-id"></p>
+            </div>
+        </div>
+        <hr>
+        <form id="subscription-form" method='post'>
+            {% csrf_token %}
+            <div id="card-element">
+            </div>
+            <div id="card-errors" role="alert" class="error"></div>
+            <br>
+            <button id="submit" type="submit" class="btn main-button btn-primary" style="width: 100%" disabled>
+                <span class="charged-id">Select plan</span>
+            </button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        const upcomingPlans = {{ upcoming_plans|safe }};
+        let MAX_USER =  {{ object.max_user }};
+        const $cardError = $('#card-errors');
+        const $submitButton = $(':input[type="submit"]');
+        const $endingBalance = $('#ending-balance-id');
+        const $charged = $('.charged-id');
+        const $maxUserCount = $('#max-user-count');
+
+        /** Function when plan selected
+         * Update checkout indicator
+         */
+        function planSelect(element, name, price, priceId, maxUser) {
+            {# toggle other button #}
+            const $otherButton = $('.btn-success')
+            $otherButton.addClass('btn-primary');
+            $otherButton.removeClass('btn-success');
+            $(element).addClass('btn-success');
+            $(element).removeClass('btn-primary');
+
+            $('#plan-indicator').html(name)
+            $('#price-indicator').html(price)
+            $('#price-id').html(priceId);
+
+            subSelected = true;
+            if (subSelected) {
+                $submitButton.prop('disabled', false);
+            }
+            $('#max-user-errors').hide()
+            if (MAX_USER !== 0 && maxUser < MAX_USER) {
+                $('#max-user-errors').show()
+                $maxUserCount.html(maxUser)
+            }
+            const upcomingPlan = upcomingPlans[priceId];
+            $charged.html(upcomingPlan['charged']);
+            $endingBalance.html(upcomingPlan['balance']);
+        }
+
+        function displayError(error) {
+            $('button').prop('disabled', false);
+            if (error) {
+                $cardError.show();
+                $cardError.html(error)
+                $submitButton.prop('disabled', true);
+            }
+        }
+
+        $("#subscription-form").submit(function (event) {
+            $cardError.html('');
+            $cardError.hide();
+            $('button').prop('disabled', true);
+            const paymentParams = {
+                plan_id: $('#price-id').html()
+            };
+            fetch("{% url "organisation_subscription_change" pk=object.id %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(paymentParams)
+            }).then((response) => {
+                return response.json();
+            }).then((result) => {
+                if (result.error) {
+                    throw result;
+                }
+                window.location.href = '{% url "organisation_detail" pk=object.id %}#subscription';
+            }).catch(function (result) {
+                displayError(result.error);
+            });
+            event.preventDefault();
+        });
+    </script>
+{% endblock %}

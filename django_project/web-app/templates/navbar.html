@@ -1,0 +1,93 @@
+{% load i18n %}
+{% load static %}
+<div id="navbar">
+    <div class="row">
+        <div class="title">
+            <a href="/" style="margin-right: 20px">{% include "logo.html" %}</a>
+        </div>
+        <div class="col">
+            <a class="item section-button" href="/#how-does-civitas-work" data-target="#how-does-civitas-work">{% trans "How Does MyCivitas Work?" %}</a>
+            <a class="item section-button" href="/#pricing" data-target="#pricing">{% trans "Pricing" %}</a>
+            <a class="item section-button" href="/#our-story" data-target="#our-story">{% trans "Our Story" %}</a>
+            <a class="item section-button" href="https://github.com/landinfotech/civitas-asset-management/wiki" data-target="#our-story" target="_blank">{% trans "Documentation" %}</a>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="item">
+                <a href="{% url 'map' %}">{% trans "Community Map" %}</a>
+            </div>
+            <div class="item">
+                {% if request.path == '/community-map' %}
+                <p onclick="showTables()">{% trans "View Table" %}</p>
+                {% else %}
+                    <a href="{% url 'map' %}?view_table=1">{% trans "View Table" %}</a>
+                {% endif %}
+            </div>
+            <div class="item">
+                <a href="{% url 'community-dashboard-list' %}">{% trans "Dashboard" %}</a>
+            </div>
+            <div class="item">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'helpdesk:list' %}">{% trans "Work Orders" %}</a>
+                {% endif %}
+            </div>
+            <div class="navbar-options">
+                <a id="profile-navbar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{ user.avatar_url }}">
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'user-detail' user.get_username %}">
+                            <b>{{ user.get_username }}</b>
+                            <br>
+                            <span style="opacity: 0.5; font-size: 12px">View profile</span>
+                        </a>
+                    </li>
+                    {% if user.is_staff %}
+                        <li>
+                            <a href="/admin/">{% trans "Admin" %}</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'user-detail' user.get_username %}#organisations">
+                            Organisations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user-settings' %}">{% trans "Settings" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}?next=/">{% trans "Logout" %}</a>
+                    </li>
+                </ul>
+            </div>
+        {% else %}
+            <div class="item">
+                <b><a href="{% url "login" %}?next={% url "map" %}">{% trans "SIGN IN" %}</a></b>
+            </div>
+            <div class="item" style="margin-top: -17px;">
+                <a href="{% url 'signup' %}">
+                    <button class="blue-button content-button" style="padding: 18px 20px">Want to register your community? — <b>SIGN UP</b></button>
+                </a>
+
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        function hashHandler(target) {
+            $('html').animate({
+                scrollTop: $(target).offset().top
+            }, 500, function () {
+                window.location.hash = target;
+            });
+        }
+
+        const $button = $('.section-button');
+        $button.click(function () {
+            const target = $(this).data('target');
+            hashHandler(target);
+        });
+    })
+</script>

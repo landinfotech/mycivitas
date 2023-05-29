@@ -1,0 +1,163 @@
+{% load humanize %}
+{% block content %}
+{% if obj.qs.count > 0 %}
+
+<div id="tab_{{obj.id}}" style="page-break-after: always;background-color:white; position: relative;" class=" mt-2 mb-2 tabcontent">
+    <button data-html2canvas-ignore id="generate_{{obj.id}}" class="btn btn-primary pdf-button">Download PDF</button>
+
+<div class="centered-content">
+
+    <div class="mb-5 centered-content" style="width: 100% !important; height: 100%; position: relative;">
+        <h5 class="_title" style="color: red; width: 25%;">{{obj.title}}</h5><br>
+        <h6 class="_sum" >${{obj.sum.sum|floatformat:0|intcomma}}</h6>
+
+        <div class="canvas_chart" style="page-break-after: always;">
+            <div id="{{index}}_{{obj.id}}" style="width: 100%; height: 100% !important"></div>
+        </div>
+        
+        <div data-html2canvas-ignore  id="table_{{obj.id}}" style="margin-top: 120px !important;">
+            <table class="table mt-2 table-bordered ">
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>Remaining Years</td>
+                        {% for entry in obj.system_names %}
+                            <td>{{entry.system_name}}</td>
+                        {% endfor %}    
+                        <td>Total Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in obj.formatted %}
+                    <tr>
+                            <td style="text-align: left;">{{ entry.remaining_years }}</td>
+                            {% for asset in entry.asset %}
+                                <td style="text-align: right;">${{asset.values|floatformat:0|intcomma}}</td>
+                            {% endfor %} 
+                            <td style="text-align: left;">${{ entry.total|floatformat:0|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr >
+                        <td style="text-align: left;"><strong>Total</strong></td>
+                        {% for entry in obj.total %}
+                            <td style="text-align: right;">${{entry.total|floatformat:0|intcomma}}</td>
+                        {% endfor %}
+                        <td style="text-align: right;">${{obj.sum.sum|floatformat:0|intcomma}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+
+        <div id="table_{{obj.id}}" class="pdf-print" style="margin-top: 300px !important; ">
+            <table class="table mt-2 table-bordered ">
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>Remaining Years</td>
+                        {% for entry in obj.system_names %}
+                            <td>{{entry.system_name}}</td>
+                        {% endfor %}    
+                        <td>Total Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in obj.pdf_table_1 %}
+                    <tr>
+                            <td style="text-align: left;">{{ entry.remaining_years }}</td>
+                            {% for asset in entry.asset %}
+                                <td style="text-align: right;">${{asset.values|floatformat:0|intcomma}}</td>
+                            {% endfor %} 
+                            <td style="text-align: left;">${{ entry.total|floatformat:0|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+
+        <div id="table_{{obj.id}}" class="pdf-print" style="margin-top: 500px !important;">
+            <table class="table mt-2 table-bordered ">
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>Remaining Years</td>
+                        {% for entry in obj.system_names %}
+                            <td>{{entry.system_name}}</td>
+                        {% endfor %}    
+                        <td>Total Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in obj.pdf_table_2 %}
+                    <tr>
+                            <td style="text-align: left;">{{ entry.remaining_years }}</td>
+                            {% for asset in entry.asset %}
+                                <td style="text-align: right;">${{asset.values|floatformat:0|intcomma}}</td>
+                            {% endfor %} 
+                            <td style="text-align: left;">${{ entry.total|floatformat:0|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr >
+                        <td style="text-align: left;"><strong>Total</strong></td>
+                        {% for entry in obj.total %}
+                            <td style="text-align: right;">${{entry.total|floatformat:0|intcomma}}</td>
+                        {% endfor %}
+                        <td style="text-align: right;">${{obj.sum.sum|floatformat:0|intcomma}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+</div>
+    
+<style>
+    .centered-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        align-content: center !important;
+        justify-items: center !important;
+        justify-content: center !important;
+        vertical-align: middle !important;
+      }
+</style>
+
+<script type="module">
+
+var data = [
+    {% for val in obj.graph %}
+        {
+            x:  [{% for x_val in val.x %} "{{x_val}}", {% endfor %}],
+            y:  [{% for y_val in val.y %} {{y_val}}, {% endfor %}],
+            name: stringDivider('{{val.name}}', 25, "<br>"),
+            type: 'bar'
+        },
+    {% endfor %}
+];
+
+var layout = {barmode: 'stack', width: 1000, height: 500};
+
+Plotly.newPlot('{{index}}_{{obj.id}}', data, layout);
+    
+</script>
+
+<script>
+
+    let btn_{{obj.id}} = document.getElementById("generate_{{obj.id}}");
+
+    window.addEventListener('scroll', function() {
+        if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+            btn_{{obj.id}}.style.display = "none";
+        } else {
+            btn_{{obj.id}}.style.display = "block";
+        }
+    });
+
+    document.getElementById('generate_{{obj.id}}').addEventListener('click', function() {
+        const element = document.getElementById('tab_{{obj.id}}');
+        createPDF(element, 1000, -50, -250, 'portrait', '{{community}}', 2);
+    })
+</script>
+</div>
+{% endif %}
+{% endblock content %}

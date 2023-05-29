@@ -1,0 +1,408 @@
+# -------------------------------
+# MapProxy example configuration.
+# -------------------------------
+#
+# This is a minimal MapProxy configuration.
+# See full_example.yaml and the documentation for more options.
+
+services:
+  demo:
+  wms:
+    md:
+      title: MapProxy WMS Proxy
+      abstract: MapProxy for my civitas
+      online_resource: http://nginx/
+
+sources:
+  natural:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Natural
+      transparent: true
+      styles: default
+  fleet_and_equipment:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Fleet and Equipment
+      transparent: true
+      styles: default
+  structures:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Structures
+      transparent: true
+      styles: default
+  transportation_network:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Transportation Network
+      transparent: true
+      styles: default
+  water_network:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Water Network
+      transparent: true
+      styles: default
+  wastewater_network:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Wastewater Network
+      transparent: true
+      styles: default
+  stormwater_network:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Stormwater Network
+      transparent: true
+      styles: default
+
+  # Risk
+  natural_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Natural
+      transparent: true
+      styles: risk
+  fleet_and_equipment_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Fleet and Equipment
+      transparent: true
+      styles: risk
+  structures_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Structures
+      transparent: true
+      styles: risk
+  transportation_network_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Transportation Network
+      transparent: true
+      styles: risk
+  water_network_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Water Network
+      transparent: true
+      styles: risk
+  wastewater_network_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Wastewater Network
+      transparent: true
+      styles: risk
+  stormwater_network_risk:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Stormwater Network
+      transparent: true
+      styles: risk
+
+  # cof
+  natural_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Natural
+      transparent: true
+      styles: cof
+  fleet_and_equipment_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Fleet and Equipment
+      transparent: true
+      styles: cof
+  structures_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Structures
+      transparent: true
+      styles: cof
+  transportation_network_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Transportation Network
+      transparent: true
+      styles: cof
+  water_network_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Water Network
+      transparent: true
+      styles: cof
+  wastewater_network_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Wastewater Network
+      transparent: true
+      styles: cof
+  stormwater_network_cof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Stormwater Network
+      transparent: true
+      styles: cof
+
+  # pof
+  natural_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Natural
+      transparent: true
+      styles: pof
+  fleet_and_equipment_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Fleet and Equipment
+      transparent: true
+      styles: pof
+  structures_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Structures
+      transparent: true
+      styles: pof
+  transportation_network_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Transportation Network
+      transparent: true
+      styles: pof
+  water_network_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Water Network
+      transparent: true
+      styles: pof
+  wastewater_network_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Wastewater Network
+      transparent: true
+      styles: pof
+  stormwater_network_pof:
+    type: wms
+    req:
+      url: http://nginx/map
+      layers: Stormwater Network
+      transparent: true
+      styles: pof
+
+caches:
+  natural_cache:
+    grids: [webmercator]
+    sources: [natural]
+  fleet_and_equipment_cache:
+    grids: [webmercator]
+    sources: [fleet_and_equipment]
+  structures_cache:
+    grids: [webmercator]
+    sources: [structures]
+  transportation_network_cache:
+    grids: [webmercator]
+    sources: [transportation_network]
+  water_network_cache:
+    grids: [webmercator]
+    sources: [water_network]
+  wastewater_network_cache:
+    grids: [webmercator]
+    sources: [wastewater_network]
+  stormwater_network_cache:
+    grids: [webmercator]
+    sources: [stormwater_network]
+
+  #  Risk
+  natural_cache_risk:
+    grids: [webmercator]
+    sources: [natural_risk]
+  fleet_and_equipment_cache_risk:
+    grids: [webmercator]
+    sources: [fleet_and_equipment_risk]
+  structures_cache_risk:
+    grids: [webmercator]
+    sources: [structures_risk]
+  transportation_network_cache_risk:
+    grids: [webmercator]
+    sources: [transportation_network_risk]
+  water_network_cache_risk:
+    grids: [webmercator]
+    sources: [water_network_risk]
+  wastewater_network_cache_risk:
+    grids: [webmercator]
+    sources: [wastewater_network_risk]
+  stormwater_network_cache_risk:
+    grids: [webmercator]
+    sources: [stormwater_network_risk]
+
+  #  cof
+  natural_cache_cof:
+    grids: [webmercator]
+    sources: [natural_cof]
+  fleet_and_equipment_cache_cof:
+    grids: [webmercator]
+    sources: [fleet_and_equipment_cof]
+  structures_cache_cof:
+    grids: [webmercator]
+    sources: [structures_cof]
+  transportation_network_cache_cof:
+    grids: [webmercator]
+    sources: [transportation_network_cof]
+  water_network_cache_cof:
+    grids: [webmercator]
+    sources: [water_network_cof]
+  wastewater_network_cache_cof:
+    grids: [webmercator]
+    sources: [wastewater_network_cof]
+  stormwater_network_cache_cof:
+    grids: [webmercator]
+    sources: [stormwater_network_cof]
+
+  #  pof
+  natural_cache_pof:
+    grids: [webmercator]
+    sources: [natural_pof]
+  fleet_and_equipment_cache_pof:
+    grids: [webmercator]
+    sources: [fleet_and_equipment_pof]
+  structures_cache_pof:
+    grids: [webmercator]
+    sources: [structures_pof]
+  transportation_network_cache_pof:
+    grids: [webmercator]
+    sources: [transportation_network_pof]
+  water_network_cache_pof:
+    grids: [webmercator]
+    sources: [water_network_pof]
+  wastewater_network_cache_pof:
+    grids: [webmercator]
+    sources: [wastewater_network_pof]
+  stormwater_network_cache_pof:
+    grids: [webmercator]
+    sources: [stormwater_network_pof]
+
+layers:
+  - name: Natural
+    title: Natural
+    sources: [natural_cache]
+  - name: Fleet and Equipment
+    title: Fleet and Equipment
+    sources: [fleet_and_equipment_cache]
+  - name: Structures
+    title: Structures
+    sources: [structures_cache]
+  - name: Transportation Network
+    title: Transportation Network
+    sources: [transportation_network_cache]
+  - name: Water Network
+    title: Water Network
+    sources: [water_network_cache]
+  - name: Wastewater Network
+    title: Wastewater Network
+    sources: [wastewater_network_cache]
+  - name: Stormwater Network
+    title: Stormwater Network
+    sources: [stormwater_network_cache]
+
+  # Risk
+  - name: Natural_risk
+    title: Natural_risk
+    sources: [natural_cache_risk]
+  - name: Fleet and Equipment_risk
+    title: Fleet and Equipment_risk
+    sources: [fleet_and_equipment_cache_risk]
+  - name: Structures_risk
+    title: Structures_risk
+    sources: [structures_cache_risk]
+  - name: Transportation Network_risk
+    title: Transportation Network_risk
+    sources: [transportation_network_cache_risk]
+  - name: Water Network_risk
+    title: Water Network_risk
+    sources: [water_network_cache_risk]
+  - name: Wastewater Network_risk
+    title: Wastewater Network_risk
+    sources: [wastewater_network_cache_risk]
+  - name: Stormwater Network_risk
+    title: Stormwater Network_risk
+    sources: [stormwater_network_cache_risk]
+
+  # cof
+  - name: Natural_cof
+    title: Natural_cof
+    sources: [natural_cache_cof]
+  - name: Fleet and Equipment_cof
+    title: Fleet and Equipment_cof
+    sources: [fleet_and_equipment_cache_cof]
+  - name: Structures_cof
+    title: Structures_cof
+    sources: [structures_cache_cof]
+  - name: Transportation Network_cof
+    title: Transportation Network_cof
+    sources: [transportation_network_cache_cof]
+  - name: Water Network_cof
+    title: Water Network_cof
+    sources: [water_network_cache_cof]
+  - name: Wastewater Network_cof
+    title: Wastewater Network_cof
+    sources: [wastewater_network_cache_cof]
+  - name: Stormwater Network_cof
+    title: Stormwater Network_cof
+    sources: [stormwater_network_cache_cof]
+
+  # pof
+  - name: Natural_pof
+    title: Natural_pof
+    sources: [natural_cache_pof]
+  - name: Fleet and Equipment_pof
+    title: Fleet and Equipment_pof
+    sources: [fleet_and_equipment_cache_pof]
+  - name: Structures_pof
+    title: Structures_pof
+    sources: [structures_cache_pof]
+  - name: Transportation Network_pof
+    title: Transportation Network_pof
+    sources: [transportation_network_cache_pof]
+  - name: Water Network_pof
+    title: Water Network_pof
+    sources: [water_network_cache_pof]
+  - name: Wastewater Network_pof
+    title: Wastewater Network_pof
+    sources: [wastewater_network_cache_pof]
+  - name: Stormwater Network_pof
+    title: Stormwater Network_pof
+    sources: [stormwater_network_cache_pof]
+
+grids:
+  webmercator:
+    base: GLOBAL_WEBMERCATOR
+
+globals:

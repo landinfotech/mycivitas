@@ -1,0 +1,40 @@
+{% load static %}
+<div id="{{ widget.attrs.id }}">
+    <link href="{% static 'libs/jquery-ui/1.12.1/jquery-ui.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <div id="recurring-type-input" class="form-group">
+        <select id="recurring-type-input-selection" class="{{ widget.attrs.class }}" name="{{ widget.name }}">
+            <option value="">-------------</option>
+            {% for choice in default_choices %}
+                <option value="{{ choice }}" {% if widget.value == choice %}selected{% endif %}>{{ choice }}</option>
+            {% endfor %}
+            {% if value_choice %}
+                <option value="{{ value_choice }}" class="custom-recurrence" selected>{{ value_choice }}</option>
+            {% endif %}
+        </select>
+        <div id="custom-recurrences" style="padding: 10px; border: 1px solid #ddd; margin-top: 10px; display: none">
+            <select id="custom-recurrences-period">
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
+            </select>
+            <span id="custom-recurrences-period-Weekly" class="period-detail">
+                every
+                <select>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+            </span>
+            <span id="custom-recurrences-period-Monthly" class="period-detail" style="display: none">
+                on day #<input type="number" min="1" max="31" value="1">
+            </span>
+            <span id="custom-recurrences-period-Yearly" class="period-detail" style="display: none">
+                on date <input type="text" style="width: 125px;">
+            </span>
+        </div>
+    </div>
+</div>

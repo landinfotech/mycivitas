@@ -1,0 +1,49 @@
+{% extends 'pages/with-sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    Profile : {{ object.get_username }}
+{% endblock %}
+
+{% block extra_stylesheet %}
+{% endblock extra_stylesheet %}
+
+{% block header %}
+    {{ object.get_username }}
+{% endblock header %}
+
+{% block sidebar %}
+    <li data-target="profile">Profile</li>
+    <li data-target="organisations">Organisations</li>
+{% endblock %}
+
+{% block sidebar_content %}
+    <div id="profile" class="sidebar-content">
+        <div class="row">
+            <div class="avatar">
+                <img src="{{ object.avatar_url }}">
+            </div>
+            <div class="col info-section">
+                <div class="title">{{ object.first_name }} {{ object.last_name }}</div>
+                <div>
+                    <div class="sub-title">Email</div>
+                    <div class="content">{{ object.email }}</div>
+                </div>
+                <div>
+                    <div class="sub-title">Phone</div>
+                    <div class="content">
+                        {% if object.phone %}
+                            {{ object.phone }}
+                        {% else %}
+                            -
+                        {% endif %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="organisations" class="sidebar-content">
+        {% include "pages/organisations/list_content.html"  with user=object %}
+    </div>
+{% endblock %}
+{% block extrascripts_extend %}
+{% endblock %}

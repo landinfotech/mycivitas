@@ -1,0 +1,75 @@
+{% load i18n %}
+{% load static %}
+<link href="{% static 'libs/leaflet/1.5.1/leaflet.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+<script type="text/javascript" src="{% static 'libs/leaflet/1.5.1/leaflet.js' %}"></script>
+<div id="map-wrapper">
+    <div id="map">
+        <div class="indicator">Loading</div>
+    </div>
+</div>
+
+
+<script>
+    function capitalize(string) {
+        //check if it is already has upper case
+        string = string.replaceAll('_', ' ')
+        if (/[A-Z]/.test(string)) {
+            return string;
+        }
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    $(document).ready(function () {
+        const $map = $('#map');
+        const $mapWrapper = $('#map-wrapper');
+        const $attributes = $('#map-attributes');
+        $.get("{% url 'amlit_helpdesk:feature-ticket-detail' id=ticket.id %}", function (data) {
+            $map.html('')
+            $map.css("width", "100%");
+            $map.css("height", "100%");
+            $mapWrapper.css("height", "300px");
+
+            {# setup map #}
+            var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            });
+
+            var markerStyle = {
+                radius: 5,
+                weight: 2,
+                opacity: 1,
+            };
+            var layer = L.geoJSON(data.features, {
+                onEachFeature: function (feature, layer) {
+                    const keys = Object.keys(feature.properties).sort();
+                    let rows = []
+                    $.each(keys, function (value, key) {
+                        value = feature.properties[key];
+                        rows.push(`
+                           <tr>
+                              <td>${capitalize(key)}</td>
+                              <td>${value ? value : '-'}</td>
+                           </tr>
+                       `)
+                    });
+                    layer.bindPopup(`<table>${rows.join('')}</table>`);
+                },
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, markerStyle);
+                }
+            });
+            const map = L.map('map', {
+                center: [39.73, -104.99],
+                zoom: 10,
+                layers: [osm, layer]
+            });
+            map.fitBounds(layer.getBounds());
+            $attributes.show();
+        }).fail(function () {
+            $map.html('<div class="indicator">Aset not found</div>')
+        });
+
+    })
+    ;
+</script>

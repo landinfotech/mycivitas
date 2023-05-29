@@ -1,0 +1,68 @@
+{% extends 'pages/base.html' %}
+{% load i18n %}
+{% load saved_queries %}
+{% load load_helpdesk_settings %}
+{% load static %}
+
+{% block extra_stylesheet %}
+    <link href="{% static 'css/helpdesk.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/helpdesk-report.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'helpdesk/vendor/morrisjs/morris.css' %}" rel="stylesheet">
+    <link href="{% static 'helpdesk/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'js/forms/widget/recurring_type.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/forms/widget/expected_time.js' %}"></script>
+{% endblock extra_stylesheet %}
+
+{% block info %}
+    <div class="row">
+        <div class="col-sm-3">
+            <ul id="sidebar">
+                <li class="{% if not title %}active{% endif %}">
+                    <a href="{% url "helpdesk:report_index" %}">{% trans "Reports & Statistics" %}</a>
+                </li>
+                <li class="title">
+                    {% trans "Reports By User" %}
+                </li>
+                <li class="sub-title {% if title == 'User by Priority' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "userpriority" %}">{% trans "by Priority" %}</a>
+                </li>
+                <li class="sub-title {% if title == 'User by Queue' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "userqueue" %}">{% trans "by Queue" %}</a>
+                </li>
+                <li class="sub-title {% if title == 'User by Status' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "userstatus" %}">{% trans "by Status" %}</a>
+                </li>
+                <li class="sub-title {% if title == 'User by Month' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "usermonth" %}">{% trans "by Month" %}</a>
+                </li>
+                <li class="title">
+                    {% trans "Reports By Queue" %}
+                </li>
+                <li class="sub-title {% if title == 'Queue by Priority' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "queuepriority" %}">{% trans "by Priority" %}</a>
+                </li>
+                <li class="sub-title {% if title == 'Queue by Status' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "queuestatus" %}">{% trans "by Status" %}</a>
+                </li>
+                <li class="sub-title {% if title == 'Queue by Month' %}active{% endif %}">
+                    <a href="{% url "helpdesk:run_report" "queuemonth" %}">{% trans "by Month" %}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9 content">
+            <div id="content">
+                {% block sidebar_content %}
+                {% endblock sidebar_content %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block title %}
+    {% trans "Reports & Statistics" %}
+{% endblock %}
+
+{% block header %}
+    {% trans "Reports & Statistics" %}
+{% endblock header %}

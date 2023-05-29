@@ -1,0 +1,413 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block extra_stylesheet %}
+    <link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+{% endblock %}
+{% block container %}
+    <div id="profile">
+        <img id="banner" src="{% static "img/banner/Revelstoke.jpg" %}">
+        <div class="container">
+            <div class="inner-container">
+                <div class="title">
+                    Welcome to MyCivitas
+                </div>
+                <div class="paragraph">
+                    An affordable, user friendly asset management platform for small communities.
+                    <br>
+                    MyCivitas is an all-inclusive, easy to use platform that lets you record and manage your assets in one powerful information system.
+                    <br>
+                    <br>
+                </div>
+                <div class="profile-button">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'map' %}">
+                            <button class="white-button content-button">Open Community Map</button>
+                        </a>
+                    {% else %}
+                        <a class="section-button" href="{% url "login" %}?next={% url "map" %}">
+                            <button class="white-button content-button">Have an account? — <b>SIGN IN</b></button>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="how-does-civitas-work">
+        <div id="workflow-1" class="section">
+            <div class="row">
+                <div class="background">
+                    <img src="{% static "img/parallax/bg.svg" %}">
+                </div>
+                <div class="col-8" style="filter: grayscale(100%);">
+                    <div class="image" style="background: white">
+                        <img src="{% static "img/parallax/1.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            How does MyCivitas work?
+                        </div>
+                        <div class="paragraph-content">
+                            The heart of MyCivitas is a map of your community and it's assets and infrastructure.
+                        </div>
+                        <div class="paragraph-content" style="text-align: center; margin-top: 50px">
+                            Keep scrolling to find out more!
+                            <br>
+                            <span style="font-size: 40px">↓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="workflow-2" class="section">
+            <div class="row">
+                <div class="col-8">
+                    <div class="image">
+                        <img src="{% static "img/parallax/2.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            Capture your infrastructure
+                        </div>
+                        <div class="paragraph-content">
+                            Create an asset inventory using powerful mapping software. Our data capture system uses QGIS, a free and open source desktop application.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="workflow-3" class="section">
+            <div class="row">
+                <div class="col-8">
+                    <div class="image">
+                        <img src="{% static "img/parallax/3.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            Prioritize Your Assets
+                        </div>
+                        <div class="paragraph-content">
+                            Our system performs risk assessment analysis and preventative maintenance planning analysis on your data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="workflow-4" class="section">
+            <div class="row">
+                <div class="col-8">
+                    <div class="image">
+                        <img src="{% static "img/parallax/4.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            Support Your Capital Planning
+                        </div>
+                        <div class="paragraph-content">
+                            Make informed decisions to support your capital planning.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="workflow-5" class="section">
+            <div class="row">
+                <div class="col-8">
+                    <div class="image">
+                        <img src="{% static "img/parallax/5.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            Set Up Work Order
+                        </div>
+                        <div class="paragraph-content">
+                            Use the platform to plan ad hoc and scheduled maintenance planning tasks.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="workflow-6" class="section">
+            <div class="row">
+                <div class="col-8">
+                    <div class="image">
+                        <img src="{% static "img/parallax/6.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            We Are Here to Help
+                        </div>
+                        <div class="paragraph-content">
+                            Let us know if you need any help along the way, from capturing data to presenting to council. We have a team of experienced staff available.
+                            <br>
+                            <br>
+                            <div style="font-size: 16px;">
+                                Please note that support is not included in the hosting fee. A popular option for small communities is to sign an annual support contract.
+                                Please inquire (<a href="mailto:support@civitas.ca">support@civitas.ca</a>) and we will connect you with a team member near you.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="workflow-7" class="section">
+            <div class="row">
+                <div class="col-8">
+                    <div class="image">
+                        <img src="{% static "img/parallax/6.png" %}">
+                    </div>
+                </div>
+                <div class="col-4 paragraph">
+                    <div class="paragraph-wrapper">
+                        <div class="paragraph-title">
+                            Enjoy Asset Management
+                        </div>
+                        <div class="paragraph-content">
+                            Practice effective and sustainable asset management on our affordable platform to benefit of your community.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pricing">
+        <div class="container">
+            <div class="paragraph">
+                <div class="paragraph-title">
+                    Pricing with small community in mind
+                </div>
+                <div class="paragraph-content">
+                    Choose the number of staff that will be using the platform.
+                </div>
+            </div>
+            {% include 'widgets/price-list.html' %}
+        </div>
+    </div>
+    <div id="our-story">
+        <img src="{% static "img/banner/Chairs and a Fire Hydrant.jpg" %}">
+        <div class="section row">
+            <div class="col-4 sub-section">
+            </div>
+            <div class="col-8 sub-section">
+                <div class="background-black">
+                    <div class="paragraph-title">
+                        Our story
+                    </div>
+                    <div class="paragraph-content">
+                        MyCivitas was created by <a href="https://www.landinfotech.com/">LandInfo Technologies</a> and <a href="https://kartoza.com">Kartoza</a> after we identified a need for an affordable and easy to use asset management
+                        system for small communities.
+                        The large proprietary offerings are overly complex and far too expensive for most small communities to be able to invest time into or afford.
+                    </div>
+                    <br>
+                    <br>
+                    <div class="paragraph-title">
+                        Open Source
+                    </div>
+                    <div class="paragraph-content">
+                        MyCivitas is Open Source software. This means that the intellectual property behind the platform is <a href="https://github.com/landinfotech/civitas-asset-management">freely available</a> to everyone and developed by
+                        a community of users who care about solving the problems you deal with every day in your small community.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        let parallaxNumber = 9;
+        let $navbar = $('#navbar');
+        let navbarHeight = $('#navbar').outerHeight();
+
+        let $footer = $('#footer');
+        let footerHeight = $('#footer').outerHeight();
+        let $elm = $('#how-does-civitas-work');
+        let elmTop = $elm.position().top - navbarHeight;
+
+        {# transition is last half of the element #}
+        let elmSectionHeight = $elm.outerHeight() / parallaxNumber;
+        let transitionPositionTop = elmSectionHeight * 0.5;
+        let transitionPositionBottom = elmSectionHeight;
+
+        let $workflow1 = $('#workflow-1');
+        let $workflow2 = $('#workflow-2');
+        let $workflow3 = $('#workflow-3');
+        let $workflow4 = $('#workflow-4');
+        let $workflow5 = $('#workflow-5');
+        let $workflow6 = $('#workflow-6');
+        let $workflow7 = $('#workflow-7');
+        let elmHeight = elmTop + $elm.height() - $workflow7.height() - navbarHeight;
+
+        function setUpVariable() {
+            parallaxNumber = 8;
+            navbarHeight = $('#navbar').outerHeight();
+            $elm = $('#how-does-civitas-work');
+            elmTop = $elm.position().top - navbarHeight;
+
+            {# transition is last half of the element #}
+            elmSectionHeight = $elm.height() / parallaxNumber;
+            transitionPositionTop = elmSectionHeight * 0.7;
+            transitionPositionBottom = elmSectionHeight;
+
+            $workflow1 = $('#workflow-1');
+            $workflow2 = $('#workflow-2');
+            $workflow3 = $('#workflow-3');
+            $workflow4 = $('#workflow-4');
+            $workflow5 = $('#workflow-5');
+            $workflow6 = $('#workflow-6');
+            $workflow7 = $('#workflow-7');
+            elmHeight = elmTop + $elm.height() - $workflow7.height() - navbarHeight;
+        }
+
+        $(window).on('resize', function () {
+            setUpVariable();
+            onScrollHowDoesItWork();
+        });
+
+
+        function getTransitionPosition(parallaxIdx) {
+            let pos = {
+                top: elmTop + (elmSectionHeight * parallaxIdx) + transitionPositionTop,
+                bottom: elmTop + (elmSectionHeight * parallaxIdx) + transitionPositionBottom
+            };
+            pos['diff'] = pos.bottom - pos.top
+            return pos;
+        }
+
+        function checkTransition($workflow, prevTransition, transition, scrollTop, noFadeOut) {
+            {
+                const height = transition.diff * 1.5;
+                const $image = $workflow.find('.image img');
+                const $background = $workflow.find('.background');
+                const $paragraph = $workflow.find('.paragraph-wrapper');
+                let $parent = $workflow;
+                if (!prevTransition) {
+                    $parent = $workflow.find('.null');
+                }
+                if (prevTransition && scrollTop <= prevTransition.top) {
+                    $image.css("opacity", 0);
+                    $parent.hide();
+                    $paragraph.css("opacity", 0);
+                    $paragraph.css("top", height + 'px');
+                    $background.css("opacity", 0);
+                } else if (scrollTop >= transition.bottom) {
+                    if (noFadeOut) {
+                        $paragraph.css("opacity", 1);
+                        $parent.show();
+                    } else {
+                        $parent.hide();
+                        $paragraph.css("opacity", 0);
+                        $paragraph.css("top", (-1 * height) + 'px');
+                    }
+                    $image.css("opacity", 1);
+                    $background.css("opacity", 1);
+                } else if (
+                    prevTransition && (
+                        scrollTop >= prevTransition.top &&
+                        scrollTop <= prevTransition.bottom
+                    )
+                ) {
+                    {# fade in #}
+                    const different = prevTransition.bottom - scrollTop;
+                    const opacity = ((prevTransition.diff - different) / prevTransition.diff);
+                    $image.css("opacity", opacity);
+                    $parent.show();
+                    $paragraph.css("opacity", opacity);
+                    $paragraph.css("top", (height * (1 - opacity)) + 'px');
+                    $background.css("opacity", 0);
+                } else if (
+                    !noFadeOut && (
+                        scrollTop >= transition.top &&
+                        scrollTop <= transition.bottom
+                    )
+                ) {
+                    {# fade out #}
+                    const different = transition.bottom - scrollTop;
+                    const opacity = (different / transition.diff);
+                    $image.css("opacity", 1);
+                    $parent.show();
+                    $paragraph.css("opacity", opacity);
+                    $paragraph.css("top", (-1 * height * (1 - opacity)) + 'px');
+                    $background.css("opacity", 1);
+                } else {
+                    $image.css("opacity", 1);
+                    $paragraph.css("opacity", 1);
+                    $parent.show();
+                    $paragraph.css("top", 1);
+                    if (prevTransition) {
+                        $background.css("opacity", 0);
+                    } else {
+                        $background.css("opacity", 1);
+                    }
+                }
+            }
+        }
+
+        function onScrollHowDoesItWork() {
+            const scrollTop = $(window).scrollTop() + navbarHeight;
+            $elm.removeClass('stick');
+            $elm.removeClass('done');
+
+            {# setup navbar transparency #}
+            if (scrollTop > elmTop) {
+                $navbar.removeClass('transparent')
+            } else {
+                $navbar.addClass('transparent')
+            }
+            {# setup footer transparency#}
+            if ($(window).scrollTop() > footerHeight) {
+                $footer.show();
+            } else {
+                $footer.hide();
+            }
+
+            if (scrollTop > elmTop && scrollTop < elmHeight) {
+                $elm.addClass('stick')
+            } else if (scrollTop > elmHeight) {
+                $elm.addClass('done')
+            }
+
+            {# parallax #}
+            {# workflow1 #}
+            checkTransition(
+                $workflow1, null, getTransitionPosition(0), scrollTop
+            );
+            checkTransition(
+                $workflow2, getTransitionPosition(0), getTransitionPosition(1), scrollTop
+            );
+            checkTransition(
+                $workflow3, getTransitionPosition(1), getTransitionPosition(2), scrollTop
+            );
+            checkTransition(
+                $workflow4, getTransitionPosition(2), getTransitionPosition(3), scrollTop
+            );
+            checkTransition(
+                $workflow5, getTransitionPosition(3), getTransitionPosition(4), scrollTop
+            );
+            checkTransition(
+                $workflow6, getTransitionPosition(4), getTransitionPosition(5), scrollTop
+            );
+            checkTransition(
+                $workflow7, getTransitionPosition(5), getTransitionPosition(6), scrollTop, true
+            );
+        }
+
+        $(window).scroll(function () {
+            onScrollHowDoesItWork();
+        });
+        onScrollHowDoesItWork();
+
+    </script>
+{% endblock extrascripts %}

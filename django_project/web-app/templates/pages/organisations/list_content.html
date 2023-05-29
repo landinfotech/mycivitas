@@ -1,0 +1,49 @@
+{% load static %}
+{% load amlit_organisation %}
+<style>
+
+    #organisation-table {
+        width: 100%;
+    }
+
+    #organisation-table th,
+    #organisation-table td {
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+    }
+
+    #organisation-table h2 {
+        position: relative;
+    }
+
+    #organisation-table h2 a {
+        position: absolute;
+        right: 0;
+    }
+</style>
+{% if organisations %}
+    <table id="organisation-table">
+        <tr>
+            <th>Organisation</th>
+            <th>Community</th>
+            <th>Role</th>
+        </tr>
+        {% for org in organisations %}
+            {% user_role org user as role %}
+            <tr>
+                <td><a href="{% url "organisation_detail" org.id %}">{{ org.name }}</a></td>
+                <td>{{ org.community_name }}</td>
+                <td>{{ role }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <div style="text-align: center">
+        <br>
+        <br>
+        No organisation found. <br>
+        <br>
+        <br>
+        <br>
+    </div>
+{% endif %}

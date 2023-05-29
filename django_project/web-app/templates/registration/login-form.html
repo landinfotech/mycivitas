@@ -1,0 +1,68 @@
+<form method="post" id="login-form">{% csrf_token %}
+    <div style="padding: 15px; background: white">
+        <div class="form-row">
+            {{ form.username.errors }}
+            {{ form.non_field_errors }}
+            <div class="row">
+                <div class="icon">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </div>
+                <div class="col">
+                    <input type="text" name="username" required="" id="id_username" placeholder="Email address">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            {{ form.password.errors }}
+            <div id='password-input' class="row">
+                <div class="icon">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                </div>
+                <div class="col">
+                    <input type="password" name="password" required="" id="id_password" placeholder="Password">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </div>
+                <div>
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% url 'admin_password_reset' as password_reset_url %}
+    {% if password_reset_url %}
+        <div class="password-reset-link">
+            <a href="{{ password_reset_url }}">Forgotten your password or username?</a>
+        </div>
+    {% endif %}
+    <br>
+    <br>
+    <div class="submit-row">
+        <button class="blue-button">Sign In</button>
+    </div>
+</form>
+<div>
+    {% if signup_url %}
+        <br>
+        <a href="{{ signup_url }}" style="color: var(--primary-color)">
+            <div>Don't have an account?</div>
+        </a>
+    {% endif %}
+</div>
+<script>
+    $(document).ready(function () {
+        const $password = $('#password-input');
+        const $passwordInput = $('#id_password');
+        const $eye = $('#password-input .fa-eye');
+        const $eyeSlash = $('#login-form .fa-eye-slash');
+        $eye.click(function () {
+            $password.removeClass('active');
+            $passwordInput.attr('type', 'password');
+        });
+        $eyeSlash.click(function () {
+            $password.addClass('active');
+            $passwordInput.attr('type', 'text');
+        });
+
+    });
+</script>

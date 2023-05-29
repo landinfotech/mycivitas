@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<label for='st_resolved' class="radio-inline">
+    <input type='radio' name='new_status' value='3' id='st_resolved' {% if checked %}checked='checked'{% endif %}
+           {% if not ticket.can_be_resolved %}disabled='disabled'{% endif %}>
+    {% trans "Resolved" %}
+</label>

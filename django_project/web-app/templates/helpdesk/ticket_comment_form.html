@@ -1,0 +1,155 @@
+{% load i18n %}
+<hr>
+<form method='post' action='update/' enctype='multipart/form-data' class="comment-form">
+    {% csrf_token %}
+    <div class="follow-up">
+        <div class="content">
+            <div class="row">
+                Comment the ticket
+            </div>
+            <div class="message">
+                <textarea id='commentBox' name='comment' rows='8' style="width: 100%" placeholder="Leave a comment"></textarea>
+                <div class="attachment">
+                    <div class="help">Attach file(s) by clicking here or drop here.</div>
+                    <input type="file" name='attachment' multiple/>
+                </div>
+                <div class='textarea form_help_text'>
+                    {% trans "You can insert ticket and queue details in your message." %}
+                </div>
+                <div>
+                    <br>
+                    <br>
+                    <span><b>{% trans "Time spent" %}</b></span> <span class='form_optional'>{% trans "(Optional)" %}</span>
+                    &nbsp;&nbsp;
+                    <span class="time-spent">
+                        <input id="time-spent-hour" type="number" style="text-align: right" min="0" placeholder="Hours"/>:
+                        <input id="time-spent-minute" type="number" min="0" placeholder="Minutes"/>
+                    </span>
+                    <input id="time_spent" name="time_spent" type="text" hidden>
+                </div>
+                <br>
+                <div class="status">
+                    {# THE TICKET STATUS #}
+                    {% ifequal ticket.status 0 %}
+                        {% if ticket.assigned_to == user %}
+                            <div>
+                                <b>Status</b>
+                            </div>
+                            <div>
+                                {% include 'helpdesk/ticket_status_inputs/new.html' with checked=True %} ►
+                                {% include 'helpdesk/ticket_status_inputs/open.html' %} /
+                                {% include 'helpdesk/ticket_status_inputs/reject.html' %}
+                            </div>
+                        {% endif %}
+                    {% endifequal %}
+                    {% ifequal ticket.status 1 %}
+                        {% if ticket.assigned_to == user %}
+                            <div>
+                                <b>Status</b>
+                            </div>
+                            <div>
+                                {% include 'helpdesk/ticket_status_inputs/open.html' with checked=True %} ►
+                                {% include 'helpdesk/ticket_status_inputs/resolved.html' %}
+                            </div>
+                        {% endif %}
+                    {% endifequal %}
+                    {% ifequal ticket.status 2 %}
+                        {% if ticket.assigned_to == user %}
+                            <div>
+                                <b>Status</b>
+                            </div>
+                            <div>
+                                {% include 'helpdesk/ticket_status_inputs/reopen.html' with checked=True %} ►
+                                {% include 'helpdesk/ticket_status_inputs/open.html' %} /
+                                {% include 'helpdesk/ticket_status_inputs/reject.html' %}
+                            </div>
+                        {% endif %}
+                    {% endifequal %}
+                    {% ifequal ticket.status 3 %}
+                        {% if can_edit_ticket %}
+                            <div>
+                                <b>Status</b>
+                            </div>
+                            <div>
+                                {% include 'helpdesk/ticket_status_inputs/resolved.html' with checked=True %} ►
+                                {% include 'helpdesk/ticket_status_inputs/reopen.html' %} /
+                                {% include 'helpdesk/ticket_status_inputs/close.html' %}
+                            </div>
+                        {% endif %}
+                    {% endifequal %}
+                    {% ifequal ticket.status 4 %}
+                        {% if can_edit_ticket %}
+                            <div>
+                                <b>Status</b>
+                            </div>
+                            <div>
+                                {% include 'helpdesk/ticket_status_inputs/close.html' with checked=True %} ►
+                                {% include 'helpdesk/ticket_status_inputs/reopen.html' %}
+                            </div>
+                        {% endif %}
+                    {% endifequal %}
+                    {% ifequal ticket.status 5 %}
+                        <div>
+                            <b>Status</b>
+                        </div>
+                        <div>
+                            <label class="radio-inline" for='st_reopened'>
+                                <input type='radio' name='new_status' value='2' id='st_reopened'> {% trans "Reopened" %}
+                            </label>
+                        </div>
+                    {% endifequal %}
+                    {% ifequal ticket.status 6 %}
+                        {% if ticket.assigned_to == user or can_edit_ticket %}
+                            <div>
+                                <b>Status</b>
+                            </div>
+                            <div>
+                                {% include 'helpdesk/ticket_status_inputs/reject.html' with checked=True %} ►
+                                {% if ticket.assigned_to == user %}
+                                    {% include 'helpdesk/ticket_status_inputs/open.html' %}
+                                {% endif %}
+                                {% if can_edit_ticket %}
+                                    {% include 'helpdesk/ticket_status_inputs/reopen.html' %} /
+                                    {% include 'helpdesk/ticket_status_inputs/close.html' %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endifequal %}
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="col">
+                </div>
+                <div>
+                    <button class="btn btn-primary" type='submit'>{% trans "Save & Comment" %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        const $attachmentHelp = $('.comment-form .attachment .help');
+        const $attachmentInput = $('.comment-form .attachment input');
+        const $timeSpendHours = $('#time-spent-hour');
+        const $timeSpendMinutes = $('#time-spent-minute');
+        $attachmentInput.change(function () {
+            const $currentAttachment = $($(this));
+            const $currentAttachmentHelp = $($(this)).closest('.attachment').find('.help');
+            if ($currentAttachment.prop("files").length === 0) {
+                $currentAttachmentHelp.html('Attach file(s) by clicking here or drop here.')
+            } else {
+                $currentAttachmentHelp.html('');
+                $.each($currentAttachment.prop("files"), function (index, file) {
+                    $currentAttachmentHelp.html($currentAttachmentHelp.html() + file.name + ', ')
+                })
+            }
+        })
+
+        $('.time-spent input').change(function () {
+            const hour = $timeSpendHours.val() === '' ? 0 : $timeSpendHours.val();
+            const minute = $timeSpendMinutes.val() === '' ? 0 : $timeSpendMinutes.val();
+            $('#time_spent').val(`${hour}:${minute}`)
+        })
+    })
+</script>

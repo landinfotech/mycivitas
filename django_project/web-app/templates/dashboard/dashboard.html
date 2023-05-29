@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block extrascripts %}
+{% static "img/pdf" as baseUrl %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}?version=2"/>
+<link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css"/>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rasterizehtml/1.3.0/rasterizeHTML.allinone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'libs/plotly.js' %}?version=1" charset="utf-8"></script>
+<script src="{% static 'js/charts.js' %}?version=6" charset="utf-8"></script>
+
+{% endblock extrascripts %}
+
+
+
+{% block content %}
+
+
+    <div id="loadingScreen">
+        <div class="load"><hr/><hr/><hr/><hr/></div>
+    </div>
+
+    <div class="d-print-none">
+        <h1 style="margin-bottom: 75px;">{{community}} Dashboard</h1>
+    </div>
+
+    <br>
+
+    <div class="tab">
+        {% for obj in dashboard %}
+            <button class="tablinks" id="def_{{obj.id}}" onclick="openGraph(event, 'tab_{{obj.id}}')">{{obj.title}}</button>
+        {% endfor %}
+    </div>
+
+    <div id="dashboards" >
+        {% for obj in dashboard %}
+            {% if obj.type == 'non_stacked'%}
+                {% include './charts/non_stacked_chart.html' with obj=obj community=community index=forloop.counter%}
+            {% endif %}
+            
+            {% if obj.type == 'stacked_a' %}
+                {% include './charts/stacked_chart_a.html' with obj=obj community=community index=forloop.counter%}
+            {% endif %}
+                
+            {% if obj.type == 'stacked_b' %}
+                {% include './charts/stacked_chart_b.html' with obj=obj community=community index=forloop.counter %}
+            {% endif %}
+
+            {% if obj.type == 'stacked_c' %}
+                {% include './charts/stacked_chart_c.html' with obj=obj community=community index=forloop.counter %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/tabs.js' %}?version=1" charset="utf-8"></script>
+    
+{% endblock content %}
+
+    

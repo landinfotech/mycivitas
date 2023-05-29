@@ -1,0 +1,74 @@
+{% extends 'pages/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Sign up{% endblock %}
+{% block extra_stylesheet %}
+    <link href="{% static 'admin/css/login.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'admin/css/base.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+{% endblock %}
+
+{% block content %}
+    <div class="title">
+        SIGN UP
+    </div>
+    <div class="login container">
+        <form method="post" id="signup-form">
+            {% csrf_token %}
+            {# username #}
+            {{ form.email.errors }}
+            <p>
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                <span class="helptext">{{ form.email.help_text }}</span>
+            </p>
+            <div class="row">
+                {# first name #}
+                <div class="col left">
+                    {{ form.first_name.errors }}
+                    <p>
+                        <label for="{{ form.first_name.id_for_label }}">First name</label>
+                        {{ form.first_name }}
+                        <span class="helptext">{{ form.first_name.help_text }}</span>
+                    </p>
+                </div>
+                {# last name #}
+                <div class="col right">
+                    {{ form.last_name.errors }}
+                    <p>
+                        <label for="{{ form.last_name.id_for_label }}">Last name</label>
+                        {{ form.last_name }}
+                        <span class="helptext">{{ form.last_name.help_text }}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                {# password #}
+                <div class="col left">
+                    {{ form.password1.errors }}
+                    <p>
+                        <label for="{{ form.password1.id_for_label }}">Password</label>
+                        {{ form.password1 }}
+                        <span class="helptext">{{ form.password1.help_text }}</span>
+                    </p>
+                </div>
+                {# password confirmation #}
+                <div class="col right">
+                    {{ form.password2.errors }}
+                    <p>
+                        <label for="{{ form.password2.id_for_label }}">Password confirmation</label>
+                        {{ form.password2 }}
+                        <span class="helptext">{{ form.password2.help_text }}</span>
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="submit-row">
+                <button class="red-button main-button">Signup</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block extrascripts %}
+{% endblock extrascripts %}

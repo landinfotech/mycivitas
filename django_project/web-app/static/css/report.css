@@ -1,0 +1,121 @@
+.container {
+    padding-top: 20px;
+}
+
+#report .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#report .row div {
+    padding: 10px;
+    padding-right: 0;
+}
+
+#report .number, #header .col {
+    text-align: right;
+}
+
+#report .percent {
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(33, 37, 41, 0.6);
+    flex: 0 0 60px;
+}
+
+#header {
+    font-weight: 600;
+}
+
+#header.row {
+    border-bottom: 1px solid #dee2e6;
+}
+
+#header .col:nth-child(2),
+#header .col:nth-child(3),
+#header .col:nth-child(4),
+#header .col:nth-child(5),
+#header .col:nth-child(6),
+#header .col:nth-child(7) {
+    border-top: 3px solid #dee2e6;
+}
+
+.total .col:nth-child(2),
+.total .col:nth-child(3),
+.total .col:nth-child(4),
+.total .col:nth-child(5),
+.total .col:nth-child(6),
+.total .col:nth-child(7) {
+    border-bottom: 3px solid #dee2e6;
+}
+
+#table .row {
+    border-top: 1px solid #dee2e6;
+}
+
+#report-table .row .col:nth-child(2) {
+    border-left: 3px solid #dee2e6;
+}
+
+#report-table .row .col:nth-child(7) {
+    border-right: 3px solid #dee2e6;
+}
+
+.sub {
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    background: rgba(220, 220, 220, 0.3);
+}
+
+.col-name {
+    padding-left: 10px !important;
+}
+
+#navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    padding-left: 0;
+    width: 210px;
+}
+
+#navigation div {
+    list-style-type: none;
+    padding: 5px 10px;
+    background: #eee;
+    border: 1px solid #dee2e6;
+    margin-top: -1px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+
+#navigation div:hover {
+    opacity: 0.5;
+}
+
+#navigation div.disabled {
+    cursor: progress;
+    opacity: 0.5;
+}
+
+#projected-loading {
+    position: absolute !important;
+    bottom: -1px;
+    left: 0;
+    height: 7px;
+    background: green !important;
+    padding: 0 !important;
+}
+
+#report-chart {
+    height: 100%;
+    width: 100%;
+}
+
+.total div {
+    height: 0;
+    padding: 0 !important;
+    overflow: hidden;
+}

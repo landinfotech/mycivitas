@@ -1,0 +1,182 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n humanize static in_list webapp_tag %}
+{% load static %}
+
+{% block title %}
+    {% trans "Tickets" %}
+{% endblock %}
+
+{% block extra_stylesheet %}
+    <link href="{% static 'css/helpdesk.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link title="timeline-styles" rel="stylesheet" href="{% static 'helpdesk/vendor/timeline3/css/timeline.css' %}">
+    <link href="{% static 'helpdesk/vendor/datatables/css/dataTables.bootstrap4.css' %}" rel="stylesheet">
+    <link href="{% static 'helpdesk/vendor/datatables/css/buttons.dataTables.css' %}" rel="stylesheet">
+    <link href="{% static 'helpdesk/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <script src='{% static "helpdesk/filter.js" %}'></script>
+    <script src="{% static 'helpdesk/vendor/timeline3/js/timeline.js' %}"></script>
+    <script src="{% static 'helpdesk/vendor/datatables/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'helpdesk/vendor/datatables/js/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'helpdesk/vendor/datatables/js/dataTables.buttons.js' %}"></script>
+    <script src="{% static 'helpdesk/vendor/datatables/js/buttons.colVis.js' %}"></script>
+    <style>
+        #ticketTable_wrapper .col-sm-12 {
+            margin-bottom: 10px;
+            overflow-y: auto;
+        }
+
+        #ticketTable_wrapper .col-sm-12::-webkit-scrollbar {
+            height: 5px;
+        }
+    </style>
+{% endblock extra_stylesheet %}
+
+{% block content %}
+    <div class="card" style="border: none">
+        <div class="card-header" style="padding-bottom: 0; padding-top: 20px">
+            <div class="pull-right" style="margin-top: -10px">
+                <a href="{% url "helpdesk:report_index" %}">
+                    <button class="btn btn-primary" type='submit'>{% trans "Reports & Statistics" %}</button>
+                </a>
+            </div>
+            <ul class="nav nav-tabs" style="margin-bottom: -1px">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#datatabletabcontents" id="datatabletabcontents-tab"
+                       data-toggle="tab" role="tab" aria-controls="datatabletabcontents" aria-selected=true>
+                        <i class="fas fa-th-list"></i>
+                        {% trans "Table" %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#timelinetabcontents" id="timelinetabcontents-tab" data-toggle="tab"
+                       role="tab" aria-controls="timelinetabcontents" aria-selected=false>
+                        <i class="fas fa-history"></i>
+                        {% trans "Timeline" %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            {{ search_message|safe }}
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="datatabletabcontents" role="tabpanel"
+                     aria-labelledby="datatabletabcontents-tab">
+                    <table class="table table-sm table-striped table-bordered table-hover"
+                           id="ticketTable" data-page-length='{{ default_tickets_per_page }}'>
+                        <thead class="thead-light">
+                        <tr>
+                            <th>{% trans "Ticket" %}</th>
+                            <th>{% trans "Type" %}</th>
+                            <th>{% trans "Priority" %}</th>
+                            <th>{% trans "Status" %}</th>
+                            <th>{% trans "Created" %}</th>
+                            <th>{% trans "Operator" %}</th>
+                            <th>{% trans "Submitter" %}</th>
+                            <th>{% trans "Start Date" %}</th>
+                            <th>{% trans "Due Date" %}</th>
+                            <th>{% trans "Time Spent" %}</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="timelinetabcontents" role="tabpanel" aria-labelledby="timelinetabcontents-tab">
+                    <div id='timeline-embed' style="width: 100%; height: 80vh"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        function get_url(row) {
+            return "{% url 'helpdesk:view' 1234 %}".replace(/1234/, row.id.toString());
+        }
+
+        $(document).ready(function () {
+            // Ticket DataTable Initialization
+            $('#ticketTable').DataTable({
+                language: {
+                    "emptyTable": "{% trans 'No Tickets Found' %}"
+                },
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "{% url 'helpdesk:datatables_ticket_list' urlsafe_query %}",
+                    "type": "GET",
+                },
+                createdRow: function (row, data, dataIndex) {
+                    $(row).addClass(data.row_class);
+                },
+                buttons: ["colvis"],
+                columns: [
+                    {
+                        data: "ticket",
+                        render: function (data, type, row, meta) {
+                            if (type === 'display') {
+                                data = '<div class="tickettitle"><a href="' + get_url(row) + '" >' +
+                                    row.id + '. ' +
+                                    row.title + '</a></div>';
+                            }
+                            return data
+                        }
+                    },
+                    {
+                        data: "queue",
+                        render: function (data, type, row, meta) {
+                            return data.title;
+                        },
+                    },
+                    {
+                        data: "priority_text",
+                        render: function (data, type, row, meta) {
+                            const css = data.replaceAll(' ', '-').toLowerCase()
+                            return `<div class="ticket-priority ${css}">${data} </div>`;
+                        }
+                    },
+                    {
+                        data: "status",
+                        render: function (data, type, row, meta) {
+                            const css = data.replaceAll(' ', '-').toLowerCase()
+                            return `<div class="ticket-status ${css}">${data} </div>`;
+                        }
+                    },
+                    { data: "created" },
+                    {
+                        data: "assigned_to",
+                        render: function (data, type, row, meta) {
+                            if (data !== "None") {
+                                return data;
+                            }
+                            return "";
+                        }
+                    },
+                    { data: "submitter" },
+                    { data: "start_date" },
+                    { data: "due_date" },
+                    { data: "time_spent", "visible": false },
+                ]
+            });
+
+            {# Timeline initialization when tab is displayed #}
+            // The TL.Timeline constructor takes at least two arguments:
+            // the id of the Timeline container (no '#'), and
+            // the URL to your JSON data file or Google spreadsheet.
+            // the id must refer to an element "above" this code,
+            // and the element must have CSS styling to give it width and height
+            // optionally, a third argument with configuration options can be passed.
+            // See below for more about options.
+            let timeline_loaded = false;
+            $('#timelinetabcontents-tab').on('shown.bs.tab', function (e) {
+                if (!timeline_loaded) {
+                    new TL.Timeline(
+                        'timeline-embed',
+                        '{% url 'helpdesk:timeline_ticket_list' urlsafe_query %}'
+                    );
+                    timeline_loaded = true;
+                }
+            });
+        })
+    </script>
+{% endblock %}

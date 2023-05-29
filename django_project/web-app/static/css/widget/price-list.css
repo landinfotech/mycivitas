@@ -1,0 +1,124 @@
+#price-list {
+    white-space: nowrap;
+    padding-bottom: 10px;
+    font-size: 14px;
+    height: fit-content;
+}
+
+#price-list .product {
+    border: none;
+    display: inline-block;
+    padding: 4px;
+    position: relative;
+    margin: 10px;
+    text-align: center;
+    vertical-align: top;
+}
+
+#price-list .product.best-value {
+    padding: 0;
+}
+
+#price-list .card {
+    border: none;
+    box-shadow: -1px 0 4px rgb(0 0 0 / 30%);
+}
+
+#price-list .product.best-value .card {
+    border: 4px solid var(--secondary-color);
+}
+
+#price-list .card .content {
+    padding: 20px;
+}
+
+#price-list .card .title {
+    background: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    color: white;
+    padding: 40px;
+    position: relative;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    margin: 0;
+    overflow: hidden;
+}
+
+#price-list .card .best-value-indicator {
+    position: absolute;
+    top: -68px;
+    left: 135px;
+    background: white;
+    font-weight: 700;
+    color: var(--primary-color);
+    transform: rotateY(
+        0deg) rotate(
+        37deg);
+    padding: 100px 100px 10px 123px;
+}
+
+#price-list .card .title .desc {
+    color: white;
+    font-weight: 500 !important;
+    font-size: 14px !important;;
+    margin-top: 20px;
+}
+
+#price-list .card .specification {
+    font-weight: 500 !important;
+    font-size: 16px;
+    color: green;
+    padding: 50px 20px;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+#price-list .card .subscription-btn-wrapper {
+    padding: 40px 0;
+}
+
+#price-list .card .plan {
+    padding: 5px 20px;
+    position: relative;
+}
+
+#price-list .card .price {
+    color: var(--primary-color);
+    text-align: left;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#price-list .card .plan-note {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 10px;
+}
+
+#price-list .subscription-btn, .subscribed {
+    margin-bottom: 10px;
+}
+
+#price-list .subscription-btn .main-button:disabled {
+    border-color: var(--secondary-color) !important;
+}
+
+#price-list .subscription-btn button, #price-list .subscribed div {
+    color: white;
+    font-weight: 700;
+    padding: 20px;
+}
+
+#price-list .subscription-btn button.btn-success {
+    background-color: #218838 !important;
+    border: none;
+}
+
+#price-list .subscription-btn button.btn-success:disabled {
+    border: none;
+}
+
+#price-list .subscribed div {
+    cursor: not-allowed !important;
+    border: 1px solid green;
+    color: green !important;
+}

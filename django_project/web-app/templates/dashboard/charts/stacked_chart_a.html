@@ -1,0 +1,188 @@
+{% load humanize %}
+{% block content %}
+{% if obj.qs.count > 0 %}
+
+<div id="tab_{{obj.id}}" style="page-break-after: always;background-color:white; position: relative;" class=" mt-2 mb-2 tabcontent">
+    <button data-html2canvas-ignore id="generate_{{obj.id}}" class="btn btn-primary pdf-button">Download PDF</button>
+
+<div class="centered-content">
+
+    <div class="mb-5 centered-content" style="width: 100% !important; height: 100%; position: relative;">
+        <h5 class="_title" style="color: red; word-break: break-all; width: 25%;">{{obj.title}}</h5><br>
+        <h6 class="_sum" >${{obj.sum.sum|floatformat:0|intcomma}}</h6>
+
+        <div  class="canvas_chart" style="page-break-after: always;">
+            <div id="{{index}}_{{obj.id}}" style="width: 100%; height: 100% !important"></div>
+        </div>
+
+        <div style="margin-top: 120px !important;">
+            <table class="table mt-2 table-bordered " style="transform: scale(0.9);">
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>System Name</td>
+                        <td>Extreme</td>
+                        <td>High</td>
+                        <td>Medium</td>
+                        <td>Low</td>
+                        <td>Minimal</td>
+                        <td>None</td>
+                        <td>Total Sum</td>
+                        <td>Total Percentage</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obj_ in obj.formatted%}
+                    <tr >
+                        <td style="text-align: left;">{{ obj_.system_name }}</td>
+
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if 'Extreme' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if 'High' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if 'Medium' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if 'Low' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if 'Minimal' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if key.risk_level == 'None' %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        
+                        <td style="text-align: right;">${{ obj_.total_value|floatformat:0|intcomma  }}</td>
+                        <td style="text-align: right;" id="{{forloop.counter0}}_{{obj.id}}_per">{{ obj_.total_per|floatformat:1|intcomma }}%</td>
+                    </tr>
+                    {% endfor %}
+                    <tr >
+                        <td style="text-align: left;"><strong>Total</strong></td>
+                        {% for obj_ in obj.total_bottom%}
+                        <td style="text-align: right;" id="{{obj.id}}_total">${{obj_.total|floatformat:0|intcomma}}</td>
+                        {% endfor %}
+                        <td style="text-align: right;" id="{{obj.id}}_total">${{obj.sum.sum|floatformat:0|intcomma}}</td>
+                        <td style="text-align: right;" id="{{obj.id}}_per_total">100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div id="{{index}}_{{obj.id}}_des" class="description-list">{{obj.description}}</div>
+    </div>
+</div>
+
+<style>
+    .centered-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        align-content: center !important;
+        justify-items: center !important;
+        justify-content: center !important;
+        vertical-align: middle !important;
+      }
+</style>
+
+<script type="module">
+
+    var trace1 = {
+    x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Extreme' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %}{% endfor %}],
+    text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Extreme' %}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
+    textposition: 'auto',
+    name: 'Extreme',
+    type: 'bar',
+    marker: {
+        color: 'rgb(235, 64, 52)',
+    }
+    };
+
+    var trace2 = {
+    x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'High' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %}{% endfor %}],
+    name: 'High',
+    type: 'bar',
+    text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'High' %}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
+    textposition: 'auto',
+    marker: {
+        color: 'rgb(235, 134, 52)',
+    }
+    };
+
+    var trace3 = {
+    x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Medium' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %} {% endfor %}],
+    name: 'Medium',
+    type: 'bar',
+    text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Medium' %}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
+    textposition: 'auto',
+    marker: {
+        color: 'rgb(240, 231, 67)',
+    }
+    };
+
+    var trace4 = {
+    x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Low' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %} {% endfor %}],
+    name: 'Low',
+    type: 'bar',
+    text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Low' %}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
+    textposition: 'auto',
+    marker: {
+        color: 'rgb(153, 224, 105)',
+    }
+    };
+
+    var trace5 = {
+    x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Minimal' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %} {% endfor %}],
+    name: 'Minimal',
+    type: 'bar',
+    text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'Minimal' %}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
+    textposition: 'auto',
+    marker: {
+        color: 'rgb(68, 150, 60)',
+    }
+    };
+
+    var trace6 = {
+    x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == '' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %} {% endfor %}],
+    name: 'None',
+    text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'None'%}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
+    textposition: 'auto',
+    type: 'bar',
+    marker: {
+        color: 'rgb(25, 77, 20)',
+    }
+    };
+
+    var data = [trace1, trace2, trace3, trace4, trace5, trace6];
+
+    var layout = {
+        xaxis:{
+            tickangle: 0
+        },
+        barmode: 'stack', 
+        width: 900, 
+        height: 500
+    };
+
+    Plotly.newPlot('{{index}}_{{obj.id}}', data, layout);
+
+    let btn_{{obj.id}} = document.getElementById("generate_{{obj.id}}");
+
+    window.addEventListener('scroll', function() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        btn_{{obj.id}}.style.display = "none";
+    } else {
+        btn_{{obj.id}}.style.display = "block";
+    }
+});
+
+</script>
+
+<script>
+
+    document.getElementById('generate_{{obj.id}}').addEventListener('click', function() {
+        const element = document.getElementById('tab_{{obj.id}}');
+        createPDF(element, 900, -50, -200, 'portrait', '{{community}}', 1);
+    })
+    
+</script>
+</div>
+</div>
+{% endif %}
+{% endblock content %}

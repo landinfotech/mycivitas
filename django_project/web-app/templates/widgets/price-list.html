@@ -1,0 +1,60 @@
+{% load static %}
+<link href="{% static 'css/widget/price-list.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+<div id="price-list" class="row">
+    {% for p in products %}
+        <div class="product col {% if p.amlitproduct.best_value %}best-value{% endif %}">
+            <div class="card ">
+                <div class="title">
+                    {{ p.name }}
+                    {% if p.amlitproduct.best_value %}
+                        <div class="best-value-indicator">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            Best value
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="specification">
+                    ✓ Allowing up to <b>{{ p.amlitproduct.max_user }}</b> users <br>in the organisation.
+                </div>
+                <div class="subscription-btn-wrapper">
+                    {% for plan in p.plans %}
+                        <div class="plan">
+                            {% if 'year' not in plan.human_readable_price %}
+                                {% if object.subscription and object.subscription.is_status_current and object.subscription.plan == plan %}
+                                    <div class="subscribed">
+                                        <div class="btn">
+                                            Current Plan
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="subscription-btn">
+                                        <button class="btn blue-button" value="{{ p.id }}"
+                                                onclick="planSelect(this, '{{ p.name }}' ,'{{ plan.human_readable_price }}', '{{ plan.id }}', {{ p.amlitproduct.max_user }}, '{{ plan.amount_after_tax }}')">
+                                            {{ plan.human_readable_price }}
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="plan-note">Or pre-pay annually (save 17%)</div>
+                                {% if object.subscription and object.subscription.is_status_current and object.subscription.plan == plan %}
+                                    <div class="subscribed">
+                                        <div class="btn">
+                                            Current Plan
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="subscription-btn">
+                                        <button class="btn blue-button" value="{{ p.id }}"
+                                                onclick="planSelect(this, '{{ p.name }}' ,'{{ plan.human_readable_price }}', '{{ plan.id }}', {{ p.amlitproduct.max_user }}, '{{ plan.amount_after_tax }}')">
+                                            {{ plan.human_readable_price }}
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

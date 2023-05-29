@@ -1,0 +1,1 @@
+from core.templatetags.admin_group import *

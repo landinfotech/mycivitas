@@ -1,0 +1,48 @@
+{% load i18n static %}
+<div class="modal fade" tabindex="-1" role="dialog" id="scheduler-template">
+    <div class="modal-dialog" role="document" style="max-width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Work order schedule templates</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            {% csrf_token %}
+            <div class="modal-body">
+                <table id="template-table">
+                    <tr>
+                        <th>Asset Type</th>
+                        <th>Schedule</th>
+                        <th>Activity Summary</th>
+                        <th>Activity Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for scheduler_data in object.scheduler_templates %}
+                        <tr
+                                {% for key, value in scheduler_data.items %}
+                                    data-{{ key }}="{{ value }}"
+                                {% endfor %}
+                        >
+                            <td>{{ scheduler_data.feature_type_combination_str }}</td>
+                            <td>{{ scheduler_data.recurring_type }}</td>
+                            <td>{{ scheduler_data.title }}</td>
+                            <td>{{ scheduler_data.description }}</td>
+                            <td class="action">
+                                <div>
+                                    <button
+                                            id="create-form" class="red-button template_form_button"
+                                            data-form-title="Create new schedule from template"
+                                            data-form-url="{% url "organisation_schedule_create" object.id %}"
+                                    >
+                                        Edit & Activate
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

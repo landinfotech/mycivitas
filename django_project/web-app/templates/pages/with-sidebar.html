@@ -1,0 +1,49 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block info %}
+    <div class="row">
+        <div class="col-sm-3">
+            <ul id="sidebar">
+                {% block sidebar %}
+                {% endblock sidebar %}
+            </ul>
+        </div>
+        <div class="col-sm-9 content">
+            <div id="content">
+                {% block sidebar_content %}
+                {% endblock sidebar_content %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        const $list = $('#sidebar li');
+        $list.click(function () {
+            const top = $('#page').scrollTop() + 0;
+            $list.removeClass('active');
+            $('.sidebar-content').hide();
+            $(this).addClass('active');
+
+            const target = $(this).data('target');
+            $(`#${target}`).show();
+            window.location.hash = target;
+
+            $('#page').scrollTop(top);
+        });
+        if (!window.location.hash) {
+            $($list[0]).click();
+        } else {
+            const hash = window.location.hash.replaceAll('#', '');
+            const $target = $(`#sidebar li[data-target="${hash}"]`);
+            if ($target.length === 0) {
+                $($list[0]).click();
+            } else {
+                $target.click();
+            }
+
+        }
+    </script>
+    {% block extrascripts_extend %}{% endblock %}
+{% endblock %}

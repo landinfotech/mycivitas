@@ -1,0 +1,174 @@
+version: '3.4'
+
+volumes:
+  database:
+  rabbitmq:
+
+x-common-django:
+  &default-common-django
+  build:
+    context: ../
+    dockerfile: deployment/docker/Dockerfile
+  environment:
+    - DATABASE_NAME=${DATABASE_NAME}
+    - DATABASE_HOST=${DATABASE_HOST}
+    - DATABASE_USERNAME=${DATABASE_USERNAME}
+    - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+
+    - DATABASE_CIVITAS_NAME=${DATABASE_CIVITAS_NAME}
+    - DATABASE_CIVITAS_HOST=${DATABASE_CIVITAS_HOST}
+    - DATABASE_CIVITAS_PORT=${DATABASE_CIVITAS_PORT}
+    - DATABASE_CIVITAS_USERNAME=${DATABASE_CIVITAS_USERNAME}
+    - DATABASE_CIVITAS_PASSWORD=${DATABASE_CIVITAS_PASSWORD}
+
+    - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    - ADMIN_EMAIL=${ADMIN_EMAIL}
+    # hardcoded
+    - RABBITMQ_HOST=rabbitmq
+    - DJANGO_SETTINGS_MODULE=core.settings.prod
+    - VIRTUAL_HOST=amlit.com
+    - VIRTUAL_PORT=8080
+    # email
+    - EMAIL_HOST_USER="${EMAIL_HOST_USER}@${EMAIL_HOST_DOMAIN}"
+    - EMAIL_HOST_PASSWORD="${EMAIL_HOST_PASSWORD}"
+    - EMAIL_HOST=${EMAIL_HOST}
+    - INITIAL_FIXTURES=${INITIAL_FIXTURES}
+    - ENABLE_SUBSCRIPTION=${ENABLE_SUBSCRIPTION}
+  volumes:
+    - ../django_project:/home/web/django_project
+    - ./volumes/static:/home/web/static
+    - ./volumes/media:/home/web/media
+    - ./volumes/logs:/var/log/
+  restart: on-failure
+
+services:
+  # Vanilla RabbitMQ service. This is needed by celery
+  rabbitmq:
+    image: rabbitmq:3.7-alpine
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    restart: on-failure
+
+  # postfix with smtp authentication (sasldb) TLS and OpenDKIM support are optional
+  smtp:
+    image: catatnight/postfix
+    environment:
+      maildomain: "${EMAIL_HOST_DOMAIN}"
+      smtp_user: "${EMAIL_HOST_USER}:${EMAIL_HOST_PASSWORD}"
+    restart: unless-stopped
+
+  db:
+    image: kartoza/postgis:13.0
+    volumes:
+      - ./backups:/backups
+      - database:/var/lib/postgresql/
+    environment:
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      - POSTGRES_DB=${DATABASE_NAME},${DATABASE_CIVITAS_NAME}
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - USERNAME=${DATABASE_USERNAME}
+      - PASS=${DATABASE_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    restart: on-failure:5
+
+  dbbackups:
+    image: kartoza/pg-backup:9.6
+    hostname: pg-backups
+    volumes:
+      - ./backups:/backups
+    environment:
+      # take care to let the project name below match that
+      # declared in the top of the makefile
+      - DUMPPREFIX=PG_amlit
+      # These are all defaults anyway, but setting explicitly in
+      # case we ever want to ever use different credentials
+      - PGDATABASE=${DATABASE_NAME}
+      - PGHOST=${DATABASE_HOST}
+      - PGUSER=${DATABASE_USERNAME}
+      - PGPASSWORD=${DATABASE_PASSWORD}
+      - PGPORT=5432
+    restart: on-failure:5
+
+  django:
+    <<: *default-common-django
+    command: 'uwsgi --ini /uwsgi.conf'
+    entrypoint: ["/home/web/django_project/entrypoint.sh"]
+
+  # Celery worker that executes celery tasks created by Django.
+  worker:
+    <<: *default-common-django
+    command: celery -A core worker -B -l debug
+    entrypoint: []
+
+  web:
+    image: nginx
+    hostname: nginx
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    volumes:
+      - ./sites-enabled:/etc/nginx/conf.d:ro
+      - ./volumes/static:/home/web/static:ro
+      - ./volumes/media:/home/web/media:ro
+      - ./volumes/certbot/conf:/etc/letsencrypt
+      - ./volumes/certbot/www:/var/www/certbot
+    ports:
+      - "${HTTP_HOST}:80"
+      - "${HTTPS_HOST}:443"
+
+    restart: on-failure:5
+
+  certbot:
+    image: certbot/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    volumes:
+      - ./volumes/certbot/conf:/etc/letsencrypt
+      - ./volumes/certbot/www:/var/www/certbot
+
+  # QGIS openquake
+  qgis-server:
+    image: openquake/qgis-server:3.16.1-ubuntu
+    environment:
+      # Do not run the embedded copy of nginx
+      # SKIP_NGINX: "true"
+      # Improve rendering performance
+      QGIS_SERVER_PARALLEL_RENDERING: "true"
+      QGIS_SERVER_MAX_THREADS: 4
+      # Limit the maximum size returned by a GetMap
+      QGIS_SERVER_WMS_MAX_HEIGHT: 5000
+      QGIS_SERVER_WMS_MAX_WIDTH: 5000
+      # Verbose logging
+      QGIS_SERVER_LOG_LEVEL: 0
+      QGIS_AUTH_DB_DIR_PATH: /tmp/
+      QGIS_AUTH_PASSWORD_FILE: /tmp/qgis-auth-pwd.txt
+    volumes:
+      - ./volumes/qgis-server/data:/io/data:ro
+      - ./qgis-server/pg_service.conf:/etc/postgresql-common/pg_service.conf:ro
+      - ./qgis-server/qgis-auth.db:/tmp/qgis-auth.db
+      - ./qgis-server/qgis-auth-pwd.txt:/tmp/qgis-auth-pwd.txt
+    ports:
+      - "9993:9993"
+      - "9990:80"
+    restart: on-failure:5
+
+  mapproxy:
+    image: kartoza/mapproxy
+    volumes:
+      - ./mapproxy:/mapproxy
+    depends_on:
+      - qgis-server
+
+  # django application for development
+  dev:
+    <<: *default-common-django
+    build:
+      context: ../
+      dockerfile: deployment/docker/Dockerfile-dev
+    ports:
+      # for django test server
+      - "6002:8080"
+      # for ssh
+      - "6003:22"
+    depends_on:
+      - qgis-server
+    entrypoint: []

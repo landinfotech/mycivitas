@@ -1,0 +1,215 @@
+{% load i18n humanize webapp_tag %}
+<form id="detail-form" method='post' action='update/' enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% if form %}
+        <div class="section field">
+            <div class="title">Title</div>
+            <div class="field">
+                {{ form.title }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="section">
+        <div class="title">Priority</div>
+        {% string_to_css_class ticket.get_priority_display as priority_class %}
+        <div class="value ticket-priority {{ priority_class }}">
+            {{ ticket.get_priority_display }}
+        </div>
+        {% if form %}
+            <div class="field">
+                {{ form.priority }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="section">
+        <div class="title">
+            Start date
+        </div>
+        <div class="value">
+            {% if ticket.start_date %}
+                {{ ticket.start_date|date:"DATETIME_FORMAT" }} {% if ticket.start_date %}({{ ticket.due_date|naturaltime }}){% endif %}
+            {% else %}
+                -
+            {% endif %}
+        </div>
+        {% if form %}
+            <div class="field">
+                {{ form.start_date }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="section">
+        <div class="title">
+            Due date
+        </div>
+        <div class="value">
+            {% if ticket.due_date %}
+                {{ ticket.due_date|date:"DATETIME_FORMAT" }} {% if ticket.due_date %}({{ ticket.due_date|naturaltime }}){% endif %}
+            {% else %}
+                -
+            {% endif %}
+        </div>
+        {% if form %}
+            <div class="field">
+                {{ form.due_date }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="section">
+        <div class="title">Operator</div>
+        <div class="value">
+            {% if ticket.assigned_to %}
+                <a href="{% url 'user-detail' ticket.assigned_to.get_username %}">{{ ticket.assigned_to }}</a>
+            {% else %}
+                <i>Unassigned</i>
+            {% endif %}
+        </div>
+        {% if form %}
+            <div class="field">
+                {{ form.assigned_to }}
+            </div>
+        {% endif %}
+    </div>
+    {% if can_recurring %}
+        <div class="section">
+            <div class="title">Recurring</div>
+            <div class="value">
+                {% if recurring_ticket and recurring_ticket.active %}
+                    {{ recurring_ticket.recurring_type }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+            {% if form %}
+                <div class="field">
+                    {{ form.recurring_type }}
+                </div>
+            {% endif %}
+            {% if recurring_ticket.active %}
+                <br>
+                <div class="title">Next Schedule</div>
+                <div>
+                    {{ recurring_ticket.next_date|date:"DATETIME_FORMAT" }} ({{ recurring_ticket.next_date|naturaltime }})
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    <div class="section">
+        <div class="title">Expected time to complete task</div>
+        <div>
+            <div class="value">
+                {% if ticket.expected_time %}
+                    {{ ticket.expected_time_formated }}
+                {% else %}
+                    -
+                {% endif %}
+            </div>
+        </div>
+        {% if form %}
+            <div class="field">
+                {{ form.expected_time }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="section">
+        <div class="title">Time spent</div>
+        <div>
+            {% if ticket.time_spent %}
+                {{ ticket.time_spent_formated }}
+            {% else %}
+                00:00
+            {% endif %}
+        </div>
+    </div>
+    {% if form and can_delete_ticket %}
+        <div class="detail-action">
+            {% if form %}
+                <button id="edit-button" class="btn btn-primary">Edit</button>
+                <div id="submit-section" style="display: none">
+                    <div>
+                        <button id="cancel-button" class="btn btn-light">Cancel</button>
+                    </div>
+                    <div>
+                        <button id="save-button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            {% endif %}
+            {% if can_delete_ticket %}
+                <button id="delete-button" class="btn btn-danger">Delete</button>
+            {% endif %}
+        </div>
+    {% endif %}
+</form>
+
+<script>
+    $(document).ready(function () {
+        const $field = $('#detail-form .field');
+        const $value = $('#detail-form .value');
+        const $editButton = $('#edit-button');
+        const $submitSection = $('#submit-section');
+        const $cancelButton = $('#cancel-button');
+        const $saveButton = $('#save-button');
+        const $deleteButton = $('#delete-button');
+        $editButton.click(function () {
+            $field.show();
+            $value.hide();
+            $editButton.hide();
+            $deleteButton.hide();
+            $submitSection.show();
+            return false;
+        });
+        $cancelButton.click(function () {
+            $field.hide();
+            $value.show();
+            $editButton.show();
+            $submitSection.hide();
+            $deleteButton.show();
+            return false;
+        });
+
+        let assignedTo = '{{ ticket.assigned_to.id }}';
+        $('#id_assigned_to').val(assignedTo);
+        let recurringType = null;
+        {% if recurring_ticket %}
+            recurringType = '{{ recurring_ticket.recurring_type }}';
+        {% endif%}
+        $('#id_recurring_type').val(recurringType);
+        const $startDateField = $('#id_start_date');
+        if ($startDateField.val()) {
+            $startDateField.val($startDateField.val().split(' ')[0])
+        }
+        $startDateField.datepicker({
+            minDate: 0,
+            dateFormat: 'yy-mm-dd'
+        });
+        const $dueDateField = $('#id_due_date');
+        if ($dueDateField.val()) {
+            $dueDateField.val($dueDateField.val().split(' ')[0])
+        }
+        $dueDateField.datepicker({
+            minDate: 0,
+            dateFormat: 'yy-mm-dd'
+        });
+
+        {% if can_delete_ticket %}
+            $deleteButton.click(function () {
+                if (confirm('Are you sure you want to delete this work order?')) {
+                    $.ajax({
+                        url: '{% url 'helpdesk:delete' ticket.id%}',
+                        type: 'DELETE',
+                        success: function (data) {
+                            window.location = '{% url 'helpdesk:list'%}'
+                        },
+                        error: function (jqXhr, textStatus, errorMessage) {
+
+                        },
+                        beforeSend: beforeAjaxSend
+                    });
+                } else {
+
+                }
+                return false;
+            })
+        {% endif %}
+    })
+</script>

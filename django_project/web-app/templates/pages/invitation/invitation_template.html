@@ -1,0 +1,12 @@
+<div>
+    You are invited to {{ object.organisation.name }} as {{ object.role.name }}.
+    <br>
+    Please login or signup with {{ object.email }} to accept this invitation.
+
+    <br>
+    click this link to <b>Accept</b> : <a href="{{ object.accept_link }}">{{ object.accept_link }}</a>
+
+    <br>
+    <br>
+    click this link to <b style="color: red">Reject</b> : <a href="{{ object.reject_link }}">{{ object.reject_link }}</a>
+</div>

@@ -1,0 +1,69 @@
+{% load i18n %}
+<script type='text/template' id='_feature_detail_tab'>
+    <li>
+        <a data-toggle="tab" data-id="<%= id %>" href="#feature-<%= id %>" class="<%= active %>">
+            <%= id %>
+        </a>
+    </li>
+</script>
+<script type='text/template' id='_feature_detail_tab_pane'>
+    <div id="feature-<%= id %>" class="tab-pane fade <%= active %>">
+        <div class="feature-header">
+            <%= name %>
+        </div>
+        <div class="feature-id">
+            ID <%= id %>
+        </div>
+        <% if(canCreateTicket) { %>
+        <div class="feature-create-ticket <%= basketClass %>"
+             data-toggle="modal" data-target="#create-ticket-modal"
+             data-feature-id="<%= id %>">
+            <i class="fa fa-ticket" aria-hidden="true"></i>
+            <span class="add">Add asset for creating ticket</span>
+            <span class="remove">Remove asset from creating ticket</span>
+        </div>
+        <% } %>
+        <div class="toggle row">
+            <div class="col active detail-button">Detail</div>
+            <div class="col ticket-button">Ticket
+                <span id="ticket-count-<%= id %>" class="ticket-count">
+                    <i class="fa fa-spinner" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
+        <div class="detail-view">
+            <table>
+                <%= html %>
+            </table>
+        </div>
+        <div id="ticket-view-<%= id %>" class="ticket-view" style="display: none">
+            <div class="indicator loading">Loading data</div>
+        </div>
+    </div>
+</script>
+<script type='text/template' id='_feature_info'>
+    {% for group, values in site_preferences.feature_info_format.items %}
+        {% if group %}
+            <tr class="header" data-group="{{ group }}">
+                <td colspan="2">
+                    {{ group }}
+                </td>
+            </tr>
+            <tbody data-group="{{ group }}" class="group">
+            {% for key in values %}
+                <tr class="extra-property">
+                    <td>{{ key }}</td>
+                    <td><%= value['{{ key }}'] ? value['{{ key }}'] : '-' %></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        {% else %}
+            {% for key in values %}
+                <tr class="extra-property">
+                    <td>{{ key }}</td>
+                    <td><%= value['{{ key }}'] ? value['{{ key }}'] : '-' %></td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</script>

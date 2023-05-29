@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/base-blue.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    {% block extra_stylesheet %}
+    {% endblock %}
+{% endblock stylesheet %}
+{% block container %}
+    <div id="container" class="row">
+        <div class="col content">
+            <div id="content">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+{% endblock container %}
+
+{% block extrascripts %}
+{% endblock extrascripts %}

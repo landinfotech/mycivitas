@@ -1,0 +1,55 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n bootstrap4form humanize webapp_tag %}
+{% load static %}
+
+{% block title %}
+    {{ ticket.queue.slug }} #{{ ticket.id }} : {% trans "View Ticket Details" %}
+{% endblock %}
+
+{% block content %}
+    {% get_user_by_username ticket.submitter_email as submitter %}
+    {% get_feature_ticket ticket as feature_ticket %}
+    {% get_recurring_ticket ticket as recurring_ticket %}
+    <div class="ticket">
+        {% if helpdesk_settings.HELPDESK_TRANSLATE_TICKET_COMMENTS %}
+            <div id="google_translate_element"></div>
+            <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        {% endif %}
+        <div class="section title">
+            {% string_to_css_class ticket.get_status as ticket_class %}
+            <div class="row">
+                <div class="ticket-title">#{{ ticket.id }} {{ ticket.title }}</div>
+                <div class="col">
+                    <div class="ticket-status {{ ticket_class }}">{{ ticket.get_status }}</div>
+                </div>
+            </div>
+            <div class="subtitle">
+                <b>{% blocktrans with ticket.queue as queue %}{{ queue }}{% endblocktrans %}</b> ●
+                Opened
+                {% if ticket.submitter_email %}
+                    by <a href="{% url 'user-detail' ticket.submitter_email %}"><b>{{ submitter.full_str }}</b></a>
+                {% endif %}
+                <span title='{{ ticket.created|date:"DATETIME_FORMAT" }}'>{{ ticket.created|naturaltime }}</span>
+            </div>
+        </div>
+        {% if feature_ticket %}
+            {% include "helpdesk/ticket_features.html" %}
+        {% endif %}
+        <div class="content">
+            <div class="row">
+                <div class="col">
+                    {% for followup in ticket.followup_set.all %}
+                        {% include "helpdesk/ticket_comment.html" with followup=followup %}
+                    {% endfor %}
+                    {% if can_comment %}
+                        {% include "helpdesk/ticket_comment_form.html" %}
+                    {% endif %}
+                </div>
+                <div class="detail">
+                    {% include "helpdesk/ticket_detail.html" %}
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+{% endblock %}
