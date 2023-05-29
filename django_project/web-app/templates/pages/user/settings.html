@@ -1,0 +1,137 @@
+{% extends 'pages/with-sidebar.html' %}
+{% load static %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block extra_stylesheet %}
+    <link href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <style>
+        .container {
+            padding: 0;
+        }
+
+        form span, form .error {
+            font-size: 12px;
+            clear: both;
+            color: #777;
+        }
+
+        form {
+            width: 60%;
+        }
+
+        form .form-row label, form p label {
+            padding-right: 0.5em;
+            line-height: 2em;
+            font-size: 1em;
+            clear: both;
+            color: #333;
+        }
+
+        input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px 6px;
+            margin-top: 0;
+        }
+
+        ul.errorlist {
+            margin: 0 0 4px;
+            padding: 0;
+            color: #ba2121;
+            background: #fff;
+        }
+
+        ul.errorlist li {
+            font-size: 13px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+    </style>
+{% endblock extra_stylesheet %}
+
+{% block header %}
+    {{ object.get_username }}
+{% endblock header %}
+
+{% block sidebar %}
+    <li data-target="edit-profile">Edit profile</li>
+    <li data-target="edit-avatar">Change avatar</li>
+    <li data-target="edit-password">Edit password</li>
+{% endblock %}
+
+{% block sidebar_content %}
+    <div id="edit-profile" class="sidebar-content">
+        <form method="post">
+            {% csrf_token %}
+            {{ edit_profile.non_field_errors }}
+            {{ edit_profile.first_name.errors }}
+            <p>
+                <label for="{{ edit_profile.first_name.id_for_label }}">First name</label>
+                {{ edit_profile.first_name }}
+                <span class="helptext">{{ edit_profile.first_name.help_text }}</span>
+            </p>
+            {{ edit_profile.last_name.errors }}
+            <p>
+                <label for="{{ edit_profile.last_name.id_for_label }}">Last name</label>
+                {{ edit_profile.last_name }}
+                <span class="helptext">{{ edit_profile.last_name.help_text }}</span>
+            </p>
+            <br>
+            <div class="submit-row">
+                <button class="red-button main-button">Save</button>
+            </div>
+        </form>
+    </div>
+    <div id="edit-avatar" class="sidebar-content">
+        <div id="profile">
+            <div class="row">
+                <div class="avatar">
+                    <img src="{{ object.avatar_url }}">
+                </div>
+                <div class="col info-section">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ edit_avatar.avatar.errors }}
+                        <p>
+                            <label for="{{ edit_avatar.avatar.id_for_label }}">New avatar</label>
+                            <input type="file" name="avatar" accept="image/*">
+                            <span class="helptext">{{ edit_avatar.avatar.help_text }}</span>
+                        </p>
+                        <br>
+                        <div class="submit-row">
+                            <button class="red-button main-button">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="edit-password" class="sidebar-content">
+        <form method="post">
+            {% csrf_token %}
+            {{ edit_password.non_field_errors }}
+            {{ edit_password.password1.errors }}
+            <p>
+                <label for="{{ edit_password.password1.id_for_label }}">Password</label>
+                {{ edit_password.password1 }}
+                <span class="helptext">{{ edit_password.password1.help_text }}</span>
+            </p>
+            {{ edit_password.password2.errors }}
+            <p>
+                <label for="{{ edit_password.password2.id_for_label }}">Confirm password</label>
+                {{ edit_password.password2 }}
+                <span class="helptext">{{ edit_password.password2.help_text }}</span>
+            </p>
+            <br>
+            <div class="submit-row">
+                <button class="red-button main-button">Save</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block extrascripts_extend %}
+{% endblock %}

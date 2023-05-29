@@ -1,0 +1,194 @@
+[
+  {
+    "model": "amlit.rolepermission",
+    "pk": 1,
+    "fields": {
+      "name": "view-map",
+      "description": "Can view map"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 2,
+    "fields": {
+      "name": "view-report",
+      "description": "View the report"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 3,
+    "fields": {
+      "name": "delete-ticket",
+      "description": "Can delete ticket"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 4,
+    "fields": {
+      "name": "manage-access",
+      "description": "Manage access to the community"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 5,
+    "fields": {
+      "name": "comment-ticket",
+      "description": "Can comment ticket"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 6,
+    "fields": {
+      "name": "see-ticket",
+      "description": "Can just see ticket, without be able to comment or edit"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 7,
+    "fields": {
+      "name": "edit-ticket",
+      "description": "Can edit ticket"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 8,
+    "fields": {
+      "name": "create-ticket",
+      "description": "Can create ticket for the community"
+    }
+  },
+  {
+    "model": "amlit.rolepermission",
+    "pk": 9,
+    "fields": {
+      "name": "assign-user",
+      "description": "Assign user to WO"
+    }
+  },
+  {
+    "model": "amlit.userrole",
+    "pk": 1,
+    "fields": {
+      "name": "Manager",
+      "description": "- Add new users\r\n- Set user rights for all other users\r\n- Have full user rights\r\n\r\n- Assign user accounts for CMMS team\r\n- Create/edit/delete WOs.\r\n- Assign WO to CMMS operator \r\n- View all reports and set filters",
+      "permissions": [
+        4,
+        5,
+        8,
+        3,
+        7,
+        6,
+        1,
+        2,
+        9
+      ]
+    }
+  },
+  {
+    "model": "amlit.userrole",
+    "pk": 2,
+    "fields": {
+      "name": "Operations Admin",
+      "description": "Create/edit/delete WOs.\r\n- Assign WO to CMMS operator \r\n- View all reports and set filters",
+      "permissions": [
+        5,
+        8,
+        3,
+        7,
+        6,
+        1,
+        2,
+        9
+      ]
+    }
+  },
+  {
+    "model": "amlit.userrole",
+    "pk": 3,
+    "fields": {
+      "name": "CMMS Operator",
+      "description": "- Accept/Reject WO\r\n- Assign/edit WO info and dates assign to Operator\r\n- Sign-off WO when completed \r\n- View reports and set filters",
+      "permissions": [
+        5,
+        6,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "amlit.userrole",
+    "pk": 4,
+    "fields": {
+      "name": "CMMS Viewer",
+      "description": "- View WOs, reports and set filters \r\n- Cannot edit",
+      "permissions": [
+        6,
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "amlit.userrole",
+    "pk": 5,
+    "fields": {
+      "name": "Dashboard  Viewer",
+      "description": "- View/query maps and reports \r\n- Set filters",
+      "permissions": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "amlit.sitepreferences",
+    "pk": 1,
+    "fields": {
+      "feature_info_format": {
+        "General": [
+          "Province",
+          "Region",
+          "Community",
+          "System",
+          "Asset Class",
+          "Asset Sub Class",
+          "Condition",
+          "Type"
+        ],
+        "Properties": [
+          "Description",
+          "Label",
+          "Brand",
+          "Model",
+          "Area",
+          "Diameter",
+          "Install Date",
+          "Inspection Date",
+          "Contractor"
+        ],
+        "Life": [
+          "Lifespan",
+          "Age",
+          "Remaining Years"
+        ],
+        "Risk & Failure": [
+          "Risk Level",
+          "Probability of Failure",
+          "Consequence of Failure"
+        ],
+        "Cost": [
+          "Renewal Cost",
+          "Annual Reserve",
+          "Maintenance Cost"
+        ]
+      }
+    }
+  }
+]

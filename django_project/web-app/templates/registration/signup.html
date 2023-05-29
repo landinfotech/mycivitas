@@ -1,0 +1,118 @@
+{% extends 'pages/base-blue.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Sign up{% endblock %}
+{% block extra_stylesheet %}
+    <link
+            href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css"
+            media="screen, projection"/>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <div class="title">
+        SIGN UP
+    </div>
+    <div class="container container-page">
+        <div class="subtitle">
+            Select your community and create your account
+        </div>
+        <form method="post" id="signup-form">
+            {% csrf_token %}
+            {{ organisation_form.non_field_errors }}
+
+            {# community #}
+            {{ organisation_form.community_code.errors }}
+            <p>
+                {{ organisation_form.community_code }}
+                <span class="helptext">{{ organisation_form.community_code.help_text }}</span>
+            </p>
+            <div>
+                <span>Don't see your community?
+                    <div class="btn"
+                         style="margin-top: -2px">Contact support</div>
+                </span>
+            </div>
+            <br>
+            <div hidden>
+                {# name #}
+                {{ organisation_form.name.errors }}
+                <p>
+                    <label for="{{ organisation_form.name.id_for_label }}">
+                        Organisation name
+                    </label>
+                    {{ organisation_form.name }}
+                    <span class="helptext">
+                        {{ organisation_form.name.help_text }}
+                    </span>
+                </p>
+                <br>
+            </div>
+            {{ user_form.non_field_errors }}
+
+            {# username #}
+            <div class="form-row">
+                <input type="email" name="email" maxlength="254" autofocus=""
+                       required="" id="id_email" placeholder="Email address">
+                <span class="helptext">{{ user_form.email.help_text }}</span>
+                {{ user_form.email.errors }}
+            </div>
+            <div class="row">
+                {# first name #}
+                <div class="col left">
+                    <p>
+                        <input type="text" name="first_name" required=""
+                               id="id_first_name" placeholder="First name">
+                        <span class="helptext">
+                            {{ user_form.first_name.help_text }}
+                        </span>
+                    </p>
+                    {{ user_form.first_name.errors }}
+                </div>
+                {# last name #}
+                <div class="col right">
+                    <p>
+                        <input type="text" name="last_name" maxlength="150"
+                               id="id_last_name" placeholder="Last name">
+                        <span class="helptext">
+                            {{ user_form.last_name.help_text }}
+                        </span>
+                    </p>
+                    {{ user_form.last_name.errors }}
+                </div>
+            </div>
+            <div class="row">
+                {# password #}
+                <div class="col left">
+                    <p>
+                        <input type="password" name="password1" required=""
+                               id="id_password1" placeholder="Password">
+                        <span class="helptext">
+                            {{ user_form.password1.help_text }}
+                        </span>
+                    </p>
+                    {{ user_form.password1.errors }}
+                </div>
+                {# password confirmation #}
+                <div class="col right">
+                    <p>
+                        <input type="password" name="password2" required=""
+                               id="id_password2"
+                               placeholder="Password confirmation">
+                    </p>
+                    {{ user_form.password2.errors }}
+                </div>
+            </div>
+            <br>
+            <div class="submit-row">
+                <button class="red-button main-button">
+                    Create account
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,101 @@
+#page {
+    padding-bottom: var(--navbar-height);
+}
+
+.container-page {
+    padding: 0;
+    border: none;
+    margin-top: 40px;
+    min-height: 70vh;
+    text-align: left;
+}
+
+.header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+}
+
+.row {
+    margin: 0;
+    height: 100%;
+}
+
+.col-sm-3, .col-sm-9 {
+    padding: 0;
+    position: relative;
+}
+
+#sidebar {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-top: 37px;
+}
+
+#sidebar li {
+    padding: 5px 20px;
+    border: 1px solid var(--background-color);
+    margin-top: -1px;
+    margin-left: -1px;
+    cursor: pointer;
+}
+
+#sidebar li:hover {
+    opacity: 0.5;
+    background: var(--background-color);
+}
+
+#sidebar li.active {
+    background: var(--background-color);
+    border-left: 3px solid var(--primary-color);
+    padding-left: 17px !important;
+}
+
+#content {
+    padding: 36px 20px 10px 30px;
+}
+
+.sidebar-content {
+    display: none;
+}
+
+.header-button {
+    margin-top: -10px;
+    text-align: center;
+}
+
+.info {
+    padding: 20px;
+}
+
+#profile .avatar {
+    width: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#profile .avatar img {
+    object-fit: cover;
+    width: 100%;
+}
+
+#profile .title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#profile .sub-title {
+    font-weight: 700;
+}
+
+
+#profile .info-section > div {
+    margin-bottom: 20px;
+}
+
+#profile .info-section .content {
+    color: grey;
+}

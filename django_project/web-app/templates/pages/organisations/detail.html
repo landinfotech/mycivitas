@@ -1,0 +1,373 @@
+{% extends 'pages/with-sidebar.html' %}
+{% load static amlit_organisation %}
+
+{% block title %}
+    Organisation : {{ object.name }}
+{% endblock %}
+
+{% block extra_stylesheet %}
+    <style>
+        .container {
+            text-align: left;
+        }
+
+        #organisation-form label {
+            display: block;
+            font-weight: 700;
+        }
+
+        .save {
+            width: 100%;
+        }
+
+        input, select, textarea {
+            padding: 5px;
+
+        }
+
+        input, select {
+            height: 40px;
+            background-color: white;
+        }
+
+        input, select, textarea {
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        input:focus, select:focus, input:active, select:active {
+            outline: none;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table th, table td {
+            border: 1px solid #eee;
+            padding: 8px 15px;
+        }
+
+        .remove {
+            color: red;
+            cursor: pointer;
+        }
+
+        .remove:hover {
+            opacity: 0.5;
+        }
+
+        #invite-button {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .info {
+            color: grey;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        #manage-access select {
+            width: auto;
+        }
+
+        #manage-access .col {
+            text-align: left;
+            padding: 0;
+        }
+
+        #manage-access .col,
+        #manage-access b,
+        #manage-access select {
+            font-size: 14px;
+        }
+
+        .user-access {
+            border: 1px solid #ddd;
+            margin-top: -1px;
+            padding: 5px 10px;
+        }
+
+        input:disabled,
+        select:disabled {
+            opacity: 1;
+            border: none;
+            color: black;
+            cursor: default;
+            -o-appearance: none;
+            -ms-appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .delete-column {
+            width: 20px;
+            padding-top: 7px;
+        }
+
+        .ui-widget-content {
+            z-index: 9999 !important;
+        }
+
+        .current-plan {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .current-plan .col {
+            padding: 0;
+        }
+
+        .subscription-name {
+            display: block;
+            color: var(--primary-color);
+        }
+
+        #edit-payment {
+            font-size: 12px;
+            color: green;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        #edit-payment:hover {
+            opacity: 0.5;
+        }
+
+        .subscription-status {
+            background: white;
+            border: 1px solid #dddddd;
+            color: #555;
+            display: inline-block;
+            margin-right: -16px;
+            margin-top: -3px;
+            padding: 2px 5px;
+            border-radius: 5px;
+        }
+
+        .subscription-status.active {
+            color: green;
+            border: 1px solid green;
+        }
+
+        .balance {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: right;
+        }
+        .subscription .title{
+            color: var(--primary-color);
+            margin-left: 10px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+    </style>
+{% endblock extra_stylesheet %}
+
+{% block header %}
+    Organisation : {{ object.name }}
+
+    <div class="header-button pull-right">
+        <a href="{% url 'map' %}">
+            <button class="white-button">Open Community Map</button>
+        </a>
+    </div>
+{% endblock header %}
+
+{% block sidebar %}
+    <li data-target="profile">Profile</li>
+    {% has_perm_in_org object user 'manage_access' as can_manage_access %}
+    {% if can_manage_access %}
+        <li data-target="manage-access">Manage Access</li>
+        <li data-target="work-order-scheduler">Work Order Scheduler</li>
+    {% endif %}
+    {% if object.owner == user%}
+        <li data-target="subscription">
+            Subscription
+            {% if object.subscription and object.subscription.is_status_current %}
+                <span class="subscription-status active pull-right">Active</span>
+            {% else %}
+                <span class="subscription-status pull-right">Not Active</span>
+            {% endif %}
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block sidebar_content %}
+    <div id="profile" class="sidebar-content">
+        <div class="info-section">
+            <div class="title">{{ object.name }}</div>
+            <div>
+                <div class="sub-title">Community Name</div>
+                <div class="content">{{ object.community_name }}</div>
+            </div>
+            <div>
+                <div class="sub-title">Owner</div>
+                <div class="content">
+                    <a href="{% url "user-detail" username=object.owner.get_username %}">{{ object.owner }}</a>
+                </div>
+            </div>
+            <div>
+                <div class="sub-title">Created at</div>
+                <div class="content">{{ object.created_at }}</div>
+            </div>
+        </div>
+    </div>
+    {% if object.owner == user %}
+        {# SUBSCRIPTION #}
+        <div id="subscription" class="sidebar-content">
+            <div class="subscription">
+                {% if balance %}
+                    <div class="balance">
+                        <i class="fa fa-info-circle" aria-hidden="true" title="This credit will be use for next payment. If you wish to refund it, please contact admin."></i>
+                        Your credit : <b>{{ balance }}</b>
+                    </div>
+                {% endif %}
+                {% if object.subscription %}
+                    <div>
+                        <div class="title">Current plan</div>
+                        <div class="current-plan row">
+                            <div class="col">
+                                <div style="margin-bottom: 20px;">
+                                    <b class="subscription-name">{{ object.subscription.plan.product.name }}</b>
+                                    Up to {{ object.subscription.plan.product.amlitproduct.max_user }} users<br>
+                                </div>
+                                {% if payment_method %}
+                                    <div>
+                                        <i class="fa fa-cc-{{ payment_method.brand }}" aria-hidden="true" style="font-size: 20px"></i>
+                                        {{ payment_method.brand|title }} •••• {{ payment_method.last4 }}
+                                        <span id="edit-payment" data-toggle="modal" data-target="#change-payment-method">edit</span>
+                                    </div>
+                                {% endif %}
+                                {% if object.subscription and object.subscription.is_status_current %}
+                                    {% if object.subscription.cancel_at_period_end %}
+                                        Ended at : {{ object.subscription.current_period_end }}
+                                    {% else %}
+                                        Next payment : {{ upcoming }} at {{ object.subscription.current_period_end }}
+                                    {% endif %}
+                                {% else %}
+                                    Subscription is not active
+                                {% endif %}
+                            </div>
+                            <div>
+                                <b>{{ object.subscription.plan.human_readable_price }}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        {# secondary button for cancel and reactivate#}
+                        {% if object.subscription and object.subscription.is_status_current %}
+                            {% if object.subscription.cancel_at_period_end %}
+                                <form role="form" method='post' action='{% url 'organisation_subscription_reactivate' object.pk %}'>
+                                    {% csrf_token %}
+                                    <button class="white-button pill-button pull-right">Reactivate Subscription</button>
+                                </form>
+                            {% else %}
+                                <button class="white-button pill-button pull-right" data-toggle="modal" data-target="#cancel-subscription-modal">Cancel Subscription</button>
+                            {% endif %}
+                            <a href="{% url "organisation_subscription_change" pk=object.id %}" class="pull-right" style="margin-right: 5px">
+                                <button class="red-button pill-button">Change Subscription</button>
+                            </a>
+                        {% else %}
+                            <a href="{% url "organisation_subscription" pk=object.id %}" class="pull-right" style="margin-right: 5px">
+                                <button class="red-button pill-button">Activate Subscription</button>
+                            </a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    Subscribe to manage users for your organisation.
+                    <a href="{% url "organisation_subscription" pk=object.id %}">
+                        <button class="red-button pill-button">Subscribe</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        {# MANAGE ACCESS #}
+    {% endif %}
+    {% has_perm_in_org object user 'manage_access' as can_manage_access %}
+    {% if can_manage_access %}
+        {% include 'pages/organisations/widgets/manage_access.html' %}
+    {% endif %}
+    {% if can_manage_access %}
+        {% include 'pages/organisations/widgets/work_order_scheduler.html' %}
+    {% endif %}
+
+    {% if object.owner == user %}
+        {# cancel subscription modal #}
+        <div class="modal fade" id="cancel-subscription-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="padding: 20px 30px">
+                        <div style="text-align: center; font-weight: 700">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size: 50px; color: #CC3333;"></i>
+                            <br>
+                            <br>
+                            <div>
+                                Are you sure you want to cancel your subscription for {{ object.name }}?
+                            </div>
+                        </div>
+                        <div style="margin-top: 30px; margin-bottom: 30px">
+                            The organisation has {{ users_count }} user(s)
+                            and is provisioned for up to
+                            {{ object.subscription.plan.product.amlitproduct.max_user }} user(s)
+                            . If you cancel the subscription, current users will not be able to access the organisation and you will not be able to add any new users.
+                            <br>
+                            <br>
+                            {% if object.refundable %}
+                                <div style="font-style: italic">
+                                    Note:<br>
+                                    This subscription is refundable because it is created today.
+                                    Subscription will not be refunded if it is already created more than 1 day.
+                                </div>
+                            {% else %}
+                                <div style="font-style: italic">
+                                    Note:<br>
+                                    Users will still be able to access your organisation until <br>{{ object.subscription.current_period_end }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border: none">
+                        <form role="form" method='post' action='{% url 'organisation_subscription_cancel' object.pk %}'>
+                            {% csrf_token %}
+                            <button id="cancel-subscription-btn" class="white-button pill-button" style="border: 1px solid white">Cancel Subscription</button>
+                        </form>
+                        <button class="red-button pill-button" data-dismiss="modal">I change my mind</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="change-payment-method" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="subscription-form">
+                        <div class="modal-body" style="padding: 50px 30px 20px 30px">
+                            <div id="card-element">
+                            </div>
+                            <div id="card-errors" role="alert" class="error"></div>
+                            <br>
+                        </div>
+                        <div class="modal-footer" style="border: none">
+                            <button id="change-payment-method-btn" class="white-button pill-button" style="border: 1px solid white">Change</button>
+                            <button class="red-button pill-button" data-dismiss="modal">I change my mind</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+

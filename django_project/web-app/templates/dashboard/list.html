@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style>
+.title_ {
+    background: var(--primary-color);
+    border-bottom: 1px solid #ddd;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    text-align: center;
+    flex: 0 1 auto;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+</style>
+
+<div class="title_">
+    <h3 >List of linked Communities</h3>
+</div>
+<br>
+
+<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
+
+<br>
+    <div id="searchDiv">
+        {% for community in communities %}
+        <!-- <a href={% url 'community-dashboard-detailed' pk=community.pk %}>{{community}}</a><br> -->
+        <!-- <a href={% url 'community-dashboard-detailed' pk=community.pk %}>{{community}}</a> -->
+        <div class="p-3 mb-2 bg-light text-dark text-left" >
+            <a class="link-dark" style="color:#26497D !important" href={% url 'community-dashboard-detailed' pk=community.pk %}>{{community}}</a>
+        </div>
+        {% endfor %}
+    </div>
+
+<script>
+    function search() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("searchDiv");
+        tr = table.getElementsByTagName("div");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("a")[0];
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
+</script>
+{% endblock content %}
+    
+
+
+    

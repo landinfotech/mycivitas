@@ -1,0 +1,191 @@
+{% load static %}
+<link href="{% static 'css/widget/subscription.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+<script src="https://js.stripe.com/v3/"></script>
+{% include "widgets/price-list.html" %}
+<br>
+<div class="checkout">
+    <div class="card-title font-weight-bold">Checkout</div>
+    <div id="max-user-errors" role="alert" class="error">
+        The current plan max user access is more than new plan.<br>
+        Please remove it on organisation edit page first before subscribe.<br>
+        The exceeded user access will be removed automatically after subscribed.
+        <br>
+        <br>
+    </div>
+    <table id="checkout-detail">
+        <tr>
+            <td valign="top">Plan:</td>
+            <td valign="top" id="plan-indicator"></td>
+        </tr>
+        <tr>
+            <td valign="top">Price:</td>
+            <td valign="top" id="price-indicator"></td>
+        </tr>
+        {% if taxes %}
+            <tr>
+                <td valign="top">Taxes:</td>
+                <td valign="top">
+                    <div class="tax-list">
+                        {% for tax in taxes %}
+                            <div>{{ tax.display_name }} {{ tax.percentage }}%</div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">Total:</td>
+                <td valign="top" id="total-price"></td>
+            </tr>
+        {% endif %}
+    </table>
+    <p hidden id="price-id"></p>
+    <hr>
+    <form id="subscription-form">
+        <div id="card-element">
+        </div>
+        <div id="card-errors" role="alert" class="error"></div>
+        <br>
+        <button id="submit" type="submit" class="btn main-button btn-primary" disabled>
+            <div id="spinner" class="spinner-border spinner-border-sm text-light hidden" role="status">
+                <div class="sr-only">Loading...</div>
+            </div>
+            <div id="button-text">Subscribe</div>
+        </button>
+    </form>
+</div>
+
+<script>
+    let MAX_USER = 1;
+    {% if subscription %}
+        MAX_USER = {{ subscription.plan.product.amlitproduct.max_user }};
+    {% endif %}
+
+    const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+    const $cardError = $('#card-errors');
+    const $submitButton = $(':input[type="submit"]');
+    let subSelected = false;
+    let cardOk = false;
+
+    let taxes = 0;
+    {% for tax in taxes %}
+        taxes += {{ tax.percentage }}
+    {% endfor %}
+
+    /** Initiate card input
+     */
+    $('#spinner').hide();
+    $(document).ready(function () {
+        let elements = stripe.elements();
+        card = elements.create('card');
+        card.mount('#card-element');
+
+        card.on('focus', function () {
+            let el = document.getElementById('card-errors');
+            el.classList.add('focused');
+        });
+
+        card.on('blur', function () {
+            let el = document.getElementById('card-errors');
+            el.classList.remove('focused');
+        });
+
+        card.on('change', function (event) {
+            $cardError.html('');
+            $cardError.hide();
+            cardOk = true;
+            if (event.error) {
+                cardOk = false;
+                displayError(event.error)
+            }
+
+            if (subSelected && cardOk) {
+                $submitButton.prop('disabled', false);
+            }
+        });
+        $("#subscription-form").submit(function (event) {
+            subscribe(card);
+            event.preventDefault();
+        });
+    });
+
+    function displayError(error) {
+        $('button').prop('disabled', false);
+        if (error) {
+            $cardError.show();
+            $cardError.html(error.message)
+            $submitButton.prop('disabled', true);
+            $submitButton.show();
+            $('#button-text').show();
+        }
+    }
+
+    /** Function when plan selected
+     * Update checkout indicator
+     */
+    function planSelect(element, name, price, priceId, maxUser, amount_after_tax) {
+        {# toggle other button #}
+        const $otherButton = $('.btn-success')
+        $otherButton.addClass('btn-primary');
+        $otherButton.removeClass('btn-success');
+        $(element).addClass('btn-success');
+        $(element).removeClass('btn-primary');
+
+        $('#plan-indicator').html(name)
+        $('#price-indicator').html(price)
+        $('#price-id').html(priceId);
+        $('#button-text').html(amount_after_tax);
+        $('#total-price').html(amount_after_tax);
+
+        subSelected = true;
+        if (subSelected && cardOk) {
+            $submitButton.prop('disabled', false);
+        }
+        $('#max-user-errors').hide()
+        if (MAX_USER !== 0 && maxUser < MAX_USER) {
+            $('#max-user-errors').show()
+        }
+    }
+
+    function subscribe(card) {
+        $('button').prop('disabled', true);
+        $('#spinner').show();
+        $('#button-text').hide();
+
+        stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+            billing_details: {
+                name: '{{ billing_name }}',
+                email: '{{ billing_email }}'
+            },
+        }).then((result) => {
+            if (result.error) {
+                displayError(result.error);
+            } else {
+                const paymentParams = {
+                    price_id: $('#price-id').html(),
+                    payment_method: result.paymentMethod.id,
+                };
+                fetch("{{ url_submit }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(paymentParams),
+                }).then((response) => {
+                    return response.json();
+                }).then((result) => {
+                    if (result.error) {
+                        throw result;
+                    }
+                    window.location.href = result.URL;
+                }).catch(function (result) {
+                    displayError(result.error);
+
+                });
+            }
+        });
+    }
+</script>

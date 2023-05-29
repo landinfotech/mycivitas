@@ -1,0 +1,514 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Map
+{% endblock %}
+
+{% block stylesheet %}
+    <link href="{% static 'libs/maplibre/2.4.0/maplibre-gl.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/maplibre-gl.js' %}?"></script>
+
+    <link href="{% static 'css/map/main.css' %}?ver=2" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/map/widget.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <style>
+      #loadingScreen{
+      display: none;
+      height: 100%;
+      width: 100%;
+      z-index: 99999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: gray;
+      opacity: 0.8;
+    }
+    #loader-1 {
+      width: 200px;
+      height: 200px;
+      border-radius: 100%;
+      position: absolute;
+      top: 40%;
+      left: 45%;
+      margin: 0 auto;
+    }
+
+    /** only for the head of the table. */
+    table.table thead th {
+        padding:3px 3px 0px 3px;
+    }
+
+    /** only for the body of the table. */
+    table.table thead tr td {
+      padding:3px 3px 0px 3px;
+    } */
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="{% static 'libs/chart.js/3.5.0/chart.min.js' %}"></script>
+    <script data-main="{% static 'js/dashboard/config.js' %}" src="{% static 'libs/require.js/2.3.6/require.min.js' %}"></script>
+
+    <script>
+        const urls = {
+            ticket_list: "{% url 'amlit_helpdesk:ticket-list' %}",
+            feature_ticket_list: "{% url 'amlit_helpdesk:feature-ticket-list' id=0 %}",
+            ticket_detail: "{% url 'helpdesk:view' ticket_id=0 %}",
+
+            community_cof: "{% url 'community-summary-cof' 0 %}",
+            community_pof: "{% url 'community-summary-pof' 0 %}",
+            community_risk: "{% url 'community-summary-risk' 0 %}",
+            community_ticket: "{% url 'community-ticket-list' 0 %}",
+            reporter_data_download: "{% url 'community-reporter-data-download' 0 %}",
+            feature_data: "{% url 'feature-data' 0 %}",
+        };
+        const user = {
+            communityID: parseInt(getCookie('community'))
+        };
+        const recurring_queues = {{ site_preferences.recurred_queues_ids|safe }};
+
+        const styleUrl = "{%static 'styling/mycivitas_styling_v5_5.json'%}?";
+        const requireConfig = {
+            paths: {
+                'jquery': '{% static 'libs/jquery.js/3.4.1/jquery.min.js' %}?',
+                'jqueryUI': '{% static 'libs/jquery-ui/1.12.1/jquery-ui.js' %}?',
+                'backbone': '{% static 'libs/backbone.js/1.4.0/backbone-min.js' %}?',
+                'underscore': '{% static 'libs/underscore.js/1.9.1/underscore-min.js' %}?',
+                'fancyTable': '{% static 'libs/fancyTable.js/fancyTable.min.js' %}?',
+
+                {# project static #}
+                'js/event': '{% static 'js/event.js' %}?',
+                'js/request': '{% static 'js/request.js' %}?',
+                'js/templates': '{% static 'js/templates.js' %}?',
+
+                'js/controller': '{% static 'js/dashboard/controller.js' %}?',
+                'js/views/base': '{% static 'js/dashboard/views/base.js' %}?',
+                'js/views/global-view': '{% static 'js/dashboard/views/global-view.js' %}?',
+                'js/views/standard-view/view': '{% static 'js/dashboard/views/standard-view/view.js' %}?',
+
+                'js/widgets/base': '{% static 'js/dashboard/widgets/base.js' %}?',
+                'js/widgets/asset-management/base': '{% static 'js/dashboard/widgets/asset-management/base.js' %}?',
+                'js/widgets/asset-management/consequence-of-failure': '{% static 'js/dashboard/widgets/asset-management/consequence-of-failure.js' %}?',
+                'js/widgets/asset-management/probability-of-failure': '{% static 'js/dashboard/widgets/asset-management/probability-of-failure.js' %}?',
+                'js/widgets/asset-management/risk': '{% static 'js/dashboard/widgets/asset-management/risk.js' %}?',
+                'js/widgets/global/create-ticket': '{% static 'js/dashboard/widgets/global/create-ticket.js' %}?',
+                'js/widgets/global/in-progress': '{% static 'js/dashboard/widgets/global/in-progress.js' %}?',
+                'js/widgets/standard/ticket': '{% static 'js/dashboard/widgets/standard/ticket.js' %}?',
+                'js/widgets/global/features-detail': '{% static 'js/dashboard/widgets/global/features-detail.js' %}?',
+
+                'js/community/collection': '{% static 'js/dashboard/community/collection.js' %}?',
+                'js/community/controller': '{% static 'js/dashboard/community/controller.js' %}?',
+                'js/community/model': '{% static 'js/dashboard/community/model.js' %}?',
+
+                'js/map/map': '{% static 'js/dashboard/map/map.js' %}?',
+                'js/map/map-layers': '{% static 'js/dashboard/map/map-layers.js' %}?',
+                'js/map/layers/control': '{% static 'js/dashboard/map/layers/control.js' %}?',
+                'js/map/layers/main-layer': '{% static 'js/dashboard/map/layers/main-layer.js' %}?',
+                'js/map/layers/selected-layer-feature': '{% static 'js/dashboard/map/layers/selected-layer-feature.js' %}?',
+            },
+            shim: {
+                jqueryUI: {
+                    deps: ["jquery"]
+                },
+                rangeSlider: {
+                    deps: ["jquery"]
+                },
+                templates: {
+                    deps: ['underscore']
+                },
+            }
+        }
+
+
+        // QGIS Layers with class list on it
+        // TODO: LIT
+        //  We need make QGISLayers and Layers as 1 data
+        //  Below is used for filtering data on graph
+        const QGISLayers = {
+          'Natural': {
+            classes: ['nat'],
+            legends : [
+            "{% static 'legends/1_NaturalAssets.svg'%}",
+            ]
+          },
+          // 'Fleet and Equipment': {
+          //   classes: ['flt', 'equ'],
+          //   legends: []
+          // },
+          'Structures': {
+            classes: ['str'],
+            legends: [
+              "{% static 'legends/3_Structures.svg'%}"
+            ]
+          },
+          'Transportation Network': {
+            classes: ['trn'],
+            legends : [
+              "{% static 'legends/4_TransportationNetwork.svg'%}"
+            ]
+          },
+          'Water Network': {
+            classes: ['pws'],
+            legends : [
+              "{% static 'legends/6_WaterSupply.svg'%}",
+            ]
+          },
+          'Wastewater Network': {
+            classes: ['wwc'],
+            legends : [
+              "{% static 'legends/5_WastewaterCollection.svg'%}",
+            ]
+          },
+          'Stormwater Network': {
+            classes: ['swc'],
+            legends : [
+              "{% static 'legends/2_StormwaterCollection.svg'%}",
+            ]
+          },
+        };
+    </script>
+{% endblock stylesheet %}
+
+{% block container %}
+    {% csrf_token %}
+
+    <div id="loadingScreen">
+      <div class="loader" id="loader-1"></div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="left-top" class="side-panel">
+        <div class="inner full ui-overlay">
+            <div class="content full box-overlay">
+                <div id="community" class="section">
+                    <div class="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading community list</div>
+                    <div class="detail" style="display: none">
+                        <div class="selection">
+                            <div class="name"></div>
+                            <ul class="main-ul" style="display: none"></ul>
+                        </div>
+                        <div class="region"></div>
+                        <div class="province"></div>
+                    </div>
+                </div>
+                <div id="layer-list-toggle" class="section">
+                    <span id="see-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-down" aria-hidden="true"></i> See layer list</span>
+                    <span id="hide-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-up" aria-hidden="true"></i> Hide layer list</span>
+                </div>
+                <div id="layers" class="section">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="top-center" class="ui-overlay box-overlay">
+        <div id="styles">
+            <div class="selection">
+                <span class="name"></span>
+                <span class="arrow pull-right">▼</span>
+                <ul class="main-ul" style="display: none"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="right-panel" class="side-panel">
+        <div class="inner full">
+            <div id="side-panel-toggle-button">
+                <div id="global-toggle-button" class="side-panel-toggle-button">
+                </div>
+                <br>
+                <div id="widget-toggle-button" class="side-panel-toggle-button">
+                </div>
+            </div>
+        </div>
+        {% include "footer-transparent.html" %}
+    </div>
+
+    <div class="modal export" id="modal_export" tabindex="-1" role="dialog">
+      <div class="modal-dialog" style="width: 60% !important;" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="export_body">
+            <h3 class="modal-title">Export</h3>
+            <p>Please choose what data you would like to be exported</p>
+            <div style="overflow-x:scroll">
+              <table class="table mt-2 table-bordered" style="width:100%;overflow-x: scroll;">
+                <thead>
+                  <tr>
+                    <td>Include</td>
+                    <td>Name</td>
+                    <td>Value</td>
+                  </tr>
+                </thead>
+                <tbody id="table_body">
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="exportcsv" class="btn btn-primary">Export to CSV</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal export" id="modal_show" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div id="table-data" class="modal-content">
+          <div class="modal-header">
+
+            <div class="row" style="margin-bottom: 0px !important; margin-top: 0px !important;">
+              <div class="col-md-2">
+                <h3 class="modal-title">Export</h3>
+              </div>
+              <div class="col-md-10">
+                <div class="parent-rel">
+                  <div class="child-search">
+                    <input type="text" id="myInput" class="form-control" placeholder="Search..." title="Type in a name">
+                  </div>
+                  <div class="row child-search-btn">
+                    <div class="col-md-1">
+                      <span class="material-symbols-outlined" onclick="searchTable()">
+                        search
+                      </span>
+                    </div>
+                    <div class="col-md-1">
+                      <span class="material-symbols-outlined" onclick="clearSearch()">
+                        close
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-body" id="export_body">
+              <div style="width:100%;height:700px;overflow-x: scroll;overflow-y: scroll;">
+                <table class="table mt-2 table-bordered" id="filteredTable" >
+                <thead id="filteredhead" class="sticky-th">
+                </thead>
+                <tbody id="table_show" class="page-data">
+                </tbody>
+              </table>
+              </div>
+            </div>
+
+          </div>
+          <div id="_pagination">
+
+          </div>
+          <div id="_pagination">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="exportcsv" onclick="tableToCSV()" class="btn btn-primary">Export to CSV</button>
+            <button type="button" class="btn btn-secondary" onclick="closeFilter()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block extrascripts %}
+    {% include 'map/templates.html' %}
+    {% include 'map/widget/_coming_soon.html' %}
+    {% include 'map/widget/_create-ticket.html' %}
+    {% include 'map/widget/_feature-detail.html' %}
+    {% include 'map/widget/_loading.html' %}
+    {% include 'map/widget/_no_data_found.html' %}
+    {% include 'map/widget/_no_access.html' %}
+    {% include 'map/widget/_please_select_feature.html' %}
+    {% include 'map/widget/_please_click_map.html' %}
+    {% include 'map/widget/_please_add_feature.html' %}
+    {% include 'map/widget/_asset-management-widget.html' %}
+    {% include 'map/widget/_ticket-detail.html' %}
+    {% include 'map/widget/_ticket-feature.html' %}
+
+    <script type="text/javascript" src="{% static 'js/forms/widget/recurring_type.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/forms/widget/expected_time.js' %}"></script>
+
+    <script>
+
+        if(window.location.href.indexOf("view_table") > -1){
+          showTables()
+        }
+
+        function showFeatureMap(id){
+          var td = document.getElementsByClassName("getFeatureMap")
+
+          for(var i = 0; i < td.length; i++){
+            td[i].parentNode.style.backgroundColor = 'white'
+          }
+
+          $.ajax({
+              type: 'GET',
+              url: "/api/feature/"+id+"/data", //Replace your URL here
+              success: function(response){
+                  //code after success
+                  document.getElementById(id).parentNode.style.backgroundColor = '#97a1ba'
+                  var row = $(this).closest("tr");
+
+                  event.trigger(evt.FEATURE_LIST_FETHCED, [response]);
+                  event.trigger(evt.FEATURE_PAN, response);
+                  event.trigger(evt.FEATURE_HIGHLIGHTED, response);
+
+                  $("#modal_show").hide();
+              },
+              error: function () {
+                  // Code After Erroe
+              }
+          });
+        }
+
+        function showFeatureMap(id){
+          var td = document.getElementsByClassName("getFeatureMap")
+
+          for(var i = 0; i < td.length; i++){
+            td[i].parentNode.style.backgroundColor = 'white'
+          }
+
+          $.ajax({
+              type: 'GET',
+              url: "/api/feature/"+id+"/data", //Replace your URL here
+              success: function(response){
+                  //code after success
+                  document.getElementById(id).parentNode.style.backgroundColor = '#97a1ba'
+                  var row = $(this).closest("tr");
+                  
+                  event.trigger(evt.FEATURE_LIST_FETHCED, [response]);
+                  event.trigger(evt.FEATURE_PAN, response);
+                  event.trigger(evt.FEATURE_HIGHLIGHTED, response);
+                  
+                  $("#modal_show").hide();
+              },
+              error: function () {
+                  // Code After Erroe
+              }
+          });
+        }
+
+        function tableToCSV() {
+
+          let data = "";
+          const tableData = [];
+          const rows = document.getElementsByClassName("exportfiltered");
+          var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+          var searchColumnsArr = document.getElementsByClassName('search-column');
+          var isEmpty = true;
+          for(var x = 0; x < searchColumnsArr.length; x++){
+            if(searchColumnsArr.value != ""){
+              isEmpty = false;
+              break;
+            }
+          }
+          for (const row of rows) {
+            const rowData = [];
+            var count = 0;
+            if(isEmpty){
+              for (const [index, column] of row.querySelectorAll("th, td").entries()) {
+                // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
+                if(count != 0){
+                  if (format.test(column.innerText)) {
+                  rowData.push('"' + column.innerText + '"');
+                } else {
+                  rowData.push(column.innerText);
+                }
+                }
+                count++;
+              }
+              tableData.push(rowData.join(","));
+            }
+            else if($(row).hasClass('feature-filter') && isEmpty==false){
+              for (const [index, column] of row.querySelectorAll("th, td").entries()) {
+                // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
+                if(count!=0){
+                  if (format.test(column.innerText)) {
+                  rowData.push('"' + column.innerText + '"');
+                  } else {
+                    rowData.push(column.innerText);
+                  }
+                }
+                count++;
+              }
+              tableData.push(rowData.join(","));
+            }
+
+          }
+          data += tableData.join("\n");
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(new Blob([data], { type: "text/csv" }));
+          a.setAttribute("download", "data.csv");
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
+        }
+
+        function searchTable() {
+
+          document.getElementById("loadingScreen").style.display = "block";
+          document.getElementsByClassName('pag')[0].style.display = "none";
+
+          setTimeout(function(){
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table_show");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              $(tr[i]).removeClass('feature-filter')
+              td = tr[i].getElementsByTagName("td");
+              for(var x=0; x < td.length; x++){
+                if (td[x]) {
+                  txtValue =  td[x].textContent || td[x].innerText;
+                  if ( txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    $(tr[i]).addClass('feature-filter')
+                    break;
+                  }
+                  else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+          }, 500)
+
+          setTimeout(function(){
+            document.getElementById("loadingScreen").style.display = "none";
+          }, 2000)
+
+        }
+
+        function clearSearch(){
+          document.getElementById("myInput").value = "";
+          table = document.getElementById("table_show");
+          tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              tr[i].style.display = "";
+            }
+            document.getElementsByClassName('pag')[0].style.display = "";
+
+        }
+
+        function showTables(){
+          $("#modal_show").show();
+        }
+
+        function closeFilter(){
+          $("#modal_show").hide();
+        }
+
+
+    </script>
+
+{% endblock extrascripts %}

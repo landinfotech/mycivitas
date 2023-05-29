@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}" type="image/x-icon">
+    <title>{% block title %}MyCivitas.ca{% endblock title %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap" rel="stylesheet">
+
+    <link href="{% static 'libs/bootstrap/4.5.2/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'libs/font-awesome/4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'libs/jquery-ui/1.12.1/jquery-ui.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/animation.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/navbar.css' %}?version=3" rel="stylesheet" type="text/css" media="screen, projection"/>
+
+    <script type="text/javascript" src="{% static 'libs/jquery.js/3.4.1/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/jquery-ui/1.12.1/jquery-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'libs/bootstrap/4.5.2/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/shared.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/dashboard/env.js' %}"></script>
+    {% block stylesheet %}{% endblock stylesheet %}
+</head>
+<body class="body">
+{% include "navbar.html" %}
+<div id="page">
+    {% block container %}
+        <div id="container">
+            <div class="container container-page">{% block content %}{% endblock content %}</div>
+        </div>
+    {% endblock container %}
+    {% include "footer-transparent.html" %}
+    {% include "footer.html" %}
+</div>
+
+<script>
+    function remove(el) {
+        var element = el;
+        element.remove();
+    }
+</script>
+
+{% block extrascripts %}{% endblock extrascripts %}
+</body>
+</html>

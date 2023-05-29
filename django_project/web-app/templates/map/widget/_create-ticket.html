@@ -1,0 +1,45 @@
+{% load i18n %}
+<!-- Modal -->
+<script type='text/template' id='_create-ticket'>
+    <div class="help">
+        <i>
+            Below is the asset(s) selected for the new ticket.<br>
+            Click
+            <a id="click-here">here</a>
+            to show the asset(s) on the map.
+        </i>
+    </div>
+    <div id="feature-ticket-list">
+
+    </div>
+    <form action="{% url 'amlit_helpdesk:submit' %}" method='post' enctype='multipart/form-data'>
+        {% csrf_token %}
+        <div class="form-group">
+            <input id="feature-id-input" type="text" name="feature_id" class="form-control" autocomplete="off" hidden>
+        </div>
+        {% for field in create_ticket_form %}
+            {% if field.is_hidden %}
+                {{ field }}
+            {% else %}
+                <div class="form-group">
+                    <label for='id_{{ field.name }}'>
+                        {{ field.label }}
+                        {% if not field.field.required %}
+                            ({% trans "Optional" %})
+                        {% endif %}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <small class='error'>{{ field.errors }}</small>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <small class='form_help_text help-block'>{% trans field.help_text %}</small>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+            {% trans "Create Ticket" %}
+        </button>
+    </form>
+</script>

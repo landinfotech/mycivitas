@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        #price-list {
+            padding: 0 20px;
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block content %}
+    {% if object.subscription %}
+        <script src="https://js.stripe.com/v3/"></script>
+        <h2>
+            <a href='{% url "organisation_detail" pk=object.id %}'>Back
+                to {{ object.name }}</a>
+            Subscription plan
+        </h2>
+        <hr>{% load static %}
+        <link href="{% static 'css/widget/subscription.css' %}"
+              rel="stylesheet" type="text/css" media="screen, projection"/>
+        <script src="https://js.stripe.com/v3/"></script>
+        {% include "widgets/price-list.html" %}
+        <br>
+        <div class="checkout">
+            <div class="card-title font-weight-bold">Checkout</div>
+            <div id="max-user-errors" role="alert" class="error">
+                The current plan max user access is more than new plan.<br>
+                Please remove it on organisation edit page first before
+                subscribe.<br>
+                The exceeded user access will be removed automatically after
+                subscribed.
+                <br>
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-6 text-muted">
+                    <p>Plan:</p>
+                    <p>Price:</p>
+                </div>
+                <div class="col-6 text-right">
+                    <p id="plan-indicator"></p>
+                    <p id="price-indicator"></p>
+                    <p hidden id="price-id"></p>
+                </div>
+            </div>
+            <hr>
+            <form id="subscription-form" method='post'>
+                {% csrf_token %}
+                <div id="card-element">
+                </div>
+                <div id="card-errors" role="alert" class="error"></div>
+                <br>
+                <button id="submit" type="submit"
+                        class="btn main-button btn-primary" style="width: 100%"
+                        disabled>
+                    Change
+                </button>
+            </form>
+        </div>
+    {% else %}
+        {% include "widgets/subscription.html" %}
+    {% endif %}
+
+{% endblock %}
+
+{% block extrascripts %}
+    {% if object.subscription %}
+        <script>
+          let MAX_USER =  {{ object.max_user }};
+          const $cardError = $('#card-errors');
+          const $submitButton = $(':input[type="submit"]');
+          let subSelected = false;
+
+          /** Function when plan selected
+           * Update checkout indicator
+           */
+          function planSelect(element, name, price, priceId, maxUser) {
+            {# toggle other button #}
+            const $otherButton = $('.btn-success')
+            $otherButton.addClass('btn-primary');
+            $otherButton.removeClass('btn-success');
+            $(element).addClass('btn-success');
+            $(element).removeClass('btn-primary');
+
+            $('#plan-indicator').html(name)
+            $('#price-indicator').html(price)
+            $('#price-id').html(priceId);
+            $('#submit').html(price);
+
+            subSelected = true;
+            if (subSelected) {
+              $submitButton.prop('disabled', false);
+            }
+            $('#max-user-errors').hide()
+            if (MAX_USER !== 0 && maxUser < MAX_USER) {
+              $('#max-user-errors').show()
+            }
+          }
+
+          function displayError(error) {
+            $('button').prop('disabled', false);
+            if (error) {
+                $cardError.show();
+                $cardError.html(error)
+                $submitButton.prop('disabled', true);
+            }
+          }
+
+          $("#subscription-form").submit(function (event) {
+            $cardError.html('');
+            $cardError.hide();
+            $('button').prop('disabled', true);
+            const paymentParams = {
+              price_id: $('#price-id').html()
+            };
+            fetch("{% url "organisation_subscription" pk=object.id %}", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+              },
+              credentials: 'same-origin',
+              body: JSON.stringify(paymentParams)
+            }).then((response) => {
+              return response.json();
+            }).then((result) => {
+              if (result.error) {
+                throw result;
+              }
+              window.location.href = '{% url "organisation_detail" pk=object.id %}#subscription';
+            }).catch(function (result) {
+              displayError(result.error);
+
+            });
+            event.preventDefault();
+          });
+        </script>
+    {% endif %}
+{% endblock %}

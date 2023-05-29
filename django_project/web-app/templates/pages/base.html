@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    {% block extra_stylesheet %}
+    {% endblock %}
+{% endblock stylesheet %}
+{% block content %}
+    <div class="header">
+        {% block header %}
+        {% endblock header %}
+    </div>
+    {% block info %}
+    {% endblock %}
+{% endblock content %}
+
+{% block extrascripts %}
+{% endblock extrascripts %}

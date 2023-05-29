@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block stylesheet %}
+    <style>
+        .page-header {
+            padding-bottom: 10px;
+            margin: 44px 0 22px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .page-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        dl {
+            margin-top: 0;
+            margin-bottom: 22px;
+        }
+
+        .dl-horizontal dt {
+            text-overflow: clip;
+            white-space: normal;
+            overflow: hidden;
+        }
+
+        .dl-horizontal dt {
+            float: left;
+            width: 160px;
+            clear: left;
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dl-horizontal dd {
+            margin-left: 180px;
+            min-height: 24px;
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block content %}
+    <div class="page-header">
+        <h2>{{ title }}</h2>
+    </div>
+    <div>
+        {% block content_page %}{% endblock %}
+    </div>
+{% endblock content %}

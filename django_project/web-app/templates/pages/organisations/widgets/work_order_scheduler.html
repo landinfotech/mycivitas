@@ -1,0 +1,172 @@
+{% load static %}
+{% load amlit_organisation %}
+<style>
+
+    #scheduler-table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    #scheduler-table th,
+    #scheduler-table td {
+        border: 1px solid #ddd;
+        padding: 8px 15px;
+        vertical-align: top;
+    }
+
+    #scheduler-table td {
+        opacity: 0.5;
+    }
+
+    #scheduler-table tr.active td {
+        opacity: 1 !important;
+    }
+
+    #scheduler-table h2 {
+        position: relative;
+    }
+
+    #scheduler-table h2 a {
+        position: absolute;
+        right: 0;
+    }
+
+    #scheduler-table .action {
+        opacity: 1 !important;
+    }
+
+    #scheduler-table .action button {
+        padding: 5px 10px;
+    }
+
+    #scheduler-table .ticket-link {
+        font-size: 16px;
+    }
+
+    #scheduler-table .title {
+        background: #eee;
+        color: var(--primary-color);
+        font-weight: 700;
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    #scheduler-template-button {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    #work-order-scheduler-table {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    #scheduler-table .btn {
+        width: 90px;
+    }
+
+</style>
+<div id="work-order-scheduler" class="sidebar-content">
+    {% if site_preferences.recurred_queues.first  %}
+        <button class="btn btn-success template_form_button"
+                style="margin-top: 5px"
+                data-form-title="Create new schedule"
+                data-form-url="{% url "organisation_schedule_create" object.id %}">Create New Schedule
+        </button>
+        <button id="scheduler-template-button" class="red-button pull-right" data-toggle="modal" data-target="#scheduler-template">
+            See Schedule Templates
+        </button>
+        <br>
+        <br>
+        <div id="work-order-scheduler-table">
+            <table id="scheduler-table">
+                <tr>
+                    <th>Status</th>
+                    <th>Asset Type</th>
+                    <th>Schedule</th>
+                    <th>Activity Summary</th>
+                    <th>Activity Description</th>
+                    <th>Assign to</th>
+                    <th>Ticket link</th>
+                    <th>Actions</th>
+                </tr>
+                {% for scheduler_data in object.scheduler_data %}
+                    <tr
+                            {% for key, value in scheduler_data.items %}
+                                data-{{ key }}="{{ value }}"
+                            {% endfor %}
+                                class="{% if scheduler_data.active %}active{% endif %}"
+                    >
+                        <td>{% if scheduler_data.active %}Active{% else %}Inactive{% endif %}</td>
+                        <td>{{ scheduler_data.feature_type_combination_str }}</td>
+                        <td>{{ scheduler_data.recurring_type }}</td>
+                        <td>{{ scheduler_data.title }}</td>
+                        <td>{{ scheduler_data.description }}</td>
+                        <td>{% if scheduler_data.operator %}{{ scheduler_data.operator }}{% endif %}</td>
+                        <td class="ticket-link">{% if scheduler_data.ticket_link %}<a href="{{ scheduler_data.ticket_link }}"><i class="fa fa-ticket" aria-hidden="true"></i></a>{% endif %}</td>
+                        <td class="action">
+                            {% if scheduler_data.ticket_link %}
+                                <div>
+                                    {% if scheduler_data.active %}
+                                        <form action="{% url "organisation_schedule_inactivate" object.id scheduler_data.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="btn btn-danger">Inactivate</button>
+                                        </form>
+                                    {% else %}
+                                        <form action="{% url "organisation_schedule_activate" object.id scheduler_data.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="btn btn-success">Activate</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary template_form_button"
+                                            style="margin-top: 5px"
+                                            data-form-title="Edit the schedule"
+                                            data-form-url="{% url "organisation_schedule_edit" object.id scheduler_data.id %}">Edit
+                                    </button>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <button class="btn btn-success template_form_button"
+                                            style="margin-top: 5px"
+                                            data-form-title="Edit and activate the schedule"
+                                            data-form-url="{% url "organisation_schedule_edit" object.id scheduler_data.id %}">Edit & Activate
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <div>
+            There is no queue for Work Order in Schedule. Please contact Admin to add it.
+        </div>
+    {% endif %}
+</div>
+{% include "pages/organisations/widgets/work_order_scheduler_templates.html" %}
+{% include "pages/organisations/widgets/work_order_scheduler_form.html" %}
+<script type="text/javascript" src="{% static 'js/forms/widget/recurring_type.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/forms/widget/expected_time.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.template_form_button').click(function () {
+            const $row = $(this).closest('tr');
+            const formTitle = $(this).data('form-title');
+            const formUrl = $(this).data('form-url');
+
+            $('#id_feature_type_combination').val($row.data('feature_type_combination_id'));
+            $('#id_title').val($row.data('title'));
+            $('#id_description').val($row.data('description'));
+            $('#id_assigned_to').val($row.data('operator_id'));
+            assignNewRecurring($row.data('recurring_type'));
+            $('#scheduler-form form').attr('action', formUrl);
+            $('#scheduler-form .modal-title').html(formTitle);
+            $('#scheduler-form').modal('toggle');
+            $('#scheduler-template').modal('hide');
+        });
+        $('.default-recurrence').remove();
+    });
+</script>

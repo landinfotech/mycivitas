@@ -1,0 +1,28 @@
+{% extends 'pages/base-blue.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+{% block extra_stylesheet %}
+    <link href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+
+{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <div class="title">
+        SIGN IN
+    </div>
+    <div class="container container-page">
+        {% include "registration/login-form.html" %}
+    </div>
+{% endblock %}
+{% block extrascripts %}
+    <script>
+        if (window.location.hash) {
+            window.location = window.location.href.substr(0, window.location.href.indexOf('#'))
+        }
+    </script>
+{% endblock %}

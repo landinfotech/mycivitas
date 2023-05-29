@@ -1,0 +1,4924 @@
+{
+  "version": 8,
+  "name": "maputnik_testing",
+  "metadata": {"maputnik:renderer": "mbgljs"},
+  "sources": {
+    "MyCivitasStaging": {
+      "type": "vector",
+      "tiles": ["https://staging.mycivitas.ca/community-layer/{z}/{x}/{y}"],
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=cc4PpmmWZP73LjU1nsw3 "
+    },
+    "natural_earth": {
+      "type": "raster",
+      "tiles": [
+        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    },
+    "basemapOsm": {
+      "id": "OSM",
+      "type": "raster",
+      "tiles": ["https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "maxzoom": 18,
+      "tileSize": 256
+    }
+  },
+  "sprite": "https://raw.githubusercontent.com/Jeremy-Prior/sprite-testing/main/sprite/test2",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cc4PpmmWZP73LjU1nsw3 ",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "background-color": "rgba(88, 150, 50, 1)",
+        "background-opacity": 0.35
+      }
+    },
+    {
+      "id": "basemapOsm",
+      "source": "basemapOsm",
+      "type": "raster"
+    },
+    {
+      "id": "boundaries",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "filter": ["all"],
+      "layout": {"visibility": "visible"}
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "water",
+      "filter": ["all"],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(75, 146, 164, 1)",
+        "fill-outline-color": "rgba(22, 35, 36, 1)"
+      }
+    },
+    {
+      "id": "place_village",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "filter": ["all", ["==", "class", "village"]],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": ["Open Sans Bold"],
+        "text-line-height": 1,
+        "text-allow-overlap": true,
+        "text-pitch-alignment": "map",
+        "text-rotation-alignment": "map",
+        "symbol-z-order": "auto",
+        "text-size": 10,
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "place_town",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "filter": ["all", ["==", "class", "town"]],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": ["Open Sans Bold"],
+        "text-line-height": 1,
+        "text-allow-overlap": true,
+        "text-pitch-alignment": "map",
+        "text-rotation-alignment": "map",
+        "symbol-z-order": "auto",
+        "text-size": 12,
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "place_city",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "filter": ["all", ["==", "class", "city"]],
+      "layout": {
+        "text-field": "{name_en}",
+        "text-font": ["Open Sans Bold"],
+        "text-line-height": 1,
+        "text-allow-overlap": true,
+        "text-pitch-alignment": "map",
+        "text-rotation-alignment": "map",
+        "symbol-z-order": "auto",
+        "text-size": 12,
+        "visibility": "none"
+      }
+    },
+    {
+      "id": "1. Abandoned Infrastructure",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": ["all", ["==", "system_name", "Abandoned Infrastructure"]],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "1. Abandoned Infrastructure Points",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": ["all", ["==", "system_name", "Abandoned Infrastructure"]],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "2. Buildings, Facilities, Parks and Recreation",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Facilities, Parks and Recreation"]
+      ],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "3. wetland (Buildings, Parks, and Recreation fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "wetland"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(114, 133, 132, 1)",
+        "fill-opacity": 1,
+        "fill-color": "rgba(163, 205, 185, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "3. wetland (Buildings, Parks, and Recreation outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "wetland"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(114, 133, 132, 1)",
+        "line-opacity": 1,
+        "line-width": 2
+      }
+    },
+    {
+      "id": "3. engineered land (Buildings, Parks, and Recreation fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(35, 35, 35, 1)",
+        "fill-opacity": 0.48,
+        "fill-color": "rgba(231, 251, 55, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "3. engineered land Buildings, Parks, and Recreation outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.48,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "3. recreational structure Buildings, Parks, and Recreation fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "recreational structure"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(82, 82, 82, 1)",
+        "fill-opacity": 0.58,
+        "fill-color": "rgba(204, 204, 204, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "3. recreational structure Buildings, Parks, and Recreation outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "recreational structure"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.35,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "3. building (Buildings, Parks, and Recreation fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(35, 35, 35, 1)",
+        "fill-opacity": 0.35,
+        "fill-color": "rgba(227, 26, 28, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "3. building (Buildings, Parks, and Recreation outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.35,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "3. pedestrian walkway Buildings, Parks, and Recreation line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "pedestrian walkway"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(165, 165, 165, 1)",
+        "line-opacity": 1,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "3. monument 1 (Buildings, Parks, and Recreation symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "monument"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "text-size": 12,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "rgba(231, 231, 231, 1)",
+        "text-halo-color": "rgba(35, 35, 35, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "3. monument 2 (Buildings, Parks, and Recreation symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "monument"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╋",
+        "text-size": 11,
+        "visibility": "visible"
+      },
+      "paint": {"text-color": "rgba(0, 0, 0, 1)"}
+    },
+    {
+      "id": "3. tank 1 (Buildings, Parks, and Recreation point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "tank"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(72, 123, 182, 1)",
+        "circle-opacity": 1,
+        "circle-stroke-color": "rgba(50, 87, 128, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-radius": 5,
+        "circle-stroke-width": 2
+      }
+    },
+    {
+      "id": "3. tank 2 (Buildings, Parks, and Recreation point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "tank"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 255, 255, 1)",
+        "circle-opacity": 1,
+        "circle-stroke-color": "rgba(255, 255, 255, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-radius": 3,
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "4. engineered land (Buildings, Parks, and Recreations fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(35, 35, 35, 1)",
+        "fill-opacity": 0.48,
+        "fill-color": "rgba(231, 251, 55, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "4. engineered land (Buildings, Parks, and Recreations outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.48,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "4. recreational structure Buildings, Parks, and Recreations fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "recreational structure"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(82, 82, 82, 1)",
+        "fill-opacity": 0.58,
+        "fill-color": "rgba(204, 204, 204, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "4. recreational structure Buildings, Parks, and Recreations outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "recreational structure"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.35,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "4. building (Buildings, Parks, and Recreations fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "4. building (Buildings, Parks, and Recreations outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "4. monument 1 (Buildings, Parks, and Recreations symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "monument"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "text-size": 12,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "rgba(231, 231, 231, 1)",
+        "text-halo-color": "rgba(35, 35, 35, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "4. monument 2 (Buildings, Parks, and Recreations symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Buildings, Parks, and Recreations"],
+        ["==", "asset_sub_class", "monument"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╋",
+        "text-size": 11,
+        "visibility": "visible"
+      },
+      "paint": {"text-color": "rgba(0, 0, 0, 1)"}
+    },
+    {
+      "id": "5. distribution force main (Georgetown Water Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Georgetown Water Network"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "#1f78b4", "line-width": 2}
+    },
+    {
+      "id": "5. hydrant (Georgetown Water Network point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Georgetown Water Network"],
+        ["==", "asset_sub_class", "hydrant"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 127, 0, 1)",
+        "circle-stroke-color": "rgba(179, 92, 21, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 2,
+        "circle-radius": 4
+      }
+    },
+    {
+      "id": "5. valve (Georgetown Water Network point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Georgetown Water Network"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(221, 232, 251, 1)",
+        "circle-stroke-color": "rgba(50, 87, 128, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "5. valve (Georgetown Water Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Georgetown Water Network"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "6. distribution gravity main (Irrigation System line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Irrigation System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 1.5}
+    },
+    {
+      "id": "6. valve (Irrigation System point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Irrigation System"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(221, 232, 251, 1)",
+        "circle-stroke-color": "rgba(50, 87, 128, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "6. valve (Irrigation System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Irrigation System"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "7. Municipal Buildings, Parks and Recreation",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Buildings, Parks and Recreation"]
+      ],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "8. Municipal Buildings, Parks, and Recreation",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Buildings, Parks, and Recreation"]
+      ],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "9. Municipal Buildings, Structures. Parks, and Recreation",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "system_name",
+          "Municipal Buildings, Structures. Parks, and Recreation"
+        ]
+      ],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "10. transmission force main (Municipal Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "10. transmission force main 1 (Municipal Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 13
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(215, 0, 3, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "10. transmission force main 2 (Municipal Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 9
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "10. transmission gravity main (Municipal Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "10. transmission gravity main (Municipal Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "10. service connection (Municipal Wastewater Collection line)-copy",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "service connection"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 1}
+    },
+    {
+      "id": "10. manhole cover (Municipal Wastewater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 1, 5, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "10. pump 1 (Municipal Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "10. pump 2 (Municipal Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(255, 117, 119, 1)"}
+    },
+    {
+      "id": "10. cleanout (Municipal Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Municipal Wastewater Collection"],
+        ["==", "asset_sub_class", "cleanout"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "11. symbols (Non-Municipal Infrastructure symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": ["all", ["==", "system_name", "Non-Municipal Infrastructure"]],
+      "layout": {
+        "text-font": ["Open Sans Regular"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "{asset_sub_class}",
+        "visibility": "none",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      }
+    },
+    {
+      "id": "11. lines (Non-Municipal Infrastructure line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": ["all", ["==", "system_name", "Non-Municipal Infrastructure"]],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "11. points (Non-Municipal Infrastructure point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": ["all", ["==", "system_name", "Non-Municipal Infrastructure"]],
+      "layout": {"visibility": "none"}
+    },
+    {
+      "id": "12. pedestrian walkway (Pedestrian Transportation line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Pedestrian Transportation"],
+        ["==", "asset_sub_class", "pedestrian walkway"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 1.5}
+    },
+    {
+      "id": "13. transmission gravity main (Planned Infrastructure line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Planned Infrastructure"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "13. transmission gravity main (Planned Infrastructure symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Planned Infrastructure"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "13. manhole cover (Planned Infrastructure point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Planned Infrastructure"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 1, 5, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "13. manhole trunk (Planned Infrastructure symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Planned Infrastructure"],
+        ["==", "asset_sub_class", "manhole trunk"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-anchor": "center",
+        "text-justify": "auto",
+        "text-size": 18,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(255, 1, 5, 1)"}
+    },
+    {
+      "id": "14. engineered land (Public Buildings, Parks, and Recreation fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(35, 35, 35, 1)",
+        "fill-opacity": 0.48,
+        "fill-color": "rgba(231, 251, 55, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "14. engineered land (Public Buildings, Parks, and Recreation outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.48,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "14. building (Public Buildings, Parks, and Recreation fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "14. building (Public Buildings, Parks, and Recreation outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "14. pedestrian walkway (Public Buildings, Parks, and Recreation line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Buildings, Parks, and Recreation"],
+        ["==", "asset_sub_class", "pedestrian walkway"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 1.5}
+    },
+    {
+      "id": "15. road overlay (Public Transportation line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Transportation"],
+        ["==", "asset_sub_class", "road overlay"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 2}
+    },
+    {
+      "id": "16. light (Public Transportation System point)-copy",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Transportation System"],
+        ["==", "asset_sub_class", "light"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(231, 231, 231, 1)",
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1,
+        "circle-radius": 2
+      }
+    },
+    {
+      "id": "16. traffic sign or signal (Public Transportation System symbol)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Public Transportation System"],
+        ["==", "asset_sub_class", "traffic sign or signal"]
+      ],
+      "layout": {
+        "text-field": "◆",
+        "text-font": ["code"],
+        "text-size": 10,
+        "text-allow-overlap": true,
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-rotation-alignment": "auto",
+        "icon-ignore-placement": true,
+        "text-anchor": "bottom",
+        "text-justify": "center",
+        "text-radial-offset": 0.75,
+        "text-ignore-placement": true
+      },
+      "paint": {"text-color": "rgba(0, 0, 0, 1)"}
+    },
+    {
+      "id": "17. transmission gravity main (RDCB Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "RDCB Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "17. transmission gravity main (RDCB Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "RDCB Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "17. manhole cover (RDCB Wastewater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "RDCB Wastewater Collection"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 1, 5, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "17. valve (RDCB Wastewater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "RDCB Wastewater Collection"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 117, 119, 1)",
+        "circle-stroke-color": "rgba(0, 0, 0, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "17. valve (RDCB Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "RDCB Wastewater Collection"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "18. transmission force main (Reclaimed Water System line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Reclaimed Water System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 2}
+    },
+    {
+      "id": "18. distribution force main (Reclaimed Water System line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Reclaimed Water System"],
+        ["==", "type", "distribution force main"],
+        ["==", "asset_sub_class", "pipe"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "#1f78b4", "line-width": 2}
+    },
+    {
+      "id": "18. hydrant (Reclaimed Water System point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Reclaimed Water System"],
+        ["==", "asset_sub_class", "hydrant"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 127, 0, 1)",
+        "circle-stroke-color": "rgba(179, 92, 21, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 2,
+        "circle-radius": 4
+      }
+    },
+    {
+      "id": "19. transmission gravity main (Stormwater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(51, 160, 44, 1)", "line-width": 2}
+    },
+    {
+      "id": "19. transmission gravity main (Stormwater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "19. culvert 1 (Stormwater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(0, 0, 0, 1)", "line-width": 3}
+    },
+    {
+      "id": "19. culvert 2 (Stormwater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 2}
+    },
+    {
+      "id": "19. culvert (Stormwater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "19. manhole cover (Stormwater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(51, 160, 44, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "19. catch basin (Stormwater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "catch basin"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(51, 160, 44, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(51, 160, 44, 1)",
+        "circle-stroke-width": 2,
+        "circle-opacity": 0
+      }
+    },
+    {
+      "id": "19. catch basin (Stormwater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "catch basin"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "┼",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 5,
+        "text-offset": [0.02, -0.02],
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 0}
+    },
+    {
+      "id": "19. reservoir 1 (Stormwater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16,
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 2, "text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "19. reservoir 2 (Stormwater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 13
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "19. reservoir 3 (Stormwater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 7
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "20. transmission force main (Stormwater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(51, 160, 44, 1)", "line-width": 2}
+    },
+    {
+      "id": "20. transmission force main (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "20. building (Stormwater Collection and Treatment fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "20. building (Stormwater Collection and Treatment outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "20. transmission gravity main (Stormwater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(51, 160, 44, 1)", "line-width": 2}
+    },
+    {
+      "id": "20. transmission gravity main (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "20. distribution force main (Stormwater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(51, 160, 44, 1)", "line-width": 2}
+    },
+    {
+      "id": "20. distribution force main (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "20. culvert 1 (Stormwater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(0, 0, 0, 1)", "line-width": 3}
+    },
+    {
+      "id": "20. culvert 2 (Stormwater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 2}
+    },
+    {
+      "id": "20. culvert (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "20. channel (Stormwater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "channel"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(51, 160, 44, 1)",
+        "line-width": 2,
+        "line-dasharray": [2, 1]
+      }
+    },
+    {
+      "id": "20. manhole cover (Stormwater Collection and Treatment point",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(51, 160, 44, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "20. manhole trunk (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "manhole trunk"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-anchor": "center",
+        "text-justify": "auto",
+        "text-size": 18,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(51, 160, 44, 1)", "text-opacity": 1}
+    },
+    {
+      "id": "20. catch basin (Stormwater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "catch basin"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(51, 160, 44, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(51, 160, 44, 1)",
+        "circle-stroke-width": 2,
+        "circle-opacity": 0
+      }
+    },
+    {
+      "id": "20. catch basin (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "catch basin"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "┼",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 5,
+        "text-offset": [0.02, -0.02],
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 0}
+    },
+    {
+      "id": "20. valve (Stormwater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(178, 223, 138, 1)",
+        "circle-stroke-color": "rgba(51, 160, 44, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "20. valve (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "20. reservoir 1 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16,
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 2, "text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "20. reservoir 2 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 13
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "20. reservoir 3 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 7
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "20. pump 1 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "20. pump 2 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "20. box 1 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "box"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "□",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 12
+      },
+      "paint": {
+        "text-color": "rgba(51, 160, 44, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(51, 160, 44, 1)"
+      }
+    },
+    {
+      "id": "20. control 1 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(0, 0, 0, 1)"
+      }
+    },
+    {
+      "id": "20. control 2 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 8
+      },
+      "paint": {
+        "text-color": "rgba(51, 160, 44, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(51, 160, 44, 1)"
+      }
+    },
+    {
+      "id": "20. grate 1 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "grate"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(35, 35, 35, 1)"
+      }
+    },
+    {
+      "id": "20. grate 2 (Stormwater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection and Treatment"],
+        ["==", "asset_sub_class", "grate"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "┼",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 10
+      },
+      "paint": {
+        "text-color": "rgba(35, 35, 35, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(35, 35, 35, 1)"
+      }
+    },
+    {
+      "id": "21. transmission gravity main (Stormwater Collection Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(51, 160, 44, 1)", "line-width": 2}
+    },
+    {
+      "id": "21. transmission gravity main (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "21. culvert 1 (Stormwater Collection Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(0, 0, 0, 1)", "line-width": 3}
+    },
+    {
+      "id": "21. culvert 2 (Stormwater Collection Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 2}
+    },
+    {
+      "id": "21. culvert (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "21. catch basin (Stormwater Collection Network point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "catch basin"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(51, 160, 44, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(51, 160, 44, 1)",
+        "circle-stroke-width": 2,
+        "circle-opacity": 0
+      }
+    },
+    {
+      "id": "21. catch basin (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "catch basin"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "┼",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 5,
+        "text-offset": [0.02, -0.02],
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 0}
+    },
+    {
+      "id": "21. reservoir 1 (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16,
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 2, "text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "21. reservoir 2 (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 13
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "21. reservoir 3 (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 7
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "21. grate 1 (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "grate"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(35, 35, 35, 1)"
+      }
+    },
+    {
+      "id": "21. grate 2 (Stormwater Collection Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Stormwater Collection Network"],
+        ["==", "asset_sub_class", "grate"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "┼",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 10
+      },
+      "paint": {
+        "text-color": "rgba(35, 35, 35, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(35, 35, 35, 1)"
+      }
+    },
+    {
+      "id": "22. base(Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "base"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 5, "line-color": "rgba(151, 142, 111, 1)"}
+    },
+    {
+      "id": "22. road overlay (Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "road overlay"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 2}
+    },
+    {
+      "id": "22. pedestrian walkway (Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "pedestrian walkway"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 1.5}
+    },
+    {
+      "id": "22. bridge 1 (Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "bridge"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(134, 134, 134, 1)",
+        "line-width": 1.5,
+        "line-offset": 2
+      }
+    },
+    {
+      "id": "22. bridge 2 (Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "bridge"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(134, 134, 134, 1)",
+        "line-width": 1.5,
+        "line-offset": -2
+      }
+    },
+    {
+      "id": "22. bridge 3 (Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "bridge"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(69, 69, 69, 1)",
+        "line-dasharray": [0.25, 1],
+        "line-width": 3
+      }
+    },
+    {
+      "id": "22. barrier or fence (Transportation Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Transportation Network"],
+        ["==", "asset_sub_class", "barrier or fence"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(83, 83, 83, 1)",
+        "line-dasharray": [2, 1],
+        "line-width": 2
+      }
+    },
+    {
+      "id": "23. road overlay (Vehicle Transportation line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Vehicle Transportation"],
+        ["==", "asset_sub_class", "road overlay"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 2}
+    },
+    {
+      "id": "24. building (Wastewater Collection fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "24. building (Wastewater Collection outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "24. transmission force main (Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "24. transmission force main 1 (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 13
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(215, 0, 3, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "24. transmission force main 2 (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 9
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "24. transmission gravity main (Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "24. transmission gravity main (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "24. outfall (Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "outfall"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 3}
+    },
+    {
+      "id": "24. outfall (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "outfall"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "24. culvert 1 (Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(0, 0, 0, 1)", "line-width": 3}
+    },
+    {
+      "id": "24. culvert 2 (Wastewater Collection line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 2}
+    },
+    {
+      "id": "24. culvert (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "culvert"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "24. manhole cover (Wastewater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 1, 5, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "24. manhole trunk (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "manhole trunk"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-anchor": "center",
+        "text-justify": "auto",
+        "text-size": 18,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(255, 1, 5, 1)"}
+    },
+    {
+      "id": "24. pump 1 (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "24. pump 2 (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(255, 117, 119, 1)"}
+    },
+    {
+      "id": "24. valve (Wastewater Collection point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 117, 119, 1)",
+        "circle-stroke-color": "rgba(0, 0, 0, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "24. valve (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "24. motor (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "motor"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "★",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 16,
+        "text-max-angle": 360,
+        "text-rotate": 180
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "24. control 1 (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(0, 0, 0, 1)"
+      }
+    },
+    {
+      "id": "24. control 2 (Wastewater Collection symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 8
+      },
+      "paint": {
+        "text-color": "rgba(255, 117, 119, 1)",
+        "text-halo-color": "rgba(255, 117, 119, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "25. engineered land (Wastewater Collection and Treatment fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(35, 35, 35, 1)",
+        "fill-opacity": 0.48,
+        "fill-color": "rgba(231, 251, 55, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "25. engineered land (Wastewater Collection and Treatment outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.48,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "25. building (Wastewater Collection and Treatment fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "25. building (Wastewater Collection and Treatment outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "25. transmission force main (Wastewater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "25. transmission force main 1 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 13
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(215, 0, 3, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "25. transmission force main 2 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 9
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "25. transmission gravity main (Wastewater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "25. transmission gravity main (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "25. outfall (Wastewater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "outfall"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 3}
+    },
+    {
+      "id": "25. outfall (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "outfall"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "25. service connection (Wastewater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "service connection"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 1}
+    },
+    {
+      "id": "25. manhole cover (Wastewater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 1, 5, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "25. manhole trunk (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "manhole trunk"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-anchor": "center",
+        "text-justify": "auto",
+        "text-size": 18,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(255, 1, 5, 1)"}
+    },
+    {
+      "id": "25. pump 1 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "25. pump 2 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(255, 117, 119, 1)"}
+    },
+    {
+      "id": "25. valve (Wastewater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 117, 119, 1)",
+        "circle-stroke-color": "rgba(0, 0, 0, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "25. valve (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "25. motor (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "motor"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "★",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 16,
+        "text-max-angle": 360,
+        "text-rotate": 180
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "25. tank 1 (Wastewater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "tank"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-stroke-color": "rgba(215, 0, 3, 1)",
+        "circle-stroke-width": 1,
+        "circle-color": "rgba(255, 117, 119, 1)"
+      }
+    },
+    {
+      "id": "25. tank 2 (Wastewater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "tank"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"circle-radius": 3, "circle-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "25. control 1 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(0, 0, 0, 1)"
+      }
+    },
+    {
+      "id": "25. control 2 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 8
+      },
+      "paint": {
+        "text-color": "rgba(255, 117, 119, 1)",
+        "text-halo-color": "rgba(255, 117, 119, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "25. part (Wastewater Collection and Treatment point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "part"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"circle-radius": 3}
+    },
+    {
+      "id": "25. cleanout (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "cleanout"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "25. treatment 1 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◒",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(0, 0, 0, 1)"}
+    },
+    {
+      "id": "25. treatment 2 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◑",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(255, 163, 165, 1)"}
+    },
+    {
+      "id": "25. treatment 3 (Wastewater Collection and Treatment symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◓",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "26. building (Wastewater Collection and Treatment System fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "26. building (Wastewater Collection and Treatment System outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "26. distribution force main (Wastewater Collection and Treatment line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "26. distribution force main 1 (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 16
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "26. transmission gravity main (Wastewater Collection and Treatment System line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "26. transmission gravity main (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "26. distribution gravity main (Wastewater Collection and Treatment System line)-copy",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 2}
+    },
+    {
+      "id": "26. distribution gravity main (Wastewater Collection and Treatment System symbols)-copy",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "26. outfall (Wastewater Collection and Treatment System line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "outfall"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(215, 0, 3, 1)", "line-width": 3}
+    },
+    {
+      "id": "26. outfall (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "outfall"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center"
+      }
+    },
+    {
+      "id": "26. manhole cover (Wastewater Collection and Treatment System point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 1, 5, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "26. manhole trunk (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "manhole trunk"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◌",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-anchor": "center",
+        "text-justify": "auto",
+        "text-size": 18,
+        "text-offset": [-0.02, -0.37]
+      },
+      "paint": {"text-color": "rgba(255, 1, 5, 1)"}
+    },
+    {
+      "id": "26. pump 1 (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "26. pump 2 (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(255, 117, 119, 1)"}
+    },
+    {
+      "id": "26. treatment 1 (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◒",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(0, 0, 0, 1)"}
+    },
+    {
+      "id": "26. treatment 2 (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◑",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(255, 163, 165, 1)"}
+    },
+    {
+      "id": "26. treatment 3 (Wastewater Collection and Treatment System symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Wastewater Collection and Treatment System"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◓",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "27. building (Water Treatment and Distribution fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(227, 26, 28, 1)", "fill-opacity": 0.35}
+    },
+    {
+      "id": "27. building (Water Treatment and Distribution outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "building"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-opacity": 0.35,
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "27. engineered land (Water Treatment and Distribution fill)",
+      "type": "fill",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-outline-color": "rgba(35, 35, 35, 1)",
+        "fill-opacity": 0.48,
+        "fill-color": "rgba(231, 251, 55, 1)",
+        "fill-translate-anchor": "map"
+      }
+    },
+    {
+      "id": "27. engineered land (Water Treatment and Distribution outline)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "engineered land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-opacity": 0.48,
+        "line-width": 1.5
+      }
+    },
+    {
+      "id": "27. transmission force main (Water Treatment and Distribution line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 3}
+    },
+    {
+      "id": "27. transmission force main 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 13
+      },
+      "paint": {
+        "text-halo-color": "rgba(31, 120, 180, 1)",
+        "text-color": "rgba(31, 120, 180, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "27. transmission force main 2 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 9
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "27. distribution force main (Water Treatment and Distribution line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 2}
+    },
+    {
+      "id": "27. distribution force main 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 16
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "27. distribution gravity main (Water Treatment and Distribution line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution gravity main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 2}
+    },
+    {
+      "id": "27. distribution gravity main 1 (Water Treatment and Distribution symbols)-copy",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution gravity main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 16
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "27. service connection (Water Treatment and Distribution line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "service connection"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 1}
+    },
+    {
+      "id": "27. pedestrian walkway (Water Treatment and Distribution line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pedestrian walkway"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(165, 165, 165, 1)", "line-width": 1.5}
+    },
+    {
+      "id": "27. part (Water Treatment and Distribution point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "part"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"circle-radius": 3}
+    },
+    {
+      "id": "27. hydrant (Water Treatment and Distribution point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "hydrant"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 127, 0, 1)",
+        "circle-stroke-color": "rgba(179, 92, 21, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 2,
+        "circle-radius": 4
+      }
+    },
+    {
+      "id": "27. valve (Water Treatment and Distribution point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(221, 232, 251, 1)",
+        "circle-stroke-color": "rgba(50, 87, 128, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "27. valve (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "27. motor (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "motor"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "★",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 16,
+        "text-max-angle": 360,
+        "text-rotate": 180
+      },
+      "paint": {"text-color": "rgba(31, 120, 180, 1)"}
+    },
+    {
+      "id": "27. pump 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "27. pump 2 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(72, 123, 182, 1)"}
+    },
+    {
+      "id": "27. control 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(0, 0, 0, 1)"
+      }
+    },
+    {
+      "id": "27. control 2 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "control"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 8
+      },
+      "paint": {
+        "text-color": "rgba(31, 120, 180, 1)",
+        "text-halo-color": "rgba(31, 120, 180, 1)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "27. meter 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "meter"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(0, 0, 0, 1)"
+      }
+    },
+    {
+      "id": "27. meter 2 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "meter"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(96, 184, 227, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(96, 184, 227, 1)"
+      }
+    },
+    {
+      "id": "27. meter 3 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "meter"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╋",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 0,
+        "text-halo-color": "rgba(0, 0, 0, 1)"
+      }
+    },
+    {
+      "id": "27. treatment 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◒",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(0, 0, 0, 1)"}
+    },
+    {
+      "id": "27. treatment 2 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◑",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(221, 232, 251, 1)"}
+    },
+    {
+      "id": "27. treatment 3 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "metadata": {"maputnik:comment": "Work in progress symbol"},
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "treatment"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "◓",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16
+      },
+      "paint": {"text-color": "rgba(31, 120, 180, 1)"}
+    },
+    {
+      "id": "27. tank 1 (Water Treatment and Distribution point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "tank"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-stroke-color": "rgba(50, 87, 128, 1)",
+        "circle-stroke-width": 1,
+        "circle-color": "rgba(72, 123, 182, 1)"
+      }
+    },
+    {
+      "id": "27. tank 2 (Water Treatment and Distribution point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "tank"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"circle-radius": 3, "circle-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "27. box 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "box"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "□",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 12
+      },
+      "paint": {
+        "text-color": "rgba(31, 120, 180, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(31, 120, 180, 1)"
+      }
+    },
+    {
+      "id": "27. reservoir 1 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 16,
+        "text-line-height": 1.2
+      },
+      "paint": {"text-halo-width": 2, "text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "27. reservoir 2 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 13
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(72, 123, 182, 1)"}
+    },
+    {
+      "id": "27. reservoir 3 (Water Treatment and Distribution symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "reservoir"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "■",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-line-height": 1.2,
+        "text-size": 7
+      },
+      "paint": {"text-halo-width": 0, "text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "27. manhole cover (Water Treatment and Distribution point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution"],
+        ["==", "asset_sub_class", "manhole cover"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(31, 120, 180, 1)",
+        "circle-radius": 3,
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "28. transmission force main (Water Treatment and Distribution Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 3}
+    },
+    {
+      "id": "28. transmission force main 1 (Water Treatment and Distribution Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 13
+      },
+      "paint": {
+        "text-halo-color": "rgba(31, 120, 180, 1)",
+        "text-color": "rgba(31, 120, 180, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "28. transmission force main 2 (Water Treatment and Distribution Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "transmission force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▶",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 9
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "28. distribution force main (Water Treatment and Distribution Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 2}
+    },
+    {
+      "id": "28. distribution force main 1 (Water Treatment and Distribution Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "distribution force main"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": ">",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "line-center",
+        "text-size": 16
+      },
+      "paint": {
+        "text-halo-color": "rgba(215, 0, 3, 1)",
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "28. service connection (Water Treatment and Distribution Network line)",
+      "type": "line",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pipe"],
+        ["==", "type", "service connection"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(31, 120, 180, 1)", "line-width": 1}
+    },
+    {
+      "id": "28. part (Water Treatment and Distribution Network point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "part"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"circle-radius": 3}
+    },
+    {
+      "id": "28. hydrant (Water Treatment and Distribution Network point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "hydrant"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(255, 127, 0, 1)",
+        "circle-stroke-color": "rgba(179, 92, 21, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 2,
+        "circle-radius": 4
+      }
+    },
+    {
+      "id": "28. valve (Water Treatment and Distribution Network point)",
+      "type": "circle",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(221, 232, 251, 1)",
+        "circle-stroke-color": "rgba(50, 87, 128, 1)",
+        "circle-stroke-opacity": 1,
+        "circle-opacity": 1,
+        "circle-stroke-width": 1,
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "28. valve (Water Treatment and Distribution Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "valve"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "╳",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-size": 4
+      }
+    },
+    {
+      "id": "28. pump 1 (Water Treatment and Distribution Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 15
+      },
+      "paint": {"text-color": "rgba(50, 87, 128, 1)"}
+    },
+    {
+      "id": "28. pump 2 (Water Treatment and Distribution Network symbols)",
+      "type": "symbol",
+      "source": "MyCivitasStaging",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "system_name", "Water Treatment and Distribution Network"],
+        ["==", "asset_sub_class", "pump"]
+      ],
+      "layout": {
+        "text-font": ["code"],
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-field": "▲",
+        "visibility": "visible",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "text-max-angle": 360,
+        "symbol-placement": "point",
+        "text-size": 11
+      },
+      "paint": {"text-color": "rgba(72, 123, 182, 1)"}
+    }
+  ],
+  "id": "903to775d"
+}

@@ -1,0 +1,114 @@
+<style>
+    #manage-access input {
+        width: auto;
+    }
+
+    #manage-access .col > span {
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    #manage-access .invitation .col > span {
+        margin-top: 0;
+    }
+</style>
+<div id="manage-access" class="sidebar-content">
+    <h5>User access
+        <button id="invite-button" class="pull-right red-button" data-toggle="modal" data-target="#invite-user">Invite user</button>
+    </h5>
+    
+    <br>
+    {% for data in users.data %}
+        <div class="row user-access">
+            <div class="col">
+                <span>{{ data.instance.user }}</span>
+            </div>
+            <div class="role" style="width: 300px" data-url="{% url "organisation-user-access" pk=data.instance.pk %}">
+                <b>Role :</b> {{ data.role }}
+            </div>
+            <div class="delete-column">
+                {% if object.owner != data.instance.user and data.instance.user != user %}
+                    <div class="remove" data-url='{% url "organisation-user-access" pk=data.instance.pk %}'>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% for data in users.pendings %}
+        <div class="row user-access invitation">
+            <div class="col">
+                <span>
+                    <b>( Pending )</b>
+                    {{ data.instance.email }}
+                    <div>
+                        Click <a href="{% url "user-organisation-invitation-page" uuid=data.instance.uuid %}">here</a> to see the invitation.
+                    </div>
+                </span>
+            </div>
+            <div class="role" style="width: 300px" data-url='{% url "user-organisation-invitation-detail" pk=data.instance.pk %}'>
+                <b>Role :</b> {{ data.role }}
+            </div>
+            <div class="delete-column">
+                <div class="remove" data-url='{% url "user-organisation-invitation-detail" pk=data.instance.pk %}'>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Modal -->
+<div id="invite-user" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Invite a user</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'organisation_invite_user' pk=object.pk %}">
+                    {% csrf_token %}
+                    <label>Email </label>
+                    <input id="user-input" type="email" placeholder="Email of user" name="email">
+                    <br>
+                    <br>
+                    <label>Role </label>
+                    {{ users.form.role }}
+                    <br>
+                    <br>
+                    <button type="submit" class="save btn btn-primary">Invite</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#manage-access .delete-column .remove').click(function () {
+            $.ajax({
+                url: $(this).data('url'),
+                type: 'DELETE',
+                beforeSend: beforeAjaxSend,
+                success: function () {
+                    location.reload();
+                }
+            });
+        })
+        $('#manage-access .role select').change(function () {
+            $.ajax({
+                url: $(this).closest('.role').data('url'),
+                type: 'PUT',
+                data: {
+                    role: $(this).val()
+                },
+                beforeSend: beforeAjaxSend,
+                success: function () {
+                    location.reload();
+                }
+            });
+        })
+    })
+</script>

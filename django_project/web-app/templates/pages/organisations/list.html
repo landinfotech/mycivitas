@@ -1,0 +1,21 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+    Map
+{% endblock %}
+
+{% block extra_stylesheet %}
+{% endblock extra_stylesheet %}
+
+{% block header %}
+    Organisation List
+{% endblock header %}
+{% block info %}
+    <div class="info">
+        {% include "pages/organisations/list_content.html" with organisations=object_list %}
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+{% endblock extrascripts %}

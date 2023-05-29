@@ -1,0 +1,59 @@
+.card.mb-3 {
+    border: none;
+    margin-bottom: 0 !important;
+}
+
+.card-header {
+    border-radius: unset;
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.card-body {
+    padding: 40px 40px;
+}
+
+#sidebar li {
+    padding: 0;
+}
+
+#sidebar li.title {
+    padding: 5px 20px;
+    opacity: 0.5;
+    color: #212529;
+    display: block;
+    cursor: default;
+}
+
+#sidebar li.title:hover {
+    background: white;
+    opacity: 0.5;
+}
+
+#sidebar li.active {
+    padding-left: 0 !important;
+}
+
+#sidebar li a {
+    padding: 5px 20px;
+    color: #212529;
+    display: block;
+}
+
+#sidebar li.sub-title a {
+    padding: 5px 35px;
+    color: #212529;
+    display: block;
+}
+
+#sidebar li.active a {
+    padding-left: 19px !important;
+}
+
+#sidebar li.active.sub-title a {
+    padding-left: 34px !important;
+}
+
+#sidebar li a:hover {
+    text-decoration: none;
+}

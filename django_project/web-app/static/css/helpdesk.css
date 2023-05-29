@@ -1,0 +1,350 @@
+form select {
+    cursor: pointer;
+}
+
+.ticket a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ticket .col {
+    padding: 0;
+}
+
+.ticket a:hover {
+    opacity: 0.5;
+}
+
+.ticket a.image:hover {
+    opacity: 1;
+}
+
+.ticket .section {
+    border-bottom: var(--border-gray);
+    padding: 15px 20px;
+}
+
+.ticket .title .ticket-title {
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* STATUS */
+.ticket-status {
+    background-color: var(--background-color);
+    border: var(--border-gray);
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: 300;
+    font-size: 12px;
+    padding: 5px 15px;
+}
+
+.ticket .title .ticket-status {
+    margin-left: 10px;
+    margin-top: 4px;
+    padding: 3px 15px;
+}
+
+.ticket-status.open,
+.ticket-status.reopened {
+    background-color: var(--open-green);
+    border: 1px solid var(--open-green);
+    color: white;
+}
+
+.ticket .title .subtitle {
+    color: #545454;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.ticket .content {
+    font-size: 14px;
+}
+
+.ticket .content .detail {
+    color: #545454;
+    width: 350px;
+}
+
+.ticket .content .detail .title {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.ticket .content .detail .title .setting {
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.ticket .content .detail .title .setting:hover {
+    opacity: 0.5;
+}
+
+/* PRIORITY */
+.ticket-priority {
+    border: var(--border-gray);
+    border-radius: 20px;
+    padding: 5px 20px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.ticket .content .detail .priority {
+    font-size: 14px;
+}
+
+.ticket-priority.critical {
+    color: white;
+    border: 1px solid red;
+    background-color: red;
+}
+
+.ticket-priority.high {
+    color: white;
+    border: 1px solid orange;
+    background-color: orange;
+}
+
+.ticket-priority.normal {
+    color: inherit;
+    border: 1px solid yellow;
+    background-color: yellow;
+}
+
+.ticket-priority.low {
+    color: inherit;
+    border: var(--border-gray);
+    background-color: lightyellow;
+}
+
+.ticket .content .detail .field {
+    display: none;
+}
+
+.ticket .content .detail .detail-action {
+    padding: 15px 30px;
+}
+
+.ticket .content .detail button {
+    width: 100%;
+}
+
+.ticket .content .follow-up {
+    padding: 10px 20px;
+}
+
+.ticket .content .follow-up .attachments a,
+.ticket .content .follow-up .attachments img {
+    display: block;
+    margin-top: 5px;
+}
+
+.ticket .content .follow-up .attachments a {
+    color: #007bff;
+}
+
+.ticket .content .follow-up .no-content {
+    padding: 0 10px;
+}
+
+.ticket .content .follow-up .content > div {
+    padding: 10px 10px;
+}
+
+.ticket .content .follow-up .content .row {
+    background-color: var(--background-color-light);
+    border-bottom: var(--border-gray);
+}
+
+.ticket .content .follow-up .content {
+    border: var(--border-gray);
+    border-radius: 5px;
+}
+
+.ticket .content .follow-up .message {
+    font-size: 14px;
+}
+
+.ticket .content .follow-up .message .row {
+    background: none;
+    border: none;
+}
+
+.ticket .content .follow-up .message img {
+    max-width: 100%;
+}
+
+.ticket .content .follow-up .detail {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.ticket .content .follow-up .dropdown-menu {
+    margin-top: -15px;
+}
+
+.ticket .content .follow-up .dropdown-menu li {
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.ticket .content .follow-up .dropdown-menu li:hover {
+    background: #ddd;
+}
+
+.ticket .content .follow-up .changes {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.ticket .content .follow-up .edit-attachment {
+    padding: 5px 10px;
+    border: 1px solid #ddd !important;;
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin-top: 5px;
+}
+
+.ticket .content .follow-up .edit-attachment a {
+    width: fit-content;
+}
+
+.ticket .content .follow-up .edit-attachment .fa-times {
+    color: red;
+    cursor: pointer;
+}
+
+.ticket .content .follow-up .edit-attachment .fa-times:hover {
+    opacity: 0.5;
+}
+
+.ticket .content .profile-picture {
+    border: var(--border-gray);
+    border-radius: 50px;
+    height: 20px;
+    overflow: hidden;
+    width: 20px;
+}
+
+.ticket .content .follow-up .profile-picture img {
+    height: 100%;
+    margin-top: -5px;
+    width: 100%;
+}
+
+/* FOR THE MAP*/
+#map-wrapper {
+    margin-bottom: 5px;
+}
+
+#map {
+    z-index: 0;
+}
+
+#map-attributes table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+#map-attributes table tr:nth-of-type(even) {
+    background: #f3f3f3;
+}
+
+/* Comment form*/
+.comment-form textarea {
+    border: var(--border-gray);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+}
+
+.comment-form input {
+    border: var(--border-gray);
+}
+
+.message textarea:focus-visible,
+.comment-form textarea:focus-visible,
+.comment-form input:focus-visible {
+    outline: none;
+    border: var(--border-gray-bolder) !important;
+}
+
+.comment-form .attachment {
+    position: relative;
+    padding: 5px 10px;
+    border-left: var(--border-gray);
+    border-right: var(--border-gray);
+    border-bottom: var(--border-gray);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: -7px;
+}
+
+.comment-form .attachment:hover {
+    opacity: 0.5;
+}
+
+.comment-form .attachment .help {
+    font-size: 12px;
+}
+
+.comment-form .attachment input {
+    left: 0;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.comment-form .form_help_text {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.comment-form .footer {
+    background-color: white !important;
+    border-bottom: none !important;;
+    border-top: var(--border-gray);
+}
+
+.comment-form .textarea.form_help_text {
+    margin-top: 5px;
+    text-align: right;
+}
+
+.comment-form .form_help_text a {
+    color: #007bff;
+}
+
+.comment-form .radio-inline {
+    cursor: pointer;
+}
+
+.comment-form .time-spent {
+    border: var(--border-gray);
+    display: inline-block;
+}
+
+.comment-form .time-spent input {
+    border: none;
+    width: 70px;
+}
+
+#map-wrapper #map > .indicator {
+    padding: 20px;
+    font-style: italic;
+}
+
+.detail-action .btn {
+    margin-top: 15px;
+}
+
+.detail-action {
+    padding-top: 0 !important;
+}

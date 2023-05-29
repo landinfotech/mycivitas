@@ -1,0 +1,48 @@
+# ---------------------------------------
+# MapProxy example seeding configuration.
+# ---------------------------------------
+#
+# This is a minimal MapProxy seeding configuration.
+# See full_seed_example.yaml and the documentation for more options.
+#
+
+seeds:
+  mycivitas_seed:
+    caches: [
+      natural_cache,
+      fleet_and_equipment_cache,
+      structures_cache,
+      transportation_network_cache,
+      water_network_cache,
+      wastewater_network_cache,
+      stormwater_network_cache,
+
+      # Risk
+      natural_cache_risk,
+      fleet_and_equipment_cache_risk,
+      structures_cache_risk,
+      transportation_network_cache_risk,
+      water_network_cache_risk,
+      wastewater_network_cache_risk,
+      stormwater_network_cache_risk,
+
+      # cof
+      natural_cache_cof,
+      fleet_and_equipment_cache_cof,
+      structures_cache_cof,
+      transportation_network_cache_cof,
+      water_network_cache_cof,
+      wastewater_network_cache_cof,
+      stormwater_network_cache_cof,
+
+      # pof
+      natural_cache_pof,
+      fleet_and_equipment_cache_pof,
+      structures_cache_pof,
+      transportation_network_cache_pof,
+      water_network_cache_pof,
+      wastewater_network_cache_pof,
+      stormwater_network_cache_pof,
+    ]
+
+coverages:

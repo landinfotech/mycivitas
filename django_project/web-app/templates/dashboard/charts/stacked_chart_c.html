@@ -1,0 +1,194 @@
+{% load humanize %}
+{% block content %}
+{% if obj.qs.count > 0 %}
+
+<div id="tab_{{obj.id}}" style="page-break-after: always;background-color:white; position: relative;" class=" mt-2 mb-2 tabcontent">
+    <button data-html2canvas-ignore id="generate_{{obj.id}}" class="btn btn-primary pdf-button">Download PDF</button>
+
+<div class="centered-content">
+
+    <div class="mb-5 centered-content" style="width: 100% !important; height: 100%; position: relative;">
+        <h5 class="_title" style="color: red; width: 25%;">{{obj.title}}</h5><br>
+        <h6 class="_sum" >${{obj.sum.sum|floatformat:0|intcomma}}</h6>
+
+        <div class="canvas_chart" style="page-break-after: always;">
+            <div id="{{index}}_{{obj.id}}" style="width: 100%; height: 100% !important"></div>
+        </div>
+        
+        <div data-html2canvas-ignore id="table_{{obj.id}}" style="width: 100%;" style="margin-top: 120px !important;">
+            <table class="table mt-2 table-bordered " >
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>Remaining Years</td>
+                        {% for entry in obj.risk_levels %}
+                            <td>{{entry.risk_level}}</td>
+                        {% endfor %}    
+                        <td>Total Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in obj.formatted %}
+                        <tr >
+                            <td style="text-align: left;">{{ entry.remaining_years }}</td>
+                            {% for asset in entry.risk_level %}
+                                <td style="text-align: right;">${{asset.values|floatformat:0|intcomma}}</td>
+                            {% endfor %} 
+                            <td style="text-align: left;">${{ entry.total|floatformat:0|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr >
+                        <td style="text-align: left;"><strong>Total</strong></td>
+                        {% for entry in obj.total %}
+                            <td style="text-align: right;">${{entry.total|floatformat:0|intcomma}}</td>
+                        {% endfor %}
+                        <td style="text-align: right;">${{obj.sum.sum|floatformat:0|intcomma}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <div id="{{index}}_{{obj.id}}_des" class="description-list">{{obj.description}}</div>
+
+        <div class="pdf-print" style="margin-top: 100px !important; ">
+            <table class="table mt-2 table-bordered " >
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>Remaining Years</td>
+                        {% for entry in obj.risk_levels %}
+                            <td>{{entry.risk_level}}</td>
+                        {% endfor %}    
+                        <td>Total Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in obj.pdf_table_1 %}
+                        <tr >
+                            <td style="text-align: left;">{{ entry.remaining_years }}</td>
+                            {% for asset in entry.risk_level %}
+                                <td style="text-align: right;">${{asset.values|floatformat:0|intcomma}}</td>
+                            {% endfor %} 
+                            <td style="text-align: left;">${{ entry.total|floatformat:0|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+
+        <div class="pdf-print" style="margin-top: 400px !important; ">
+            <table class="table mt-2 table-bordered " >
+                <thead>
+                    <tr style="text-align: left;">
+                        <td>Remaining Years</td>
+                        {% for entry in obj.risk_levels %}
+                            <td>{{entry.risk_level}}</td>
+                        {% endfor %}    
+                        <td>Total Result</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in obj.pdf_table_2 %}
+                        <tr >
+                            <td style="text-align: left;">{{ entry.remaining_years }}</td>
+                            {% for asset in entry.risk_level %}
+                                <td style="text-align: right;">${{asset.values|floatformat:0|intcomma}}</td>
+                            {% endfor %} 
+                            <td style="text-align: left;">${{ entry.total|floatformat:0|intcomma }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr >
+                        <td style="text-align: left;"><strong>Total</strong></td>
+                        {% for entry in obj.total %}
+                            <td style="text-align: right;">${{entry.total|floatformat:0|intcomma}}</td>
+                        {% endfor %}
+                        <td style="text-align: right;">${{obj.sum.sum|floatformat:0|intcomma}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+</div>
+    
+<style>
+    .centered-content {
+        text-align: center;
+      }
+</style>
+
+<script type="module">
+
+var data = [
+    {% for val in obj.graph %}
+        {
+            x:  [{% for x_val in val.x %} "{{x_val}}", {% endfor %}],
+            y:  [{% for y_val in val.y %} {{y_val|floatformat:0}}, {% endfor %}],
+            name: '{{val.name}}',
+            type: 'bar',
+            
+            {% if val.name == 'Extreme' %}
+                marker: {
+                    color: 'rgb(235, 64, 52)',
+                }
+            {% endif %}
+
+            {% if val.name == 'High' %}
+                marker: {
+                    color: 'rgb(235, 134, 52)',
+                }
+            {% endif %}
+
+            {% if val.name == 'Medium' %}
+                marker: {
+                    color: 'rgb(240, 231, 67)',
+                }
+            {% endif %}
+
+            {% if val.name == 'Low' %}
+                marker: {
+                    color: 'rgb(153, 224, 105)',
+                }
+            {% endif %}
+
+            {% if val.name == 'Minimal' %}
+                marker: {
+                    color: 'rgb(68, 150, 60)',
+                }
+            {% endif %}
+
+            {% if val.name == 'None' %}
+                marker: {
+                    color: 'rgb(25, 77, 20)',
+                }
+            {% endif %}
+        },
+    {% endfor %}
+];
+
+var layout = {barmode: 'stack', autosize: true, width: 900, height: 500};
+
+Plotly.newPlot('{{index}}_{{obj.id}}', data, layout);
+
+let btn_{{obj.id}} = document.getElementById("generate_{{obj.id}}");
+
+window.addEventListener('scroll', function() {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        btn_{{obj.id}}.style.display = "none";
+    } else {
+        btn_{{obj.id}}.style.display = "block";
+    }
+});
+
+
+document.getElementById('generate_{{obj.id}}').addEventListener('click', function() {
+    
+    const element = document.getElementById('tab_{{obj.id}}');
+    // createPDF(element, 800, 520, -250, 'portrait');
+    createPDF(element, 900, -50, -220, 'portrait', '{{community}}', 2);
+})
+
+</script>
+</div>
+{% endif %}
+{% endblock content %}

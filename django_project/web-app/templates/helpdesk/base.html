@@ -1,0 +1,26 @@
+{% extends 'pages/base.html' %}
+{% load i18n %}
+{% load saved_queries %}
+{% load load_helpdesk_settings %}
+{% load static %}
+{% with request|load_helpdesk_settings as helpdesk_settings %}
+    {% with user|saved_queries as user_saved_queries_ %}
+
+        {% block title %}
+            Work Orders
+        {% endblock %}
+
+        {% block extra_stylesheet %}
+            <link href="{% static 'css/helpdesk.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+            <script type="text/javascript" src="{% static 'js/forms/widget/recurring_type.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/forms/widget/expected_time.js' %}"></script>
+        {% endblock extra_stylesheet %}
+
+        {% block content %}
+        {% endblock content %}
+
+        {% block extrascripts %}
+        {% endblock extrascripts %}
+
+    {% endwith %}
+{% endwith %}

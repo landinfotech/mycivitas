@@ -1,0 +1,221 @@
+#profile {
+    background: white;
+    height: 100vh;
+    position: relative;
+    margin-top: var(--navbar-height-minus);
+    margin-bottom: var(--navbar-height);
+    /*overflow: hidden;*/
+}
+
+#profile #banner {
+    left: 0;
+    position: absolute;
+    top: -63%;
+    width: 100%;
+}
+
+#profile .container {
+    height: 100%;
+    position: relative;
+}
+
+#profile .inner-container {
+    top: 50%;
+    margin-top: -140px;
+    position: absolute;
+    width: 50%;
+    right: 96px;
+    text-align: right;
+}
+
+#profile .title,
+#our-story .title {
+    color: white;
+    animation: 0.5s ease-out 0s 1 slideFromBottom;
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+#profile .paragraph,
+#our-story .paragraph {
+    animation: 0.5s ease-out 0s 1 slideFromBottomDelay1;
+    color: white;
+    font-weight: 700;
+}
+
+#profile .profile-button {
+    animation: 0.5s ease-out 0s 1 slideFromBottomDelay2;
+}
+
+.content-button {
+    padding: 20px;
+    font-weight: 500;
+    border: none;
+}
+
+.paragraph {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+#how-does-civitas-work {
+    height: 400vh;;
+    background: white;
+    overflow: hidden;
+    margin-top: var(--navbar-height-minus);
+    position: relative
+}
+
+#how-does-civitas-work .section {
+    color: var(--primary-color);
+    height: 100vh;
+    padding-top: 100px;
+    width: 100%;
+}
+
+#how-does-civitas-work .row {
+    position: relative;
+    width: 100%;
+}
+
+#how-does-civitas-work .row .background {
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#how-does-civitas-work .row .background img {
+    height: 100%;
+}
+
+#how-does-civitas-work.stick .section {
+    position: fixed;
+    left: 0;
+    top: var(--navbar-height);
+}
+
+#how-does-civitas-work.done .section {
+    position: absolute;
+    bottom: 0;
+}
+
+#how-does-civitas-work .section > div {
+    position: relative;
+}
+
+#how-does-civitas-work .col-8 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#how-does-civitas-work .paragraph {
+    font-size: 20px;
+    padding-right: 40px;
+    position: relative;
+}
+
+#how-does-civitas-work .paragraph-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80%;
+}
+
+
+#how-does-civitas-work .paragraph-title,
+#our-story .paragraph-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+#how-does-civitas-work .image {
+    background: none;
+    border: 10px solid white;
+    border-radius: 10px;
+    width: 100%;
+    box-shadow: -4px 4px 6px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: -4px 4px 6px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -4px 4px 6px 2px rgba(0, 0, 0, 0.1);
+}
+
+#how-does-civitas-work .image img {
+    width: 100%;
+}
+
+#our-story {
+    min-height: 100vh;
+    color: white;
+    padding: 200px 100px;
+    position: relative;
+}
+
+#our-story a {
+    color: var(--secondary-color);
+}
+
+#our-story a:hover {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+#our-story img {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: var(--navbar-height);
+}
+
+#pricing {
+    min-height: 100vh;
+    margin-top: var(--navbar-height-minus);
+    text-align: center;
+}
+
+#pricing .container {
+    padding-top: 100px;
+    height: 100%;
+    padding-bottom: var(--navbar-height);
+}
+
+#price-list .card {
+    height: 100% !important;
+}
+
+#pricing .card {
+    height: 80%;
+}
+
+#pricing .paragraph-title {
+    color: var(--primary-color);
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+#footer {
+    display: none;
+}
+
+#footer-transparent {
+    display: block;
+}
+
+.footer-page {
+    position: fixed;
+    bottom: 0;
+}
+
+.subscription-btn button {
+    cursor: default !important;
+}
+
+.subscription-btn button:hover {
+    opacity: 1 !important;
+}

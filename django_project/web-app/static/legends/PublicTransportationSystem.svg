@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="112.51854mm"
+   height="40.047005mm"
+   viewBox="0 0 112.51854 40.047005"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   sodipodi:docname="MyCivitas_legends_master.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.28"
+     inkscape:cx="260.9375"
+     inkscape:cy="96.09375"
+     inkscape:window-width="1920"
+     inkscape:window-height="981"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5"
+     showguides="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer30"
+     inkscape:label="Symbol Layout"
+     style="display:none"
+     transform="translate(-43.914414,-12.424299)">
+    <g
+       inkscape:groupmode="layer"
+       id="layer31"
+       inkscape:label="Symbol Row">
+      <g
+         inkscape:groupmode="layer"
+         id="g8196"
+         inkscape:label="Symbol Outline"
+         style="display:inline;fill:none;stroke-width:0.5;stroke-dasharray:none">
+        <rect
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.308852;stroke-dasharray:none"
+           id="rect8194"
+           width="19.691147"
+           height="9.6911478"
+           x="41.377037"
+           y="33.527786" />
+        <rect
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.308852;stroke-dasharray:none"
+           id="rect8194-7"
+           width="19.691147"
+           height="9.6911478"
+           x="41.377037"
+           y="43.527786" />
+        <rect
+           style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:#ff1919;stroke-width:0.288707;stroke-dasharray:none;stroke-opacity:1"
+           id="rect11466"
+           width="4.7112927"
+           height="9.7112932"
+           x="61.366962"
+           y="33.606518" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:label="3. Buildings, Parks, and Recreation"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:none"
+     inkscape:export-filename="../1bd7d081/BuildingsParksAndRecreation.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <g
+       inkscape:groupmode="layer"
+       id="layer24"
+       inkscape:label="Engineered Land"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="50.319839"
+         id="text15911"><tspan
+           sodipodi:role="line"
+           id="tspan15909"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="50.319839">Engineered Land</tspan></text>
+      <path
+         style="fill:#e7fb37;fill-opacity:0.478431;fill-rule:evenodd;stroke:#232323;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.478431"
+         d="m 44.484427,45.821197 8.181351,-0.91177 4.93768,0.321744 1.289841,3.572743 -1.352867,2.170472 -4.635807,1.120421 -7.797469,-0.291021 -1.023724,-1.157793 -0.153259,-3.061517 z"
+         id="path19624" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer23"
+       inkscape:label="Wetland"
+       style="display:inline">
+      <path
+         style="fill:#a3cdb9;fill-opacity:1;fill-rule:evenodd;stroke:#728584;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+         d="m 47.114748,35.554364 c 1.25321,-1.217845 3.438814,-1.153787 5.138899,-1.153787 1.847316,0 3.830373,-0.0048 5.090277,1.259121 0.282897,0.283789 0.745852,0.445285 0.933862,0.840697 0.0425,0.08937 -0.0441,0.241597 0,0.329803 0.122688,0.24537 0.303922,0.544627 0.182597,0.858444 -0.08029,0.207666 -0.317831,0.319759 -0.3727,0.539242 -0.143481,0.573926 0.750501,2.00443 -0.123364,2.295718 -0.922311,0.307438 -2.082435,-0.0037 -3.069551,0.19372 -0.636759,0.127352 -1.143629,0.855924 -1.750719,1.065564 -2.476298,0.855115 -7.932986,1.068631 -9.173974,-1.785559 -0.205203,-0.471948 0.759468,-0.821955 0.921033,-1.0389 0.389615,-0.523163 0.170894,-1.256136 0.532545,-1.79896 0.402257,-0.603766 1.21507,-0.986486 1.691095,-1.605103 z"
+         id="path8318" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="64.292244"
+         y="42.103485"
+         id="text10573"
+         transform="scale(1.0262853,0.97438792)"><tspan
+           sodipodi:role="line"
+           id="tspan10571"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+           x="64.292244"
+           y="42.103485">Wetland</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="20.713043"
+       id="text10573-9"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="20.713043"
+         id="tspan29533">Buildings, Parks,</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="32.178318"
+         id="tspan29900">and Recreation</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="4. Buildings, Parks, and Recreations"
+     style="display:none"
+     inkscape:export-filename="../4e057e4/BuildingsParksAndRecreations.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <g
+       inkscape:groupmode="layer"
+       id="g31263"
+       inkscape:label="Recreational Structure"
+       style="display:inline">
+      <path
+         style="display:inline;fill:#cccccc;fill-opacity:0.58;fill-rule:evenodd;stroke:#232323;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.58"
+         d="m 45.235006,46.045312 8.240749,-1.250508 3.438396,2.791187 0.826775,2.918527 -3.179532,1.454856 -6.310662,-0.152569 -3.562469,-1.3632 z"
+         id="path31257" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="51.003693"
+         id="text31261"><tspan
+           sodipodi:role="line"
+           id="tspan31259"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="51.003693">Recreational Structure</tspan></text>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g31182"
+       inkscape:label="Engineered Land"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="40.319839"
+         id="text31174"><tspan
+           sodipodi:role="line"
+           id="tspan31172"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="40.319839">Engineered Land</tspan></text>
+      <path
+         style="fill:#e7fb37;fill-opacity:0.478431;fill-rule:evenodd;stroke:#232323;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.478431"
+         d="m 44.484427,35.692378 8.181351,-0.91177 4.93768,0.321744 1.289841,3.572743 -1.352867,2.170472 -4.635807,1.120421 -7.797469,-0.291021 -1.023724,-1.157793 -0.153259,-3.061517 z"
+         id="path31176" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="20.713043"
+       id="text10573-9-6"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="20.713043"
+         id="tspan29900-3">Buildings, Parks,</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="32.178318"
+         id="tspan31370">and Recreations</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="5. Georgetown Water Network"
+     style="display:none"
+     inkscape:export-filename="../e2fb8ed/GeorgetownWaterNetwork.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="20.713043"
+       id="text10573-9-6-0"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="20.713043"
+         id="tspan31370-0">Georgetown</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="32.178318"
+         id="tspan32071">Water Network</tspan></text>
+    <g
+       inkscape:groupmode="layer"
+       id="g34244"
+       inkscape:label="Hydrant"
+       style="display:inline"
+       transform="translate(0,10.155408)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="40.164433"
+         id="text34232"><tspan
+           sodipodi:role="line"
+           id="tspan34230"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="40.164433">Hydrant</tspan></text>
+      <circle
+         style="display:inline;fill:#ff7f00;fill-opacity:1;fill-rule:evenodd;stroke:#b35c15;stroke-width:0.599946;stroke-dasharray:none;stroke-opacity:1"
+         id="path34337"
+         cx="51.22261"
+         cy="48.37336"
+         r="3.7000268"
+         transform="translate(0,-10.155408)" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g32170"
+       inkscape:label="Distribution Force Main"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="41.003693"
+         id="text32162"><tspan
+           sodipodi:role="line"
+           id="tspan32160"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="41.003693">Distribution Force Main</tspan></text>
+      <g
+         id="g34283"
+         transform="translate(1.3561766,-0.01849357)">
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="M 43.671484,35.846218 56.39377,41.246512"
+           id="path32180" />
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 50.998101,38.956374 1.365577,-3.318444 3.290052,1.42921"
+           id="path34120"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 47.322525,37.389908 -1.43424,3.149873 -2.543236,-1.158489"
+           id="path34122"
+           sodipodi:nodetypes="ccc" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="6. Irrigation System"
+     style="display:none"
+     inkscape:export-filename="../10a1c147/IrrigationSystem.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <g
+       inkscape:groupmode="layer"
+       id="g38948"
+       inkscape:label="Valve"
+       style="display:inline"
+       transform="translate(0,10.155407)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="66.167488"
+         y="40.848286"
+         id="text38936"><tspan
+           sodipodi:role="line"
+           id="tspan38934"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="66.167488"
+           y="40.848286">Valve</tspan></text>
+      <circle
+         style="display:inline;fill:#dde8fb;fill-opacity:1;fill-rule:evenodd;stroke:#325780;stroke-width:0.44996;stroke-dasharray:none;stroke-opacity:1"
+         id="circle38942"
+         cx="51.22261"
+         cy="38.217953"
+         r="2.7750201" />
+      <path
+         style="fill:#dde8fb;fill-opacity:1;fill-rule:evenodd;stroke:#325780;stroke-width:0.2;stroke-dasharray:none;stroke-opacity:1"
+         d="m 49.2901,36.224094 3.86502,3.987718"
+         id="path38944" />
+      <path
+         style="fill:#dde8fb;fill-opacity:1;fill-rule:evenodd;stroke:#325780;stroke-width:0.2;stroke-dasharray:none;stroke-opacity:1"
+         d="m 49.263925,40.202904 3.91737,-3.969903"
+         id="path38946" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g38930"
+       inkscape:label="Distribution Force Main"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="41.003693"
+         id="text38916"><tspan
+           sodipodi:role="line"
+           id="tspan38914"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="41.003693">Distribution Force Main</tspan></text>
+      <g
+         id="g38928"
+         transform="translate(1.3561766,-0.01849357)">
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="M 43.671484,35.846218 56.39377,41.246512"
+           id="path38922" />
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 50.998101,38.956374 1.365577,-3.318444 3.290052,1.42921"
+           id="path38924"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#1f78b4;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 47.322525,37.389908 -1.43424,3.149873 -2.543236,-1.158489"
+           id="path38926"
+           sodipodi:nodetypes="ccc" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="31.184887"
+       id="text10573-9-6-0-5"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.184887"
+         id="tspan32071-0">Irrigation System</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="10. Municipal Wastewater Collection"
+     style="display:none"
+     inkscape:export-filename="../f09d2de2/MunicipalWastewaterCollection.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="31.184887"
+       id="text39782"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.184887"
+         id="tspan39780">Irrigation System</tspan></text>
+    <g
+       inkscape:groupmode="layer"
+       id="g39831"
+       inkscape:label="Transmission Gravity Main"
+       style="display:inline"
+       transform="translate(0,10)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="66.243279"
+         y="40.319839"
+         id="text39817"><tspan
+           sodipodi:role="line"
+           id="tspan39815"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="66.243279"
+           y="40.319839">Transmission Gravity Main</tspan></text>
+      <g
+         id="g48396"
+         style="display:inline"
+         transform="translate(0,-10)">
+        <g
+           id="g45795-6"
+           style="display:inline"
+           transform="translate(0.92280622,9.5631358)">
+          <path
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+             d="m 42.895075,36.643148 12.722286,5.400294"
+             id="path39794-9" />
+          <path
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+             d="m 50.374879,39.646677 1.74495,-3.977893 5.589602,2.2341"
+             id="path39796-2"
+             sodipodi:nodetypes="ccc" />
+        </g>
+        <path
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 48.354216,47.150908 -1.971486,0.190169 1.390047,1.453054"
+           id="path43297-5-7"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 57.752145,46.076039 -1.971486,0.190169 1.390047,1.453054"
+           id="path43297-5-7-5"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 55.36928,50.063732 -1.971486,0.190169 1.390047,1.453054"
+           id="path43297-5-7-4"
+           sodipodi:nodetypes="ccc" />
+      </g>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g39802"
+       inkscape:label="Transmission Force Main"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="66.243279"
+         y="41.092495"
+         id="text39788"><tspan
+           sodipodi:role="line"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="66.243279"
+           y="41.092495"
+           id="tspan40022">Transmission Force Main</tspan></text>
+      <g
+         id="g48388">
+        <g
+           id="g45795">
+          <path
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+             d="m 42.895075,36.643148 12.722286,5.400294"
+             id="path39794" />
+          <path
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+             d="m 50.374879,39.646677 1.74495,-3.977893 5.589602,2.2341"
+             id="path39796"
+             sodipodi:nodetypes="ccc" />
+        </g>
+        <path
+           style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 45.080877,37.578342 1.390047,1.453054 0.581439,-1.643223 z"
+           id="path43297-5"
+           sodipodi:nodetypes="cccc" />
+        <path
+           style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 54.581892,36.674878 1.390047,1.453054 0.581439,-1.643223 z"
+           id="path43297-5-4"
+           sodipodi:nodetypes="cccc" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="12. Pedestrian Transportation"
+     style="display:none"
+     inkscape:export-filename="../cbf516dc/PedestrianTransportation.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="31.184887"
+       id="text54242"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.184887"
+         id="tspan54240">Pedestrian Transportation</tspan></text>
+    <g
+       inkscape:groupmode="layer"
+       id="g54256"
+       inkscape:label="Pedestrian Walkway"
+       style="display:inline"
+       transform="translate(0,-39.844489)">
+      <g
+         id="g54250"
+         transform="translate(1.3096201,-0.07794278)">
+        <path
+           style="display:inline;fill:none;fill-opacity:0.35;fill-rule:evenodd;stroke:#a5a5a5;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+           d="m 43.425832,76.086726 c 0.778245,-1.78e-4 1.046018,1.160221 1.685172,1.58856 1.396519,0.935906 1.901809,1.198378 3.133364,1.834391 1.281037,0.661567 6.633461,0.995183 8.140816,0.995183"
+           id="path54246"
+           sodipodi:nodetypes="cssc" />
+        <path
+           style="display:inline;fill:none;fill-opacity:0.35;fill-rule:evenodd;stroke:#a5a5a5;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
+           d="m 48.419214,79.660047 c 1.829716,-1.30181 5.864186,-3.446369 7.980969,-3.446369"
+           id="path54248"
+           sodipodi:nodetypes="cc" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="80.16433"
+         id="text54254"><tspan
+           sodipodi:role="line"
+           id="tspan54252"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="80.16433">Pedestrian Walkway</tspan></text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="13. Planned Infrastructure"
+     style="display:none"
+     inkscape:export-filename="../a1251144/PlannedInfrastructure.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <g
+       inkscape:groupmode="layer"
+       id="g55020"
+       inkscape:label="Manhole Cover"
+       style="display:inline"
+       transform="translate(0,10.155407)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="40.848286"
+         id="text55012"><tspan
+           sodipodi:role="line"
+           id="tspan55010"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="40.848286">Manhole Cover</tspan></text>
+      <circle
+         style="display:inline;fill:#ff0105;fill-opacity:1;fill-rule:evenodd;stroke:#232323;stroke-width:0.4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle55018"
+         cx="51.22261"
+         cy="38.217953"
+         r="2.7750201" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g54994"
+       inkscape:label="Transmission Gravity Main"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="66.243279"
+         y="40.319839"
+         id="text54974"><tspan
+           sodipodi:role="line"
+           id="tspan54972"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="66.243279"
+           y="40.319839">Transmission Gravity Main</tspan></text>
+      <g
+         id="g54992"
+         style="display:inline"
+         transform="translate(0,-10)">
+        <g
+           id="g54984"
+           style="display:inline"
+           transform="translate(0.92280622,9.5631358)">
+          <path
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+             d="m 42.895075,36.643148 12.722286,5.400294"
+             id="path54980" />
+          <path
+             style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d70003;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+             d="m 50.374879,39.646677 1.74495,-3.977893 5.589602,2.2341"
+             id="path54982"
+             sodipodi:nodetypes="ccc" />
+        </g>
+        <path
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 48.354216,47.150908 -1.971486,0.190169 1.390047,1.453054"
+           id="path54986"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 57.752145,46.076039 -1.971486,0.190169 1.390047,1.453054"
+           id="path54988"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="display:inline;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.193414;stroke-dasharray:none;stroke-opacity:1"
+           d="m 55.36928,50.063732 -1.971486,0.190169 1.390047,1.453054"
+           id="path54990"
+           sodipodi:nodetypes="ccc" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="31.184887"
+       id="text55058"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.184887"
+         id="tspan55056">Planned Infrastructure</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="14. Public Buildings, Parks, and Recreation"
+     style="display:none"
+     inkscape:export-filename="../ae6b233/PublicBuildingsParksAndRecreation.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="20.395884"
+       id="text56076"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="20.395884"
+         id="tspan56074">Public Buildings,</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.861158"
+         id="tspan56080">Parks, and Recreation</tspan></text>
+    <g
+       inkscape:groupmode="layer"
+       id="g56396"
+       inkscape:label="Building"
+       style="display:inline"
+       transform="translate(0,-9.9999991)">
+      <rect
+         style="fill:#e31a1c;fill-opacity:0.35;fill-rule:evenodd;stroke:#232323;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.478431"
+         id="rect56390"
+         width="13.307025"
+         height="5.1840568"
+         x="44.569099"
+         y="55.78133" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="60.319839"
+         id="text56394"><tspan
+           sodipodi:role="line"
+           id="tspan56392"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="60.319839">Building</tspan></text>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g56380"
+       inkscape:label="Engineered Land"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.530144"
+         y="40.319839"
+         id="text56372"><tspan
+           sodipodi:role="line"
+           id="tspan56370"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.530144"
+           y="40.319839">Engineered Land</tspan></text>
+      <path
+         style="fill:#e7fb37;fill-opacity:0.478431;fill-rule:evenodd;stroke:#232323;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.478431"
+         d="m 44.484427,35.692378 8.181351,-0.91177 4.93768,0.321744 1.289841,3.572743 -1.352867,2.170472 -4.635807,1.120421 -7.797469,-0.291021 -1.023724,-1.157793 -0.153259,-3.061517 z"
+         id="path56374" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="15. Public Transportation"
+     style="display:none"
+     inkscape:export-filename="../dadd4afd/PublicTransportation.svg"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="translate(-43.914414,-12.424299)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="31.256546"
+       id="text57851"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.256546"
+         id="tspan57849">Public Transportation</tspan></text>
+    <g
+       inkscape:groupmode="layer"
+       id="g57872"
+       inkscape:label="Distribution Force Main copy"
+       style="display:inline"
+       transform="translate(-26.514388)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="92.044533"
+         y="41.003693"
+         id="text57858"><tspan
+           sodipodi:role="line"
+           id="tspan57856"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="92.044533"
+           y="41.003693">Road Overlay</tspan></text>
+      <g
+         id="g57975">
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 71.542049,35.827724 12.722286,5.400294"
+           id="path57864" />
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 78.868666,38.93788 1.365577,-3.318444 3.290052,1.42921"
+           id="path57866"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+           d="m 75.19309,37.371414 -1.43424,3.149873 -2.543236,-1.158489"
+           id="path57868"
+           sodipodi:nodetypes="ccc" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer10"
+     inkscape:label="16. Public Transportation System"
+     style="display:inline"
+     transform="translate(-43.914414,-12.424299)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';display:inline;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+       x="42.131317"
+       y="19.719612"
+       id="text60591"
+       transform="scale(1.0262853,0.97438792)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="19.719612"
+         id="tspan60589">Public Transportation</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.17222px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461357;stroke-dasharray:none;stroke-opacity:1"
+         x="42.131317"
+         y="31.184887"
+         id="tspan60595">System</tspan></text>
+    <g
+       inkscape:groupmode="layer"
+       id="g60627"
+       inkscape:label="Traffic Sign Or Signal"
+       style="display:inline"
+       transform="translate(0,10.155406)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.826424"
+         y="40.848286"
+         id="text60619"><tspan
+           sodipodi:role="line"
+           id="tspan60617"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.826424"
+           y="40.848286">Traffic Sign Or Signal</tspan></text>
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.235708;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect63593"
+         width="4.7141595"
+         height="4.7141595"
+         x="60.821476"
+         y="-11.992331"
+         transform="rotate(45.398432)" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="g60607"
+       inkscape:label="Light"
+       style="display:inline"
+       transform="translate(0,0.15540559)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:0.48"
+         x="65.826424"
+         y="40.848286"
+         id="text60599"><tspan
+           sodipodi:role="line"
+           id="tspan60597"
+           style="font-size:7.05556px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+           x="65.826424"
+           y="40.848286">Light</tspan></text>
+      <circle
+         style="display:inline;fill:#e7e7e7;fill-opacity:1;fill-rule:evenodd;stroke:#232323;stroke-width:0.374997;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle60605"
+         cx="51.22261"
+         cy="38.217953"
+         r="2.3125012" />
+    </g>
+  </g>
+</svg>

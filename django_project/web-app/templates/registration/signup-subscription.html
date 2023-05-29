@@ -1,0 +1,26 @@
+{% extends 'pages/base-blue.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Sign up{% endblock %}
+{% block extra_stylesheet %}
+    <link href="{% static 'css/form.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div class="title">
+        SIGN UP
+    </div>
+    <div class="container container-page">
+        <div class="step">
+            Step 2
+        </div>
+        <div class="subtitle">
+            Step 2 of 2 : Select subscription
+        </div>
+        {% include 'widgets/subscription.html' %}
+    </div>
+{% endblock %}
+{% block extrascripts %}
+{% endblock extrascripts %}

@@ -1,0 +1,92 @@
+.checkout {
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: var(--box-shadow);
+    width: 75%;
+    background: white;
+    padding: 20px;
+    text-align: left;
+}
+
+.checkout .row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.checkout p {
+    margin-bottom: 1rem;
+}
+
+.checkout hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+#spinner {
+    display: inline-block;
+}
+
+.error {
+    color: #fa755a;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+#max-user-errors {
+    display: none;
+}
+
+h2 {
+    position: relative;
+}
+
+h2 a {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.container {
+    padding: 30px 20px !important;
+    color: #212529;
+}
+
+#subscription-form .main-button {
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    width: 100%;
+}
+
+#header, input[type=submit], .main-button, .main-button:active, .main-button:focus {
+    background-color: var(--primary-color) !important;
+    outline: none !important;
+    color: white !important;
+}
+
+#checkout-detail {
+    width: 100%;
+}
+
+#checkout-detail tr td {
+    padding: 10px 0;
+}
+
+#checkout-detail tr td:last-child {
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+}
+
+#checkout-detail tr td:last-child div {
+    white-space: nowrap;
+}
