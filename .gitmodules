@@ -1,0 +1,4 @@
+[submodule "mycivitas_commercial"]
+	path = mycivitas_commercial
+	url = https://github.com/landinfotech/mycivitas_commercial.git
+	branch = dj_stripe_removed
