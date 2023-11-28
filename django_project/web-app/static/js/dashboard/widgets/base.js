@@ -3,7 +3,12 @@
  * Widget is the class that have specific content that will be rendered on the right side panel
  */
 define([
-    'backbone'], function (Backbone) {
+    'backbone',
+    'jquery',
+    'js/map/layers/main-layer',
+    'js/map/map',
+    'js/map/layers/selected-layer-feature'
+    ], function (Backbone) {
     return Backbone.View.extend({
         id: null,
         name: null,
@@ -11,6 +16,7 @@ define([
         icon: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
         actionButton: '',
         layerStyle: null,
+        
 
         /** Initialize the widget
          */
@@ -20,7 +26,8 @@ define([
             this.$wrapper = $('#right-panel .inner');
             this.$wrapperButton = $toggleButtonWrapper ? $toggleButtonWrapper : $('#widget-toggle-button');
             this.templateNoData = templates.NODATAFOUND;
-
+            
+            this.mapView = mapView;
             // events
             event.register(this, evt.MAP_CLICKED, this._mapClicked);
             event.register(this, evt.WIDGETS_HIDE, this.hide);
@@ -116,7 +123,13 @@ define([
         /** Function show if the widget already show
          */
         afterShow: function () {
-
+            const that = this;
+            const ID = $(this.$rightPanel.find('.content:visible')[0]).attr('id');
+            //trigger event set up in map.js
+            if(ID == "widget-ticket" || ID == "consequence-of-failure" || ID == "probability-of-failure" || ID == "risk"){
+                event.trigger(evt.HEATMAP_CHANGED, ID);
+            }
+            
         },
         /** Function when the widget hidden
          */

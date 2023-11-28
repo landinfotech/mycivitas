@@ -17,7 +17,13 @@
         SIGN UP
     </div>
     <div class="container container-page">
+        {% if ENABLE_SUBSCRIPTION %}
+            <div class="step">
+                Step 1
+            </div>
+        {% endif %}
         <div class="subtitle">
+            {% if ENABLE_SUBSCRIPTION %}Step 1 of 2 : {% endif %}
             Select your community and create your account
         </div>
         <form method="post" id="signup-form">
@@ -107,12 +113,39 @@
                 </div>
             </div>
             <br>
+            <div class="section-title">BILLING INFORMATION</div>
+            <div class="billing-section">
+                <div class="billing-province">
+                    {# Province #}
+                    <div>Province</div>
+                    {{ user_form.billing_province }}
+                    <span class="helptext">{{ user_form.billing_province.help_text }}</span>
+                    <div>
+                        {{ user_form.billing_province.errors }}
+                    </div>
+                </div>
+                <div class="billing-country">
+                    {# Country #}
+                    <div>Country</div>
+                    {{ user_form.billing_country }}
+                    <span class="helptext">{{ user_form.billing_country.help_text }}</span>
+                    <div>
+                        {{ user_form.billing_country.errors }}
+                    </div>
+                </div>
+            </div>
+            <br>
             <div class="submit-row">
                 <button class="red-button main-button">
-                    Create account
+                    {% if ENABLE_SUBSCRIPTION %}
+                        Next, choose your subscription level
+                    {% else %}
+                        Create account
+                    {% endif %}
                 </button>
             </div>
         </form>
     </div>
 {% endblock %}
-
+{% block extrascripts %}
+{% endblock extrascripts %}

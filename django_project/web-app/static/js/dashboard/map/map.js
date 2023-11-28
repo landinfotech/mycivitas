@@ -3,7 +3,7 @@
  * Put just function of map in here  
  */
 
-const sourceLayerID = 'MyCivitas'
+const sourceLayerID = 'MyCivitas';
 
 define([
     'backbone',
@@ -19,7 +19,8 @@ define([
          * Initialization
          */
         initialize: async function (initFinishedFn) {
-            const style = await this.loadStyle()
+            const style = await this.loadStyle();
+
             style.sources[sourceLayerID].tiles = [domain + 'community-layer/{z}/{x}/{y}/']
 
             // Hide all filters first
@@ -120,7 +121,6 @@ define([
          */
         showLayer : function (id) {
           if (this.hasLayer(id)) {
-
             this.map.setLayoutProperty(id, 'visibility', 'visible');
           }
         },

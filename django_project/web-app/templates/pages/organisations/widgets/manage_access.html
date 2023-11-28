@@ -13,10 +13,22 @@
     }
 </style>
 <div id="manage-access" class="sidebar-content">
-    <h5>User access
+    <h5>User access {% if ENABLE_SUBSCRIPTION %}({{ object.users_count }}/<span class="max-user"></span>){% endif %}
         <button id="invite-button" class="pull-right red-button" data-toggle="modal" data-target="#invite-user">Invite user</button>
     </h5>
-    
+    {% if ENABLE_SUBSCRIPTION %}
+        <div class="info">Your organization is using {{ object.users_count }}of <span class="max-user"></span> available users. <br>To increase or decrease the number of available users, please change your subscription.
+            {% if object.subscription.is_status_current %}
+                {% if object.subscription.cancel_at_period_end %}
+                    <br>
+                    <br>
+                    <div style="color: red">
+                        Your organization still be able to assign user up to <span class="max-user"></span> until {{ object.subscription.current_period_end }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
     <br>
     {% for data in users.data %}
         <div class="row user-access">

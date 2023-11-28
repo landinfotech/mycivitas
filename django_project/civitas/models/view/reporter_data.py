@@ -1,9 +1,11 @@
 __author__ = 'Irwan Fathurrahman <meomancer@gmail.com>'
 __date__ = '14/07/21'
 
+from decimal import Decimal
+from pprint import pprint
 from django.contrib.gis.db import models
-from django.db.models import Sum, Case, When, F
-from django.db.models.functions import Concat
+from django.db.models import Sum, Case, When, F, Func, Value, Q
+from django.db.models.functions import Concat, Coalesce
 from django.db.models.lookups import GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual
 from civitas.models.community import Community
 from .dashboard_data import DashboardData
@@ -88,8 +90,8 @@ class ReporterData(models.Model):
     remaining_years = models.IntegerField(
         null=True, blank=True
     )
-    annual_reserve = models.IntegerField(
-        null=True, blank=True
+    annual_reserve = models.FloatField(
+        null=False, blank=False, default=0
     )
     pof_id = models.IntegerField(
         null=True, blank=True
@@ -188,8 +190,8 @@ class ReporterData(models.Model):
             'system_name',
             
         ).annotate(
-            maintenance_cost=Sum('maintenance_cost'),
-            renewal_cost=Sum('renewal_cost')
+            maintenance_cost=Coalesce(Sum('maintenance_cost'), 0),
+            renewal_cost=Coalesce(Sum('renewal_cost'), 0)
         ).order_by('system_name')
     
     @staticmethod
@@ -209,8 +211,7 @@ class ReporterData(models.Model):
             'class_name',
             'sub_class_name',
             'system_name',
-            'age', 
-            'annual_reserve', 
+            'age',  
             'area', 
             'asset_type_description', 
             'asset_type_name', 
@@ -222,13 +223,11 @@ class ReporterData(models.Model):
             'length', 
             'lifespan', 
             'lifespan_method', 
-            'maintenance_cost',
             'maintenance_cost_method',
             'pof_name', 
             'quantity', 
             'remaining_years', 
             'remaining_years_method', 
-            'renewal_cost', 
             'renewal_cost_method', 
             'risk_level', 
             'risk_value', 
@@ -236,6 +235,9 @@ class ReporterData(models.Model):
             'sub_class_unit_description', 
             'sub_class_unit_name', 
             'system_name', 
+            'annual_reserve',
+            'maintenance_cost',
+            'renewal_cost'
         ).order_by('system_name')
 
     @staticmethod
@@ -255,83 +257,199 @@ class ReporterData(models.Model):
                     'Non-Municipal Infrastructure',
                     'Abandoned Infrastructure'
                     ]
-            ) 
+            )
+        
+        _dashboard = DashboardData(data=data)  
+        
         system_names = data.exclude(system_name=None) \
             .order_by('system_name') \
             .values('system_name') \
             .distinct() \
             .annotate(label=Concat('system_name', models.Value('')))
-        renewal_cost_of_assets = data.exclude(system_name=None) \
+        
+        ##### Renewal costs of assets #####
+        
+        _renewal_cost_of_assets_a = data.exclude(system_name=None) \
             .order_by('system_name') \
-            .values('system_name') \
-            .annotate(label=Concat('system_name', models.Value('')), values=Sum('renewal_cost'))       
-        maintenance_cost_of_assets = data.exclude(system_name=None) \
+            .values('system_name', 'renewal_cost')
+
+        _data_renewal= [{'system_name': val["system_name"], 'renewal_cost': val['renewal_cost']} for val in _renewal_cost_of_assets_a]
+
+        renewal_sum = 0
+
+        qs_renewal = []
+
+        for name in system_names:
+            qs_renewal.append({"system_name": name["system_name"], "label": name["label"],"values": 0.0})
+
+        for x in _data_renewal:
+
+            system_name = x["system_name"]
+
+            if str(x["renewal_cost"]) == 'NaN' or not x["renewal_cost"]:
+                x["renewal_cost"] = 0.00
+            elif x["renewal_cost"]:
+                renewal_sum = renewal_sum + float(x["renewal_cost"])
+                index = next((index for (index, d) in enumerate(qs_renewal) if d["system_name"] == system_name), None)
+                qs_renewal[index]["values"] = float(qs_renewal[index]["values"]) + float(x["renewal_cost"])
+
+        #### End Renewal costs of assets ####
+
+        ##### Maintenance #####
+        
+        _maintenance_cost_of_assets = data.exclude(system_name=None) \
             .order_by('system_name') \
-            .values('system_name') \
-            .distinct() \
-            .annotate(label=Concat('system_name', models.Value('')), values=Sum('maintenance_cost'))      
-        risk_renewal_of_assets = data.exclude(system_name=None) \
+            .values('system_name', 'maintenance_cost')
+
+        _data_maintenace = [{'system_name': val["system_name"], 'maintenance_cost': val['maintenance_cost']} for val in _maintenance_cost_of_assets]
+
+        maintenance_sum = 0
+
+        qs_maintenance = []
+
+        for name in system_names:
+            qs_maintenance.append({"system_name": name["system_name"], "label": name["label"],"values": 0.0})
+
+        for x in _data_maintenace:
+
+            system_name = x["system_name"]
+
+            if str(x["maintenance_cost"]) == 'NaN' or not x["maintenance_cost"]:
+                x["maintenance_cost"] = 0.00
+            elif x["maintenance_cost"]:
+                maintenance_sum = maintenance_sum + float(x["maintenance_cost"])
+                index = next((index for (index, d) in enumerate(qs_maintenance) if d["system_name"] == system_name), None)
+                qs_maintenance[index]["values"] = float(qs_maintenance[index]["values"]) + float(x["maintenance_cost"])
+
+        #### End Maintenance ####
+
+        #### Risk Renewal####
+        
+        _risk_renewal_of_assets = data.exclude(system_name=None) \
             .order_by('system_name') \
-            .values('system_name', 'risk_level') \
-            .distinct() \
-            .annotate(label=Concat('system_name', models.Value('')), values=Sum('renewal_cost'))     
-        remaining_years_renewal_cost = data.exclude(system_name=None) \
+            .values('system_name', 'risk_level', 'renewal_cost')
+        
+        _data_renewal_cost_of_assets = [{'system_name': val["system_name"], 'renewal_cost': val['renewal_cost'], 'risk_level': val['risk_level']} \
+                                         for val in _risk_renewal_of_assets]
+
+        qs_renewal_cost_of_assets = []
+
+        for risk in _dashboard.risk_level_list:
+            for name in system_names:
+                qs_renewal_cost_of_assets.append({"system_name": name["system_name"], 
+                                                  "risk_level": risk["risk_level"], 
+                                                  "label": name["label"],
+                                                  "values": 0.0})
+        
+        risk_renewal_of_assets_sum = 0
+
+        for x in _data_renewal_cost_of_assets:
+
+            system_name = x["system_name"]
+            
+            risk_level = ''
+            if not x['risk_level'] is None:
+                risk_level = x["risk_level"].strip()
+            else:
+                risk_level = 'None'
+
+            print("risk_level", risk_level)
+
+            if str(x["renewal_cost"]) == 'NaN' or not x["renewal_cost"]:
+                x["renewal_cost"] = 0.00
+            else:
+                risk_renewal_of_assets_sum = risk_renewal_of_assets_sum + Decimal(x["renewal_cost"])
+            index = next((index for (index, d) in enumerate(qs_renewal_cost_of_assets) \
+                           if d["system_name"] == system_name and d["risk_level"] == risk_level), None)
+            if index :
+                qs_renewal_cost_of_assets[index]["values"] = float(qs_renewal_cost_of_assets[index]["values"]) + float(x["renewal_cost"])
+
+        #### END Risk Renewal####
+
+        #### remaining years renewal cost ####
+        
+        _remaining_years_renewal_cost = data.exclude(system_name=None) \
             .order_by('system_name') \
-            .values('system_name') \
-            .distinct() \
-            .annotate(label=Concat('system_name', models.Value('')), values=Sum('renewal_cost'))    
+            .values('system_name', 'renewal_cost') 
+        
+        #### End remaining years renewal cost ####
         remaining_years_renewal_risk_cost = data.exclude(system_name=None) \
             .order_by('system_name') \
             .values('system_name', 'risk_level') \
             .distinct() \
-            .annotate(label=Concat('system_name', models.Value('')), values=Sum('renewal_cost'))  
-        annual_reserve = data.exclude(system_name=None) \
+            .annotate(label=Concat('system_name', models.Value('')), values=Sum('renewal_cost'))
+        
+        ###### Annual Reserve  #########
+        _annual_reserve = data.exclude(system_name=None) \
             .order_by('system_name') \
-            .values('system_name') \
-            .distinct() \
-            .annotate(label=Concat('system_name', models.Value('')), values=Sum('annual_reserve'))       
+            .values('system_name', 'annual_reserve') 
+        
+        _data_annual_reserve = [{'system_name': val["system_name"], 'annual_reserve': val['annual_reserve']} for val in _annual_reserve]
 
-        _dashboard = DashboardData(data=data)  
+        annual_sum = 0
+
+        qs_annual_data = []
+
+        for name in system_names:
+            qs_annual_data.append({"system_name": name["system_name"], "label": name["label"],"values": 0.0})
+
+        for x in _data_annual_reserve:
+
+            system_name = x["system_name"]
+
+            annual_reserve = 0
+            if str(x["annual_reserve"]) == 'NaN' or not x["annual_reserve"]:
+                x["annual_reserve"] = 0.00
+                annual_reserve = 0.00
+            else:
+                annual_reserve = x["annual_reserve"]
+            
+            annual_sum = annual_sum + Decimal(annual_reserve)
+
+            index = next((index for (index, d) in enumerate(qs_annual_data) if d["system_name"] == system_name), None)
+            qs_annual_data[index]["values"] = float(qs_annual_data[index]["values"]) + float(annual_reserve)
+
+        ###### End Annual Reserve  #########
 
         qs = [
             {
                 'id': 'renewal_cost', 
                 "title": "Renewal costs of assets",
-                "qs": renewal_cost_of_assets, 
+                "qs": qs_renewal, 
                 'type': 'non_stacked', 
-                'sum': renewal_cost_of_assets.aggregate(sum=Sum('values')),
+                'sum': {"sum": renewal_sum},
                 'description': 'Replacement costs are based on current available costs and include the following components: Capital Costs - 65%, Contingency - 15%, Design - 10%, Inspections and Removal - 10%. As a starting point, a default replacement cost is applied for each asset type.  However, in some cases, where the above general formula is not applicable, or requires significantly less or more effort in one of the above areas, a custom cost might have been applied. This value will override the default value.'
             },              
             {
                 'id': 'maintenenance_cost', 
                 "title": "Maintenance costs of assets",
-                "qs": maintenance_cost_of_assets, 
+                "qs": qs_maintenance, 
                 'type': 'non_stacked',
-                'sum': maintenance_cost_of_assets.aggregate(sum=Sum('values')),
+                'sum': {"sum": maintenance_sum},
                 'description': 'Maintenance costs are the estimated annual cost to maintain assets. As a starting point, a default value of 10% of the renewal cost is used'
             },   
             {
                 'id': 'annual_reserve', 
                 "title": "Annual Average Infrastructure Demand",
-                "qs": annual_reserve, 
+                "qs": qs_annual_data, 
                 'type': 'non_stacked',
-                'sum': annual_reserve.aggregate(sum=Sum('values')),
+                'sum': {'sum': annual_sum},
                 'description':  "This graph uses lifespan projections and renewal costs for a long-term outlook of  infrastructure. This projection is theoretical and is not a realistic indication of spending timelines. A valuable output of this projection is an annualized infrastructure demand, indicated as a dotted line on the graph. This annualized value is obtained by dividing the renewal cost by the lifespan for each asset in the database and then summing the total. As lifespan and renewal cost data are updated, the annual infrastructure demand will update. The annual infrastructure demand could be lowered by committing to operations and maintenance programs to extend lifespans, deciding to rehabilitate versus replace, and more. The values shown in the graph is based on current $ values and the actual value of this average annual investment will increase over time with inflation."
             },   
             {
                 'id': 'system_risk_renewal', 
                 "title": "Risk By System",
-                "qs": risk_renewal_of_assets, 
-                "formatted": _dashboard.stacked_a(risk_renewal_of_assets),
-                "total_bottom": _dashboard.stacked_a_total(_dashboard.stacked_a(risk_renewal_of_assets)),
+                "qs": qs_renewal_cost_of_assets, 
+                "formatted": _dashboard.stacked_a(qs_renewal_cost_of_assets),
+                "total_bottom": _dashboard.stacked_a_total(_dashboard.stacked_a(qs_renewal_cost_of_assets)),
                 'type': 'stacked_a',
-                'sum': risk_renewal_of_assets.aggregate(sum=Sum('values')),
+                'sum': {"sum": risk_renewal_of_assets_sum},
                 'description': 'A risk value is obtained by combining Probability of Failure  (PoF) and Consequence of Failure (CoF) values as per the following matrix. It is common asset management practice to shift the matrix in favour of the consequence of failure,'
             },        
             {
                 'id': 'remaining_years_renewal_system', 
                 "title": "Remaining Years by Renewal Cost by System",
-                "qs": remaining_years_renewal_cost, 
+                "qs": _remaining_years_renewal_cost, 
                 "formatted": _dashboard.stacked_b_list(system_names),
                 "total": _dashboard.stacked_b_total(_dashboard.stacked_b_list(system_names), system_names=system_names),
                 "graph": _dashboard.stacked_b_graph(_dashboard.stacked_b_list(system_names), system_names=system_names),
@@ -339,7 +457,7 @@ class ReporterData(models.Model):
                 "pdf_table_2": _dashboard.pdf_table_2(_dashboard.stacked_b_list(system_names)),
                 'type': 'stacked_b',
                 'system_names': system_names,
-                'sum': remaining_years_renewal_cost.aggregate(sum=Sum('values')),
+                'sum': {"sum": risk_renewal_of_assets_sum},
                 'description': ''
             },   
             {
@@ -353,10 +471,11 @@ class ReporterData(models.Model):
                 "pdf_table_2": _dashboard.pdf_table_2(_dashboard.stacked_c_list()),
                 'type': 'stacked_c',
                 'risk_levels': _dashboard.risk_level_list,
-                'sum': remaining_years_renewal_risk_cost.aggregate(sum=Sum('values')),
+                'sum': {"sum": risk_renewal_of_assets_sum},
                 'description': ''
             },  
         ]
+
         return qs
 
     @staticmethod
@@ -365,7 +484,14 @@ class ReporterData(models.Model):
         Return summary of cof for specific community
         The return will be grouped by class
         """
-        return ReporterData._summary(community, 'cof_name')
+
+        cof_dict = ReporterData._summary(community, 'cof_name')
+
+        for val in cof_dict:
+            for x in val:
+                if str(val[x]) == 'nan' or val[x] == 'NaN':
+                    val[x] = 0
+        return cof_dict
 
     @staticmethod
     def summary_pof(community: Community) -> dict:
@@ -373,7 +499,13 @@ class ReporterData(models.Model):
         Return summary of pof for specific community
         The return will be grouped by class
         """
-        return ReporterData._summary(community, 'pof_name')
+        pof_dict = ReporterData._summary(community, 'pof_name')
+
+        for val in pof_dict:
+            for x in val:
+                if str(val[x]) == 'nan' or val[x] == 'NaN':
+                    val[x] = 0
+        return pof_dict
 
     @staticmethod
     def summary_risk(community: Community) -> dict:
@@ -381,7 +513,14 @@ class ReporterData(models.Model):
         Return summary of risk for specific community
         The return will be grouped by class
         """
-        return ReporterData._summary(community, 'risk_level')
+
+        risk_dict = ReporterData._summary(community, 'risk_level')
+
+        for val in risk_dict:
+            for x in val:
+                if str(val[x]) == 'nan' or val[x] == 'NaN':
+                    val[x] = 0
+        return risk_dict
     
     @staticmethod
     def by_community_all(community: Community) -> dict:

@@ -1,6 +1,6 @@
 {% load humanize %}
 {% block content %}
-{% if obj.qs.count > 0 %}
+
 
 <div id="tab_{{obj.id}}" style="page-break-after: always;background-color:white; position: relative;" class=" mt-2 mb-2 tabcontent">
     <button data-html2canvas-ignore id="generate_{{obj.id}}" class="btn btn-primary pdf-button">Download PDF</button>
@@ -41,7 +41,7 @@
                         <td style="text-align: right;">{% for key in obj_.risk %}{% if 'Low' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
                         
                         <td style="text-align: right;">{% for key in obj_.risk %}{% if 'Minimal' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
-                        <td style="text-align: right;">{% for key in obj_.risk %}{% if key.risk_level == 'None' %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
+                        <td style="text-align: right;">{% for key in obj_.risk %}{% if 'None' in key.risk_level %} ${{ key.values|floatformat:0|intcomma }} {% endif %}{% endfor %}</td>
                         
                         <td style="text-align: right;">${{ obj_.total_value|floatformat:0|intcomma  }}</td>
                         <td style="text-align: right;" id="{{forloop.counter0}}_{{obj.id}}_per">{{ obj_.total_per|floatformat:1|intcomma }}%</td>
@@ -139,7 +139,7 @@
 
     var trace6 = {
     x: [{% for entry in obj.formatted %}stringDivider('{{entry.system_name}}', 15, "<br>"),{% endfor %}],
-    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == '' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %} {% endfor %}],
+    y: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'None' %}'{{key.values|floatformat:0}}',{%endif%}{% endfor %} {% endfor %}],
     name: 'None',
     text: [{% for entry in obj.formatted %} {% for key in entry.risk %}{% if key.risk_level == 'None'%}'${{key.values|floatformat:0|intcomma}}',{%endif%}{% endfor %}{% endfor %}],
     textposition: 'auto',
@@ -184,5 +184,5 @@
 </script>
 </div>
 </div>
-{% endif %}
+
 {% endblock content %}

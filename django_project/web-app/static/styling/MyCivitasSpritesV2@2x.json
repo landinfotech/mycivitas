@@ -1,0 +1,436 @@
+{
+  "ElectricalLight": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 0,
+    "y": 0
+  },
+  "ElectricalMeter": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 0,
+    "y": 320
+  },
+  "ElectricalPole": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 63,
+    "y": 0
+  },
+  "ElectricalSwitchgearCombination": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 0,
+    "y": 64
+  },
+  "ElectricalSwitchgearFuse": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 64,
+    "y": 320
+  },
+  "ElectricalSwitchgearOther": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 126,
+    "y": 0
+  },
+  "ElectricalSwitchgearSwitch": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 128,
+    "y": 320
+  },
+  "ElectricalTransformer": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 64,
+    "y": 64
+  },
+  "NaturalAnimalia": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 127,
+    "y": 64
+  },
+  "NaturalVegetation": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 192,
+    "y": 320
+  },
+  "StormwaterBox": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 255,
+    "y": 320
+  },
+  "StormwaterCatchBasin": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 0,
+    "y": 128
+  },
+  "StormwaterChannel": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 57,
+    "x": 318,
+    "y": 320
+  },
+  "StormwaterControl": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 64,
+    "y": 128
+  },
+  "StormwaterGrate": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 375,
+    "y": 320
+  },
+  "StormwaterManholeCover": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 127,
+    "y": 128
+  },
+  "StormwaterManholeTrunk": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 0,
+    "y": 192
+  },
+  "StormwaterMeter": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 438,
+    "y": 320
+  },
+  "StormwaterMotor": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 63,
+    "y": 192
+  },
+  "StormwaterPart": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 126,
+    "y": 192
+  },
+  "StormwaterPipeFlowDirection": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 57,
+    "x": 444,
+    "y": 0
+  },
+  "StormwaterPump": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 190,
+    "y": 0
+  },
+  "StormwaterReservoir": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 0,
+    "y": 383
+  },
+  "StormwaterTank": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 253,
+    "y": 0
+  },
+  "StormwaterTreatment": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 63,
+    "y": 383
+  },
+  "StormwaterValve": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 126,
+    "y": 383
+  },
+  "StructureAmenity": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 190,
+    "y": 383
+  },
+  "StructureMonument": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 316,
+    "y": 0
+  },
+  "TransportationLight": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 380,
+    "y": 0
+  },
+  "TransportationNetworkTrafficSignOrSignal": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 253,
+    "y": 383
+  },
+  "TransportationPole": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 316,
+    "y": 383
+  },
+  "WastewaterBox": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 379,
+    "y": 383
+  },
+  "WastewaterCleanout": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 191,
+    "y": 64
+  },
+  "WastewaterControl": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 255,
+    "y": 64
+  },
+  "WastewaterManholeCover": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 318,
+    "y": 64
+  },
+  "WastewaterManholeTrunk": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 381,
+    "y": 64
+  },
+  "WastewaterMeter": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 0,
+    "y": 446
+  },
+  "WastewaterMotor": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 190,
+    "y": 128
+  },
+  "WastewaterPart": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 253,
+    "y": 128
+  },
+  "WastewaterPipeTransmissionForcemain": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 57,
+    "x": 442,
+    "y": 383
+  },
+  "WastewaterPipeTransmissionGravityMain": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 57,
+    "x": 64,
+    "y": 446
+  },
+  "WastewaterPump": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 317,
+    "y": 128
+  },
+  "WastewaterReservoir": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 121,
+    "y": 446
+  },
+  "WastewaterTank": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 380,
+    "y": 128
+  },
+  "WastewaterTreatment": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 190,
+    "y": 192
+  },
+  "WastewaterValve": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 184,
+    "y": 446
+  },
+  "WaterBox": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 248,
+    "y": 446
+  },
+  "WaterControl": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 253,
+    "y": 192
+  },
+  "WaterHydrantHydrant": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 316,
+    "y": 192
+  },
+  "WaterHydrantPrivate": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 379,
+    "y": 192
+  },
+  "WaterManholeCover": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 0,
+    "y": 256
+  },
+  "WaterManholeTrunk": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 63,
+    "y": 256
+  },
+  "WaterMeterBulk": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 311,
+    "y": 446
+  },
+  "WaterMeterService": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 375,
+    "y": 446
+  },
+  "WaterMotor": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 126,
+    "y": 256
+  },
+  "WaterPart": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 189,
+    "y": 256
+  },
+  "WaterPump": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 253,
+    "y": 256
+  },
+  "WaterReservoir": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 438,
+    "y": 446
+  },
+  "WaterTank": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 316,
+    "y": 256
+  },
+  "WaterTreatment": {
+    "height": 64,
+    "pixelRatio": 2,
+    "width": 63,
+    "x": 379,
+    "y": 256
+  },
+  "WaterValveCurbstop": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 502,
+    "y": 320
+  },
+  "WaterValveValve": {
+    "height": 63,
+    "pixelRatio": 2,
+    "width": 64,
+    "x": 566,
+    "y": 320
+  }
+}

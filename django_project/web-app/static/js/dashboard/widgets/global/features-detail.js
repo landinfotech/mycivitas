@@ -12,9 +12,11 @@ define([
         community: null,
         featureIDKey: 'Feature ID',
         actionButton: '<span id="download_exported_id" class="export-assets-table"><i class="fa fa-download" aria-hidden="true" title="Download data as csv"></i></span>',
-
+        
         init: function () {
             this.data = [];
+            this.currentFeatureID = 0;
+            this.numCount = 0;
             this.templateNoData = templates.PLEASE_CLICK_MAP;
 
             event.register(this, evt.FEATURE_LIST_FETHCING, this.dataFetching);
@@ -38,17 +40,6 @@ define([
                 var community = QueryString["community"];
 
                 setTimeout(function(){
-                    // $.ajax({
-                    //     type: 'GET',
-                    //     url: "/api/community/" + community, //Replace your URL here
-                    //     success: function(response){
-                    //         event.trigger(evt.COMMUNITY_CHANGE, response);
-                    //         event.trigger(this, evt.COMMUNITY_GEOJSON_CHANGE, response);
-                    //     },
-                    //     error: function () {
-                    //         // Code After Erroe
-                    //     }
-                    // });
                     $.ajax({
                         type: 'GET',
                         url: "/api/feature/"+id+"/data", //Replace your URL here
@@ -76,6 +67,7 @@ define([
         dataFetched: function (data) {
             /** success **/
             this.data = data;
+            console.log("data fetched",this.data)
             this.render();
             const ID = $(this.$rightPanel.find('.content:visible')[0]).attr('id');
             if (ID !== this.id) {
@@ -88,10 +80,16 @@ define([
             let _feature;
             
             if (this.data.length > 0) {
-                let htmls = [];
+                
                 let tabs = []
                 that.features = {};
+                
+                this.$content.html(`<ul class="nav nav-tabs">${tabs.join('')}</ul>`);
+                
                 this.data.forEach(feature => {
+                    console.log("inside", feature)
+                    let html = '';
+                    let htmls = [];
                     if (!feature.properties.feature_id) {
                         feature.properties.feature_id = feature.properties[that.featureIDKey];
                     }
@@ -120,7 +118,7 @@ define([
                     event.trigger(evt.TICKET_BASKET_CHECK, feature, function (output) {
                         isInBasket = output;
                     });
-                    let html = '';
+                    
 
                     // TODO:
                     //  This should be don on backend
@@ -136,20 +134,23 @@ define([
                     html += templates.FEATURE_INFO({
                         value: properties
                     })
+
                     htmls.push(
                         templates.FEATURE_DETAIL_TAB_PANE({
                             id: ID,
                             name: feature.id.replaceAll('_', ' '),
-                            basketClass: isInBasket ? 'remove' : '',
+                            basketClass: '',
                             canCreateTicket: that.community?.get('organisation')?.permissions?.create_ticket,
-                            active: ID === selectedID ? 'true active show' : '',
+                            active: 'true active show',
                             html: html
                         })
                     );
+    
+                    this.$content.append(`<div class="tab-content">${htmls.join('')}</div>`);
+                    
                 });
-                this.$content.html(`<ul class="nav nav-tabs">${tabs.join('')}</ul>`);
-                this.$content.append(`<div class="tab-content">${htmls.join('')}</div>`);
-
+                
+                
                 // We need to get ticket list
                 this.data.forEach(feature => {
                     const ID = feature.properties.feature_id;
@@ -237,7 +238,6 @@ define([
                     }
                 }
 
-
                 document.getElementById("exportcsv").addEventListener("click", function(){
 
                     let checkedElem = document.getElementsByName("export_csv");
@@ -312,11 +312,13 @@ define([
             }
             
             this.selectFeature(selectedID);
+            
         },
         /***
          * When feature selected, highlight it to map
          */
         selectFeature: function (ID) {
+            
             event.trigger(evt.FEATURE_HIGHLIGHTED, this.features[ID]);
         },
         /** When community changed,

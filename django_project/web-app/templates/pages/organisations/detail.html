@@ -192,7 +192,7 @@
         <li data-target="manage-access">Manage Access</li>
         <li data-target="work-order-scheduler">Work Order Scheduler</li>
     {% endif %}
-    {% if object.owner == user%}
+    {% if object.owner == user and ENABLE_SUBSCRIPTION%}
         <li data-target="subscription">
             Subscription
             {% if object.subscription and object.subscription.is_status_current %}
@@ -224,7 +224,7 @@
             </div>
         </div>
     </div>
-    {% if object.owner == user %}
+    {% if object.owner == user and ENABLE_SUBSCRIPTION%}
         {# SUBSCRIPTION #}
         <div id="subscription" class="sidebar-content">
             <div class="subscription">
@@ -370,4 +370,121 @@
         </div>
     {% endif %}
 {% endblock %}
+{% block extrascripts_extend %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        {# check max user #}
+        let MAX_USER =  {{ object.max_user }};
 
+        const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+        $(document).ready(function () {
+            const $table = $('table');
+            $('.max-user').html(MAX_USER);
+            $table.find('.remove').click(function () {
+                $(this).closest('tr').remove()
+            })
+
+            {# For subscription #}
+            {% if object.owner == user %}
+                $('#cancel-subscription-btn').click(function () {
+                    $('#cancel-subscription-modal button').prop('disabled', true);
+                    $('#cancel-subscription-modal form').submit();
+                });
+
+                {# change payment method#}
+                let elements = stripe.elements();
+                const $cardError = $('#card-errors');
+                const $submitButton = $('#change-payment-method-btn');
+                let style = {
+                    base: {
+                        color: "#32325d",
+                        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                        fontSmoothing: "antialiased",
+                        fontSize: "16px",
+                        "::placeholder": {
+                            color: "#aab7c4"
+                        }
+                    },
+                    invalid: {
+                        color: "#fa755a",
+                        iconColor: "#fa755a"
+                    }
+                };
+
+
+                card = elements.create('card', { style: style });
+                card.mount('#card-element');
+
+                card.on('focus', function () {
+                    let el = document.getElementById('card-errors');
+                    el.classList.add('focused');
+                });
+
+                card.on('blur', function () {
+                    let el = document.getElementById('card-errors');
+                    el.classList.remove('focused');
+                });
+
+                card.on('change', function (event) {
+                    $cardError.html('')
+                    if (event.error) {
+                        displayError(event.error)
+                    } else {
+                        $submitButton.prop('disabled', false);
+                    }
+                });
+                $("#subscription-form").submit(function (event) {
+                    subscribe(card);
+                    event.preventDefault();
+                });
+
+                function displayError(error) {
+                    if (error) {
+                        $cardError.html(error.message)
+                        $submitButton.prop('disabled', true);
+                    }
+                }
+
+                function subscribe(card) {
+                    $submitButton.prop('disabled', true);
+                    $('#spinner').show();
+
+                    stripe.createPaymentMethod({
+                        type: 'card',
+                        card: card,
+                        billing_details: {
+                            name: '{{ user.get_full_name }}',
+                            email: '{{ user.email }}',
+                        },
+                    }).then((result) => {
+                        if (result.error) {
+                            displayError(result.error);
+                        } else {
+                            const paymentParams = {
+                                payment_method: result.paymentMethod.id,
+                            };
+                            fetch("{% url "organisation_payment_method_change" pk=object.id %}", {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': '{{ csrf_token }}',
+                                },
+                                credentials: 'same-origin',
+                                body: JSON.stringify(paymentParams),
+                            }).then((response) => {
+                                return response.json();
+                            }).then((result) => {
+                                if (result.error) {
+                                    throw result;
+                                }
+                                window.location.reload();
+                            }).catch(function (result) {
+                                window.location.reload();
+                            });
+                        }
+                    });
+                }
+            {% endif %}
+        });
+    </script>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% load humanize %}
 {% block content %}
-{% if obj.qs.count > 0 %}
+
 
 <div id="tab_{{obj.id}}" style="page-break-after: always;background-color:white; position: relative;" class=" mt-2 mb-2 tabcontent">
 <button data-html2canvas-ignore id="generate_{{obj.id}}" class="btn btn-primary pdf-button" >Download PDF</button>
@@ -31,7 +31,7 @@
                         <tr >
                             <td style="text-align: left;">{{ entry.label }}</td>
                             <td style="text-align: right;">
-                                {% if entry.values is not none  %} 
+                                {% if entry.values is not none %} 
                                 ${{ entry.values|floatformat:0|intcomma }} 
                                 {% else %}
                                 $0
@@ -127,5 +127,5 @@
 
 
 </div>
-{% endif %}
+
 {% endblock content %}

@@ -1,0 +1,2400 @@
+{
+  "version": 8,
+  "name": "MyCivitas",
+  "metadata": {"maputnik:renderer": "mbgljs"},
+  "center": [-69.5, 69.97],
+  "zoom": 2,
+  "sources": {
+    "MyCivitas": {
+      "type": "vector",
+      "tiles": ["https://staging.mycivitas.ca/community-all-layer/{z}/{x}/{y}"],
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=cc4PpmmWZP73LjU1nsw3"
+    },
+    "natural_earth": {
+      "type": "raster",
+      "tiles": [
+        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    },
+    "OSM tiles": {
+      "type": "raster",
+      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "minzoom": 0,
+      "maxzoom": 24
+    }
+  },
+  "sprite": "https://staging.mycivitas.ca/static/styling/MyCivitasSpritesV2",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cc4PpmmWZP73LjU1nsw3",
+  "layers": [
+    {
+      "id": "OSM Background",
+      "type": "raster",
+      "source": "OSM tiles",
+      "layout": {"visibility": "visible"},
+      "paint": {"raster-resampling": "linear"}
+    },
+    {
+      "id": "boundaries",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "filter": ["all", ["==", "admin_level", 2]],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 0.5}
+    },
+    {
+      "id": "selection natural waterway - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-waterway"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection stormwater channel - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-channel"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection stormwater culvert - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-pipe-culvert"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection stormwater inlet or outfall - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-inlet-or-outfall"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection stormwater other - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "asset_class", "Stormwater Collection"],
+        ["!=", "def_stylename", "def-stormwater-collection-channel"],
+        ["!=", "def_stylename", "def-stormwater-collection-pipe-culvert"],
+        [
+          "!=",
+          "def_stylename",
+          "def-stormwater-collection-pipe-inlet-or-outfall"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-stormwater-collection-pipe-service-connection"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-stormwater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection stormwater service connection - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-service-connection"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection stormwater transmission gravity main - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection structure barrier or fence - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-structure-barrier-or-fence"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection structure bridge - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-structures-bridge"]],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 12]]},
+        "line-translate": [0, 0],
+        "line-offset": 0,
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection transportation barrier or fence - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-barrier-or-fence"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection transportation base - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-base"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection transportation pedestrian walkway - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-pedestrian-walkway"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection transportation road overlay - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-road-overlay"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection wastewater other - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "asset_class", "Wastewater Collection"],
+        [
+          "!=",
+          "def_stylename",
+          "def-wastewater-collection-pipe-service-connection"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-forcemain"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection wastewater service connection - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-service-connection"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection wastewater transmission forcemain - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-forcemain"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection wastewater transmission gravity main - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection water distribution forcemain - selection tool",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-pipe-distribution-forcemain"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection water other - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["!=", "def_stylename", "def-water-supply-pipe-distribution-forcemain"],
+        ["!=", "def_stylename", "def-water-supply-pipe-service-connection"],
+        ["!=", "def_stylename", "def-water-supply-pipe-transmission-forcemain"],
+        ["==", "asset_class", "Water Supply"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection water service connection - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-pipe-service-connection"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection water transmission forcemain - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-pipe-transmission-forcemain"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "natural aquifer - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-aquifer"]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(165, 191, 221, 1)"}
+    },
+    {
+      "id": "natural aquifer - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-aquifer"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(100, 152, 210, 1)",
+        "line-width": {"stops": [[8, 0], [12, 1]]}
+      }
+    },
+    {
+      "id": "natural wetland - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-wetland"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(163, 205, 185, 1)",
+        "fill-translate": [0, 0]
+      }
+    },
+    {
+      "id": "natural wetland - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-wetland"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(114, 133, 132, 1)",
+        "line-width": {"stops": [[7, 0], [12, 0.6]]}
+      }
+    },
+    {
+      "id": "natural grassland - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-natural-assets-grassland"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(148, 209, 128, 1)",
+        "fill-translate": [0, 0]
+      }
+    },
+    {
+      "id": "natural grassland - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-natural-assets-grassland"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(143, 181, 131, 1)",
+        "line-width": {"stops": [[8, 0], [12, 0.8]]}
+      }
+    },
+    {
+      "id": "natural forest - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-forest"]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(145, 82, 45, 1)"}
+    },
+    {
+      "id": "natural forest - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-forest"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": {"stops": [[8, 0], [12, 1]]}
+      }
+    },
+    {
+      "id": "natural waterbody - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-natural-assets-waterbody"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(166, 206, 227, 1)",
+        "fill-translate": [0, 0]
+      }
+    },
+    {
+      "id": "natural waterbody - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-natural-assets-waterbody"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": {"stops": [[7, 0], [12, 0.6]]}
+      }
+    },
+    {
+      "id": "natural waterway - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-waterway"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(166, 206, 227, 1)",
+        "line-width": {"stops": [[6, 0], [12, 4]]}
+      }
+    },
+    {
+      "id": "natural animalia - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-natural-assets-animalia"]],
+      "layout": {
+        "icon-image": "NaturalAnimalia",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.4]]}
+      }
+    },
+    {
+      "id": "natural vegetation - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-natural-assets-vegetation"]
+      ],
+      "layout": {
+        "icon-image": "NaturalVegetation",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.5]]}
+      }
+    },
+    {
+      "id": "structure engineered land - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-structures-engineered-land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(231, 251, 55, 1)",
+        "fill-translate": [0, 0],
+        "fill-opacity": 0.48
+      }
+    },
+    {
+      "id": "structure engineered land - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-structures-engineered-land"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": {"stops": [[7, 0], [12, 0.6]]},
+        "line-opacity": 0.48
+      }
+    },
+    {
+      "id": "structure recreational structure - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-structures-recreational-structure"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(204, 204, 204, 1)",
+        "fill-translate": [0, 0],
+        "fill-opacity": 0.58
+      }
+    },
+    {
+      "id": "structure recreational structure - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-structures-recreational-structure"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(82, 82, 82, 1)",
+        "line-width": {"stops": [[7, 0], [12, 0.6]]},
+        "line-opacity": 0.58
+      }
+    },
+    {
+      "id": "structure building - fill",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-structures-building"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-color": "rgba(227, 26, 28, 1)",
+        "fill-translate": [0, 0],
+        "fill-opacity": 0.34
+      }
+    },
+    {
+      "id": "structure building - outline",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-structures-building"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": {"stops": [[7, 0], [12, 0.6]]},
+        "line-opacity": 0.34
+      }
+    },
+    {
+      "id": "structure bridge 1 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-structures-bridge"]],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(134, 134, 134, 1)",
+        "line-width": {"stops": [[6, 0], [12, 1.5]]},
+        "line-translate": [0, 0],
+        "line-offset": {"stops": [[10, 0], [14, 3], [16, 5]]}
+      }
+    },
+    {
+      "id": "structure bridge 2 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-structures-bridge"]],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(134, 134, 134, 1)",
+        "line-width": {"stops": [[6, 0], [12, 1.5]]},
+        "line-translate": [0, 0],
+        "line-offset": {"stops": [[10, 0], [14, -3], [16, -5]]}
+      }
+    },
+    {
+      "id": "structure bridge 3 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "def_stylename", "def-structures-bridge"]],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(134, 134, 134, 1)",
+        "line-width": {"stops": [[10, 0], [14, 3], [16, 5]]},
+        "line-dasharray": [0.3, 1]
+      }
+    },
+    {
+      "id": "structure barrier or fence - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-structure-barrier-or-fence"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(83, 83, 83, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-dasharray": [2, 3]
+      }
+    },
+    {
+      "id": "structure amenity - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-structures-amenity"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.4]]},
+        "icon-image": "StructureAmenity",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "structure monument - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-structures-monument"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.45]]},
+        "icon-image": "StructureMonument",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "transportation base - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-base"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(151, 142, 111, 1)",
+        "line-width": {"stops": [[8, 0], [12, 3], [14, 5]]}
+      }
+    },
+    {
+      "id": "transportation road overlay - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-road-overlay"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {"stops": [[6, 0], [14, 3]]}
+      }
+    },
+    {
+      "id": "transportation pedestrian walkway - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-pedestrian-walkway"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(165, 165, 165, 1)",
+        "line-width": {"stops": [[6, 0], [14, 2]]}
+      }
+    },
+    {
+      "id": "transportation barrier or fence - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-barrier-or-fence"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(83, 83, 83, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-dasharray": [2, 3]
+      }
+    },
+    {
+      "id": "transportation pole - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-pole"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.4]]},
+        "icon-image": "TransportationPole",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "transportation traffic sign or signal - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-transportation-network-traffic-sign-or-signal"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.5]]},
+        "icon-image": "TransportationNetworkTrafficSignOrSignal",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": {"stops": [[6, false], [14, true]]},
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "transportation light - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-transportation-network-light"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.4]]},
+        "icon-image": "TransportationLight",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater other - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "asset_class", "Wastewater Collection"],
+        [
+          "!=",
+          "def_stylename",
+          "def-wastewater-collection-pipe-service-connection"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-forcemain"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {"stops": [[6, 0], [12, 1.5]]}
+      }
+    },
+    {
+      "id": "wastewater service connection - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-service-connection"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(215, 0, 3, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]}
+      }
+    },
+    {
+      "id": "wastewater transmission gravity main - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(215, 0, 3, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2.5]]}
+      }
+    },
+    {
+      "id": "wastewater transmission gravity main - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "icon-image": "WastewaterPipeTransmissionGravityMain",
+        "visibility": "visible",
+        "icon-size": {"stops": [[3, 0], [14, 0.3]]},
+        "symbol-placement": "line",
+        "symbol-spacing": 5
+      }
+    },
+    {
+      "id": "wastewater transmission forcemain 1 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-forcemain"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(215, 0, 3, 1)",
+        "line-width": {"stops": [[6, 0], [12, 3.5]]}
+      }
+    },
+    {
+      "id": "wastewater transmission forcemain - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-forcemain"
+        ]
+      ],
+      "layout": {
+        "icon-image": "WastewaterPipeTransmissionForcemain",
+        "visibility": "visible",
+        "icon-size": {"stops": [[3, 0], [14, 0.3]]},
+        "symbol-placement": "line",
+        "symbol-spacing": 5
+      }
+    },
+    {
+      "id": "wastewater transmission forcemain 2 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-wastewater-collection-pipe-transmission-forcemain"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-dasharray": [4, 1.5]
+      }
+    },
+    {
+      "id": "wastewater manhole trunk - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-manhole-trunk"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.66]]},
+        "icon-image": "WastewaterManholeTrunk",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": " ",
+        "text-size": 8,
+        "icon-ignore-placement": {"stops": [[6, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[6, false], [14, true]]},
+        "text-ignore-placement": false,
+        "text-allow-overlap": false,
+        "icon-optional": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater manhole cover - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-manhole-cover"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.55]]},
+        "icon-image": "WastewaterManholeCover",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "S",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": {"stops": [[6, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[6, false], [14, true]]},
+        "text-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-ignore-placement": {"stops": [[6, false], [14, true]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater meter - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-meter"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterMeter",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "m",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 0, 0, 1)"}
+    },
+    {
+      "id": "wastewater motor - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-motor"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterMotor",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "M",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater part - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-part"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterPart",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater pump - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-pump"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterPump",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "P",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater reservoir - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-reservoir"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterReservoir",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "R",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "wastewater tank - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-tank"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterTank",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "T",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(215, 0, 3, 1)"}
+    },
+    {
+      "id": "wastewater treatment - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-treatment"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterTreatment",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "T",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater valve - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-valve-main"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterValve",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater cleanout - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-cleanout"]
+      ],
+      "layout": {
+        "icon-image": "WastewaterCleanout",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]}
+      }
+    },
+    {
+      "id": "wastewater control - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-control"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WastewaterControl",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "C",
+        "text-size": {"stops": [[13, 0], [16, 16]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "wastewater box - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-wastewater-collection-box"]
+      ],
+      "layout": {
+        "icon-image": "WastewaterBox",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]}
+      }
+    },
+    {
+      "id": "water other - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["!=", "def_stylename", "def-water-supply-pipe-distribution-forcemain"],
+        ["!=", "def_stylename", "def-water-supply-pipe-service-connection"],
+        ["!=", "def_stylename", "def-water-supply-pipe-transmission-forcemain"],
+        ["==", "asset_class", "Water Supply"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {"stops": [[6, 0], [12, 1.5]]}
+      }
+    },
+    {
+      "id": "water service connection - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-pipe-service-connection"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(72, 123, 182, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-dasharray": [2, 2]
+      }
+    },
+    {
+      "id": "water distribution forcemain - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-pipe-distribution-forcemain"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(31, 120, 180, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]}
+      }
+    },
+    {
+      "id": "water transmission forcemain - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-pipe-transmission-forcemain"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(31, 120, 180, 1)",
+        "line-width": {"stops": [[6, 0], [12, 3.5]]}
+      }
+    },
+    {
+      "id": "water box - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-box"]],
+      "layout": {
+        "icon-image": "WaterBox",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]}
+      }
+    },
+    {
+      "id": "water control - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-control"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterControl",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "C",
+        "text-size": {"stops": [[13, 0], [16, 16]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water hydrant - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-hydrant"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.8]]},
+        "icon-image": "WaterHydrantHydrant",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "H",
+        "text-size": {"stops": [[13, 0], [16, 18]]},
+        "text-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-ignore-placement": {"stops": [[8, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "icon-ignore-placement": {"stops": [[8, false], [14, true]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water manhole trunk - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-manhole-trunk"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.66]]},
+        "icon-image": "WaterManholeTrunk",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": " ",
+        "text-size": 8,
+        "icon-ignore-placement": {"stops": [[8, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-ignore-placement": false,
+        "text-allow-overlap": false,
+        "icon-optional": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water manhole cover - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-manhole-cover"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.55]]},
+        "icon-image": "WaterManholeCover",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "W",
+        "text-size": {"stops": [[13, 0], [16, 14]]},
+        "icon-ignore-placement": {"stops": [[8, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-ignore-placement": {"stops": [[8, false], [14, true]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water meter bulk - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-meter-bulk"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "m",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false,
+        "icon-image": "WaterMeterBulk"
+      },
+      "paint": {"text-color": "rgba(31, 120, 180, 1)"}
+    },
+    {
+      "id": "water meter service - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-meter-service"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": {"stops": [[8, 0], [14, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false,
+        "icon-image": "WaterMeterService"
+      },
+      "paint": {"text-color": "rgba(31, 120, 180, 1)"}
+    },
+    {
+      "id": "water motor - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-motor"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterMotor",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "M",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water part - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-part"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterPart",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water pump - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-pump"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterPump",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "P",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water reservoir - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-reservoir"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterReservoir",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "R",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(31, 120, 180, 1)"}
+    },
+    {
+      "id": "water tank - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-tank"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterTank",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "T",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(31, 120, 180, 1)"}
+    },
+    {
+      "id": "water treatment - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-treatment"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterTreatment",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "T",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water valve main - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": ["all", ["==", "def_stylename", "def-water-supply-valve-main"]],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "WaterValveValve",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "water valve service - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-water-supply-valve-service"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.25]]},
+        "icon-image": "WaterValveCurbstop",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater other - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "asset_class", "Stormwater Collection"],
+        ["!=", "def_stylename", "def-stormwater-collection-channel"],
+        ["!=", "def_stylename", "def-stormwater-collection-pipe-culvert"],
+        [
+          "!=",
+          "def_stylename",
+          "def-stormwater-collection-pipe-inlet-or-outfall"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-stormwater-collection-pipe-service-connection"
+        ],
+        [
+          "!=",
+          "def_stylename",
+          "def-stormwater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {"stops": [[6, 0], [12, 1.5]]}
+      }
+    },
+    {
+      "id": "stormwater culvert 1 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-pipe-culvert"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(131, 131, 131, 1)",
+        "line-width": {"stops": [[6, 0], [12, 3]]}
+      }
+    },
+    {
+      "id": "stormwater culvert 2 - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-pipe-culvert"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(0, 150, 45, 1)",
+        "line-width": {"stops": [[6, 0], [12, 1.5]]}
+      }
+    },
+    {
+      "id": "stormwater culvert - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-pipe-culvert"]
+      ],
+      "layout": {
+        "icon-image": "StormwaterPipeFlowDirection",
+        "visibility": "visible",
+        "icon-size": {"stops": [[3, 0], [14, 0.3]]},
+        "symbol-placement": "line",
+        "symbol-spacing": 5
+      }
+    },
+    {
+      "id": "stormwater service connection - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-service-connection"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(51, 160, 44, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-dasharray": [2, 2]
+      }
+    },
+    {
+      "id": "stormwater transmission gravity main - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(51, 160, 44, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]}
+      }
+    },
+    {
+      "id": "stormwater transmission gravity main - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-transmission-gravity"
+        ]
+      ],
+      "layout": {
+        "icon-image": "StormwaterPipeFlowDirection",
+        "visibility": "visible",
+        "icon-size": {"stops": [[3, 0], [14, 0.3]]},
+        "symbol-placement": "line",
+        "symbol-spacing": 5
+      }
+    },
+    {
+      "id": "stormwater inlet or outfall - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-inlet-or-outfall"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(51, 160, 44, 1)",
+        "line-width": {"stops": [[6, 0], [12, 3]]}
+      }
+    },
+    {
+      "id": "stormwater inlet or outfall - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        [
+          "==",
+          "def_stylename",
+          "def-stormwater-collection-pipe-inlet-or-outfall"
+        ]
+      ],
+      "layout": {
+        "icon-image": "StormwaterPipeFlowDirection",
+        "visibility": "visible",
+        "icon-size": {"stops": [[3, 0], [14, 0.3]]},
+        "symbol-placement": "line",
+        "symbol-spacing": 5
+      }
+    },
+    {
+      "id": "stormwater channel - lines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-channel"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgba(51, 160, 44, 1)",
+        "line-width": {"stops": [[6, 0], [12, 2]]},
+        "line-dasharray": [1, 2]
+      }
+    },
+    {
+      "id": "stormwater channel - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-channel"]
+      ],
+      "layout": {
+        "icon-image": "StormwaterChannel",
+        "visibility": "visible",
+        "icon-size": {"stops": [[3, 0], [14, 0.3]]},
+        "symbol-placement": "line",
+        "symbol-spacing": 5
+      }
+    },
+    {
+      "id": "stormwater manhole trunk - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-manhole-trunk"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.66]]},
+        "icon-image": "StormwaterManholeTrunk",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": " ",
+        "text-size": 8,
+        "icon-ignore-placement": {"stops": [[8, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-ignore-placement": {"stops": [[8, false], [14, true]]},
+        "text-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "icon-optional": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater manhole cover - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-manhole-cover"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.55]]},
+        "icon-image": "StormwaterManholeCover",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "D",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": {"stops": [[8, false], [14, true]]},
+        "icon-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-allow-overlap": {"stops": [[8, false], [14, true]]},
+        "text-ignore-placement": {"stops": [[8, false], [14, true]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater motor - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-motor"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterMotor",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "M",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater meter - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-meter"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterMeter",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "m",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "stormwater box - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-box"]
+      ],
+      "layout": {
+        "icon-image": "StormwaterBox",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]}
+      }
+    },
+    {
+      "id": "stormwater catch basin - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-catch-basin"]
+      ],
+      "layout": {
+        "icon-image": "StormwaterCatchBasin",
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]}
+      }
+    },
+    {
+      "id": "stormwater control - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-control"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterControl",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "C",
+        "text-size": {"stops": [[13, 0], [16, 16]]}
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater grate - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-grate"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterGrate",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater part - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-part"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterPart",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater pump - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-pump"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterPump",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "P",
+        "text-size": {"stops": [[13, 0], [16, 14]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater reservoir - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-reservoir"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterReservoir",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "R",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "stormwater tank - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-tank"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterTank",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "T",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(51, 160, 44, 1)"}
+    },
+    {
+      "id": "stormwater treatment - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-treatment"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterTreatment",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "T",
+        "text-size": {"stops": [[13, 0], [16, 16]]},
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    },
+    {
+      "id": "stormwater valve - symbol",
+      "type": "symbol",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "minzoom": 14.5,
+      "filter": [
+        "all",
+        ["==", "def_stylename", "def-stormwater-collection-valve"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "icon-size": {"stops": [[13, 0], [16, 0.6]]},
+        "icon-image": "StormwaterValve",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-field": "",
+        "text-size": 8,
+        "icon-ignore-placement": false,
+        "icon-allow-overlap": false
+      },
+      "paint": {"text-color": "rgba(255, 255, 255, 1)"}
+    }
+    
+  ],
+  "id": "903to775d"
+}

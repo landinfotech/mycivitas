@@ -1,0 +1,262 @@
+{
+  "version": 8,
+  "name": "MyCivitas",
+  "metadata": {"maputnik:renderer": "mbgljs"},
+  "center": [-69.5, 69.97],
+  "zoom": 2,
+  "sources": {
+    "MyCivitas": {
+      "type": "vector",
+      "tiles": ["https://staging.mycivitas.ca/community-all-layer/{z}/{x}/{y}"],
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=cc4PpmmWZP73LjU1nsw3"
+    },
+    "natural_earth": {
+      "type": "raster",
+      "tiles": [
+        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    },
+    "OSM tiles": {
+      "type": "raster",
+      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "minzoom": 0,
+      "maxzoom": 24
+    }
+  },
+  "sprite": "https://staging.mycivitas.ca/static/styling/MyCivitasSprites",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cc4PpmmWZP73LjU1nsw3",
+  "layers": [
+    {
+      "id": "OSM Background",
+      "type": "raster",
+      "source": "OSM tiles",
+      "layout": {"visibility": "visible"},
+      "paint": {"raster-resampling": "linear"}
+    },
+    {
+      "id": "boundaries",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "filter": ["all", ["==", "admin_level", 2]],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 0.5}
+    },
+    {
+      "id": "polygons cof 0",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Polygon"], ["==", "cof", 0]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(188, 188, 188, 1)"}
+    },
+    {
+      "id": "polygons cof 1",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Polygon"], ["==", "cof", 1]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(26, 150, 65, 1)"}
+    },
+    {
+      "id": "polygons cof 2",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Polygon"], ["==", "cof", 2]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(166, 217, 106, 1)"}
+    },
+    {
+      "id": "polygons cof 3",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Polygon"], ["==", "cof", 3]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(255, 255, 0, 1)"}
+    },
+    {
+      "id": "polygons cof 4",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Polygon"], ["==", "cof", 4]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(253, 174, 97, 1)"}
+    },
+    {
+      "id": "polygons cof 5",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Polygon"], ["==", "cof", 5]],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(215, 25, 28, 1)"}
+    },
+    {
+      "id": "lines cof 0",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "cof", 0]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(188, 188, 188, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines cof 1",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "cof", 1]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(26, 150, 65, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines cof 2",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "cof", 2]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(166, 217, 106, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines cof 3",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "cof", 3]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 255, 0, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines cof 4",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "cof", 4]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(253, 174, 97, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines cof 5",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "cof", 5]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(215, 25, 28, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "points cof 0",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Point"], ["==", "cof", 0]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(188, 188, 188, 1)",
+        "circle-stroke-color": "rgba(188, 188, 188, 1)",
+        "circle-stroke-width": 0,
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points cof 1",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Point"], ["==", "cof", 1]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(26, 150, 65, 1)",
+        "circle-stroke-color": "rgba(26, 150, 65, 1)",
+        "circle-stroke-width": 0,
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points cof 2",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Point"], ["==", "cof", 2]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(166, 217, 106, 1)",
+        "circle-stroke-color": "rgba(166, 217, 106, 1)",
+        "circle-stroke-width": 0,
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points cof 3",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Point"], ["==", "cof", 3]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-stroke-color": "rgba(255, 255, 0, 1)",
+        "circle-color": "rgba(255, 255, 0, 1)",
+        "circle-stroke-width": 0,
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points cof 4",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Point"], ["==", "cof", 4]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(253, 174, 97, 1)",
+        "circle-stroke-color": "rgba(253, 174, 97, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points cof 5",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default", "heatmap":"cof",
+      "filter": ["all", ["==", "geometry_type", "Point"], ["==", "cof", 5]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(215, 25, 28, 1)",
+        "circle-stroke-color": "rgba(215, 25, 28, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    }
+  ],
+  "id": "903to775d"
+}

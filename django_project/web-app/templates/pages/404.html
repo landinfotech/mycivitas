@@ -1,0 +1,33 @@
+{% extends 'pages/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Error{% endblock %}
+{% block extra_stylesheet %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div style="padding: 33px">
+        <div style="display: flex">
+            <h3 style="flex-grow: 1">
+                This Page could not be found
+            </h3>
+            <div>Back to
+                <a href="/">
+                    <button class="blue-button content-button"
+                            style="padding: 5px 10px">
+                        Home
+                    </button>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <div>{{ error }}</div>
+        <br>
+        <br>
+    </div>
+{% endblock %}
+{% block extrascripts %}
+{% endblock extrascripts %}

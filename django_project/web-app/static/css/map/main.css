@@ -480,6 +480,7 @@ html, body {
     text-align: left;
     background: var(--primary-color);
     font-size: 10px;
+    height: 70px;
 }
 
 #right-panel .footer-page a img {

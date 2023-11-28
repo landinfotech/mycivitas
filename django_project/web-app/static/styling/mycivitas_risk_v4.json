@@ -1,0 +1,467 @@
+{
+  "version": 8,
+  "name": "MyCivitas",
+  "metadata": {"maputnik:renderer": "mbgljs"},
+  "center": [-69.5, 69.97],
+  "zoom": 2,
+  "sources": {
+    "MyCivitas": {
+      "type": "vector",
+      "tiles": ["https://staging.mycivitas.ca/community-all-layer/{z}/{x}/{y}"],
+      "minZoom": 0,
+      "maxZoom": 14
+    },
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=cc4PpmmWZP73LjU1nsw3"
+    },
+    "natural_earth": {
+      "type": "raster",
+      "tiles": [
+        "https://klokantech.github.io/naturalearthtiles/tiles/natural_earth_2_shaded_relief.raster/{z}/{x}/{y}.png"
+      ],
+      "minzoom": 0,
+      "maxzoom": 14
+    },
+    "OSM tiles": {
+      "type": "raster",
+      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "minzoom": 0,
+      "maxzoom": 24
+    }
+  },
+  "sprite": "https://staging.MyCivitas.ca/static/styling/MyCivitasSprites",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cc4PpmmWZP73LjU1nsw3",
+  "layers": [
+    {
+      "id": "OSM Background",
+      "type": "raster",
+      "source": "OSM tiles",
+      "layout": {"visibility": "visible"},
+      "paint": {"raster-resampling": "linear"}
+    },
+    {
+      "id": "boundaries",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "boundary",
+      "filter": ["all", ["==", "admin_level", 2]],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-width": 0.5}
+    },
+    {
+      "id": "selection lines risk Unknown",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Unknown"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[12, 0], [16, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection lines risk Minimal",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Minimal"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[12, 0], [16, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection lines risk Low",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "risk", "Low"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[12, 0], [16, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection lines risk Medium",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Medium"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[12, 0], [16, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection lines risk High",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "High"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[12, 0], [16, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "selection lines risk Extreme",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Extreme"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-join": "miter",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "rgba(255, 0, 255, 1)",
+        "line-width": {"stops": [[12, 0], [16, 8]]},
+        "line-opacity": 0
+      }
+    },
+    {
+      "id": "polygons risk Unknown",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Polygon"],
+        ["==", "risk", "Unknown"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(188, 188, 188, 1)"}
+    },
+    {
+      "id": "polygons risk Minimal",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Polygon"],
+        ["==", "risk", "Minimal"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(26, 150, 65, 1)"}
+    },
+    {
+      "id": "polygons risk Low",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Polygon"],
+        ["==", "risk", "Low"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(166, 217, 106, 1)"}
+    },
+    {
+      "id": "polygons risk Medium",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Polygon"],
+        ["==", "risk", "Medium"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(255, 255, 0, 1)"}
+    },
+    {
+      "id": "polygons risk High",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Polygon"],
+        ["==", "risk", "High"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(253, 174, 97, 1)"}
+    },
+    {
+      "id": "polygons risk Extreme",
+      "type": "fill",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Polygon"],
+        ["==", "risk", "Extreme"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {"fill-color": "rgba(215, 25, 28, 1)"}
+    },
+    {
+      "id": "polygons outlines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "geometry_type", "Polygon"]],
+      "layout": {"visibility": "visible"},
+      "paint": {"line-color": "rgba(35, 35, 35, 1)", "line-width": 1}
+    },
+    {
+      "id": "lines outlines",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "geometry_type", "Line"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(35, 35, 35, 1)",
+        "line-width": {"stops": [[8, 0], [16, 3]]}
+      }
+    },
+    {
+      "id": "lines risk Unknown",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Unknown"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(188, 188, 188, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines risk Minimal",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Minimal"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(26, 150, 65, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines risk Low",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "geometry_type", "Line"], ["==", "risk", "Low"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(166, 217, 106, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines risk Medium",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Medium"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(255, 255, 0, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines risk High",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "High"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(253, 174, 97, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "lines risk Extreme",
+      "type": "line",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Line"],
+        ["==", "risk", "Extreme"]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "line-join": "miter",
+        "line-cap": "butt"
+      },
+      "paint": {
+        "line-color": "rgba(215, 25, 28, 1)",
+        "line-width": {"stops": [[8, 0], [16, 2]]}
+      }
+    },
+    {
+      "id": "points outlines",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": ["all", ["==", "geometry_type", "Point"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(35, 35, 35, 1)",
+        "circle-stroke-color": "rgba(35, 35, 35, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 6]]}
+      }
+    },
+    {
+      "id": "points risk Unknown",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Point"],
+        ["==", "risk", "Unknown"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(188, 188, 188, 1)",
+        "circle-stroke-color": "rgba(188, 188, 188, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points risk Minimal",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Point"],
+        ["==", "risk", "Minimal"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(26, 150, 65, 1)",
+        "circle-stroke-color": "rgba(26, 150, 65, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points risk Low",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Point"],
+        ["==", "risk", "Low"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(166, 217, 106, 1)",
+        "circle-stroke-color": "rgba(166, 217, 106, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points risk Medium",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Point"],
+        ["==", "risk", "Medium"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-stroke-color": "rgba(255, 255, 0, 1)",
+        "circle-color": "rgba(255, 255, 0, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points risk High",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Point"],
+        ["==", "risk", "High"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(253, 174, 97, 1)",
+        "circle-stroke-color": "rgba(253, 174, 97, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    },
+    {
+      "id": "points risk Extreme",
+      "type": "circle",
+      "source": "MyCivitas",
+      "source-layer": "default",
+      "filter": [
+        "all",
+        ["==", "geometry_type", "Point"],
+        ["==", "risk", "Extreme"]
+      ],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-color": "rgba(215, 25, 28, 1)",
+        "circle-stroke-color": "rgba(215, 25, 28, 1)",
+        "circle-radius": {"stops": [[8, 1], [16, 5]]}
+      }
+    }
+    
+  ],
+  "id": "903to775d"
+}

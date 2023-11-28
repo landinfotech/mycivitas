@@ -10,7 +10,9 @@ const evt = {
     FEATURE_PAN: 'feature:pan',
     MAP_ADD_LAYER: 'map:layer:add', // add layer to map
     MAP_REMOVE_LAYER: 'map:layer:remove', // remove layer from map
-    MAP_CLICKED: 'map:click', // draw click
+    MAP_CLICKED: 'map:click', // draw click,
+
+    HEATMAP_CHANGED: 'style:changed',
 
     CLASSES_LIST_CHANGE: 'classes-list:change', // classes list changes
     LAYER_STYLE_CHANGE: 'layer:change-style', // change layer style
@@ -21,7 +23,9 @@ const evt = {
 
     FEATURE_LIST_FETHCING: 'features:fetching', // When data is fetching
     FEATURE_LIST_FETHCED: 'features:fetched', // When data has been fetched
-    FEATURE_HIGHLIGHTED: 'features:highlighted', // When feature selected
+    FEATURE_HIGHLIGHTED: 'features:remove_highlighted', // When feature selected
+    LAYER_SELECTED: 'features:layer_highlighted', // When feature selected
+    FEATURE_REMOVE_HIGHLIGHTED: 'features:highlighted', // When feature selected
     FEATURE_SELECT_HIGHLIGHTED: 'features:select_highlighted', // When feature selected
     FEATURE_REMOVED_FROM_BASKET: 'features:remove-from-basket', // Feature removed from basket
 

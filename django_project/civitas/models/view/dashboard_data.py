@@ -1,4 +1,5 @@
 from collections import defaultdict
+from decimal import Decimal
 from itertools import groupby
 import operator
 import pprint
@@ -7,6 +8,7 @@ class DashboardData():
 
     def __init__(self, data):
         self.data = data
+
         self.risk_level_list = [
             {"risk_level":"Extreme", "index": 5}, 
             {"risk_level":"High" , "index": 4}, 
@@ -45,59 +47,20 @@ class DashboardData():
         for val in list(risk_renewal_of_assets):
             for key in final_risk_renewal:
                 if key['system_name'] == val["system_name"]:
-                    value = ""
-                    if not val['risk_level'] is None:
-                        value = val['risk_level'].strip()
-                    else:
-                        value = 'None'
+                    value = val['risk_level']
 
-                    if val["values"] is not None:
+                    if str(val["values"] ) == "NaN" or str(val["values"] ) == "nan":
+                        _values = 0
+
+                    elif val["values"] is not None:
                         _values = val["values"]
+                    
                     else:
                         _values = 0
 
                     key["risk"].append({"risk_level": value, "values": _values})
                     key["total_value"] = float(key["total_value"]) + float(_values)
                     key["total_per"] = (float(key["total_value"] ) / total_sum) * 100
-
-        for key in final_risk_renewal:
-            if not any(d['risk_level'] == 'Extreme' for d in key["risk"]):
-                key["risk"]\
-                    .append({
-                        "risk_level": 'Extreme', 
-                        "values": 0.00
-                    })
-            if not any(d['risk_level'] == 'High' for d in key["risk"]):
-                key["risk"]\
-                    .append({
-                        "risk_level": 'High', 
-                        "values": 0.00
-                    })
-            if not any(d['risk_level'] == 'Medium' for d in key["risk"]):
-                key["risk"]\
-                    .append({
-                        "risk_level": 'Medium', 
-                        "values": 0.00
-                    })
-            if not any(d['risk_level'] == 'Low' for d in key["risk"]):
-                key["risk"]\
-                    .append({
-                        "risk_level": 'Low', 
-                        "values": 0.00
-                    })
-            if not any(d['risk_level'] == 'Minimal' for d in key["risk"]):
-                key["risk"]\
-                    .append({
-                        "risk_level": 'Minimal', 
-                        "values": 0.00
-                    })
-            if not any(d['risk_level'] == 'None' for d in key["risk"]):
-                key["risk"]\
-                    .append({
-                        "risk_level": 'None', 
-                        "values": 0.00
-                    })
-        print(final_risk_renewal)
         
         return final_risk_renewal
     
@@ -111,6 +74,7 @@ class DashboardData():
 
         for val in input_list:
             for risk in val['risk']:
+
                 index = [i for i,_ in enumerate(formatted_list) if _['risk_level'] == risk['risk_level']][0]
                 formatted_list[index]['total'] = formatted_list[index]['total'] + risk['values']
                     
@@ -149,7 +113,10 @@ class DashboardData():
                 if min <= remaining_years <= max:
                     if min <= remaining_years <= max:
 
-                        if k.renewal_cost is not None:
+                        if str(k.renewal_cost) == "NaN":
+                            renewal_cost = 0
+                        
+                        elif k.renewal_cost is not None :
                             renewal_cost = k.renewal_cost
                         else:
                             renewal_cost = 0
@@ -222,7 +189,8 @@ class DashboardData():
                 for asset in input['asset']:
                     if list['name'] == asset['system_name']:
                         list["x"].append(input["remaining_years"])
-                        list["y"].append(asset["values"])
+                        if isinstance(asset["values"], float) or isinstance(asset["values"], Decimal):
+                            list["y"].append(float(asset["values"]))
 
         return formatted_list
 
@@ -262,6 +230,13 @@ class DashboardData():
                         risk_level_index = [i for i,_ in enumerate(self.risk_level_list) if _['risk_level'] == risk_lev][0]
 
                         if not any(d['level'] == risk_lev for d in val['risk_level']):
+                            if str(k.renewal_cost) == 'NaN':
+                                val['total'] = float(0.00)
+                                val["risk_level"]\
+                                .append({'level': risk_lev, 
+                                        'values': 0.00, 
+                                        'index': 0
+                                        })
                             if k.renewal_cost is not None:
                                 val["risk_level"]\
                                     .append({
@@ -279,7 +254,10 @@ class DashboardData():
                                         })
                         else:
                             index = [i for i,_ in enumerate(val['risk_level']) if _['level'] == risk_lev][0]
-                            if k.renewal_cost is not None:
+                            if str(k.renewal_cost) == 'NaN':
+                                val['risk_level'][index]['values'] = float(val['risk_level'][index]['values']) + float(0)
+                                val['total'] = float(val['total']) + float(0)
+                            elif k.renewal_cost is not None:
                                 val['risk_level'][index]['values'] = float(val['risk_level'][index]['values']) + float(k.renewal_cost)
                                 val['total'] = float(val['total']) + float(k.renewal_cost)
 
@@ -377,7 +355,3 @@ class DashboardData():
 
         return formatted_list
 
-    
-    
-    
-    

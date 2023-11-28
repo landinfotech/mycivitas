@@ -45,6 +45,38 @@
     table.table thead tr td {
       padding:3px 3px 0px 3px;
     } */
+
+    #loadingScreenTable{
+    display: none;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    position: relative;
+}
+
+.pagination { display: inline-block;}
+.pagination a { color: black; float: left; padding: 8px 16px; text-decoration: none;}
+.pagination a.active { background-color: #4CAF50; color: white;}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+.load{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);
+        /*change these sizes to fit into your project*/
+        width:100px;
+        height:100px;
+        }
+.load hr{border:0;margin:0;width:40%;height:40%;position:absolute;border-radius:50%;animation:spin 2s ease infinite}
+
+.load :first-child{background:#19A68C;animation-delay:-1.5s}
+.load :nth-child(2){background:#F63D3A;animation-delay:-1s}
+.load :nth-child(3){background:#FDA543;animation-delay:-0.5s}
+.load :last-child{background:#193B48}
+
+@keyframes spin{
+    0%,100%{transform:translate(0)}
+    25%{transform:translate(160%)}
+    50%{transform:translate(160%, 160%)}
+    75%{transform:translate(0, 160%)}
+}
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -70,14 +102,18 @@
         };
         const recurring_queues = {{ site_preferences.recurred_queues_ids|safe }};
 
-        const styleUrl = "{%static 'styling/mycivitas_styling_v5_5.json'%}?";
+        const styleUrl = "{%static 'styling/mycivitas_assets_v12_osm.json'%}?";
+        const cofStyleUrl = "{%static 'styling/mycivitas_cof_v6.json'%}?ver=1";
+        const pofStyleUrl = "{%static 'styling/mycivitas_pof_v6.json'%}?ver=1";
+        const riskStyleUrl = "{%static 'styling/mycivitas_risk_v6.json'%}?ver=1";
+
         const requireConfig = {
             paths: {
                 'jquery': '{% static 'libs/jquery.js/3.4.1/jquery.min.js' %}?',
                 'jqueryUI': '{% static 'libs/jquery-ui/1.12.1/jquery-ui.js' %}?',
                 'backbone': '{% static 'libs/backbone.js/1.4.0/backbone-min.js' %}?',
                 'underscore': '{% static 'libs/underscore.js/1.9.1/underscore-min.js' %}?',
-                'fancyTable': '{% static 'libs/fancyTable.js/fancyTable.min.js' %}?',
+                'fancyTable': '{% static 'libs/fancyTable.js/fancyTable.min.js' %}?v=1.11',
 
                 {# project static #}
                 'js/event': '{% static 'js/event.js' %}?',
@@ -101,9 +137,9 @@
 
                 'js/community/collection': '{% static 'js/dashboard/community/collection.js' %}?',
                 'js/community/controller': '{% static 'js/dashboard/community/controller.js' %}?',
-                'js/community/model': '{% static 'js/dashboard/community/model.js' %}?',
+                'js/community/model': '{% static 'js/dashboard/community/model.js' %}?v=1.9',
 
-                'js/map/map': '{% static 'js/dashboard/map/map.js' %}?',
+                'js/map/map': '{% static 'js/dashboard/map/map.js' %}?ver=1',
                 'js/map/map-layers': '{% static 'js/dashboard/map/map-layers.js' %}?',
                 'js/map/layers/control': '{% static 'js/dashboard/map/layers/control.js' %}?',
                 'js/map/layers/main-layer': '{% static 'js/dashboard/map/layers/main-layer.js' %}?',
@@ -127,11 +163,14 @@
         // TODO: LIT
         //  We need make QGISLayers and Layers as 1 data
         //  Below is used for filtering data on graph
+
+        const csrf_token = '{{csrf_token}}'
+
         const QGISLayers = {
           'Natural': {
             classes: ['nat'],
             legends : [
-            "{% static 'legends/1_NaturalAssets.svg'%}",
+            "{% static 'legends/1_natural_assets.png'%}",
             ]
           },
           // 'Fleet and Equipment': {
@@ -141,31 +180,58 @@
           'Structures': {
             classes: ['str'],
             legends: [
-              "{% static 'legends/3_Structures.svg'%}"
+              "{% static 'legends/3_structures.png'%}"
             ]
           },
           'Transportation Network': {
             classes: ['trn'],
             legends : [
-              "{% static 'legends/4_TransportationNetwork.svg'%}"
+              "{% static 'legends/4_transportation_network.png'%}"
             ]
           },
-          'Water Network': {
+          'Water Supply': {
             classes: ['pws'],
             legends : [
-              "{% static 'legends/6_WaterSupply.svg'%}",
+              "{% static 'legends/6_water_supply.png'%}",
             ]
           },
-          'Wastewater Network': {
+          'Wastewater Collection': {
             classes: ['wwc'],
             legends : [
-              "{% static 'legends/5_WastewaterCollection.svg'%}",
+              "{% static 'legends/5_wastewater_collection.png'%}",
             ]
           },
-          'Stormwater Network': {
+          'Stormwater Collection': {
             classes: ['swc'],
             legends : [
-              "{% static 'legends/2_StormwaterCollection.svg'%}",
+              "{% static 'legends/2_stormwater_collection.png'%}",
+            ]
+          },
+          'Electrical Network': {
+            classes: ['elc'],
+            legends : [
+              "{% static 'legends/7_electrical_network.png'%}",
+            ]
+          },
+        };
+
+        const HeatmapLayers = {
+          'Consequence of Failure': {
+            classes: ['cof'],
+            legends : [
+              "{% static 'legends/8_cof.png'%}",
+            ]
+          },
+          'Probability of Failure': {
+            classes: ['pof'],
+            legends : [
+              "{% static 'legends/7_pof.png'%}",
+            ]
+          },
+          'Risk': {
+            classes: ['risk'],
+            legends : [
+              "{% static 'legends/9_risk.png'%}",
             ]
           },
         };
@@ -291,6 +357,9 @@
               </div>
           </div>
           <div class="modal-body" id="export_body">
+            <div id="loadingScreenTable">
+              <div class="load"><hr/><hr/><hr/><hr/></div>
+            </div>
               <div style="width:100%;height:700px;overflow-x: scroll;overflow-y: scroll;">
                 <table class="table mt-2 table-bordered" id="filteredTable" >
                 <thead id="filteredhead" class="sticky-th">
@@ -302,12 +371,10 @@
             </div>
 
           </div>
-          <div id="_pagination">
-
+         
+          <div id="pagination" class="pagination">
           </div>
-          <div id="_pagination">
 
-          </div>
           <div class="modal-footer">
             <button type="button" id="exportcsv" onclick="tableToCSV()" class="btn btn-primary">Export to CSV</button>
             <button type="button" class="btn btn-secondary" onclick="closeFilter()">Close</button>
@@ -455,8 +522,8 @@
 
         function searchTable() {
 
-          document.getElementById("loadingScreen").style.display = "block";
-          document.getElementsByClassName('pag')[0].style.display = "none";
+          document.getElementById("loadingScreenTable").style.display = "block";
+          document.getElementById("filteredTable").style.display = "none"
 
           setTimeout(function(){
             var input, filter, table, tr, td, i, txtValue;
@@ -484,24 +551,32 @@
           }, 500)
 
           setTimeout(function(){
-            document.getElementById("loadingScreen").style.display = "none";
+            document.getElementById("loadingScreenTable").style.display = "none";
+            document.getElementById("filteredTable").style.display = "block";
           }, 2000)
 
         }
 
         function clearSearch(){
+          function clearSearch(){
+          document.getElementById("loadingScreenTable").style.display = "block";
+          document.getElementById("filteredTable").style.display = "none";
+          setTimeout(function(){
+            document.getElementById("loadingScreenTable").style.display = "none";
+            document.getElementById("filteredTable").style.display = "block";
+          }, 500)
           document.getElementById("myInput").value = "";
           table = document.getElementById("table_show");
           tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
               tr[i].style.display = "";
             }
-            document.getElementsByClassName('pag')[0].style.display = "";
-
+          }
         }
 
         function showTables(){
           $("#modal_show").show();
+          
         }
 
         function closeFilter(){

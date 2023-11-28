@@ -3,6 +3,7 @@ const templates = {
     CREATE_TICKET: '#_create-ticket',
     COMING_SOON: '#_coming_soon',
     LAYER_SELECTION_ROW: '#_layer-selection-row',
+    HEATMAP_SELECTION_ROW: '#_layer-selection-row-heatmap',
     LOADING: '#_loading',
     NODATAFOUND: '#_no_data_found',
     PLEASE_CLICK_MAP: '#_please_click_map',

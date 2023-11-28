@@ -36,6 +36,18 @@ define([
                 });
                 that.$el.append(html);
             });
+
+            $.each(HeatmapLayers, function (layerName, values) {
+                const id = layerName.replaceAll(' ', '-');
+                // restructure the html
+                const html = templates.HEATMAP_SELECTION_ROW({
+                    layername: layerName,
+                    id: id,
+                    legendURL: ''
+                });
+                that.$el.append(html);
+            });
+
             this.changeStyle('')
 
             // Create layers
@@ -60,12 +72,20 @@ define([
                 const $legend = $(`#${id} img`);
                 $legend.replaceWith(`<div>${html.join('')}</div>`);
             }
+
+            for (const [layerName, value] of Object.entries(HeatmapLayers)) {
+                let html = value.legends.map(url=>{
+                    return `<img src="${url}">`
+                })
+                const id = layerName.replaceAll(' ', '-');
+                const $legend = $(`#${id} img`);
+                $legend.replaceWith(`<div>${html.join('')}</div>`);
+            }
         },
         /** Get Legend url
          */
         changeStyle: function (style) {
             this.updateLegends(style)
-
             // if it is null
             // style does not need to be changed
             if (style === null) {
@@ -83,7 +103,10 @@ define([
         getActiveLayersName: function () {
             let names = [];
             $('#layers .active').each(function () {
-                names.push($(this).data('layername'))
+                if($(this).data('layername') != 'Consequence of Failure' && $(this).data('layername') != 'Probability of Failure' && $(this).data('layername') != 'Risk'){
+                    names.push($(this).data('layername'))
+                }
+                
             })
             return names
         },

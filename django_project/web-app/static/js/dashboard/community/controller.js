@@ -99,7 +99,6 @@ define([
             if (!geojson?.geometry?.coordinates || !geojson?.geometry?.coordinates[0]) {
                 return
             }
-            console.log("feature new", geojson)
             var coordinates;
             if(geojson.geometry.type === "Point"){
                 coordinates = geojson.geometry.coordinates

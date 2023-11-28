@@ -20,6 +20,7 @@ define([
 
             this.renewalBar = null;
             this.renewalDoughnut = null;
+            isRan = false
         },
         /** Abstract function called after render
          */
@@ -91,79 +92,6 @@ define([
                 // data by summary type
                 let bySummaryType = {};
                 let bySubClassNameAndSummaryType = {};
-                
-                let isRan = false;
-                document.getElementById("table-data").style.display = "none";
-                $.ajax({
-                    type: 'GET',
-                    url: "/api/asset-download/" + this.community.id, //Replace your URL here
-                    success: function(response){
-                        //code after success
-                        document.getElementById("filteredhead").innerHTML = "";
-                        document.getElementById("table_show").innerHTML = "";
-                        let htmlStr = "";
-                        let headStr = "";
-                        
-                        headStr += "<tr class='exportfiltered feature-filter'>";
-                        for(var key in response[0]){
-
-                            var str_a = key.replaceAll("name", "");
-                            str_a = str_a.replaceAll("_", " ");
-                            var str_b = str_a.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-                            if(str_b == 'Feature Id'){
-                                headStr += "<td>Zoom</td>"
-                                headStr += "<td>Feature ID</td>"
-                            }
-                            else{
-                                headStr += "<td>"+ str_b +"</td>"
-                            }
-
-                        }
-                        headStr += "</tr>";
-                        document.getElementById("filteredhead").innerHTML = headStr;
-                        var host = window.location.protocol + "//" + window.location.host;
-
-                        response.forEach(function(row){
-                            htmlStr += "<tr class='exportfiltered'>";
-                            var feature_id;
-                            
-                            for(var key in row){
-                                
-                                if(key==='feature_id'){
-                                    feature_id = row[key]
-                                    htmlStr += "<td class='getFeatureMap' id='"+row[key]+"'><button class='btn btn-primary' onClick='showFeatureMap("+row[key]+")'><span class='material-symbols-outlined'>search</span></button></td>"
-                                    htmlStr += "<td>"+ row[key] +"</td>";
-                                }
-                                else{
-                                    htmlStr += "<td>"+ row[key] +"</td>";
-                                }
-                                
-                            }
-
-                            htmlStr += "<td style='display:none'><a href='" + host + "/community-map/?feature=" + feature_id+"'>" + host + "/community-map/?feature=" + feature_id+"</a></td>";
-                            
-                            htmlStr += "</tr>";
-                            
-                        })
-
-                        document.getElementById("table_show").innerHTML = htmlStr;
-                        isRan = true
-
-                        $("#filteredTable").fancyTable({
-                            sortColumn:false,
-                            pagination: true,
-                            perPage:10,
-                            globalSearch:false,
-                            searchable:true,
-                        });
-
-                        document.getElementById("table-data").style.display = "";
-                        
-                    },
-                    error: function () {
-                        // Code After Erroe
-                    }
-                });
 
                 data.forEach(function (row) {
                     const summary_type = capitalize(row.summary_type ? row.summary_type.trim() : 'Unknown');

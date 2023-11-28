@@ -2,8 +2,10 @@
   "version": 8,
   "name": "MyCivitas",
   "metadata": {"maputnik:renderer": "mbgljs"},
+  "center": [-69.5, 69.97],
+  "zoom": 2,
   "sources": {
-    "MyCivitasStaging": {
+    "MyCivitas": {
       "type": "vector",
       "tiles": ["https://staging.mycivitas.ca/community-layer/{z}/{x}/{y}"],
       "minZoom": 0,
@@ -20,854 +22,28 @@
       ],
       "minzoom": 0,
       "maxzoom": 14
+    },
+    "OSM tiles": {
+      "type": "raster",
+      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "minzoom": 0,
+      "maxzoom": 24
     }
   },
-  "sprite": "https://raw.githubusercontent.com/landinfotech/mycivitas/feature/filter/django_project/web-app/static/styling/MyCivitasSprites",
+  "sprite": "https://staging.mycivitas.ca/static/styling/MyCivitasSprites",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cc4PpmmWZP73LjU1nsw3",
   "layers": [
     {
-      "id": "background",
-      "type": "background",
+      "id": "OSM Background",
+      "type": "raster",
+      "source": "OSM tiles",
       "layout": {"visibility": "visible"},
-      "paint": {
-        "background-color": "rgba(184, 184, 184, 1)",
-        "background-opacity": 0.35
-      }
-    },
-    {
-      "id": "water_tunnel",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "waterway",
-      "filter": ["all", ["==", "brunnel", "tunnel"]],
-      "paint": {
-        "line-color": "#a0c8f0",
-        "line-dasharray": [3, 3],
-        "line-gap-width": {"stops": [[12, 0], [20, 6]]},
-        "line-opacity": 1,
-        "line-width": {"base": 1.4, "stops": [[8, 1], [20, 2]]}
-      }
-    },
-    {
-      "id": "water_river",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "waterway",
-      "filter": ["all", ["==", "class", "river"], ["!=", "brunnel", "tunnel"]],
-      "layout": {"line-cap": "round"},
-      "paint": {
-        "line-color": "#a0c8f0",
-        "line-width": {"base": 1.2, "stops": [[11, 0.5], [20, 6]]}
-      }
-    },
-    {
-      "id": "water_other",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "waterway",
-      "filter": ["all", ["!=", "class", "river"], ["!=", "brunnel", "tunnel"]],
-      "layout": {"line-cap": "round"},
-      "paint": {
-        "line-color": "#a0c8f0",
-        "line-width": {"base": 1.3, "stops": [[13, 0.5], [20, 6]]}
-      }
-    },
-    {
-      "id": "water",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "water",
-      "filter": ["all"],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(158, 189, 255, 1)"}
-    },
-    {
-      "id": "landcover_residential",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landuse",
-      "maxzoom": 8,
-      "filter": ["==", "class", "residential"],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-color": {
-          "base": 1,
-          "stops": [
-            [9, "hsla(0, 3%, 85%, 0.84)"],
-            [12, "hsla(35, 57%, 88%, 0.49)"]
-          ]
-        }
-      }
-    },
-    {
-      "id": "landcover_park",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "park",
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "#d8e8c8", "fill-opacity": 0.7}
-    },
-    {
-      "id": "landcover_wood",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": ["all", ["==", "class", "wood"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-antialias": false,
-        "fill-color": "hsla(98, 61%, 72%, 0.7)",
-        "fill-opacity": 0.6
-      }
-    },
-    {
-      "id": "landcover_grass",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": ["all", ["==", "class", "grass"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-antialias": false,
-        "fill-color": "rgba(176, 213, 154, 1)",
-        "fill-opacity": 0.3
-      }
-    },
-    {
-      "id": "landcover_ice",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": ["all", ["==", "class", "ice"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-antialias": false,
-        "fill-color": "rgba(224, 236, 236, 1)",
-        "fill-opacity": 0.8
-      }
-    },
-    {
-      "id": "landcover_sand",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": ["all", ["==", "class", "sand"]],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(247, 239, 195, 1)"}
-    },
-    {
-      "id": "road_area_pattern",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": ["all", ["==", "$type", "Polygon"]],
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-pattern": "pedestrian_polygon"}
-    },
-    {
-      "id": "road_motorway_link_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 12,
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "motorway"],
-        ["==", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12, 1], [13, 3], [14, 4], [20, 15]]
-        }
-      }
-    },
-    {
-      "id": "road_service_track_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "service", "track"]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#cfcdca",
-        "line-width": {"base": 1.2, "stops": [[15, 1], [16, 4], [20, 11]]}
-      }
-    },
-    {
-      "id": "road_link_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 13,
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["!in", "class", "pedestrian", "path", "track", "service", "motorway"],
-        ["==", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12, 1], [13, 3], [14, 4], [20, 15]]
-        }
-      }
-    },
-    {
-      "id": "road_minor_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "$type", "LineString"],
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "minor"],
-        ["!=", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#cfcdca",
-        "line-opacity": {"stops": [[12, 0], [12.5, 1]]},
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12, 0.5], [13, 1], [14, 4], [20, 20]]
-        }
-      }
-    },
-    {
-      "id": "road_secondary_tertiary_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "secondary", "tertiary"],
-        ["!=", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {"base": 1.2, "stops": [[8, 1.5], [20, 17]]}
-      }
-    },
-    {
-      "id": "road_trunk_primary_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "primary", "trunk"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[5, 0.4], [6, 0.7], [7, 1.75], [20, 22]]
-        }
-      }
-    },
-    {
-      "id": "road_motorway_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 5,
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "motorway"],
-        ["!=", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[5, 0.4], [6, 0.7], [7, 1.75], [20, 22]]
-        }
-      }
-    },
-    {
-      "id": "road_motorway_link",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 12,
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "motorway"],
-        ["==", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#fc8",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12.5, 0], [13, 1.5], [14, 2.5], [20, 11.5]]
-        }
-      }
-    },
-    {
-      "id": "road_service_track",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "service", "track"]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#fff",
-        "line-width": {"base": 1.2, "stops": [[15.5, 0], [16, 2], [20, 7.5]]}
-      }
-    },
-    {
-      "id": "road_link",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 13,
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "ramp", 1],
-        ["!in", "class", "pedestrian", "path", "track", "service", "motorway"]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#fea",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12.5, 0], [13, 1.5], [14, 2.5], [20, 11.5]]
-        }
-      }
-    },
-    {
-      "id": "road_minor",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "$type", "LineString"],
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "minor"]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#fff",
-        "line-width": {"base": 1.2, "stops": [[13.5, 0], [14, 2.5], [20, 18]]}
-      }
-    },
-    {
-      "id": "road_secondary_tertiary",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "secondary", "tertiary"]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "#fea",
-        "line-width": {"base": 1.2, "stops": [[6.5, 0], [8, 0.5], [20, 13]]}
-      }
-    },
-    {
-      "id": "road_trunk_primary",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["in", "class", "primary", "trunk"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fea",
-        "line-width": {"base": 1.2, "stops": [[5, 0], [7, 1], [20, 18]]}
-      }
-    },
-    {
-      "id": "road_motorway",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 5,
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "motorway"],
-        ["!=", "ramp", 1]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": {
-          "base": 1,
-          "stops": [[5, "hsl(26, 87%, 62%)"], [6, "#fc8"]]
-        },
-        "line-width": {"base": 1.2, "stops": [[5, 0], [7, 1], [20, 18]]}
-      }
-    },
-    {
-      "id": "road_major_rail",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "rail"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-width": {"base": 1.4, "stops": [[14, 0.4], [15, 0.75], [20, 2]]}
-      }
-    },
-    {
-      "id": "road_major_rail_hatching",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "rail"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-dasharray": [0.2, 8],
-        "line-width": {"base": 1.4, "stops": [[14.5, 0], [15, 3], [20, 8]]}
-      }
-    },
-    {
-      "id": "road_transit_rail",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "transit"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-width": {"base": 1.4, "stops": [[14, 0.4], [15, 0.75], [20, 2]]}
-      }
-    },
-    {
-      "id": "road_transit_rail_hatching",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["!in", "brunnel", "bridge", "tunnel"],
-        ["==", "class", "transit"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-dasharray": [0.2, 8],
-        "line-width": {"base": 1.4, "stops": [[14.5, 0], [15, 3], [20, 8]]}
-      }
-    },
-    {
-      "id": "road_one_way_arrow",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 15,
-      "filter": ["==", "oneway", 1],
-      "layout": {
-        "icon-image": "arrow",
-        "symbol-placement": "line",
-        "visibility": "visible"
-      }
-    },
-    {
-      "id": "road_one_way_arrow_opposite",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "minzoom": 15,
-      "filter": ["==", "oneway", -1],
-      "layout": {
-        "icon-image": "arrow",
-        "symbol-placement": "line",
-        "icon-rotate": 180,
-        "visibility": "visible"
-      }
-    },
-    {
-      "id": "bridge_motorway_link_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "class", "motorway"],
-        ["==", "ramp", 1],
-        ["==", "brunnel", "bridge"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12, 1], [13, 3], [14, 4], [20, 15]]
-        }
-      }
-    },
-    {
-      "id": "bridge_service_track_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "service", "track"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#cfcdca",
-        "line-width": {"base": 1.2, "stops": [[15, 1], [16, 4], [20, 11]]}
-      }
-    },
-    {
-      "id": "bridge_link_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": ["all", ["==", "class", "link"], ["==", "brunnel", "bridge"]],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12, 1], [13, 3], [14, 4], [20, 15]]
-        }
-      }
-    },
-    {
-      "id": "bridge_street_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "street", "street_limited"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "hsl(36, 6%, 74%)",
-        "line-opacity": {"stops": [[12, 0], [12.5, 1]]},
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12, 0.5], [13, 1], [14, 4], [20, 25]]
-        }
-      }
-    },
-    {
-      "id": "bridge_secondary_tertiary_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "secondary", "tertiary"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {"base": 1.2, "stops": [[8, 1.5], [20, 17]]}
-      }
-    },
-    {
-      "id": "bridge_trunk_primary_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "primary", "trunk"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[5, 0.4], [6, 0.7], [7, 1.75], [20, 22]]
-        }
-      }
-    },
-    {
-      "id": "bridge_motorway_casing",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "class", "motorway"],
-        ["!=", "ramp", 1],
-        ["==", "brunnel", "bridge"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#e9ac77",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[5, 0.4], [6, 0.7], [7, 1.75], [20, 22]]
-        }
-      }
-    },
-    {
-      "id": "bridge_path_pedestrian",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "$type", "LineString"],
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "path", "pedestrian"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "hsl(0, 0%, 100%)",
-        "line-dasharray": [1, 0.3],
-        "line-width": {"base": 1.2, "stops": [[14, 0.5], [20, 10]]}
-      }
-    },
-    {
-      "id": "bridge_service_track",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "service", "track"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fff",
-        "line-width": {"base": 1.2, "stops": [[15.5, 0], [16, 2], [20, 7.5]]}
-      }
-    },
-    {
-      "id": "bridge_link",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": ["all", ["==", "class", "link"], ["==", "brunnel", "bridge"]],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fea",
-        "line-width": {
-          "base": 1.2,
-          "stops": [[12.5, 0], [13, 1.5], [14, 2.5], [20, 11.5]]
-        }
-      }
-    },
-    {
-      "id": "bridge_street",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": ["all", ["==", "brunnel", "bridge"], ["in", "class", "minor"]],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fff",
-        "line-width": {"base": 1.2, "stops": [[13.5, 0], [14, 2.5], [20, 18]]}
-      }
-    },
-    {
-      "id": "bridge_secondary_tertiary",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "secondary", "tertiary"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fea",
-        "line-width": {"base": 1.2, "stops": [[6.5, 0], [7, 0.5], [20, 10]]}
-      }
-    },
-    {
-      "id": "bridge_trunk_primary",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "brunnel", "bridge"],
-        ["in", "class", "primary", "trunk"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fea",
-        "line-width": {"base": 1.2, "stops": [[5, 0], [7, 1], [20, 18]]}
-      }
-    },
-    {
-      "id": "bridge_motorway",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "class", "motorway"],
-        ["!=", "ramp", 1],
-        ["==", "brunnel", "bridge"]
-      ],
-      "layout": {"line-join": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "#fc8",
-        "line-width": {"base": 1.2, "stops": [[5, 0], [7, 1], [20, 18]]}
-      }
-    },
-    {
-      "id": "bridge_major_rail",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": ["all", ["==", "class", "rail"], ["==", "brunnel", "bridge"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-width": {"base": 1.4, "stops": [[14, 0.4], [15, 0.75], [20, 2]]}
-      }
-    },
-    {
-      "id": "bridge_major_rail_hatching",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": ["all", ["==", "class", "rail"], ["==", "brunnel", "bridge"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-dasharray": [0.2, 8],
-        "line-width": {"base": 1.4, "stops": [[14.5, 0], [15, 3], [20, 8]]}
-      }
-    },
-    {
-      "id": "bridge_transit_rail",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "class", "transit"],
-        ["==", "brunnel", "bridge"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-width": {"base": 1.4, "stops": [[14, 0.4], [15, 0.75], [20, 2]]}
-      }
-    },
-    {
-      "id": "bridge_transit_rail_hatching",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "all",
-        ["==", "class", "transit"],
-        ["==", "brunnel", "bridge"]
-      ],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "line-color": "#bbb",
-        "line-dasharray": [0.2, 8],
-        "line-width": {"base": 1.4, "stops": [[14.5, 0], [15, 3], [20, 8]]}
-      }
+      "paint": {"raster-resampling": "linear"}
     },
     {
       "id": "1. Aquifer (Natural Assets Fill)",
       "type": "fill",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -882,7 +58,7 @@
     {
       "id": "1. Aquifer Outline (Natural Assets)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -894,7 +70,7 @@
     {
       "id": "1. Waterbody (Natural Assets Fill)",
       "type": "fill",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -909,7 +85,7 @@
     {
       "id": "1. Waterbody Outline (Natural Assets)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -922,7 +98,7 @@
     {
       "id": "1. Wetland Fill (Natural Assets Fill)",
       "type": "fill",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -939,7 +115,7 @@
     {
       "id": "1. Wetland Outline (Natural Assets)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -955,7 +131,7 @@
     {
       "id": "1. Waterway Lines (Natural Assets)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -967,7 +143,7 @@
     {
       "id": "3. Engineered Land Fill (Structures)",
       "type": "fill",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -983,7 +159,7 @@
     {
       "id": "3. Engineered Land Outline (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -999,7 +175,7 @@
     {
       "id": "3. Buildings Fill (Structures)",
       "type": "fill",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1015,7 +191,7 @@
     {
       "id": "3. Building Outline (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1031,7 +207,7 @@
     {
       "id": "3. Recreational Structure Fill (Structures)",
       "type": "fill",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1047,7 +223,7 @@
     {
       "id": "3. Recreational Structure Outline (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1063,7 +239,7 @@
     {
       "id": "3. Bridge 1 Lines (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1080,7 +256,7 @@
     {
       "id": "3. Bridge 2 Lines (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1097,7 +273,7 @@
     {
       "id": "3. Bridge 3 Lines (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1114,7 +290,7 @@
     {
       "id": "3. Barrier Or Fence Lines (Structures)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1131,7 +307,7 @@
     {
       "id": "3. Monument (Structures)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1150,7 +326,7 @@
     {
       "id": "3. Amenity (Structures)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1169,7 +345,7 @@
     {
       "id": "4. Base Lines (Transportation Network)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1186,7 +362,7 @@
     {
       "id": "4. Road Overlay Lines (Transportation Network)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1199,7 +375,7 @@
     {
       "id": "4. Pedestrian Walkway Lines (Transportation Network)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1212,7 +388,7 @@
     {
       "id": "4. Barrier Or Fence Lines (Transportation Network)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1229,7 +405,7 @@
     {
       "id": "4. Pole (Transportation Network)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1248,7 +424,7 @@
     {
       "id": "4. Light (Transportation Network)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1266,7 +442,7 @@
     {
       "id": "4. Traffic Sign Or Signal (Transportation Network)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1285,7 +461,7 @@
     {
       "id": "2. Culvert 1 Lines (Stormwater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1298,7 +474,7 @@
     {
       "id": "2. Culvert 2 Lines (Stormwater Collection)-copy",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1311,7 +487,7 @@
     {
       "id": "2. Culvert Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1333,7 +509,7 @@
     {
       "id": "2. Service Connection Lines (Stormwater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1346,7 +522,7 @@
     {
       "id": "2. Distribution Gravity Main Lines (Stormwater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1359,7 +535,7 @@
     {
       "id": "2. Distribution Gravity Main Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1381,7 +557,7 @@
     {
       "id": "2. Transmission Gravity Main Lines (Stormwater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1394,7 +570,7 @@
     {
       "id": "2. Transmission Gravity Main Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1416,7 +592,7 @@
     {
       "id": "2. Transmission Force Main Lines (Stormwater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1429,7 +605,7 @@
     {
       "id": "2. Transmission Force Main Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1451,7 +627,7 @@
     {
       "id": "2. Channel Lines (Stormwater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1468,7 +644,7 @@
     {
       "id": "2. Valve Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1486,7 +662,7 @@
     {
       "id": "2. Tank Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1505,7 +681,7 @@
     {
       "id": "2. Reservoir Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1524,12 +700,12 @@
     {
       "id": "2. Pump Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
         ["==", "asset_class", "Stormwater Collection"],
-        ["==", "asset_sub_class", "Valve"]
+        ["==", "asset_sub_class", "Pump"]
       ],
       "layout": {
         "text-field": "",
@@ -1543,7 +719,7 @@
     {
       "id": "2. Manhole Trunk Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1562,7 +738,7 @@
     {
       "id": "2. Manhole Cover Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1580,7 +756,7 @@
     {
       "id": "2. Grate Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1598,7 +774,7 @@
     {
       "id": "2. Catch Basin Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1619,7 +795,7 @@
     {
       "id": "2. Box Symbol (Stormwater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1637,7 +813,7 @@
     {
       "id": "5. Other Lines (Wastewater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1650,7 +826,7 @@
     {
       "id": "5. Service Connection Lines (Wastewater Collection)-copy",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1663,7 +839,7 @@
     {
       "id": "5. Outfall Lines (Wastewater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1676,7 +852,7 @@
     {
       "id": "5. Transmission Gravity Main Lines (Wastewater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1689,7 +865,7 @@
     {
       "id": "5. Transmission Gravity Main Symbol (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1711,7 +887,7 @@
     {
       "id": "5. Transmission Force Main Lines (Wastewater Collection)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1724,7 +900,7 @@
     {
       "id": "5. Transmission Force Main Symbol (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1746,7 +922,7 @@
     {
       "id": "5. Valve (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1764,7 +940,7 @@
     {
       "id": "5. Treatment (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1782,7 +958,7 @@
     {
       "id": "5. Tank (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1801,7 +977,7 @@
     {
       "id": "5. Reservoir (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1820,7 +996,7 @@
     {
       "id": "5. Pump (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1838,7 +1014,7 @@
     {
       "id": "5. Part (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1856,7 +1032,7 @@
     {
       "id": "5. Motor (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1874,7 +1050,7 @@
     {
       "id": "5. Meter (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1892,7 +1068,7 @@
     {
       "id": "5. Cleanout (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1910,7 +1086,7 @@
     {
       "id": "5. Manhole Trunk (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1929,7 +1105,7 @@
     {
       "id": "5. Manhole Cover (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1947,7 +1123,7 @@
     {
       "id": "5. Control (Wastewater Collection)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1965,7 +1141,7 @@
     {
       "id": "6. Other Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1978,7 +1154,7 @@
     {
       "id": "6. Outfall Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -1991,7 +1167,7 @@
     {
       "id": "6. Service Connection Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2004,7 +1180,7 @@
     {
       "id": "6. Distribution Force Main Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2017,7 +1193,7 @@
     {
       "id": "6. Distribution Force Main Symbol (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2030,7 +1206,6 @@
         "text-allow-overlap": true,
         "visibility": "visible",
         "text-ignore-placement": true,
-        "icon-image": "WaterSupplyDistributionForceMain",
         "symbol-placement": "line-center",
         "icon-allow-overlap": true,
         "icon-ignore-placement": false,
@@ -2042,7 +1217,7 @@
     {
       "id": "6. Distribution Gravity Main Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2055,7 +1230,7 @@
     {
       "id": "6. Distribution Gravity Main Symbol (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2068,7 +1243,6 @@
         "text-allow-overlap": true,
         "visibility": "visible",
         "text-ignore-placement": true,
-        "icon-image": "WaterSupplyDistributionGravityMain",
         "icon-size": 0.8,
         "icon-rotate": 90,
         "symbol-placement": "line-center"
@@ -2077,7 +1251,7 @@
     {
       "id": "6. Transmission Gravity Main Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2090,7 +1264,7 @@
     {
       "id": "6. Transmission Gravity Main Symbol (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2103,7 +1277,6 @@
         "text-allow-overlap": true,
         "visibility": "visible",
         "text-ignore-placement": true,
-        "icon-image": "WaterSupplyTransmissionGravityMain",
         "icon-size": 0.8,
         "icon-rotate": 90,
         "symbol-placement": "line-center"
@@ -2112,7 +1285,7 @@
     {
       "id": "6. Transmission Force Main Lines (Water Supply)",
       "type": "line",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2125,7 +1298,7 @@
     {
       "id": "6. Transmission Force Main Symbol (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2138,7 +1311,6 @@
         "text-allow-overlap": true,
         "visibility": "visible",
         "text-ignore-placement": true,
-        "icon-image": "WaterSupplyTransmissionForceMain",
         "icon-size": 1.2,
         "icon-rotate": 90,
         "symbol-placement": "line-center"
@@ -2147,7 +1319,7 @@
     {
       "id": "6. Valve (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2165,7 +1337,7 @@
     {
       "id": "6. Treatment (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2183,7 +1355,7 @@
     {
       "id": "6. Tank (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2202,7 +1374,7 @@
     {
       "id": "6. Reservoir (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2221,7 +1393,7 @@
     {
       "id": "6. Pump (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2239,7 +1411,7 @@
     {
       "id": "6. Part (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2257,7 +1429,7 @@
     {
       "id": "6. Motor (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2275,7 +1447,7 @@
     {
       "id": "6. Meter (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2293,7 +1465,7 @@
     {
       "id": "6. Manhole Trunk (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2312,7 +1484,7 @@
     {
       "id": "6. Manhole Cover (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2330,8 +1502,9 @@
     {
       "id": "6. Hydrant (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
+      "minzoom": 12,
       "filter": [
         "all",
         ["==", "asset_class", "Water Supply"],
@@ -2349,7 +1522,7 @@
     {
       "id": "6. Control (Water Supply)",
       "type": "symbol",
-      "source": "MyCivitasStaging",
+      "source": "MyCivitas", "heatmap": "default",
       "source-layer": "default",
       "filter": [
         "all",
@@ -2372,132 +1545,6 @@
       "filter": ["all", ["==", "admin_level", 2]],
       "layout": {"visibility": "visible"},
       "paint": {"line-width": 0.5}
-    },
-    {
-      "id": "label_water_name_line",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "waterway",
-      "filter": ["all", ["==", "$type", "LineString"]],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": ["Roboto Regular"],
-        "text-max-width": 5,
-        "text-size": 12,
-        "symbol-placement": "line",
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "#5d60be",
-        "text-halo-color": "rgba(255,255,255,0.7)",
-        "text-halo-width": 1
-      }
-    },
-    {
-      "id": "label_water_name_point",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "water_name",
-      "filter": ["==", "$type", "Point"],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": ["Roboto Regular"],
-        "text-max-width": 5,
-        "text-size": 12,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "#5d60be",
-        "text-halo-color": "rgba(255,255,255,0.7)",
-        "text-halo-width": 1
-      }
-    },
-    {
-      "id": "label_road",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "transportation_name",
-      "filter": ["all", ["!=", "class", "path"], ["!=", "class", "pedestrian"]],
-      "layout": {
-        "symbol-placement": "line",
-        "text-anchor": "center",
-        "text-field": "{name}",
-        "text-font": ["Roboto Regular"],
-        "text-offset": [0, 0.15],
-        "text-size": {"base": 1, "stops": [[13, 12], [14, 13]]},
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "#765",
-        "text-halo-blur": 0.5,
-        "text-halo-width": 1
-      }
-    },
-    {
-      "id": "label_place_village",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "filter": ["all", ["==", "class", "village"]],
-      "layout": {
-        "text-field": "{name_en}",
-        "text-font": ["Roboto Regular"],
-        "text-max-width": 8,
-        "text-size": {"base": 1.2, "stops": [[10, 12], [15, 22]]},
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "#333",
-        "text-halo-color": "rgba(255,255,255,0.8)",
-        "text-halo-width": 1.2
-      }
-    },
-    {
-      "id": "label_place_town",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "filter": ["all", ["==", "class", "town"]],
-      "layout": {
-        "icon-image": {"base": 1, "stops": [[0, "dot_9"], [8, ""]]},
-        "text-anchor": "bottom",
-        "text-field": "{name_en}",
-        "text-font": ["Roboto Regular"],
-        "text-max-width": 8,
-        "text-offset": [0, 0],
-        "text-size": {"base": 1.2, "stops": [[7, 12], [11, 16]]},
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "#333",
-        "text-halo-color": "rgba(255,255,255,0.8)",
-        "text-halo-width": 1.2
-      }
-    },
-    {
-      "id": "label_place_city",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "minzoom": 5,
-      "filter": ["all", ["==", "class", "city"]],
-      "layout": {
-        "icon-image": {"base": 1, "stops": [[0, "dot_9"], [8, ""]]},
-        "text-anchor": "bottom",
-        "text-field": "{name_en}",
-        "text-font": ["Roboto Medium"],
-        "text-max-width": 8,
-        "text-offset": [0, 0],
-        "text-size": {"base": 1.2, "stops": [[7, 14], [11, 24]]},
-        "icon-allow-overlap": true,
-        "icon-optional": false,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "#333",
-        "text-halo-color": "rgba(255,255,255,0.8)",
-        "text-halo-width": 1.2
-      }
     }
   ],
   "id": "903to775d"
