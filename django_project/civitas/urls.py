@@ -1,22 +1,26 @@
 # coding=utf-8
 """Project level url handler."""
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler404, handler500
 from civitas.api import (
     CommunityAPI, CommunityDetailAPI,
     FeatureGeojsonDetailAPI, ReporterDataGeojsonDetailAPI
 )
 from civitas.api.community import (
     CommunityCOFAPI, CommunityPOFAPI, CommunityRiskAPI,
-    ReporterDataDownloadAPI, AssetDataDownloadAPI
+    ReporterDataDownloadAPI, AssetDataDownloadAPI, AssetDataTable
 )
 
 from civitas.views.dashboard import (
     DashboardDetailedView, DashboardListView
 )
 
+from civitas.views.version import VersionView
+
 from civitas.api.vector_tile import VectorTileApi
+from civitas.api.vector_tile_all import VectorTileAllApi
 
 from amlit_helpdesk.api.ticket import CommunityTicketAPI
+
 
 FEATURE_API = [
     url(r'^(?P<pk>\d+)/data',
@@ -73,6 +77,8 @@ API = [
     url(r'^community/', include(COMMUNITY_API)),
     url(r'^asset-download/(?P<pk>\d+)/', AssetDataDownloadAPI.as_view(),
         name='asset-download'),
+    url(r'^asset-data/(?P<pk>\d+)/(?P<page_num>\d+)/', AssetDataTable.as_view(),
+        name='asset-data'),
 ]
 urlpatterns = [
     url(r'^api/', include(API)),
@@ -83,6 +89,18 @@ urlpatterns = [
         r'^community-layer/(?P<z>\d+)/(?P<x>\d+)/(?P<y>\d+)',
         VectorTileApi.as_view(),
         name='vector-tile-layer'
+    ),
+
+    url(
+        r'^community-all-layer/(?P<z>\d+)/(?P<x>\d+)/(?P<y>\d+)',
+        VectorTileAllApi.as_view(),
+        name='vector-tile-all-layer'
+    ),
+
+    url(
+        r'^version/',
+        VersionView.as_view(),
+        name='version'
     ),
 
 ]
