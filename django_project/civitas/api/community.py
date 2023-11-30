@@ -2,10 +2,11 @@ __author__ = 'Irwan Fathurrahman <meomancer@gmail.com>'
 __date__ = '11/11/20'
 
 import csv
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from amlit.serializer.organisation import OrganisationSerializer
 from civitas.models.community import Community
 from civitas.models.view.reporter_data import ReporterData
@@ -14,6 +15,8 @@ from civitas.serializer.community import (
 )
 from civitas.serializer.reporter_data import ReporterDataSerializer
 from civitas.permissions import CommunityAccessPermission
+import json
+from django.core.serializers import serialize
 
 class CommunityAPI(APIView):
     """ Return community list """
@@ -127,6 +130,41 @@ class AssetDataDownloadAPI(APIView):
         community = get_object_or_404(
             Community, pk=pk
         )
+        
         return Response(
             ReporterData._showall(community)
         )
+    
+class AssetDataTable(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+
+    def __init__(self):
+        self.features = None
+        self.obj_paginator = None
+        self.page_range = None
+        self.community_id = None
+
+    permission_classes = (CommunityAccessPermission,)
+    
+
+    def get(self, request, pk, page_num):
+        """ Return data of features """
+        self.community_id  = get_object_or_404(
+            Community, pk=pk
+        )
+        #get data
+        self.features = ReporterData._showall(self.community_id )
+        per_page = 10
+        self.obj_paginator = Paginator(self.features, per_page)
+        page = self.obj_paginator.page(page_num).object_list
+        self.page_range = self.obj_paginator.page_range
+
+        context = {
+            'page': list(page),
+            'page_range': list(self.page_range)
+        }
+
+        return Response(context)
+
