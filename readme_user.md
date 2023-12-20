@@ -15,25 +15,10 @@ The aim of this document is to explain how to set up your machine to run the exe
 ### Install pgAdmin
 1. Download the installer from (https://www.postgresql.org/ftp/pgadmin/pgadmin4/v6.18/windows/)[https://www.postgresql.org/ftp/pgadmin/pgadmin4/v6.18/windows/]
 2. Run the installer and follow the prompts in the installation wizard
-<br/><br/>
-![Alt text](./documentation/pgadmin1.png)
-<br/><br/>
-![Alt text](./documentation/pgadmin2.png)
-<br/><br/>
-![Alt text](./documentation/pgadmin3.png)
-<br/><br/>
-![Alt text](./documentation/pgadmin4.png)
-<br/><br/>
 3. When prompted for a username and password, use `postgres` as the username and `postgres` as the password 
-<br/><br/>
-![Alt text](./documentation/pgadmin6.png)
-<br/><br/>
 
 ### Restoring databases via pgAdmin
 1. Open pgAdmin
-<br></br>
-![Alt text](./documentation/pgadmin5.png)
-<br></br>
 2. Create a database named `civitas`. Right click on the datbase and in the dropdown select `Restore`. The format is `Custom or tar`. Click on the folder icon of `Filename` field to upload the file called `civitas_bc`
 3. Create a database named `django`. Right click on the datbase and in the dropdown select `Restore`. The format is `Custom or tar`. Click on the folder icon of `Filename` field to upload the file called `django_bc`
 *If pgAdmin fails to restore the databases please see steps below*
@@ -75,4 +60,3 @@ The aim of this document is to explain how to set up your machine to run the exe
 ### Method 2
 1. Update the username and password for the databases using psql/pgAdmin with the information your disturbutor has given you for the exe
 
-![Alt text](./documentation/final.png)
