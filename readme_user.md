@@ -46,8 +46,7 @@ The aim of this document is to explain how to set up your machine to run the exe
 
 # How to run MyCivitas exe
 1. Unzip the folder that you have received
-2. Run the exe called `mysetup.exe`
-![Alt text](./documentation/setup1.png)
+2. Run the installer
 3. Follow the installion wizard instructions
 ![Alt text](./documentation/setup2.png)
 
