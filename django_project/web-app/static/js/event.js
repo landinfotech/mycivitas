@@ -14,6 +14,8 @@ const evt = {
 
     HEATMAP_CHANGED: 'style:changed',
 
+    SELECTION_TOOL: 'layer:select',
+
     CLASSES_LIST_CHANGE: 'classes-list:change', // classes list changes
     LAYER_STYLE_CHANGE: 'layer:change-style', // change layer style
 

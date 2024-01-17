@@ -7,7 +7,9 @@ from civitas.api import (
 )
 from civitas.api.community import (
     CommunityCOFAPI, CommunityPOFAPI, CommunityRiskAPI,
-    ReporterDataDownloadAPI, AssetDataDownloadAPI, AssetDataTable
+    ReporterDataDownloadAPI, AssetDataDownloadAPI, AssetDataDefaultAPI, AssetDataDetailedAPI,
+    AssetDataCustomAPI, AssetDataTable,
+    SystemNameAPI,AssetClassAPI, AssetSubClassAPI
 )
 
 from civitas.views.dashboard import (
@@ -77,6 +79,18 @@ API = [
     url(r'^community/', include(COMMUNITY_API)),
     url(r'^asset-download/(?P<pk>\d+)/', AssetDataDownloadAPI.as_view(),
         name='asset-download'),
+    url(r'^asset-default-download/(?P<pk>\d+)/', AssetDataDefaultAPI.as_view(),
+        name='asset-default-download'),
+    url(r'^asset-detailed-download/(?P<pk>\d+)/', AssetDataDetailedAPI.as_view(),
+        name='asset-detailed-download'),
+    url(r'^asset-custom-download/', AssetDataCustomAPI.as_view(),
+        name='asset-custom-download'),
+    url(r'^system-names/(?P<pk>\d+)/', SystemNameAPI.as_view(),
+        name='system-names'),
+    url(r'^asset-class/(?P<pk>\d+)/', AssetClassAPI.as_view(),
+        name='asset-class'),
+    url(r'^asset-sub-class/(?P<pk>\d+)/', AssetSubClassAPI.as_view(),
+        name='asset-sub-class'),
     url(r'^asset-data/(?P<pk>\d+)/(?P<page_num>\d+)/', AssetDataTable.as_view(),
         name='asset-data'),
 ]

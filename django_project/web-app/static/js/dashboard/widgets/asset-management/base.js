@@ -15,6 +15,8 @@ define([
             this.data = {};
             this.community = null;
             this.classes = null;
+            this.system_names = null;
+            this.asset_sub_class = null
             event.register(this, evt.COMMUNITY_CHANGE, this.communityChanged);
             event.register(this, evt.CLASSES_LIST_CHANGE, this.classesChanged)
 

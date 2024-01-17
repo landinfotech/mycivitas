@@ -67,7 +67,6 @@ define([
         dataFetched: function (data) {
             /** success **/
             this.data = data;
-            console.log("data fetched",this.data)
             this.render();
             const ID = $(this.$rightPanel.find('.content:visible')[0]).attr('id');
             if (ID !== this.id) {
@@ -87,7 +86,6 @@ define([
                 this.$content.html(`<ul class="nav nav-tabs">${tabs.join('')}</ul>`);
                 
                 this.data.forEach(feature => {
-                    console.log("inside", feature)
                     let html = '';
                     let htmls = [];
                     if (!feature.properties.feature_id) {

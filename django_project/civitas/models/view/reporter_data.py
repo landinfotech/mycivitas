@@ -237,7 +237,82 @@ class ReporterData(models.Model):
             'system_name', 
             'annual_reserve',
             'maintenance_cost',
-            'renewal_cost'
+            'renewal_cost',
+        ).order_by('system_name')
+    
+    @staticmethod
+    def _showdefault(community: Community) -> dict:
+        """_summary_
+
+        Args:
+            community (Community): community object
+
+        Returns:
+            dict: detailed export per community per summary type
+        """
+        return ReporterData.objects.filter(
+            community_id=community.id
+        ).values(
+            "feature_id",
+            "community_name",
+            "system_name",
+            "sub_class_name",
+            "asset_type_name",
+            "quantity",
+            "sub_class_unit_description",
+            "renewal_cost",
+            "lifespan",
+        ).order_by('system_name')
+    
+    @staticmethod
+    def _showdetailed(community: Community) -> dict:
+        """_summary_
+
+        Args:
+            community (Community): community object
+
+        Returns:
+            dict: detailed export per community per summary type
+        """
+        return ReporterData.objects.filter(
+            community_id=community.id
+        ).values(
+            "feature_id",
+            "community_name",
+            "system_name",
+            "sub_class_name",
+            "asset_type_name",
+            "quantity",
+            "sub_class_unit_description",
+            "renewal_cost",
+            "lifespan",
+            "condition_id",
+            "condition_name",
+            "age",
+            "remaining_years",
+            "pof_id",
+            "pof_name",
+            "cof_id",
+            "cof_name",
+            "risk_value",
+            "area",
+        ).order_by('system_name')
+    
+    @staticmethod
+    def _showcustom(community: Community, selected_value) -> dict:
+        """_summary_
+
+        Args:
+            community (Community): community object
+
+        Returns:
+            dict: detailed export per community per summary type
+        """
+
+        return ReporterData.objects.filter(
+            community_id=community.id
+        ).values(
+            selected_value
         ).order_by('system_name')
 
     @staticmethod
