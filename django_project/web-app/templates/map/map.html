@@ -8,12 +8,18 @@
 {% block stylesheet %}
     <link href="{% static 'libs/maplibre/2.4.0/maplibre-gl.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
     <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/maplibre-gl.js' %}?"></script>
-
+    <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/turf.min.js' %}?"></script>
+    <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/mapbox-gl-draw.js' %}?"></script>
     <link href="{% static 'css/map/main.css' %}?ver=2" rel="stylesheet" type="text/css" media="screen, projection"/>
     <link href="{% static 'css/map/widget.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/filter_multi_select.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
+    <link
+    rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.0/mapbox-gl-draw.css"
+    type="text/css"
+/>
     <style>
       #loadingScreen{
       display: none;
@@ -114,7 +120,7 @@
                 'backbone': '{% static 'libs/backbone.js/1.4.0/backbone-min.js' %}?',
                 'underscore': '{% static 'libs/underscore.js/1.9.1/underscore-min.js' %}?',
                 'fancyTable': '{% static 'libs/fancyTable.js/fancyTable.min.js' %}?v=1.11',
-
+                'filter-multi-select': '{% static 'libs/filter-multi-select/filter-multi-select-bundle.min.js' %}?',
                 {# project static #}
                 'js/event': '{% static 'js/event.js' %}?',
                 'js/request': '{% static 'js/request.js' %}?',
@@ -170,7 +176,7 @@
           'Natural': {
             classes: ['nat'],
             legends : [
-            "{% static 'legends/1_natural_assets.png'%}",
+            "{% static 'legends/1_natural_assets_.png'%}",
             ]
           },
           // 'Fleet and Equipment': {
@@ -180,37 +186,37 @@
           'Structures': {
             classes: ['str'],
             legends: [
-              "{% static 'legends/3_structures.png'%}"
+              "{% static 'legends/3_structures_.png'%}"
             ]
           },
           'Transportation Network': {
             classes: ['trn'],
             legends : [
-              "{% static 'legends/4_transportation_network.png'%}"
+              "{% static 'legends/4_transportation_network_.png'%}"
             ]
           },
           'Water Supply': {
             classes: ['pws'],
             legends : [
-              "{% static 'legends/6_water_supply.png'%}",
+              "{% static 'legends/6_water_supply_.png'%}",
             ]
           },
           'Wastewater Collection': {
             classes: ['wwc'],
             legends : [
-              "{% static 'legends/5_wastewater_collection.png'%}",
+              "{% static 'legends/5_wastewater_collection_.png'%}",
             ]
           },
           'Stormwater Collection': {
             classes: ['swc'],
             legends : [
-              "{% static 'legends/2_stormwater_collection.png'%}",
+              "{% static 'legends/2_stormwater_collection_.png'%}",
             ]
           },
           'Electrical Network': {
             classes: ['elc'],
             legends : [
-              "{% static 'legends/7_electrical_network.png'%}",
+              "{% static 'legends/7_electrical_network_.png'%}",
             ]
           },
         };
@@ -219,22 +225,25 @@
           'Consequence of Failure': {
             classes: ['cof'],
             legends : [
-              "{% static 'legends/8_cof.png'%}",
+              "{% static 'legends/9_cof.png'%}",
             ]
           },
           'Probability of Failure': {
             classes: ['pof'],
             legends : [
-              "{% static 'legends/7_pof.png'%}",
+              "{% static 'legends/8_pof.png'%}",
             ]
           },
           'Risk': {
             classes: ['risk'],
             legends : [
-              "{% static 'legends/9_risk.png'%}",
+              "{% static 'legends/10_risk.png'%}",
             ]
           },
         };
+
+        const _communityID = parseInt(getCookie('community'))
+
     </script>
 {% endblock stylesheet %}
 
@@ -248,6 +257,12 @@
     <div id="map"></div>
 
     <div id="left-top" class="side-panel">
+        <div id="filter-list">
+          <div class="flex">
+            <button id="hideLegendBtn" class="btn btn-primary">F</button>
+            <button id="showLegendBtn" class="btn btn-primary">L</button>
+          </div>
+        </div>
         <div class="inner full ui-overlay">
             <div class="content full box-overlay">
                 <div id="community" class="section">
@@ -261,11 +276,23 @@
                         <div class="province"></div>
                     </div>
                 </div>
-                <div id="layer-list-toggle" class="section">
-                    <span id="see-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-down" aria-hidden="true"></i> See layer list</span>
-                    <span id="hide-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-up" aria-hidden="true"></i> Hide layer list</span>
+                <div>
+                  <!-- <button onclick="selectionTool()" id="selection-tool" class="btn btn-primary">Selection Tool</button> -->
                 </div>
-                <div id="layers" class="section">
+                <div id="layer-list-toggle" class="section">
+                    <span id="see-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-down" aria-hidden="true"></i> See Layer List</span>
+                    <span id="hide-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-up" aria-hidden="true"></i> Hide Layer List</span>
+                </div>
+                <div style="overflow-y: scroll;">
+                  <div id="asset_list" class="section layer-list-show">
+                    <p>Classification</p>
+                  </div>
+                  <div id="risk_list" class="section layer-list-show">
+                    <p>Risk</p>
+                  </div>
+                  <div id="system_list" class="section layer-list-show">
+                    <p>Organization</p>
+                  </div>
                 </div>
             </div>
         </div>
@@ -355,6 +382,18 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-6">
+                <br>
+                <label>Choose Column Filter</label>
+                <select id="column-filter" class="form-control">
+                  <option value="default">Default</option>
+                  <option value="detailed">Detailed</option>
+                  <option value="custom">Custom</option>
+                </select>
+                <div id="custom_filter" style="display: none;">
+
+                </div>
+              </div>
           </div>
           <div class="modal-body" id="export_body">
             <div id="loadingScreenTable">
@@ -362,11 +401,11 @@
             </div>
               <div style="width:100%;height:700px;overflow-x: scroll;overflow-y: scroll;">
                 <table class="table mt-2 table-bordered" id="filteredTable" >
-                <thead id="filteredhead" class="sticky-th">
-                </thead>
-                <tbody id="table_show" class="page-data">
-                </tbody>
-              </table>
+                  <thead id="filteredhead" class="sticky-th">
+                  </thead>
+                  <tbody id="table_show" class="page-data">
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -378,6 +417,35 @@
           <div class="modal-footer">
             <button type="button" id="exportcsv" onclick="tableToCSV()" class="btn btn-primary">Export to CSV</button>
             <button type="button" class="btn btn-secondary" onclick="closeFilter()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal export" id="modal_features_selected" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div id="table-data" class="modal-content">
+          <div class="modal-header">
+
+            <div class="row" style="margin-bottom: 0px !important; margin-top: 0px !important;">
+              <div class="col-md-2">
+                <h3 class="modal-title">Features Selected</h3>
+              </div>
+          </div>
+          <div class="modal-body" id="featuresSelected">
+            <div style="width:100%;height:500px;overflow-x: scroll;overflow-y: scroll;">
+              <table class="table mt-2 table-bordered" id="featuresSelectedTable" >
+                <thead id="featuresSelectedHead" class="sticky-th">
+                </thead>
+                <tbody id="featuresSelectedBody" class="page-data">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" id="addToWorkOrderBtn" class="btn btn-primary">Continue</button>
+            <button type="button" class="btn btn-secondary" onclick="$('#modal_features_selected').hide()">Cancel</button>
           </div>
         </div>
       </div>
@@ -409,31 +477,8 @@
           showTables()
         }
 
-        function showFeatureMap(id){
-          var td = document.getElementsByClassName("getFeatureMap")
-
-          for(var i = 0; i < td.length; i++){
-            td[i].parentNode.style.backgroundColor = 'white'
-          }
-
-          $.ajax({
-              type: 'GET',
-              url: "/api/feature/"+id+"/data", //Replace your URL here
-              success: function(response){
-                  //code after success
-                  document.getElementById(id).parentNode.style.backgroundColor = '#97a1ba'
-                  var row = $(this).closest("tr");
-
-                  event.trigger(evt.FEATURE_LIST_FETHCED, [response]);
-                  event.trigger(evt.FEATURE_PAN, response);
-                  event.trigger(evt.FEATURE_HIGHLIGHTED, response);
-
-                  $("#modal_show").hide();
-              },
-              error: function () {
-                  // Code After Erroe
-              }
-          });
+        function selectionTool(){
+          event.trigger(evt.SELECTION_TOOL, "");
         }
 
         function showFeatureMap(id){
@@ -487,7 +532,7 @@
                   if (format.test(column.innerText)) {
                   rowData.push('"' + column.innerText + '"');
                 } else {
-                  rowData.push(column.innerText);
+                  rowData.push('"' + column.innerText + '"');
                 }
                 }
                 count++;
@@ -501,7 +546,7 @@
                   if (format.test(column.innerText)) {
                   rowData.push('"' + column.innerText + '"');
                   } else {
-                    rowData.push(column.innerText);
+                    rowData.push('"' + column.innerText + '"');
                   }
                 }
                 count++;

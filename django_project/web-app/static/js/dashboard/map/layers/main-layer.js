@@ -23,11 +23,36 @@ define([
             event.register(this, evt.HEATMAP_CHANGED, this.heatmap_changed);
             this.selectedId = null;
             this.currentID = null;
-            this.map_interactions()
+            this.map_interactions();
+            this.map_click_interactions();
+            this.currentFeatureList = null
+        },
+
+        map_click_interactions: function(){
+            // Hover layer
+            var layerId = "featureClick"
+            var count = 0;
+            this.map.on("click", (e) => {
+                const features = map.queryRenderedFeatures(e.point);
+                var featureArr = []
+                features.forEach(element => {
+                    var isIndex = featureArr.findIndex(x => x.id == element.properties.id)
+                    if(isIndex == -1){
+                        featureArr.push({"id": element.properties.id, "layer": layerId})
+                    }
+                });
+
+                if(featureArr != this.currentFeatureList){
+                    this.currentFeatureList = featureArr
+                    console.log("featureArr map click", featureArr)
+                    this.featureClicked(featureArr)
+                }
+                
+            });
         },
 
         map_interactions: function(){
-            // Hover layer
+            
             for (const [layerId, layer] of Object.entries(map.style._layers)) {
 
                 map.on('contextmenu', layerId, (e) => {
@@ -62,19 +87,6 @@ define([
 
                         map.on("mouseleave", layerId, () => {
                             map.getCanvas().style.cursor = "grab";
-                        });
-
-                        map.on("click", layerId, (e) => {
-                            const features = map.queryRenderedFeatures(e.point);
-                            var featureArr = []
-                            features.forEach(element => {
-                                var isIndex = featureArr.findIndex(x => x.id == element.properties.id)
-                                if(isIndex == -1){
-                                    featureArr.push({"id": element.properties.id, "layer": layerId})
-                                }
-                            });
-                            console.log("feature clicked", featureArr)
-                            this.featureClicked(featureArr)
                         });
                     }
 
@@ -129,12 +141,15 @@ define([
             event.trigger(evt.FEATURE_REMOVE_HIGHLIGHTED, "");
 
             switch(ID){
+                case 'Consequence of Failure':
                 case 'consequence-of-failure':
                     this.load_style(cofStyleUrl);
                     break;
+                case 'Probability of Failure':
                 case 'probability-of-failure':
                     this.load_style(pofStyleUrl);
                     break;
+                case 'Risk':
                 case 'risk':
                     this.load_style(riskStyleUrl)
                     break;
@@ -167,8 +182,10 @@ define([
         * @param id
         */
         featureClicked: async function (featuresArr) {
+           
             try {
                 var finalArr = []
+                console.log("featuresArr function", featuresArr)
                 for(var i = 0; i < featuresArr.length; i++){
                     var id = featuresArr[i]["id"]
                     this.detailLoading = true
@@ -176,37 +193,25 @@ define([
                     const feature = await RequestFn.promiseGet(
                         urls.feature_data.replaceAll('0', id)
                     )
+                    console.log("feature clicked", feature)
                     finalArr.push(feature)
                 }
-            console.log("finalArr", finalArr)
             event.trigger(evt.FEATURE_LIST_FETHCED, finalArr);
             } catch (error) {
                 
             }
-            // event.trigger(evt.LAYER_SELECTED, layer);
-            // this.selectedId = id
-            // try {
-            //     // Trigger event when feature list starting fetching
-            //     this.detailLoading = true
-            //     event.trigger(evt.FEATURE_LIST_FETHCING);
-            //     const feature = await RequestFn.promiseGet(
-            //       urls.feature_data.replaceAll('0', id)
-            //     )
-            //     if(this.selectedId === id) {
-            //         this.currentID = id
-            //         console.log("start to trigger", feature)
-            //         event.trigger(evt.FEATURE_LIST_FETHCED, [feature]);
-            //     }
-            // } catch (e) {
-            // }
         },
         /**
          * Filter layers
          */
         filterLayers: function () {
             const classes = this.classes
+            const system_names = this.system_names
+            const asset_sub_class = this.asset_sub_class
+            const types = this.type
             this.layerIds.map(layerId => {
                 let filter = this.defaultFilter[layerId]
+                
                 if (classes) {
                     for(var i = 0; i < filter.length; i++){
                         if(filter[i].includes("asset_identifier")){
@@ -217,7 +222,42 @@ define([
                     filter = filter.concat(
                         [["in", "asset_identifier", ...classes]]
                     )
+
                 }
+
+                if(asset_sub_class){
+                    for(var i = 0; i < filter.length; i++){
+                        if(filter[i].includes("asset_sub_class")){
+                            filter.splice(i, 1)
+                        }
+                    }
+                    filter = filter.concat(
+                        [["in", "asset_sub_class", ...asset_sub_class]]
+                    )
+                }
+
+                if(system_names){
+                    for(var i = 0; i < filter.length; i++){
+                        if(filter[i].includes("system_name")){
+                            filter.splice(i, 1)
+                        }
+                    }
+                    filter = filter.concat(
+                        [["in", "system_name", ...system_names]]
+                    )
+                }
+
+                if(types){
+                    for(var i = 0; i < filter.length; i++){
+                        if(filter[i].includes("type")){
+                            filter.splice(i, 1)
+                        }
+                    }
+                    filter = filter.concat(
+                        [["in", "type", ...types]]
+                    )
+                }
+
                 if (this.community_id) {
                     for(var i = 0; i < filter.length; i++){
                         if(filter[i].includes("community_id")){
@@ -243,6 +283,6 @@ define([
                 }
 
             })
-        }
+        },
     });
 });

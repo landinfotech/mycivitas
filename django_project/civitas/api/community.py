@@ -1,6 +1,8 @@
 __author__ = 'Irwan Fathurrahman <meomancer@gmail.com>'
 __date__ = '11/11/20'
 
+from django.conf import settings
+from django.db import connections
 import csv
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
@@ -17,6 +19,8 @@ from civitas.serializer.reporter_data import ReporterDataSerializer
 from civitas.permissions import CommunityAccessPermission
 import json
 from django.core.serializers import serialize
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 class CommunityAPI(APIView):
     """ Return community list """
@@ -135,6 +139,177 @@ class AssetDataDownloadAPI(APIView):
             ReporterData._showall(community)
         )
     
+class AssetDataDefaultAPI(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+    permission_classes = (CommunityAccessPermission,)
+
+    def get(self, request, pk):
+        """ Return data of features """
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+        
+        return Response(
+            ReporterData._showdefault(community)
+        )
+    
+class AssetDataDetailedAPI(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+    permission_classes = (CommunityAccessPermission,)
+
+    def get(self, request, pk):
+        """ Return data of features """
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+        
+        return Response(
+            ReporterData._showdetailed(community)
+        )
+    
+class AssetDataCustomAPI(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+
+    @method_decorator(csrf_exempt)
+    def post(self, request):
+        """ Return data of features """
+        pk = request.POST["pk"]
+        selected  = request.POST.getlist("selected[]")
+        
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+
+        final_list = []
+        for item in selected:
+            final_list.append(ReporterData._showcustom(community, item))
+
+        print(final_list)
+        
+        return Response(
+            final_list
+        )
+    
+    """
+    Return summary_pof of ReporterData
+    """
+    permission_classes = (CommunityAccessPermission,)
+
+    def get(self, request, pk):
+        """ Return data of features """
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+
+        data = []
+
+        sql = f"SELECT DISTINCT system_name, asset_identifier FROM mv_features WHERE community_id = {pk};"
+        with connections[settings.CIVITAS_DATABASE].cursor() as cursor:
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            for row in rows:
+                system_name = row[0]
+                asset_identifier = row[1]
+                if not any(d['system_name'] == system_name for d in data):
+                    data.append({"system_name": system_name, "asset_identifier": [asset_identifier]})
+                else:
+                    index = [i for i,_ in enumerate(data) if _['system_name'] == system_name][0]
+                    data[index]["asset_identifier"].append(asset_identifier)
+        
+        return Response(
+            data
+        )
+    
+class AssetClassAPI(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+    permission_classes = (CommunityAccessPermission,)
+
+    def get(self, request, pk):
+        """ Return data of features """
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+
+        data = []
+
+        sql = f"""SELECT DISTINCT 
+                mv_features.asset_sub_class, 
+                mv_features.asset_identifier,
+                mv_features.def_stylename,
+                mv_features.type,
+                asset_class.description 
+                FROM asset_class 
+                LEFT JOIN mv_features ON mv_features.asset_identifier = asset_class.name 
+                WHERE mv_features.community_id = {pk};"""
+        with connections[settings.CIVITAS_DATABASE].cursor() as cursor:
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            for row in rows:
+                
+                asset_sub_class = row[0]
+                asset_identifier = row[1]
+                def_stylename = row[2]
+                asset_type = row[3]
+                asset_class = row[4]
+
+                if not any(d['asset_class'] == asset_class for d in data):
+                    data.append({
+                        "asset_class": asset_class, 
+                        "asset_identifier": asset_identifier, 
+                        "asset_sub_class": [{'asset': asset_sub_class, 'type': [asset_type]}], 
+                        "def_stylename": [def_stylename]
+                    })
+                else:
+                    index = [i for i,_ in enumerate(data) if _['asset_class'] == asset_class][0]    
+                    if not any(d['asset'] == asset_sub_class for d in data[index]["asset_sub_class"]):
+                        data[index]["asset_sub_class"].append({'asset': asset_sub_class, 'type': [asset_type]})
+                    else:
+                        _index = [i for i,_ in enumerate(data[index]["asset_sub_class"]) if _['asset'] == asset_sub_class][0]  
+                        data[index]["asset_sub_class"][_index]["type"].append(asset_type)
+        
+        return Response(
+            data
+        )
+    
+class AssetSubClassAPI(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+    permission_classes = (CommunityAccessPermission,)
+
+    def get(self, request, pk):
+        """ Return data of features """
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+
+        data = []
+
+        sql = f"SELECT DISTINCT asset_sub_class, asset_identifier FROM mv_features WHERE community_id = {pk};"
+        with connections[settings.CIVITAS_DATABASE].cursor() as cursor:
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            for row in rows:
+                asset_sub_class = row[0]
+                asset_identifier = row[1]
+                if not any(d['asset_sub_class'] == asset_sub_class for d in data):
+                    data.append({"asset_sub_class": asset_sub_class, "asset_identifier": [asset_identifier]})
+                else:
+                    index = [i for i,_ in enumerate(data) if _['asset_sub_class'] == asset_sub_class][0]
+                    data[index]["asset_identifier"].append(asset_identifier)
+        
+        return Response(
+            data
+        )
+    
 class AssetDataTable(APIView):
     """
     Return summary_pof of ReporterData
@@ -167,4 +342,35 @@ class AssetDataTable(APIView):
         }
 
         return Response(context)
+    
+class SystemNameAPI(APIView):
+    """
+    Return summary_pof of ReporterData
+    """
+    permission_classes = (CommunityAccessPermission,)
+
+    def get(self, request, pk):
+        """ Return data of features """
+        community = get_object_or_404(
+            Community, pk=pk
+        )
+
+        data = []
+
+        sql = f"SELECT DISTINCT system_name, asset_identifier FROM mv_features WHERE community_id = {pk};"
+        with connections[settings.CIVITAS_DATABASE].cursor() as cursor:
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            for row in rows:
+                system_name = row[0]
+                asset_identifier = row[1]
+                if not any(d['system_name'] == system_name for d in data):
+                    data.append({"system_name": system_name, "asset_identifier": [asset_identifier]})
+                else:
+                    index = [i for i,_ in enumerate(data) if _['system_name'] == system_name][0]
+                    data[index]["asset_identifier"].append(asset_identifier)
+        
+        return Response(
+            data
+        )
 

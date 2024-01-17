@@ -167,7 +167,7 @@ html, body {
     overflow: visible;
 }
 
-#left-top #layers {
+#left-top .layer-list-show {
     display: none;
     border: none;
     flex-grow: 1;
@@ -185,7 +185,7 @@ html, body {
     opacity: 1;
 }
 
-#left-top.show #layers {
+#left-top.show .layer-list-show{
     display: block;
 }
 
@@ -206,34 +206,38 @@ html, body {
     display: inline-block;
 }
 
-#layers {
+.layer-list-show {
     font-size: 14px;
 }
 
-#layers i {
+.layer-list-show i {
     cursor: pointer;
     margin-right: 5px;
 }
 
-#layers i:hover {
+.layer-list-show i:hover {
     opacity: 0.6;
 }
 
-#layers a:hover {
+.layer-list-show a:hover {
     text-decoration: none;
 }
 
-#layers .layer-list {
+.layer-list-show .layer-list {
     padding-left: 37px;
 }
 
-#layers img {
+.layer-list-show img {
     margin: 10px 0;
     width: 100%;
 }
 
 .layer-row, .layer-row a {
     color: #aaa;
+}
+
+.layer-row-sub, .layer-row-sub a {
+  color: #aaa;
 }
 
 .layer-row img {
@@ -245,12 +249,28 @@ html, body {
     display: none;
 }
 
+.layer-row-sub .fa-check-square {
+  display: none;
+}
+
 .layer-row .fa-square-o {
     display: inline-block;
 }
 
+.layer-row-sub .fa-square-o {
+  display: inline-block;
+}
+
 .layer-row.active, .layer-row.active a {
     color: green;
+}
+
+.layer-row-sub.active, .layer-row-sub.active a {
+  color: green;
+}
+
+.layer-row.active .fa-check-square {
+    display: inline-block;
 }
 
 .layer-row.active .fa-check-square {
@@ -260,6 +280,8 @@ html, body {
 .layer-row.active .fa-square-o {
     display: none;
 }
+
+
 
 .layer-row.active img {
     filter: grayscale(0%);
@@ -632,6 +654,20 @@ html, body {
     padding: 50px 0;
   }
   
+  #filter-list{
+    position: absolute;
+    right: -35px;
+    top: 90px;
+  }
+
+  .flex{
+    display: flex;
+    flex-direction: column;
+  }
+  .flex button{
+    margin-bottom: 5px;
+  }
+
   /* ALL LOADERS */
   
   .loader{

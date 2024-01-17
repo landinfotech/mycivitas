@@ -40,17 +40,65 @@
         </div>
     </div>
 </script>
-<script type='text/template' id='_layer-selection-row-heatmap'>
+<script type='text/template' id='_layer-selection-row-dropdown'>
+    <div class="layer-row active" data-layername="<%= layername %>" data-asset="<%= asset %>">
+        <a aria-hidden="true" data-toggle="collapse" href="#<%= id %>"
+           role="button" aria-expanded="false" aria-controls="collapseExample" class="collapsed button-collapse">
+            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-caret-up"></i>
+        </a>
+        <i class="fa fa-check-square asset-class-selection" aria-hidden="true"></i>
+        <i class="fa fa-square-o asset-class-selection" aria-hidden="true"></i>
+        <%= layername %>
+        
+        <div class="layer-list collapse" id="<%= id %>">
+            <img class='legendURL' src="<%= legendURL %>">
+            <div class="" id="<%= id %>_sub">
+            </div>
+        </div>
+    </div>
+</script>
+<script type='text/template' id='_layer-selection-row-asset-sub'>
     <div class="layer-row active" data-layername="<%= layername %>">
         <a aria-hidden="true" data-toggle="collapse" href="#<%= id %>"
            role="button" aria-expanded="false" aria-controls="collapseExample" class="collapsed button-collapse">
             <i class="fa fa-caret-down"></i>
             <i class="fa fa-caret-up"></i>
         </a>
+        <i class="fa fa-check-square asset-sub" aria-hidden="true"></i>
         <i class="fa fa-square-o" aria-hidden="true"></i>
         <%= layername %>
         <div class="layer-list collapse" id="<%= id %>">
             <img src="<%= legendURL %>">
+        </div>
+    </div>
+</script>
+<script type='text/template' id='_layer-selection-row-system-name'>
+    <div class="layer-row active" data-layername="<%= layername %>">
+        <!-- <a aria-hidden="true" data-toggle="collapse" href="#<%= id %>"
+           role="button" aria-expanded="false" aria-controls="collapseExample" class="collapsed button-collapse">
+            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-caret-up"></i>
+        </a> -->
+        <i class="fa fa-check-square" aria-hidden="true"></i>
+        <i class="fa fa-square-o" aria-hidden="true"></i>
+        <%= layername %>
+        <!-- <div class="layer-list collapse" id="<%= id %>">
+            <img src="<%= legendURL %>">
+        </div> -->
+    </div>
+</script>
+<script type='text/template' id='_layer-selection-row-heatmap'>
+    <div class="layer-row" data-layername="<%= layername %>">
+        <a aria-hidden="true" data-toggle="collapse" href="#<%= id %>"
+           role="button" aria-expanded="false" aria-controls="collapseExample" class="collapsed button-collapse legendURL">
+            <i class="fa fa-caret-down"></i>
+            <i class="fa fa-caret-up"></i>
+        </a>
+        <input type="radio" name="risk-selection" class="risk-selection"/>
+        <%= layername %>
+        <div class="layer-list collapse" id="<%= id %>">
+            <img class='legendURL' src="<%= legendURL %>">
         </div>
     </div>
 </script>
