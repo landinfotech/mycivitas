@@ -20,3 +20,9 @@ django_project/web-app/static/js/dashboard/env.js
 django_project/version/commit.txt
 django_project/version/version.txt
 celerybeat-schedule*
+
+docs/site/*
+docks/mkdocs.yml
+.direnv
+docs/mkdocs.yml
+docs/pdfs/*
