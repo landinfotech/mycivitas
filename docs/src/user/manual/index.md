@@ -13,10 +13,9 @@ license: This program is free software; you can redistribute it and/or modify it
 
 # User manual
 
-This section of the documentation describes every page in the application and
-what the various components of that page do. The manual is intended to function
-as a reference for the application. For narrative / workflow based tutorials,
-you may prefer to work through our [user guide](../guide/index.md).
+This section of the documentation describes every page in the application and what the various components of that page do. The manual is intended to function as a reference for the application. For narrative/workflow-based tutorials, you may prefer to work through our [user guide](../guide/index.md).
+
+* **[Landing Page:](./landing-page.md)** This page describes the landing page of the platform.
 
 * **[Login:](./sign-in.md)** This section of the documentation explains the login page.
 
