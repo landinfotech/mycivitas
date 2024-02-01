@@ -50,6 +50,7 @@ nav:
                           - user/guide/index.md
                   - Manual :
                           - user/manual/index.md
+                        # - Landing Page: user/manual/landing-page.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
