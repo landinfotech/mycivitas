@@ -17,3 +17,7 @@ This section of the documentation describes every page in the application and
 what the various components of that page do. The manual is intended to function
 as a reference for the application. For narrative / workflow based tutorials,
 you may prefer to work through our [user guide](../guide/index.md).
+
+* **[Login:](./sign-in.md)** This section of the documentation explains the login page.
+
+* **[Register:](./sign-up.md)** This documentation explains the sign-up page.
