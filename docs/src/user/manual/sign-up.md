@@ -39,7 +39,9 @@ The sign-up process is divided into two main sections:
 5. **LandInfo Technologies:** `MyCivitas Developed By`
 Visit the [LandInfo Technologies](https://www.landinfotech.com/) website to learn more about the organization behind MyCivitas.
 
-    ![LandInfo Technologies]()
+![LandInfo Technologies](./img/sign-up-3.png)
 
 6. **Kartoza:** `MyCivitas Developed By`
 Explore the [Kartoza](https://kartoza.com/) website for additional information about the organization that developed MyCivitas.
+
+![LandInfo Technologies](./img/sign-up-4.png)
