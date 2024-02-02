@@ -2,9 +2,9 @@
 
 ![sign up option](./img/sign-up-1.png)
 
-Welcome to the community! The `sign-up` page is the gateway to unlocking a world of possibilities. Whether the user is a seasoned professional or a passionate enthusiast, MyCivitas offers a diverse range of features tailored to meet the user's needs.
+Welcome to the community! The `SIGN-UP` page is the gateway to unlocking a world of possibilities. Whether the user is a seasoned professional or a passionate enthusiast, MyCivitas offers a diverse range of features tailored to meet the user's needs.
 
-To get started, simply click on the `SIGN UP` button in the top right corner. Once there, the user will find a user-friendly form designed to capture essential details and tailor user experience.
+To get started, simply click on the `SIGN-UP` button in the top right corner. Once there, the user will find a user-friendly form designed to capture essential details and tailor user experience.
 
 ## Sign Up Page
 
@@ -45,3 +45,5 @@ Visit the [LandInfo Technologies](https://www.landinfotech.com/) website to lear
 Explore the [Kartoza](https://kartoza.com/) website for additional information about the organization that developed MyCivitas.
 
 ![LandInfo Technologies](./img/sign-up-4.png)
+
+By following these steps and providing the necessary information, users can successfully create an account on `MyCivitas`.
