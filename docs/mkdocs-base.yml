@@ -50,6 +50,8 @@ nav:
                           - user/guide/index.md
                   - Manual :
                           - user/manual/index.md
+                        #   - Sign In: user/manual/sign-in.md
+                        #   - Sign Up: user/manual/sign-up.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
