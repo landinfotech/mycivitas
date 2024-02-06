@@ -133,10 +133,12 @@ On the right side of the map, the user will find various options related to work
         - Alternatively, directly click on the desired location on the map to view assets and initiate ticket creation.
 
         ![create ticket button](./img/community-map-19.png)
+        ![create ticket](./img/community-map-20.png)
+
 
         1. **Add Asset for Creating Ticket:** Once the assets appear for the location, click on the `Add Asset for Creating Ticket` button to proceed with ticket creation. Upon clicking, an exclamation mark will be displayed on the `Create Ticket` panel. This button will transform into the `Remove Asset from Creating Ticket` button, the user can click on this button to remove the assets from creating the tickets. To create a ticket, navigate to the `Create Ticket` panel by clicking on the `exclamation mark` or `Create Ticket` panel.
 
-            ![create ticket](./img/community-map-20.png)
+            ![create ticket](./img/community-map-26.png)
 
             1. **Minus Icon:** Click on the `Minus` icon to cancel the ticket creation process if needed.
 
@@ -160,13 +162,15 @@ On the right side of the map, the user will find various options related to work
 
                 - **Assign To (Optional):** Assign the ticket to a specific person if needed.
 
+            ![create ticket](./img/community-map-27.png)
+
             3. **Create Ticket Button:**  Click the `Create Ticket` button to finalize and create the ticket. Once the user clicks on this button the ticket is created and the user will redirected edit tickets page.
 
                 ![edit ticket page](./img/community-map-21.png)
 
 6. **Tickets:** In the `Tickets` panel, users can view a list of all tickets associated with their account. Click on the specific ticket in the list to view its details and relevant information.
 
-![tickets](./img/community-map-22.png)
+    ![tickets](./img/community-map-22.png)
 
 7. **Consequence of Failure:** This panel provides additional details in charts about the consequences of failure. The user can hover over the charts to view more details.
 
