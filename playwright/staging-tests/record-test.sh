@@ -34,6 +34,7 @@ TESTNAME=$1
 $PLAYWRIGHT \
 	codegen \
 	--target playwright-test \
+  --viewport-size=1280,720 \
 	--load-storage=auth.json \
 	-o tests/$1.spec.ts \
 	$BASE_URL
