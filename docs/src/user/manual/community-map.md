@@ -170,12 +170,12 @@ On the right side of the map, the user will find various options related to work
 
 7. **Consequence of Failure:** This panel provides additional details in charts about the consequences of failure. The user can hover over the charts to view more details.
 
-![consequence of failure](./img/community-map-23.png)
+    ![consequence of failure](./img/community-map-23.png)
 
 8. **Probability of Failure:** This panel provides additional details in charts about the probability of failure. The user can hover over the charts to view more details.
 
-![probability of failure](./img/community-map-24.png)
+    ![probability of failure](./img/community-map-24.png)
 
 9. **Risk:** This panel provides additional details in charts about the risk. The user can hover over the charts to view more details.
 
-![risk](./img/community-map-25.png)
+    ![risk](./img/community-map-25.png)
