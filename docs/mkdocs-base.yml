@@ -52,6 +52,7 @@ nav:
                           - user/manual/index.md
                           - Sign In: user/manual/sign-in.md
                           - Sign Up: user/manual/sign-up.md
+                          - View Table: user/manual/view-table.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
