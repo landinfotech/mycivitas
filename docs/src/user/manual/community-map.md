@@ -78,7 +78,7 @@ The `Community Map` option provides an interactive and feature-rich experience f
 
         ![options](./img/community-map-13.png)
 
-## Additional Tips:
+### Additional Tips
 
 - Use the layers to overlay different types of information on the map.
 
