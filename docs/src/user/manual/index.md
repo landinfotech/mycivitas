@@ -21,3 +21,5 @@ you may prefer to work through our [user guide](../guide/index.md).
 * **[Login:](./sign-in.md)** This section of the documentation explains the login page.
 
 * **[Register:](./sign-up.md)** This documentation explains the sign-up page.
+
+* **[Community Map:](./community-map.md)** This documentation explains the community map page.
