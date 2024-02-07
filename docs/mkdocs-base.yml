@@ -53,6 +53,7 @@ nav:
                           - Sign In: user/manual/sign-in.md
                           - Sign Up: user/manual/sign-up.md
                           - View Table: user/manual/view-table.md
+                          - Community Map: user/manual/community-map.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
