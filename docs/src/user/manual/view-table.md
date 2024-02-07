@@ -38,7 +38,6 @@ Welcome to the View Table page, a powerful tool designed to enhance the user's d
 
         - Filtered columns ![columns](./img/view-table-7.png)
 
-
 3. **Column Search Option:** Refine the data exploration within each column. Find a dedicated search option below the column name and search for specific data within each column effortlessly.
 
     ![searched data by column](./img/view-table-8.png)
