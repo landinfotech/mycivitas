@@ -54,6 +54,7 @@ nav:
                           - Sign Up: user/manual/sign-up.md
                           - View Table: user/manual/view-table.md
                           - Community Map: user/manual/community-map.md
+                          - Dashboard: user/manual/dashboard.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
