@@ -26,15 +26,15 @@ Welcome to the View Table page, a powerful tool designed to enhance the user's d
 
         ![default columns](./img/view-table-5.png)
 
-    3. **Custom:** Opt for customization with the `Custom` option. When selected, the `Select Columns` dropdown and `Apply Filter` button will appear.
+    3. **Custom:** Opt for customisation with the `Custom` option. When selected, the `Select Columns` dropdown and `Apply Filter` button will appear.
 
         ![custom](./img/view-table-6.png)
 
-        1. **Select Columns Dropdown:** Click on the dropdown to reveal a list of all available columns. The user can choose the columns they want to display in the customized view.
+        1. **Select Columns Dropdown:** Click on the dropdown to reveal a list of all available columns. The user can choose the columns they want to display in the customised view.
 
         2. **Selected Columns:** Shows the selected columns by the user.
 
-        3. **Apply Button:** After selecting the preferred columns, click the `Apply Filter` button. The table will update to reflect the customized column selection.
+        3. **Apply Button:** After selecting the preferred columns, click the `Apply Filter` button. The table will update to reflect the customised column selection.
 
         - Filtered columns ![columns](./img/view-table-7.png)
 
