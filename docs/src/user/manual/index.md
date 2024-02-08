@@ -22,4 +22,6 @@ you may prefer to work through our [user guide](../guide/index.md).
 
 * **[Register:](./sign-up.md)** This documentation explains the sign-up page.
 
+* **[View Table:](./view-table.md)** This documentation explains the view table page.
+
 * **[Community Map:](./community-map.md)** This documentation explains the community map page.
