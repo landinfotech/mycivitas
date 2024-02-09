@@ -69,3 +69,31 @@ Welcome to the `Work Order` page, a central hub for managing and tracking work o
     7. **Delete:** The user can delete the ticket using the `Delete` button. When the user clicks on the button, a confirmation popup opens, ensuring the user's intention before proceeding with the deletion of the ticket.
 
 5. **Previous/Next Button:** Navigate through multiple pages of the `Work Order` table using the `Previous` and `Next` buttons. Easily access different sets of work orders based on the user's viewing preferences.
+
+### TimeLine Section
+
+Explore the `Timeline` section, a central hub for navigating through various tickets and their details. Here's the guide to efficiently use this feature.
+
+![timeline section](./img/work-order-8.png)
+
+1. **TimeLine:** The `Timeline` shows all activities related to a specific Work Order. In the middle of the page, the user will find the title of the ticket along with its description. The created date of the ticket is also prominently displayed.
+
+2. **View Ticket:** A `View Ticket` link is available, providing a quick way to access the full details of the displayed ticket. When the user clicks on this link they will redirected to the edit ticket page.
+
+    ![ticket edit page](./img/work-order-9.png)
+
+3. **Useful feature:** The user can use these features for better visualization.
+
+    - **Zoom In Icon** Click on this icon to `Zoom In` the timeline graph line.
+
+        ![ticket edit page](./img/work-order-10.png)
+
+    - **Zoom Out Icon** Click on this icon to `Zoom Out` the timeline graph line.
+
+        ![ticket edit page](./img/work-order-11.png)
+
+    - **Go Back Icon** Click on this icon to `Go Back` to the start point of the timeline graph line.
+
+        ![ticket edit page](./img/work-order-12.png)
+
+4. **Status:** This shows the status of the ticket and the assigned person's email.
