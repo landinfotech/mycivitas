@@ -25,3 +25,5 @@ you may prefer to work through our [user guide](../guide/index.md).
 * **[View Table:](./view-table.md)** This documentation explains the view table page.
 
 * **[Community Map:](./community-map.md)** This documentation explains the community map page.
+
+* **[Work order:](./work-order.md)** This documentation explains the work order page.
