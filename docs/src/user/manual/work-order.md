@@ -97,3 +97,55 @@ Explore the `Timeline` section, a central hub for navigating through various tic
         ![ticket edit page](./img/work-order-12.png)
 
 4. **Status:** This shows the status of the ticket and the assigned person's email.
+
+### Reports & Statistics Section
+
+Unlock valuable insights into ticket management with the Reports & Statistics section. Here's a comprehensive guide to navigating and interpreting the presented information.
+
+![reports & statistics](./img/work-order-13.png)
+
+1. **Report & Statistics:** This section provides the average number of days until a ticket is closed for all tickets. Additionally, it offers insights into the average number of days until ticket closure specifically for tickets opened in the last 60 days. Click `here` to delve into more granular data.
+
+    - **Queue (Clickable):** Click on the queue type to explore detailed information about tickets in that specific category.
+
+    - **New:** Number of tickets in the `New` status.
+
+    - **Open:** Number of tickets in the `Open` status.
+
+    - **Resolved:** Number of tickets in the `Resolved` status.
+
+    - **Closed:** Number of tickets in the `Closed` status.
+
+    - **Time Spent:** Insights into the cumulative time spent on all tickets.
+
+2. **Reports By User:**  Explore detailed insights into ticket management by utilizing the `Reports by User` section. Choose from four distinct options to view both table and chart representations.
+
+    1. **By Priority:** Click on `By Priority` to access a comprehensive table and chart showcasing ticket distribution based on priority. Understand the distribution of tickets categorized by their priority levels.
+
+        ![by priority](./img/work-order-14.png)
+
+    2. **By Queue:** Opt for `By Queue` to delve into a detailed breakdown of tickets across different queues. Explore the distribution of tickets within each queue, providing insights into workload distribution.
+
+        ![by queue](./img/work-order-15.png)
+
+    3. **By Status:** Select `By Status` to view an informative table and chart displaying the distribution of tickets based on their status. Gain insights into the current status distribution of tickets within the system.
+
+        ![by status](./img/work-order-16.png)
+
+    4. **By Month:** Click on `By Month` to access a detailed breakdown of ticket data month-wise. Explore how ticket-related metrics vary across different months.
+
+        ![by month](./img/work-order-17.png)
+
+3. **Reports By Queue:** Gain valuable insights into ticket distribution across different queues with the Reports by Queue section. Choose from three distinct options to view both table and chart representations.
+
+    1. **By Priority:** Click on `By Priority` to access a comprehensive table and chart showcasing ticket distribution based on priority within each queue. Understand the priority-wise distribution of tickets for efficient workload management.
+
+        ![by priority](./img/work-order-18.png)
+
+    2. **By Status:** Opt for `By Status` to view an informative table and chart displaying the distribution of tickets based on their status within each queue. Gain insights into the current status distribution of tickets for each queue.
+
+        ![by status](./img/work-order-19.png)
+
+    3. **By Month:** Select `By Month` to access a detailed breakdown of ticket data month-wise within each queue. Explore how ticket-related metrics vary across different months for each queue. This can help you identify any seasonal trends or patterns that may impact your service delivery.
+
+        ![by month](./img/work-order-20.png)
