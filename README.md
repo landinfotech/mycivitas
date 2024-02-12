@@ -7,7 +7,7 @@ MyCivitas is a GIS-integrated asset management application developed to address 
 
 MyCivitas includes a web-interface for application users and a configured QGIS interface for application technicians. LandInfo Technologies and Kartoza are the official maintainers of MyCivitas.
 
-[Check out a Civitas Asset Management wiki](https://github.com/landinfotech/civitas-asset-management/wiki)
+[Check out a Civitas Asset Management wiki](https://github.com/landinfotech/mycivitas)
 
 Here are a couple short videos to introduce some basic concepts:
 
