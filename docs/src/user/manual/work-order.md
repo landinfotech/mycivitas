@@ -14,7 +14,7 @@ Welcome to the `Work Order` page, a central hub for managing and tracking work o
 
 1. **Table:** The table section displays the list of tickets. Each row represents a ticket. It includes columns such as `Ticket`, `Type` `Priority`, `Status`, `Created`, `Operator`, `Submitter`, `Start Date`, and `Due Date`. Each column has an up/down arrow to indicate the option to display the list in ascending or descending order.
 
-2. **Show Entries Dropdown:** Utilize the `Show Entries` dropdown to choose the number of entries as per user convenience to display on the page. Options include 10, 25, 50, and 100 entries, allowing for customized viewing.
+2. **Show Entries Dropdown:** Utilise the `Show Entries` dropdown to choose the number of entries as per user convenience to display on the page. Options include 10, 25, 50, and 100 entries, allowing for customised viewing.
 
     ![10 entries](./img/work-order-3.png)
 
@@ -35,7 +35,7 @@ Welcome to the `Work Order` page, a central hub for managing and tracking work o
     Welcome to the `Work Order Edit` page, where the user can fine-tune and manage the details of their work orders.
 
     1. **Location on the Map:** This section displays the specific location on the map for which the work order ticket is created. Gain visual insights into the geographical context of the work order.
-    2. **Plus/Minus Icons:** Utilize the `Plus/Minus` icons for zooming in and out on the map. Adjust the map view to focus on specific details or get a broader perspective.
+    2. **Plus/Minus Icons:** Utilise the `Plus/Minus` icons for zooming in and out on the map. Adjust the map view to focus on specific details or get a broader perspective.
 
     3. **Menu Icon:** Click on the `Menu` icon to access options for editing or deleting the work order description. Efficiently manage and modify the work order details as needed.
 
@@ -70,19 +70,19 @@ Welcome to the `Work Order` page, a central hub for managing and tracking work o
 
 5. **Previous/Next Button:** Navigate through multiple pages of the `Work Order` table using the `Previous` and `Next` buttons. Easily access different sets of work orders based on the user's viewing preferences.
 
-### TimeLine Section
+### Timeline Section
 
 Explore the `Timeline` section, a central hub for navigating through various tickets and their details. Here's the guide to efficiently use this feature.
 
 ![timeline section](./img/work-order-8.png)
 
-1. **TimeLine:** The `Timeline` shows all activities related to a specific Work Order. In the middle of the page, the user will find the title of the ticket along with its description. The created date of the ticket is also prominently displayed.
+1. **Timeline:** The `Timeline` shows all activities related to a specific Work Order. In the middle of the page, the user will find the title of the ticket along with its description. The created date of the ticket is also prominently displayed.
 
 2. **View Ticket:** A `View Ticket` link is available, providing a quick way to access the full details of the displayed ticket. When the user clicks on this link they will redirected to the edit ticket page.
 
     ![ticket edit page](./img/work-order-9.png)
 
-3. **Useful feature:** The user can use these features for better visualization.
+3. **Useful feature:** The user can use these features for better visualisation.
 
     - **Zoom In Icon** Click on this icon to `Zoom In` the timeline graph line.
 
@@ -118,9 +118,9 @@ Unlock valuable insights into ticket management with the Reports & Statistics se
 
     - **Time Spent:** Insights into the cumulative time spent on all tickets.
 
-2. **Reports By User:**  Explore detailed insights into ticket management by utilizing the `Reports by User` section. Choose from four distinct options to view both table and chart representations.
+2. **Reports By User:**  Explore detailed insights into ticket management by utilising the `Reports by User` section. Choose from four distinct options to view both table and chart representations.
 
-    1. **By Priority:** Click on `By Priority` to access a comprehensive table and chart showcasing ticket distribution based on priority. Understand the distribution of tickets categorized by their priority levels.
+    1. **By Priority:** Click on `By Priority` to access a comprehensive table and chart showcasing ticket distribution based on priority. Understand the distribution of tickets categorised by their priority levels.
 
         ![by priority](./img/work-order-14.png)
 
