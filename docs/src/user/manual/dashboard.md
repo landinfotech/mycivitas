@@ -1,6 +1,6 @@
 # Dashboard Page User Manual
 
-Welcome to the `Dashboard` page, a centralized hub for a quick overview of linked communities. Follow this user manual to navigate and make the most out of the dashboard experience.
+Welcome to the `Dashboard` page, a centralised hub for a quick overview of linked communities. Follow this user manual to navigate and make the most out of the dashboard experience.
 
 ![dashboard option](./img/dashboard-1.png)
 
@@ -28,7 +28,7 @@ Welcome to the `Dashboard` page, a centralized hub for a quick overview of linke
 
                 ![downloaded pdf](./img/dashboard-8.png)
 
-            2. **Available Options on Chart:** Explore various options on the chart for enhanced visualization:
+            2. **Available Options on Chart:** Explore various options on the chart for enhanced visualisation:
 
             - **Camera Image (Download as PNG):** Download the plot as a PNG image.
             
@@ -38,13 +38,13 @@ Welcome to the `Dashboard` page, a centralized hub for a quick overview of linke
 
             - **Select Box Image:** Activate the select box feature to choose a specific area on the graph.
 
-            - **Lasso Select Image:** Utilize the lasso select image option for precise graph selection.
+            - **Lasso Select Image:** Utilise the lasso select image option for precise graph selection.
 
             - **Plus Image (Zoom In):** Zoom in for a more detailed view of the chart.
 
             - **Minus Image (Zoom Out):** Zoom out to get a broader perspective of the chart.
 
-            - **Auto Scale Image:** Automatically scale the graph for optimal visualization.
+            - **Auto Scale Image:** Automatically scale the graph for optimal visualisation.
 
             - **Home Image (Refresh Axes):** Click to reset and refresh the axes of the chart.
 
@@ -56,13 +56,13 @@ Welcome to the `Dashboard` page, a centralized hub for a quick overview of linke
 
             ![maintenance costs of assets](./img/dashboard-10.png)
 
-        3. **Annual Average Infrastructure Demand:** This graph uses lifespan projections and renewal costs for a long-term outlook of infrastructure. This projection is theoretical and is not a realistic indication of spending timelines. A valuable output of this projection is an annualized infrastructure demand, indicated as a dotted line on the graph. This annualized value is obtained by dividing the renewal cost by the lifespan for each asset in the database and then summing the total. As lifespan and renewal cost data are updated, the annual infrastructure demand will update. The annual infrastructure demand could be lowered by committing to operations and maintenance programs to extend lifespans, deciding to rehabilitate versus replace, and more. The values shown in the graph are based on current $ values and the actual value of this average annual investment will increase over time with inflation.
+        3. **Annual Average Infrastructure Demand:** This graph uses lifespan projections and renewal costs for a long-term outlook of infrastructure. This projection is theoretical and is not a realistic indication of spending timelines. A valuable output of this projection is an annualised infrastructure demand, indicated as a dotted line on the graph. This annualised value is obtained by dividing the renewal cost by the lifespan for each asset in the database and then summing the total. As lifespan and renewal cost data are updated, the annual infrastructure demand will update. The annual infrastructure demand could be lowered by committing to operations and maintenance programs to extend lifespans, deciding to rehabilitate versus replace, and more. The values shown in the graph are based on current $ values and the actual value of this average annual investment will increase over time with inflation.
 
             ![annual average infrastructure demand](./img/dashboard-11.png)
 
             ![annual average infrastructure demand](./img/dashboard-12.png)
 
-        4. **Risk By System:** A risk value is obtained by combining Probability of Failure (PoF) and Consequence of Failure (CoF) values as per the following matrix. It is common asset management practice to shift the matrix in favor of the consequence of failure.
+        4. **Risk By System:** A risk value is obtained by combining Probability of Failure (PoF) and Consequence of Failure (CoF) values as per the following matrix. It is common asset management practice to shift the matrix in favour of the consequence of failure.
 
             ![risk by system](./img/dashboard-13.png)
 
@@ -74,7 +74,7 @@ Welcome to the `Dashboard` page, a centralized hub for a quick overview of linke
 
             ![remaining years by renewal cost by system](./img/dashboard-16.png)
 
-        6. **Remaining Years by Renewal Cost by Risk:** This section offers a detailed analysis of the remaining operational years of a system to its renewal cost and associated risk factors. Understand how the remaining lifespan of different systems correlates with their renewal costs and associated risks. Use this valuable information to prioritize and strategize system maintenance, considering both financial and risk considerations. Enhance decision-making processes by leveraging insights into the intersection of system longevity, renewal costs, and associated risks.
+        6. **Remaining Years by Renewal Cost by Risk:** This section offers a detailed analysis of the remaining operational years of a system to its renewal cost and associated risk factors. Understand how the remaining lifespan of different systems correlates with their renewal costs and associated risks. Use this valuable information to prioritise and strategise system maintenance, considering both financial and risk considerations. Enhance decision-making processes by leveraging insights into the intersection of system longevity, renewal costs, and associated risks.
 
             ![remaining years by renewal cost by risk](./img/dashboard-17.png)
 
