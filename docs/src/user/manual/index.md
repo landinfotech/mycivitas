@@ -25,4 +25,6 @@ This section of the documentation describes every page in the application and wh
 
 * **[Community Map:](./community-map.md)** This documentation explains the community map page.
 
+* **[Dashboard:](./dashboard.md)** This documentation explains the dashboard page.
+
 * **[Work order:](./work-order.md)** This documentation explains the work order page.
