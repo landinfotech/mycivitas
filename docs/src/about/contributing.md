@@ -1,17 +1,16 @@
 ---
-title: PROJECT_TITLE
-summary: PROJECT_SUMMARY
-    - PERSON_1
-    - PERSON_2
-date: DATE
-some_url: PROJECT_GITHUB_URL
-copyright: Copyright 2023, PROJECT_OWNER
-contact: PROJECT_CONTACT
+title: MY_CIVITAS
+summary: MyCivitas is a cost-effective and user-friendly asset management platform designed specifically for small communities. This comprehensive solution offers an all-inclusive and easy-to-use platform, empowering users to efficiently record and manage their assets within a powerful information system. With MyCivitas, communities can streamline their asset management processes, ensuring a seamless and effective approach to organising and overseeing their valuable resources.
+    - Jeremy Prior
+    - Ketan Bamniya
+date: 01-02-2024
+some_url: https://github.com/landinfotech/mycivitas
+copyright: Copyright 2024, LandInfoTech
+contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-#context_id: 1234
 ---
 
-# Contributing to [PROJECT_NAME]
+# Contributing to MyCivitas
 
 First off, thanks for taking the time to contribute! 🎉 😘 ✨
 
@@ -46,8 +45,8 @@ Explain the problem and include additional details to help maintainers reproduce
 
 In case you want to suggest an enhancement, please follow this guideline to
 help maintainers and the community understand your suggestion.
-Before creating suggestions, please check [issue
-list](https://github.com/project-name/repository/labels/feature) if
+Before creating suggestions, please check the [issue
+list](https://github.com/landinfotech/mycivitas/issues) if
 there's already a request.
 
 Create an issue and provide the following information:
@@ -60,7 +59,7 @@ Create an issue and provide the following information:
   copy/paste-able snippets which you use in those examples, as Markdown code
   blocks.
 * **Include screenshots and animated GIFs** which helps demonstrate the steps
-  or point out the part of project which the suggestion is related to.
+  or point out the part of a project which the suggestion is related to.
 * **Explain why this enhancement would be useful** to most users.
 * **List some other text editors or applications where this enhancement
   exists.**
@@ -70,7 +69,7 @@ Create an issue and provide the following information:
 Unsure where to begin contributing? You can start by looking
 through these `document`, `good first issue` and `help wanted` issues:
 
-* **document issues**: issues which should be reviewed or improved.
+* **document issues**: issues that should be reviewed or improved.
 * **good first issues**: issues which should only require a few lines of code,
   and a test or two.
 * **help wanted issues**: issues which should be a bit more involved than
@@ -81,22 +80,22 @@ through these `document`, `good first issue` and `help wanted` issues:
 ### Development workflow
 
 * Set up your development environment
-* Make change from a right branch
+* Make change from the right branch
 * Be sure the code passes tests
 * Make a pull request
 
 ### Development environment
 
-* Prepare your machine and it's packages installed.
+* Prepare your machine and its packages installed.
 * Checkout our repository
-* Install dependencies by `pip install -r REQUIREMENTS-dev.txt`
+* Follow README.md instructions to install dependencies
 
 ### Make changes
 
 #### Checkout a branch
 
 * **master**: PR Base branch.
-* **production**: lastest release branch with distribution files. Never make a PR on this.
+* **production**: latest release branch with distribution files. Never make a PR on this.
 * **gh-pages**: API docs, examples and demo
 
 #### Check code style
@@ -119,7 +118,7 @@ Make your pull request, then describe your changes.
 
 #### Title
 
-Follow other PR title format on below.
+Follow other PR title formats below.
 
 ```
     <Type>: Short Description (fix #111)
@@ -127,13 +126,13 @@ Follow other PR title format on below.
     <Type>: Short Description (ref #111)
 ```
 
-* capitalize first letter of Type
+* capitalize the first letter of the Type
 * use present tense: 'change' not 'changed' or 'changes'
 
 #### Description
 
 If it has related issues, add links to the issues(like `#123`) in the description.
-Fill in the [Pull Request Template](../developer/guide/templates/pull-request-template.md) by check your case.
+Fill in the [Pull Request Template](../developer/guide/templates/pull-request-template.md) by checking your case.
 
 ## Code of conduct
 
