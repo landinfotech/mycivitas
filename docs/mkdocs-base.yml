@@ -50,11 +50,13 @@ nav:
                           - user/guide/index.md
                   - Manual :
                           - user/manual/index.md
+                          - Landing Page: user/manual/landing-page.md
                           - Sign In: user/manual/sign-in.md
                           - Sign Up: user/manual/sign-up.md
                           - View Table: user/manual/view-table.md
                           - Community Map: user/manual/community-map.md
                           - Dashboard: user/manual/dashboard.md
+                          - Work Order: user/manual/work-order.md
         - Administrators:
                 - administrator/index.md
                 - Guide:

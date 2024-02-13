@@ -1,0 +1,257 @@
+import { test, expect } from '@playwright/test';
+
+let url = '/';
+
+test.use({
+  storageState: 'auth.json',
+  viewport: {
+    height: 720,
+    width: 1280
+  }
+});
+
+test('test anchor point(APT) dashboard', async ({ page }) => {
+  await page.goto(url);
+  await expect(page.locator('#banner')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'MC MyCivitas' })).toBeVisible();
+  await expect(page.locator('#profile')).toContainText('Welcome to MyCivitas');
+  await expect(page.locator('#profile')).toContainText('An affordable, user friendly asset management platform for small communities. MyCivitas is an all-inclusive, easy to use platform that lets you record and manage your assets in one powerful information system.');
+  await expect(page.getByRole('button', { name: 'Open Community Map' })).toBeVisible();
+  await page.getByRole('link', { name: 'Dashboard' }).click();
+  await page.waitForURL('**/dashboard/list/')
+  await expect(page.getByRole('heading')).toContainText('List of Linked Communities');
+  await expect(page.getByRole('link', { name: 'Anchor Point (APT)' })).toBeVisible();
+  await page.getByRole('link', { name: 'Anchor Point (APT)' }).click();
+  await page.waitForURL('**/dashboard/**')
+  await expect(page.locator('h1')).toContainText('Anchor Point (APT) Dashboard');
+  
+  // Renewal costs of assets
+  await expect(page.getByRole('button', { name: 'Renewal costs of assets' })).toBeVisible();
+  await expect(page.locator('#tab_renewal_cost')).toContainText('Renewal costs of assets');
+  await expect(page.getByRole('button', { name: 'Download PDF' })).toBeVisible();
+  await expect(page.locator('[id="\\31 _renewal_cost"] div').filter({ hasText: '$958,031$40,000$261,869$847,' }).nth(1)).toBeVisible();
+  await page.locator('.nsewdrag').first().click();
+  await page.locator('.nsewdrag').first().click();
+  await expect(page.getByRole('cell', { name: 'System Name' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Total Sum' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Total Percentage' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Buildings, Parks, and' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '$958,031' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '15.7%' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Fleet and Equipment' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '$40,000' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '0.7%' })).toBeVisible();
+  await expect(page.getByRole('table')).toContainText('Stormwater Collection');
+  await expect(page.getByRole('table')).toContainText('$261,869');
+  await expect(page.locator('[id="\\32 _renewal_cost_per"]')).toContainText('4.3%');
+  await expect(page.getByRole('table')).toContainText('Transportation');
+  await expect(page.getByRole('table')).toContainText('$847,059');
+  await expect(page.locator('[id="\\33 _renewal_cost_per"]')).toContainText('13.8%');
+  await expect(page.getByRole('table')).toContainText('Wastewater Collection and Treatment');
+  await expect(page.getByRole('table')).toContainText('$665,382');
+  await expect(page.locator('[id="\\34 _renewal_cost_per"]')).toContainText('10.9%');
+  await expect(page.getByRole('table')).toContainText('Water Treatment and Distribution');
+  await expect(page.getByRole('table')).toContainText('$3,344,014');
+  await expect(page.locator('[id="\\35 _renewal_cost_per"]')).toContainText('54.7%');
+  await expect(page.getByRole('table')).toContainText('Total');
+  await expect(page.locator('#renewal_cost_total')).toContainText('$6,116,355');
+  await expect(page.locator('#renewal_cost_per_total')).toContainText('100.0%');
+  await expect(page.getByRole('paragraph')).toContainText('Replacement costs are based on current available costs and include the following components: Capital Costs - 65%, Contingency - 15%, Design - 10%, Inspections and Removal - 10%. As a starting point, a default replacement cost is applied for each asset type. However, in some cases, where the above general formula is not applicable, or requires significantly less or more effort in one of the above areas, a custom cost might have been applied. This value will override the default value.');
+  
+  // Maintenance costs of assets
+  await page.getByRole('button', { name: 'Maintenance costs of assets' }).click();
+  await expect(page.getByRole('button', { name: 'Maintenance costs of assets' })).toBeVisible();
+  await page.keyboard.press('PageUp');
+  await expect(page.locator('#tab_maintenenance_cost')).toContainText('Maintenance costs of assets');
+  await expect(page.getByRole('button', { name: 'Download PDF' })).toBeVisible();
+  await expect(page.locator('[id="\\32 _maintenenance_cost"] div').filter({ hasText: '$28,721$500$10,475$16,941$26,' }).nth(1)).toBeVisible();
+  await expect(page.getByRole('table')).toContainText('System Name');
+  await expect(page.getByRole('table')).toContainText('Total Sum');
+  await expect(page.getByRole('table')).toContainText('Total Percentage');
+  await expect(page.getByRole('table')).toContainText('Buildings, Parks, and Recreation');
+  await expect(page.getByRole('table')).toContainText('$28,721');
+  await expect(page.locator('[id="\\30 _maintenenance_cost_per"]')).toContainText('15.8%');
+  await expect(page.getByRole('table')).toContainText('Fleet and Equipment');
+  await expect(page.getByRole('table')).toContainText('$500');
+  await expect(page.locator('[id="\\31 _maintenenance_cost_per"]')).toContainText('0.3%');
+  await expect(page.getByRole('table')).toContainText('Stormwater Collection');
+  await expect(page.getByRole('table')).toContainText('$10,475');
+  await expect(page.locator('[id="\\32 _maintenenance_cost_per"]')).toContainText('5.8%');
+  await expect(page.getByRole('table')).toContainText('Transportation');
+  await expect(page.getByRole('table')).toContainText('$16,941');
+  await expect(page.locator('[id="\\33 _maintenenance_cost_per"]')).toContainText('9.3%');
+  await expect(page.getByRole('table')).toContainText('Wastewater Collection and Treatment');
+  await expect(page.getByRole('table')).toContainText('$26,615');
+  await expect(page.locator('[id="\\34 _maintenenance_cost_per"]')).toContainText('14.7%');
+  await expect(page.getByRole('table')).toContainText('Water Treatment and Distribution');
+  await expect(page.getByRole('table')).toContainText('$98,163');
+  await expect(page.locator('[id="\\35 _maintenenance_cost_per"]')).toContainText('54.1%');
+  await expect(page.getByRole('table')).toContainText('Total');
+  await expect(page.locator('#maintenenance_cost_total')).toContainText('$181,415');
+  await expect(page.locator('#maintenenance_cost_per_total')).toContainText('100.0%');
+  await expect(page.getByRole('paragraph')).toContainText('Maintenance costs are the estimated annual cost to maintain assets. As a starting point, a default value of 10% of the renewal cost is used');
+  
+  // Annual Average Infrastructure
+  await expect(page.getByRole('button', { name: 'Annual Average Infrastructure' })).toBeVisible();
+  await page.getByRole('button', { name: 'Annual Average Infrastructure' }).click();
+  await page.keyboard.press('PageUp');
+  await expect(page.locator('#tab_annual_reserve')).toContainText('Annual Average Infrastructure Demand');
+  await expect(page.getByRole('button', { name: 'Download PDF' })).toBeVisible();
+  await expect(page.locator('[id="\\33 _annual_reserve"] div').filter({ hasText: '$20,447$1,000$2,896$39,949$9,' }).nth(1)).toBeVisible();
+  await expect(page.getByRole('table')).toContainText('System Name');
+  await expect(page.getByRole('table')).toContainText('Total Sum');
+  await expect(page.getByRole('table')).toContainText('Total Percentage');
+  await expect(page.getByRole('table')).toContainText('Buildings, Parks, and Recreation');
+  await expect(page.getByRole('table')).toContainText('$20,447');
+  await expect(page.locator('[id="\\30 _annual_reserve_per"]')).toContainText('14.9%');
+  await expect(page.getByRole('table')).toContainText('Fleet and Equipment');
+  await expect(page.getByRole('table')).toContainText('$1,000');
+  await expect(page.locator('[id="\\31 _annual_reserve_per"]')).toContainText('0.7%');
+  await expect(page.getByRole('table')).toContainText('Stormwater Collection');
+  await expect(page.getByRole('table')).toContainText('$2,896');
+  await expect(page.locator('[id="\\32 _annual_reserve_per"]')).toContainText('2.1%');
+  await expect(page.getByRole('table')).toContainText('Transportation');
+  await expect(page.getByRole('table')).toContainText('$39,949');
+  await expect(page.locator('[id="\\33 _annual_reserve_per"]')).toContainText('29.1%');
+  await expect(page.getByRole('table')).toContainText('Wastewater Collection and Treatment');
+  await expect(page.getByRole('table')).toContainText('$9,354');
+  await expect(page.locator('[id="\\34 _annual_reserve_per"]')).toContainText('6.8%');
+  await expect(page.getByRole('table')).toContainText('Water Treatment and Distribution');
+  await expect(page.getByRole('table')).toContainText('$63,534');
+  await expect(page.locator('[id="\\35 _annual_reserve_per"]')).toContainText('46.3%');
+  await expect(page.getByRole('table')).toContainText('Total');
+  await expect(page.locator('#annual_reserve_total')).toContainText('$137,180');
+  await expect(page.locator('#annual_reserve_per_total')).toContainText('100.0%');
+  await expect(page.getByRole('paragraph')).toContainText('This graph uses lifespan projections and renewal costs for a long-term outlook of infrastructure. This projection is theoretical and is not a realistic indication of spending timelines. A valuable output of this projection is an annualized infrastructure demand, indicated as a dotted line on the graph. This annualized value is obtained by dividing the renewal cost by the lifespan for each asset in the database and then summing the total. As lifespan and renewal cost data are updated, the annual infrastructure demand will update. The annual infrastructure demand could be lowered by committing to operations and maintenance programs to extend lifespans, deciding to rehabilitate versus replace, and more. The values shown in the graph is based on current $ values and the actual value of this average annual investment will increase over time with inflation.');
+  
+  // Risk By System
+  await expect(page.getByRole('button', { name: 'Risk By System' })).toBeVisible();
+  await page.getByRole('button', { name: 'Risk By System' }).click();
+  await expect(page.locator('#tab_system_risk_renewal')).toContainText('Risk By System');
+  await expect(page.getByRole('button', { name: 'Download PDF' })).toBeVisible();
+  await expect(page.locator('[id="\\34 _system_risk_renewal"] div').filter({ hasText: '$231,250$640,000$40,000$750,' }).nth(1)).toBeVisible();
+  await page.locator('[id="\\34 _system_risk_renewal"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\34 _system_risk_renewal"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\34 _system_risk_renewal"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\34 _system_risk_renewal"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await expect(page.locator('.bg').first()).toBeVisible();
+  await expect(page.getByRole('table')).toContainText('System Name');
+  await expect(page.getByRole('table')).toContainText('Extreme');
+  await expect(page.getByRole('table')).toContainText('High');
+  await expect(page.getByRole('table')).toContainText('Medium');
+  await expect(page.getByRole('table')).toContainText('Low');
+  await expect(page.getByRole('table')).toContainText('Minimal');
+  await expect(page.getByRole('table')).toContainText('Minimal');
+  await expect(page.getByRole('table')).toContainText('None');
+  await expect(page.getByRole('table')).toContainText('Total Sum');
+  await expect(page.getByRole('table')).toContainText('Total Percentage');
+  await expect(page.getByRole('table')).toContainText('Buildings, Parks, and Recreation');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$640,000');
+  await expect(page.getByRole('table')).toContainText('$318,031');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$958,031');
+  await expect(page.locator('[id="\\30 _system_risk_renewal_per"]')).toContainText('15.7%');
+  await expect(page.getByRole('table')).toContainText('Fleet and Equipment');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$40,000');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$40,000');
+  await expect(page.locator('[id="\\31 _system_risk_renewal_per"]')).toContainText('0.7%');
+  await expect(page.getByRole('table')).toContainText('Stormwater Collection');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$261,869');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$261,869');
+  await expect(page.locator('[id="\\32 _system_risk_renewal_per"]')).toContainText('4.3%');
+  await expect(page.getByRole('table')).toContainText('Transportation');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$750,882');
+  await expect(page.getByRole('table')).toContainText('$96,177');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$847,059');
+  await expect(page.locator('[id="\\33 _system_risk_renewal_per"]')).toContainText('13.8%');
+  await expect(page.getByRole('table')).toContainText('Wastewater Collection and Treatment');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$665,382');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$665,382');
+  await expect(page.locator('[id="\\34 _system_risk_renewal_per"]')).toContainText('10.9%');
+  await expect(page.getByRole('table')).toContainText('Water Treatment and Distribution');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$231,250');
+  await expect(page.getByRole('table')).toContainText('$2,824,522');
+  await expect(page.getByRole('table')).toContainText('$288,243');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$3,344,014');
+  await expect(page.locator('[id="\\35 _system_risk_renewal_per"]')).toContainText('54.7%');
+  await expect(page.getByRole('table')).toContainText('Total');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$231,250');
+  await expect(page.getByRole('table')).toContainText('$4,920,786');
+  await expect(page.getByRole('table')).toContainText('$964,319');
+  await expect(page.getByRole('table')).toContainText('$0');
+  await expect(page.getByRole('table')).toContainText('$6,116,355');
+  await expect(page.locator('#system_risk_renewal_per_total')).toContainText('100%');
+  await expect(page.locator('[id="\\34 _system_risk_renewal_des"]')).toContainText('A risk value is obtained by combining Probability of Failure (PoF) and Consequence of Failure (CoF) values as per the following matrix. It is common asset management practice to shift the matrix in favour of the consequence of failure,');
+  
+  // Remaining Years by Renewal Cost by System
+  await expect(page.getByRole('button', { name: 'Remaining Years by Renewal Cost by System' })).toBeVisible();
+  await page.getByRole('button', { name: 'Remaining Years by Renewal Cost by System' }).click();
+  await page.keyboard.press('PageUp');
+  await expect(page.locator('#tab_remaining_years_renewal_system')).toContainText('Remaining Years by Renewal Cost by System');
+  await expect(page.getByRole('button', { name: 'Download PDF' })).toBeVisible();
+  await expect(page.locator('[id="\\35 _remaining_years_renewal_system"] div').filter({ hasText: '-5 - -10 - 45 - 910 - 1415 -' }).nth(1)).toBeVisible();
+  await expect(page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg:nth-child(3) > .infolayer > .legend > .bg')).toBeVisible();
+  await page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\35 _remaining_years_renewal_system"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await expect(page.getByRole('table')).toContainText('Remaining Years');
+  await expect(page.getByRole('table')).toContainText('Buildings, Parks, and Recreation');
+  await expect(page.getByRole('table')).toContainText('Fleet and Equipment');
+  await expect(page.getByRole('table')).toContainText('Stormwater Collection');
+  await expect(page.getByRole('table')).toContainText('Transportation');
+  await expect(page.getByRole('table')).toContainText('Wastewater Collection and Treatment');
+  await expect(page.getByRole('table')).toContainText('Water Treatment and Distribution');
+  await expect(page.getByRole('table')).toContainText('Total Result');
+  await expect(page.getByRole('button', { name: 'Remaining Years by Renewal Cost by Risk' })).toBeVisible();
+  
+  // Remaining Years by Renewal Cost by Risk
+  await page.getByRole('button', { name: 'Remaining Years by Renewal Cost by Risk' }).click();
+  await expect(page.locator('#tab_remaining_years_renewal_risk')).toContainText('Remaining Years by Renewal Cost by Risk');
+  await page.keyboard.press('PageUp');
+  await expect(page.getByRole('button', { name: 'Download PDF' })).toBeVisible();
+  await expect(page.locator('[id="\\36 _remaining_years_renewal_risk"] div').filter({ hasText: '-5 - -10 - 45 - 910 - 1415 -' }).nth(1)).toBeVisible();
+  await expect(page.locator('[id="\\36 _remaining_years_renewal_risk"] > .plot-container > .user-select-none > svg:nth-child(3) > .infolayer > .legend > .bg')).toBeVisible();
+  await page.locator('[id="\\36 _remaining_years_renewal_risk"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\36 _remaining_years_renewal_risk"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\36 _remaining_years_renewal_risk"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\36 _remaining_years_renewal_risk"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await page.locator('[id="\\36 _remaining_years_renewal_risk"] > .plot-container > .user-select-none > svg > .draglayer > .xy > .nsewdrag').click();
+  await expect(page.getByRole('table')).toContainText('Remaining Years');
+  await expect(page.getByRole('table')).toContainText('Extreme');
+  await expect(page.getByRole('table')).toContainText('High');
+  await expect(page.getByRole('table')).toContainText('Medium');
+  await expect(page.getByRole('table')).toContainText('Low');
+  await expect(page.getByRole('table')).toContainText('Minimal');
+  await expect(page.getByRole('table')).toContainText('None');
+  await expect(page.getByRole('table')).toContainText('Total Result');
+});
