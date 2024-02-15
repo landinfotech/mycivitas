@@ -57,6 +57,7 @@ nav:
                           - Community Map: user/manual/community-map.md
                           - Dashboard: user/manual/dashboard.md
                           - Work Order: user/manual/work-order.md
+                          - Profile Options: user/manual/profile.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
