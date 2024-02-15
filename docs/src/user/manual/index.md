@@ -29,4 +29,4 @@ This section of the documentation describes every page in the application and wh
 
 * **[Work order:](./work-order.md)** This documentation explains the work order page.
 
-* **[Profile options:](./work-order.md)** This documentation explains the profile oprions.
+* **[Profile options:](./work-order.md)** This documentation explains the profile options.

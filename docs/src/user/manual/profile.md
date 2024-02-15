@@ -26,7 +26,7 @@ Explore and manage a user's `MyCivitas` profile efficiently with the following u
 
         ![organisation profile page](./img/profile-10.png)
 
-        1. **Profile:** By default, the organissation's `Profile` page will open. To navigate to the Community Map, click on the `Open Community Map` button. To view the owner's profile, click on the clickable owner name.
+        1. **Profile:** By default, the organisation's `Profile` page will open. To navigate to the Community Map, click on the `Open Community Map` button. To view the owner's profile, click on the clickable owner name.
 
         2. **Manage Access:** Click on the `Manage Access` to go to the organisation manage access page where the owner can manage the access of associate users.
 
