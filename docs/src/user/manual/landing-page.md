@@ -93,7 +93,7 @@ Easily sign in if the user is an existing user or sign up to join the MyCivitas 
 
 8. **Message:** Welcome to MyCivitas. Read the welcoming message that introduces MyCivitas as an affordable, user-friendly asset management platform for small communities.
 
-# Landing Page After Login
+## Landing Page After Login
 
 ### Navigation
 
@@ -125,12 +125,12 @@ Easily sign in if the user is an existing user or sign up to join the MyCivitas 
 
     ![set up work order](./img/landing-page-10.png)
 
-    - **We Are Here to Help** At MyCivitas, we understand that the user's journey, from capturing data to presenting to the council, may come with questions or needs for assistance. Rest assured, the  MyCivitas team of experienced staff is readily available to support the user every step of the way.
+    - **We Are Here to Help:** At MyCivitas, we understand that the user's journey, from capturing data to presenting to the council, may come with questions or needs for assistance. Rest assured, the  MyCivitas team of experienced staff is readily available to support the user every step of the way.
     Please note that support is not included in the hosting fee. For small communities seeking ongoing assistance, a popular option is to sign up for an annual support contract. Feel free to reach out to us at `support@civitas.ca`, and we will connect with a dedicated team member near the user. The user's success with MyCivitas is our priority, and we are committed to providing the help users need to maximize the benefits of our platform.
 
     ![we are here to help](./img/landing-page-11.png)
 
-    - **Enjoy Asset Management** MyCivitas invites users to practice effective and sustainable asset management on our affordable platform for the benefit of the community. Embrace the convenience, insights, and efficiency that MyCivitas offers, ensuring that their assets are managed with precision and care. By leveraging our platform, you contribute to the overall well-being and success of the community's infrastructure. Enjoy the journey of asset management with MyCivitas!
+    - **Enjoy Asset Management:** MyCivitas invites users to practice effective and sustainable asset management on our affordable platform for the benefit of the community. Embrace the convenience, insights, and efficiency that MyCivitas offers, ensuring that their assets are managed with precision and care. By leveraging our platform, you contribute to the overall well-being and success of the community's infrastructure. Enjoy the journey of asset management with MyCivitas!
 
     ![enjoy asset management](./img/landing-page-12.png)
 
@@ -160,7 +160,7 @@ Easily sign in if the user is an existing user or sign up to join the MyCivitas 
 
 7. **View Table:** Access a detailed table view of the user's community's assets. Utilise search and filter options for efficient data exploration and management. For detailed documentation on the `View Table` click [here](./view-table.md)
 
-8. **Dashboard:** Gain insights into the user's community's asset metrics with an informative dashboard. View linked communities and click for detailed information. For detailed documentation on the `Dashbord` click [here](./dashboard.md)
+8. **Dashboard:** Gain insights into the user's community's asset metrics with an informative dashboard. View linked communities and click for detailed information. For detailed documentation on the `Dashboard` click [here](./dashboard.md)
 
 9. **Work Orders:** Efficiently manage work orders for your community. Create, edit, and track the progress of tasks seamlessly. For detailed documentation on the `Work Order` click [here](./work-order.md)
 
