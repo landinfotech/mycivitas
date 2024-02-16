@@ -1,4 +1,4 @@
-site_name: Project Name
+site_name: MyCivitas
 site_description: "Project technical and user documentation."
 site_author: "Kartoza"
 docs_dir: ./src

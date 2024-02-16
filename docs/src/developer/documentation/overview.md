@@ -1,15 +1,15 @@
 ---
-title: GeoSight-OS Documentation Home 
-summary: GeoSight is UNICEF's geospatial web-based business intelligence platform.
-    - Tim Sutton
-    - Irwan Fathurrahman
-date: 2023-08-03
-some_url: https://github.com/unicef-drp/GeoSight-OS
-copyright: Copyright 2023, Unicef
-contact: geosight-no-reply@unicef.org
+title: MY_CIVITAS
+summary: MyCivitas is a cost-effective and user-friendly asset management platform designed specifically for small communities. This comprehensive solution offers an all-inclusive and easy-to-use platform, empowering users to efficiently record and manage their assets within a powerful information system. With MyCivitas, communities can streamline their asset management processes, ensuring a seamless and effective approach to organising and overseeing their valuable resources.
+    - Jeremy Prior
+    - Ketan Bamniya
+date: 01-02-2024
+some_url: https://github.com/landinfotech/mycivitas
+copyright: Copyright 2024, LandInfoTech
+contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-#context_id: 1234
 ---
+
 
 # Documentation Overview
 
@@ -77,9 +77,9 @@ Please follow these conventions when writing your documentation:
 
 ## Contributing to the documentation
 
-:pencil2: Note: The repo name in the images below is blurred out, you should work against the GeoRepo-OS repository when following these notes.
+:pencil2: Note: The repo name in the images below is blurred out, you should work against the MyCivitas repository when following these notes.
 
-To start adding to the documentation navigate to the [home page](https://github.com/unicef-drp/GeoRepo-OS) of the repository.
+To start adding to the documentation navigate to the [home page](https://github.com/landinfotech/mycivitas) of the repository.
 
 Once on the repository home page, 1️⃣ click on Fork
 ![Fork Repository 1](img/fork-repo-1.png)
@@ -126,16 +126,15 @@ Whenever you create a new file, you should add the standard header to the top of
 
 ```
 ---
-title: GeoRepo-OS Documentation 
-summary: GeoRepo is a UNICEF's geospatial web-based data storage and administrative boundary harmonization platform.
-    - Tim Sutton
-    - Dimas Tri Ciputra
-    - Danang Tri Massandy
-date: 2023-08-03
-copyright: Copyright 2023, Unicef
-contact: georepo-no-reply@unicef.org
+title: MyCivitas
+summary: MyCivitas is a cost-effective and user-friendly asset management platform designed specifically for small communities. This comprehensive solution offers an all-inclusive and easy-to-use platform, empowering users to efficiently record and manage their assets within a powerful information system. With MyCivitas, communities can streamline their asset management processes, ensuring a seamless and effective approach to organising and overseeing their valuable resources.
+    - Jeremy Prior
+    - Ketan Bamniya
+date: 01-02-2024
+some_url: https://github.com/landinfotech/mycivitas
+copyright: Copyright 2024, LandInfoTech
+contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-#context_id: 1234
 ---
 ```
 
@@ -202,9 +201,9 @@ Whenever the user visits the page using the UUID URL, they will be redirected to
 
 ### Generating PDFS
 
-To generate PDFS, `cd` into `GEOREPO-OS/docs` and then run the `build-docs-pdf` in a local terminal
+To generate PDFS, `cd` into `mycivitas/docs` and then run the `build-docs-pdf` in a local terminal
 
 ### Generating Static Site
 
-To generate HTML, `cd` into `GEOREPO-OS/docs` and then run the `build-docs-html` in a local terminal.
+To generate HTML, `cd` into `mycivitas/docs` and then run the `build-docs-html` in a local terminal.
 You can then run `mkdocs serve` to generate the static site on your local host, if there is a port conflict you can specify the port using the `-a` flag e.g `mkdocs serve -a 127.0.0.1:8001`.
