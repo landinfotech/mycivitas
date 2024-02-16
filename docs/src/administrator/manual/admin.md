@@ -38,7 +38,7 @@ The Django admin user table is a central component within the Django admin inter
 
             ![Change Password](./img/admin-5.png)
 
-            1. **Password:** The administrators required to provide the new password here.
+            1. **Password:** The administrators are required to provide the new password here.
             
             2. **Password (again):** The administrators are required to re-enter the new password for confirmation. This field ensures accuracy and helps prevent input errors.
 
@@ -120,3 +120,108 @@ The Django admin user table is a central component within the Django admin inter
     5. **Filters:** The administrators can filter the user table using the available filters on the right side of the tables. 
 
         ![filtered tables](./img/admin-12.png)
+
+### Organisation Table
+
+![organisation table](./img/django-admin-13.png)
+
+1. **Action Dropdown:** The `Action Dropdown` offers the option to perform batch actions on selected organisation records.
+
+    - **Delete selected Organisation:** Permanently remove the selected organisation records.
+
+2. **Username:** Clicking on the username in the Organisation Table redirects administrators to a detailed page containing specific user organisation data.
+
+    ![organisation record](./img/admin-14.png)
+
+    1. **Organisation Name:** Select a user from the dropdown menu to associate the organisation with a specific user. Include an option to keep it empty, if the administrators did not provide the organisation name it automatically fills with the community name.
+
+    2. **Description:** Provide a field where the administrator can input a description for the organisation.
+    
+    3. **Owner Dropdown:** Include a dropdown menu for selecting the owner of the organisation. Populate the dropdown with a list of owners for selection.
+
+        - **Edit Icon:** Allows administrators to edit owner details.
+        - **Plus Icon:** Opens a form for adding a new owner.
+
+    4. **Community Dropdown:** Implement a dropdown menu for selecting the community associated with the organisation. Populate the dropdown with a list of available communities.
+
+    5. **Created at Date:** Display the date and time when the organisation was created. This field is automatically populated on the creation of an organisation.
+
+    6. **Subscription:** This shows the name of the subscription associated with the organisation.
+
+    7. **History Button:** The History button allows administrators to access the history log of the organisation, providing insights into changes and activities related to the organisation.
+
+    ![user organisation](./img/admin-15.png)
+
+    8. **User Organisation Section:** Administrators can efficiently manage users within the organisation using the User Organisation section.
+
+        - **User Email Dropdown:** Administrators can select the email of the user to be added to the organisation from the dropdown list.
+
+        - **Role:** Choose the role or position the user will have within the organisation, such as `Manager` or `Operations Admin`.
+
+        - **Delete Checkbox:** Mark the checkbox next to a user to delete them from the organisation.
+
+        - **Add Another User Organisation:** Click on this link to add another user to the organisation, facilitating a streamlined user management process.
+
+    9. **User Organisation Invitations Section:** Administrators can invite users to join the organisation using the User Organisation Invitations section.
+
+        - **UUID:** Automatically generated UUID (Universally Unique Identifier) for each user invitation.
+
+        - **Email Address:** Administrators need to provide the email of the user to be invited to the organisation.
+
+        - **Role:** Choose the role the user will have within the organisation upon accepting the invitation.
+
+        - **Delete Checkbox:** Mark the checkbox next to an invitation to delete it.
+
+        - **Add Another User Organisation Invitation:** Click on this link to add another user invitation, simplifying the process of inviting multiple users to join the organisation.
+
+    10. **Save:** Save the current record and then get redirected to the Django Admin Table/record list.
+        
+    11. **Save and add another:** Save the current record and then be redirected to a new page to add a new record.
+
+    12. **Save and continue editing:** Save the current record while still showing the current record.
+
+    13. **Delete button:** Delete the currently opened record. It will take administrators to a confirmation page.
+
+3. **Adding Organisation:** The `ADD ORGANISATION` button allows administrators to create new observation records directly from the `Observation Table`. To add a new organisation to the system, the administrators can follow the steps outlined below.
+
+    ![add organisation](./img/admin-16.png)
+
+    1. **Organisation Name:** Select a user from the dropdown menu to associate the organisation with a specific user. Optionally, administrators can leave it empty if the organisation is not directly associated with a user.
+
+    2. **Description:** Provide a brief description of the organisation in the designated field.
+
+    3. **Owner Dropdown:** Choose the owner of the organisation from the dropdown menu. Use the `Edit` icon to modify existing owner details or the `Plus` icon to add a new owner.
+
+    4. **Community Dropdown:** Select the community associated with the organisation from the dropdown menu. Populate the dropdown with a list of available communities.
+
+    5. **Created At:** This field is automatically populated on the creation of an organisation.
+
+    ![add organisation](./img/admin-17.png)
+
+    6. **User Organisation Section:** In this section, administrators can efficiently manage users within the organisation.
+        
+        - **User Email Dropdown:** Select the email of the user to be added to the organisation from the dropdown list. Use the `Edit` icon to modify existing email details or the `Plus` icon to add a new email.
+
+        - **Role:** Choose the role or position the user will have within the organisation. Use the `Edit` icon to modify existing role details or the `Plus` icon to add a new role.
+
+        - **Delete Checkbox:** Mark the checkbox next to a user to delete them from the organisation.
+
+        - **Add Another User Organisation:** Click on this link to add another user to the organisation.
+
+    7. **User Organisation Invitations Section:** Administrators can invite users to join the organisation.
+
+        - **UUID:** Automatically generated UUID for each user invitation.
+
+        - **Email Address:** Provide the email of the user to be invited to the organisation.
+
+        - **Role:** Choose the role the user will have within the organisation. Use the `Edit` icon to modify existing role details or the `Plus` icon to add a new role.
+
+        - **Delete Checkbox:** Mark the checkbox next to an invitation to delete it.
+
+        - **Add Another User Organisation Invitation:** Click on this link to add another user invitation.
+
+    10. **Save:** Save the current record and then get redirected to the Django Admin Table/record list.
+        
+    11. **Save and add another:** Save the current record and then be redirected to a new page to add a new record.
+
+    12. **Save and continue editing:** Save the current record while still showing the current record.
