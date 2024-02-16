@@ -123,7 +123,7 @@ The Django admin user table is a central component within the Django admin inter
 
 ### Organisation Table
 
-![organisation table](./img/django-admin-13.png)
+![organisation table](./img/admin-13.png)
 
 1. **Action Dropdown:** The `Action Dropdown` offers the option to perform batch actions on selected organisation records.
 
@@ -225,3 +225,64 @@ The Django admin user table is a central component within the Django admin inter
     11. **Save and add another:** Save the current record and then be redirected to a new page to add a new record.
 
     12. **Save and continue editing:** Save the current record while still showing the current record.
+
+## General Table Management
+
+All of the tables on the administration site follow similar structures and as such can be managed in similar ways.
+
+### Managing Tables on the Administration Site
+
+All tables on the administration site adhere to a consistent structure, facilitating uniform management procedures. The following points outline the general approach for adding, editing, and deleting records across various tables:
+
+### Adding Tables
+
+- To add a new record, locate the `Add <table name>` button typically available on the respective table page.
+- Click on the button to initiate the creation of a new entry.
+- Follow the prompts or fill in the required fields in the form that opens.
+- Submit the form to add the new record to the table.
+
+### Editing Tables
+
+- For editing existing records, clicking on the name of the record will open a change record page, allowing the administrators to view or edit the record.
+- Update the necessary information or fields as required.
+- Save the changes to update the record.
+
+### Delete Record of Tables
+
+To delete a record, administrators can follow these steps using the action dropdown:
+
+**Select Record:**
+- Checkmark the checkbox available in front of the specific record that needs deletion.
+
+**Open Action Dropdown:**
+- Locate the action dropdown, often positioned near the table header or the selected record.
+
+**Choose Delete Option:**
+- Open the dropdown menu and select the `Delete` option.
+
+**Initiate Deletion:**
+- After selecting the delete option, click the `Go` button to initiate the deletion process.
+
+To delete a record, administrators can utilise the following steps from the change page:
+
+**Navigate to the Change Page:**
+- Access the change page of the specific record that needs deletion by clicking on the record name.
+
+**Locate Delete Button:**
+On the change page, find the `Delete` button.
+
+**Initiate Deletion:**
+- Click the `Delete` button to initiate the deletion process for the record.
+
+### Usage Tips
+
+- Ensure accuracy when adding or editing records by double-checking the entered information.
+- Exercise caution when deleting records, as this action is typically irreversible.
+- Follow any specific guidelines or procedures outlined in the system documentation for individual tables.
+
+### Additional Notes
+
+- Consistent table structures streamline the process of managing data on the administration site.
+- Users familiar with one table's management procedures can easily adapt to others with similar structures.
+- Refer to the system documentation for any unique features or requirements specific to individual tables.
+- By adhering to these general guidelines, administrators can effectively manage tables on the administration site, maintaining data accuracy and system efficiency.
