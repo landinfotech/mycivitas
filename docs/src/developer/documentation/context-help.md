@@ -1,15 +1,15 @@
 ---
-title: GeoSight-OS Documentation Context Help
-summary: GeoSight is UNICEF's geospatial web-based business intelligence platform.
-    - Tim Sutton
-    - Irwan Fathurrahman
-date: 2023-08-03
-some_url: https://github.com/unicef-drp/GeoSight-OS
-copyright: Copyright 2023, Unicef
-contact: geosight-no-reply@unicef.org
+title: MY_CIVITAS
+summary: MyCivitas is a cost-effective and user-friendly asset management platform designed specifically for small communities. This comprehensive solution offers an all-inclusive and easy-to-use platform, empowering users to efficiently record and manage their assets within a powerful information system. With MyCivitas, communities can streamline their asset management processes, ensuring a seamless and effective approach to organising and overseeing their valuable resources.
+    - Jeremy Prior
+    - Ketan Bamniya
+date: 01-02-2024
+some_url: https://github.com/landinfotech/mycivitas
+copyright: Copyright 2024, LandInfoTech
+contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-#context_id: 1234
 ---
+
 
 # Context Help
 
@@ -52,7 +52,7 @@ Our first activity is to edit the site preferences 1️⃣.
 
 ![image.png](img/context-help-8.png)
 
-Here our goal is to set the documentation base url for the context help system 1️⃣. Use the URL for your documentation project i.e. https://unicef-drp.github.io/GeoSight-OS
+Here our goal is to set the documentation base url for the context help system 1️⃣. Use the URL for your documentation project i.e. https://github.com/landinfotech/mycivitas
 
 ![image.png](img/context-help-9.png)
 
@@ -76,7 +76,7 @@ Here is a detailed breakdown of the options:
 
 2️⃣ **Relative page url:** This is the relative path to our application page (see underline in image above) e.g. /admin/importer/
 
-3️⃣ **Url:** This is where the documentation is, relative to the documentation base URL. For example if your docs base URL is at: https://unicef-drp.github.io/GeoSight-OS/ your help context document relative URL is /administrator/guide/. This will trigger the content panel link 3️⃣ above to point to this page.
+3️⃣ **Url:** This is where the documentation is, relative to the documentation base URL. For example if your docs base URL is at: https://github.com/landinfotech/mycivitas your help context document relative URL is /administrator/guide/. This will trigger the content panel link 3️⃣ above to point to this page.
 
 4️⃣ **Title:** This will be displayed as 1️⃣ above in the context help panel.
 
