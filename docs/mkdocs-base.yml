@@ -3,7 +3,7 @@ site_description: "Project technical and user documentation."
 site_author: "Kartoza"
 docs_dir: ./src
 site_dir: ./site
-repo_name: "Project Name"
+repo_name: "MyCivitas"
 repo_url: "https://github.com/kartoza/<project name>"
 edit_uri: "https://github.com/kartoza/<project name>/blob/main/docs/"
 
