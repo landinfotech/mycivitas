@@ -38,7 +38,7 @@ x-common-django:
     - ../django_project:/home/web/django_project
     - ./volumes/static:/home/web/static
     - ./volumes/media:/home/web/media
-    - ./volumes/logs:/var/log/
+    - ./volumes/logs:/var/log
   restart: on-failure
 
 services:
