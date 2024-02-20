@@ -24,7 +24,7 @@ These include:
 - Country Dropdown: Choose your country from the provided dropdown options.
 - Create Account: After filling in all the required fields, double-check to ensure accuracy. Click on the `Create Account` button to proceed.
 
-Welcome to Mycivitas, Congratulations! You have successfully created your Mycivitas account.
+Welcome to MyCivitas, Congratulations! You have successfully created your MyCivitas account.
 You can now explore and engage with the community, connect with others, and enjoy the features Mycivitas has to offer.
 
 ![Registering 3](./img/register-login-logout-3.png)
@@ -43,7 +43,7 @@ Click on `Sign In` to access the login page.
 ![Login 2](./img/register-login-logout-5.png)
 
 Once you are on the login page, follow these steps:
-1️⃣ In the provided field, enter your registered email address. 2️⃣ Enter your password in the designated field. To ensure accuracy, you can use the eye icon next to the password field to hide or reveal your password. 3️⃣ Once you have entered your email address and password, click on the `Sign In` button to proceed.
+In 1️⃣ the provided field, enter your registered email address. Enter 2️⃣ your password in the designated field. To ensure accuracy, you can use the eye icon next to the password field to hide or reveal your password. Once you have entered 3️⃣ your email address and password, click on the `Sign In` button to proceed.
 
 >Note: It is recommended to keep your login credentials confidential to ensure the security of your account. If you forget your password, use the `Forgot Password` option on the login page to reset it.
 
@@ -57,7 +57,7 @@ Logging out of your MyCivitas account is a straightforward process. Follow these
 
 ![Logout 1](./img/register-login-logout-7.png)
 
-On any page within the MyCivitas platform, look for the profile icon. This icon is typically represented by an image associated with your account. Once you have located the profile icon, click on it. This action will open a dropdown menu. 1️⃣ In the dropdown menu, you will find the `Logout` option. It is usually clearly labeled to facilitate easy identification. Simply click on the `Logout` option. This action will log you out of your MyCivitas account.
+On any page within the MyCivitas platform, look for the profile icon. This icon is typically represented by an image associated with your account. Once you have located the profile icon, click on it. This action will open a dropdown menu. In the dropdown menu, you will find 1️⃣ the `Logout` option. It is usually clearly labelled to facilitate easy identification. Simply click on the `Logout` option. This action will log you out of your MyCivitas account.
 
 Congratulations! You have successfully logged out of your MyCivitas account.
 

@@ -4,8 +4,8 @@ site_author: "Kartoza"
 docs_dir: ./src
 site_dir: ./site
 repo_name: "MyCivitas"
-repo_url: "https://github.com/kartoza/<project name>"
-edit_uri: "https://github.com/kartoza/<project name>/blob/main/docs/"
+repo_url: "https://github.com/landinfotech/mycivitas"
+edit_uri: "https://github.com/landinfotech/mycivitas/blob/main/docs/"
 
 copyright: Kartoza and Contributors
 

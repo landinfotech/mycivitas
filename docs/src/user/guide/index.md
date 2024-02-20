@@ -1,5 +1,5 @@
 ---
-title: MY_CIVITAS
+title: MyCivitas
 summary: MyCivitas is a cost-effective and user-friendly asset management platform designed specifically for small communities. This comprehensive solution offers an all-inclusive and easy-to-use platform, empowering users to efficiently record and manage their assets within a powerful information system. With MyCivitas, communities can streamline their asset management processes, ensuring a seamless and effective approach to organising and overseeing their valuable resources.
     - Jeremy Prior
     - Ketan Bamniya
@@ -15,4 +15,4 @@ license: This program is free software; you can redistribute it and/or modify it
 
 Welcome to the MyCivitas user guide. In this section of the documentation, we aim to show users how to utilise the platform effectively, customise their profiles and so forth. Here is a brief overview of the content provided here:
 
-* **[Registering/Login/Logout:](./register-login-logout.md)** This page will show you how to `register`, `login` and `logout` on to the platform.
+* **[Registering/Login/Logout:](./register-login-logout.md)** This page will show you how to `register`, `login` and `logout` on the platform.
