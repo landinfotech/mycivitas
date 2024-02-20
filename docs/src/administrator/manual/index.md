@@ -13,3 +13,5 @@ license: This program is free software; you can redistribute it and/or modify it
 
 # Administrator manual
 <!-- Replace all of the titles with relevant titles -->
+
+* **[Admin Panel:](./admin.md)** This page describes the adding, updating, and deleting of records in the admin panel and also describes the `User` and `Organisation` tables.
