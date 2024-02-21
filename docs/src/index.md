@@ -1,5 +1,5 @@
 ---
-title: MY_CIVITAS
+title: MyCivitas
 summary: MyCivitas is a cost-effective and user-friendly asset management platform designed specifically for small communities. This comprehensive solution offers an all-inclusive and easy-to-use platform, empowering users to efficiently record and manage their assets within a powerful information system. With MyCivitas, communities can streamline their asset management processes, ensuring a seamless and effective approach to organising and overseeing their valuable resources.
     - Jeremy Prior
     - Ketan Bamniya
