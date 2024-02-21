@@ -2,6 +2,7 @@
 # Configuration
 theme:
   name: material
+  logo: img/MyCivitas-logo.png
   language: en
   direction: ltr
   include_search_page: false
