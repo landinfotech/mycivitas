@@ -18,7 +18,7 @@ Welcome to the `Dashboard` page. This guide will walk you through the steps to a
 
 ![Dashboard 1](./img/dashboard-1.png)
 
-Locate 1️⃣ the `Dashboard` option on the navigation bar to redirect to the Dashboard page. By default, the `Renewal costs of assets` data are displayed on the dashboard page.
+Locate and click on 1️⃣ the `Dashboard` option on the navigation bar to redirect to the dashboard page. By default, the `Renewal costs of assets` data are displayed on the dashboard page.
 
 ![Dashboard 2](./img/dashboard-2.png)
 
