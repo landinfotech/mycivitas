@@ -16,3 +16,5 @@ license: This program is free software; you can redistribute it and/or modify it
 Welcome to the MyCivitas user guide. In this section of the documentation, we aim to show users how to utilise the platform effectively, customise their profiles and so forth. Here is a brief overview of the content provided here:
 
 * **[Registering/Login/Logout:](./register-login-logout.md)** This page will show you how to `register`, `login` and `logout` on the platform.
+
+* **[Organisation:](./organisation.md)** This page will show you how to view and manage the organisation details and access.
