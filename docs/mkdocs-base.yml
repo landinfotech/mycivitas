@@ -49,6 +49,7 @@ nav:
                   - Guide:
                           - user/guide/index.md
                           - Register/Login/Logout: user/guide/register-login-logout.md
+                          - Work Order: user/guide/work-order.md
                           - Dashboard: user/guide/dashboard.md
                           - View Table: user/guide/view-table.md
                   - Manual :
