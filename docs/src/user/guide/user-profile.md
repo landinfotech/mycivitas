@@ -18,7 +18,7 @@ Welcome to the `User Profile` guide. This guide will walk you through the steps 
 
 ![Profile 1](./img/user-profile-1.png)
 
-Locate and click on 1️⃣ the `Profile` icon to show the profile options. to view the profile details click on 2️⃣ the `view profile` option when you click on this option you will be redirected to the view profile page. Here you can only view the profile details.
+Locate and click on 1️⃣ the `Profile` icon to show the profile options. To view the profile details click on 2️⃣ the `view profile` option when you click on this option you will be redirected to the view profile page. Here you can only view the profile details.
 
 ![Profile 2](./img/user-profile-2.png)
 
