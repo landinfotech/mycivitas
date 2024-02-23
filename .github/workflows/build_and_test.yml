@@ -1,0 +1,68 @@
+name: pr-test
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - '3.12'
+    steps:
+
+        - uses: actions/checkout@v2
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v2
+        #- name: Run Flake8 test
+        #  run: flake8 .
+
+  test:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    defaults:
+      run:
+        working-directory: deployment
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Run docker-compose build & Spin the containers
+        run: |
+            apt update && apt install make
+            cp docker-compose.override.template.yml docker-compose.override.yml
+            cp sites-enabled/default.conf.template sites-enabled/default.conf
+            cp .template.env .env
+            make up
+            sleep 60
+
+      - name: Test django endpoint
+        run: |
+          curl -v http://127.0.0.1/
+          if [ $? -ne 0 ]; then
+            echo "Curl command failed"
+            exit 1
+          fi
+
+      - name: Install playwright dependencies
+        working-directory: playwright/ci-test
+        run: |
+          npm install
+          npm ci
+          npx playwright install --with-deps
+      - name: Run Playwright tests
+        working-directory: playwright/ci-test
+        run: npx playwright test
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright/ci-test/playwright-report/
+          retention-days: 30
