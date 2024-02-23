@@ -24,7 +24,7 @@ Locate and click on 1️⃣ the `Profile` icon to show the organisation option. 
 
 ## How do I view the organisation details?
 
-To see more detailed information about your organization such as its name and members you can click on 1️⃣ the name of the organisation. When you click on the organisation name you will be redirected to the organisation profile page where you can see the `name`, `community name`, `owner` and the created date of an organisation.
+To see more detailed information about your organisation such as its name and members you can click on 1️⃣ the name of the organisation. When you click on the organisation name you will be redirected to the organisation profile page where you can see the `name`, `community name`, `owner` and the created date of an organisation.
 
 ![Organisation 3](./img/organisation-3.png)
 
