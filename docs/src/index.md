@@ -83,11 +83,11 @@ While much of the work for our project is technical in nature, we value and
 encourage contributions from those with expertise in other areas, and welcome
 them into our community.
 
-## Project partners
+<!-- ## Project partners -->
 
 <!-- Insert Project Partner Logos and/or Links -->
-![Project Partner 1]()
-[Project Partner 1]()
+<!-- ![Project Partner 1]()
+[Project Partner 1]() -->
 
 #### Releases
 
