@@ -49,14 +49,14 @@ for any loss of revenue, life, physical harm or any other adverse outcome that m
 occur as a result of the use of this platform.
 </div>
 
-### Purpose
+<!-- ### Purpose
 
 ### Scope of project
 
 ### Project roadmap
 
 ![Project Roadmap]()
-[Project Roadmap]()
+[Project Roadmap]() -->
 <!-- Either insert link to roadmap or actual roadmap (Speak to team leads) -->
 
 #### Contributing
