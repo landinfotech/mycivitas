@@ -69,7 +69,7 @@ issues, plan and contribute feature additions etc.
 
 Our community in this project is aligned with our [Code of
 Conduct](about/code-of-conduct.md) - please be sure to read and abide by that
-document in all interactions with out community.
+document in all interactions with our community.
 
 #### Diversity statement
 
@@ -106,8 +106,8 @@ Contributions to this project will be subject to our [Contributor License Agreem
 
 #### License
 
-This project is open source, published under the AGPL-3.
-You can read our license to find out what rights this license bestows to users and contributors.
+This project is open source, and published under the AGPL-3.
+You can read our license to find out what rights this license bestows on users and contributors.
 
 [License](about/license.md)
 
