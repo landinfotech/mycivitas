@@ -30,6 +30,7 @@ Published under AGPL-3. See the [full license](license.md) text.
 | Juanique Voogt | [voogt](https://github.com/voogt) | <img src="https://github.com/voogt.png" alt= “” width="64" height="64"> |
 | Andrevdb | [Andrevdb](https://github.com/Andrevdb) | <img src="https://avatars.githubusercontent.com/u/40511773?v=4" alt= “” width="64" height="64"> |
 | Edvandenberg | [edvandenberg](https://github.com/edvandenberg) | <img src="https://avatars.githubusercontent.com/u/130529424?v=4" alt= “” width="64" height="64"> |
+| Eli Volschenk | [elivolsch](https://github.com/elivolsch) | <img src="https://avatars.githubusercontent.com/u/107027990?v=4" alt= “” width="64" height="64"> |
 
 ## Project funders/backers  
 
