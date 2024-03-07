@@ -23,15 +23,15 @@ MyCivitas is a revolutionary project aimed at providing small communities with a
 
 ## Key concepts
 
-**How does MyCivitas work?:** The heart of MyCivitas is a map of your community and its assets and infrastructure.
+**How does MyCivitas work?:** MyCivitas begins by providing a comprehensive map of your community, highlighting its assets and infrastructure. Users can capture and document essential information about the physical components within the community. With the gathered data, prioritise your community assets based on their significance and needs. MyCivitas allows you to assess and categorise assets for better management and decision-making. MyCivitas aids in capital planning by offering insights into the condition and importance of various community assets. This information supports strategic planning and budget allocation for effective infrastructure development. Streamline maintenance and improvement processes by setting up work orders within MyCivitas. Assign tasks, schedule activities, and track progress to ensure timely and efficient execution of projects. MyCivitas provides a robust platform for ongoing asset management. Monitor the status of infrastructure, track changes, and utilise the system to make informed decisions for the sustainable development of your community.
 
-**Capture your infrastructure:** Create an asset inventory using powerful mapping software. Our data capture system uses QGIS, a free and open-source desktop application.
+**Capture your infrastructure:** Create a detailed asset inventory by leveraging powerful mapping software. Our data capture system utilises QGIS, a free and open-source desktop application, making it user-friendly and accessible.
 
-**Prioritize Your Assets:** Our system performs risk assessment analysis and preventative maintenance planning analysis on your data.
+**Prioritize Your Assets:** Our system goes beyond simple inventory; it performs risk assessment analysis and preventative maintenance planning on your data. This ensures a nuanced understanding of asset priorities, allowing you to focus on areas that need immediate attention or mitigation.
 
-**Support Your Capital Planning:** Make informed decisions to support your capital planning.
+**Support Your Capital Planning:** MyCivitas empowers you to make informed decisions crucial for supporting your capital planning. By providing comprehensive insights into asset conditions and requirements, you can strategically allocate resources and budget effectively.
 
-**Set Up Work Order:** Use the platform to plan ad hoc and scheduled maintenance planning tasks.
+**Set Up Work Order:** Streamline your maintenance processes by utilising the platform to plan both ad hoc and scheduled maintenance tasks. MyCivitas enables efficient task assignment, scheduling, and tracking, facilitating a proactive approach to infrastructure management.
 
 **We Are Here to Help:** Let us know if you need any help along the way, from capturing data to presenting to the council. We have a team of experienced staff available.
 
