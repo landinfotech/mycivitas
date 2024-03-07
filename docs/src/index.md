@@ -97,8 +97,8 @@ them into our community.
 
 | | **Project Badges** | |
 | ----------------------- | ----------------------- | ----------------------- |
-| ![License](https://img.shields.io/github/license/{username}/{repo-name}.svg) | ![Version](https://img.shields.io/github/release/{username}/{repo-name}.svg) | ![Commits](https://img.shields.io/github/commits-since/{username}/{repo-name}/{version}.svg) |
-| ![Issue Tracker](https://img.shields.io/github/issues/{username}/{repo-name}.svg) | ![Closed Issues](https://img.shields.io/github/issues-closed/{username}/{repo-name}.svg) | ![Pull requests](https://img.shields.io/github/issues-pr/{username}/{repo-name}.svg) |
+| ![License](https://img.shields.io/github/license/landinfotech/mycivitas.svg) | ![Version](https://img.shields.io/github/release/landinfotech/mycivitas.svg) | ![Commits](https://img.shields.io/github/commits-since/landinfotech/mycivitas/{version}.svg) |
+| ![Issue Tracker](https://img.shields.io/github/issues/landinfotech/mycivitas.svg) | ![Closed Issues](https://img.shields.io/github/issues-closed/landinfotech/mycivitas.svg) | ![Pull requests](https://img.shields.io/github/issues-pr/landinfotech/mycivitas.svg) |
 
 #### Contributor License Agreement (CLA)
 <!-- Insert links to CLA -->
