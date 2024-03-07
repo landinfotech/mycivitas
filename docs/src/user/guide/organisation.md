@@ -44,7 +44,7 @@ To manage the organisation you can click on 1️⃣ the `Manage Access` option t
 
 ## How do I invite a user to the organisation?
 
-To invite a new user to the organisation click on the 4️⃣ `Invite  user` button. When you click on this button the invite user form will open.
+To invite a new user to the organisation click on the 4️⃣ `Invite user` button. When you click on this button the invite user form will open.
 
 ![Organisation 5](./img/organisation-5.png)
 
