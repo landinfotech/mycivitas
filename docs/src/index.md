@@ -49,11 +49,41 @@ for any loss of revenue, life, physical harm or any other adverse outcome that m
 occur as a result of the use of this platform.
 </div>
 
-<!-- ### Purpose
+<!-- ### Purpose -->
 
 ### Scope of project
 
-### Project roadmap
+Civitas was created as a way to present the captured data on a user-friendly platform, allow staff to query/analyze/understand said data, and perform various asset management-related calculations to assist in capital planning.
+
+![Scope](./img/scope-1.png)
+
+LandInfo developed a three-step methodology to support smaller communities in the development of their asset management plans:
+
+**Step 1: Asset Register:** The first step is creating an asset register. Assets are divided into classes including water supply, wastewater collection, stormwater collection, transportation, facilities, fleet and natural assets.
+
+Assets are recorded from existing electronic data, hard-copy maps and reports. The remaining unknown assets are recorded through field surveys using Mergin Maps, an open-source mobile application. Civitas Asset Management, an open-source GIS-based application is used to capture the data in a predefined data model.
+
+Once the data is captured, Civitas is used to generate reports on the condition, life expectancy, replacement cost, etc. of assets. The goal is to answer the following asset management questions:
+
+- What do we own?
+
+- Where is it?
+
+- What is the condition?
+
+- What is the remaining life?
+
+**Step 2: Asset Prioritization:** The second phase is prioritizing assets based on risk. This phase is intended to identify the Village’s critical assets. The probability of failure and consequence of failure values are collected for all assets. Staff knowledge is vital for this phase to be successful. Deliverables at the completion of Phase 2 are:
+
+- Prioritized asset registry.
+
+- Risk-based state of infrastructure reports breaking down the asset register by risk level.
+
+**Step 3: Capital and Operational Strategies:** The third phase is integrating the asset management data from Phase 1 and Phase 2 into the Village’s current planning procedures.
+
+MyCivitas web application is available for staff, aiding in asset management and planning decisions.
+
+<!-- ### Project roadmap
 
 ![Project Roadmap]()
 [Project Roadmap]() -->
