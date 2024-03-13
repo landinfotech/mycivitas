@@ -54,7 +54,7 @@ license: This program is free software; you can redistribute it and/or modify it
     ### 8. Submit the issue
 
     - Click the `Submit new issue` button to create the issue.
-.
+
     ### 9. Interact and follow up
 
     - Engage in discussions with other contributors and maintainers in the issue's comment section.
