@@ -161,7 +161,6 @@ license: This program is free software; you can redistribute it and/or modify it
 If it has related issues, add links to the issues(like `#123`) in the description.
 Fill in the [Pull Request template](./templates/pull-request-template.md) by checking your case.
 
-
 ## Committing to project
 
 Follow the [Commit message conventions](./templates/commit-message-convention.md) for commit messages.
