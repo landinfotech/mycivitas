@@ -21,7 +21,7 @@ license: This program is free software; you can redistribute it and/or modify it
 ## Description
 
 - Describe the purpose and context of the changes made in this PR.
-- Add screenshots which clarifies the implemented feature, fixed bug etc.
+- Add screenshots that clarify the implemented feature, fix bugs etc.
 
 ## Related Issues
 
@@ -30,7 +30,7 @@ license: This program is free software; you can redistribute it and/or modify it
 ## Checklist
 
 - [ ] I have tested the changes.
-- [ ] I have updated documentation if needed.
+- [ ] I have updated the documentation if needed.
 - [ ] My code follows the project's coding standards.
 - [ ] I have added unit tests if applicable.
 
