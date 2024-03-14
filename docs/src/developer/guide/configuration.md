@@ -13,9 +13,9 @@ license: This program is free software; you can redistribute it and/or modify it
 # Project setup
 <!-- This needs to be changed per project -->
 
-## Clone [MyCivitas] repository
+## Clone MyCivitas repository
 
-This will clone the [MyCivitas] repository to your machine
+This will clone the MyCivitas repository to your machine
 ```
 git clone https://github.com/landinfotech/mycivitas.git
 ```
@@ -23,7 +23,7 @@ git clone https://github.com/landinfotech/mycivitas.git
 
 ## Set up the project
 
-This will set up the [MyCivitas] project on your machine
+This will set up the MyCivitas project on your machine
 
 ```
 cd mycivitas
