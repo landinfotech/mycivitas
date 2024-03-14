@@ -80,6 +80,7 @@ nav:
                 - Guide:
                         - developer/guide/index.md
                         - Architecture: developer/guide/architecture.md
+                        - Prerequisites: developer/guide/prerequisites.md
                         - Cloning: developer/guide/cloning.md
                         - Configuration: developer/guide/configuration.md
                         - Workflows: developer/guide/workflows.md
