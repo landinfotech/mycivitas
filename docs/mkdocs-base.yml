@@ -88,7 +88,9 @@ nav:
                         # Pages to render but exclude from navigation
                         - "": developer/guide/templates/pull-request-template.md 
                         - "": developer/guide/templates/commit-message-convention.md
-                - Manual: developer/manual/index.md
+                - Manual: 
+                        - developer/manual/index.md
+                        - Amlit: developer/manual/amlit.md
                 - Documentation Writing:
                         - developer/documentation/index.md
                         - Simple Workflow: developer/documentation/easy-workflow.md
