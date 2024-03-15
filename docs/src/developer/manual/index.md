@@ -16,3 +16,4 @@ Welcome to the MyCivitas developer manual. The manual is intended to function as
 
 * **[Amlit](./amlit.md)**
 * **[Amlit Helpdesk](./amlit-helpdesk.md)**
+* **[Civitas](./civitas.md)**
