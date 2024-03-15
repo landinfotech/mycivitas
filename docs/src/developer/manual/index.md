@@ -15,3 +15,4 @@ license: This program is free software; you can redistribute it and/or modify it
 Welcome to the MyCivitas developer manual. The manual is intended to function as a reference for the application. For narrative/workflow based tutorials, you may prefer to work through our [developer guide](../guide/index.md). Here is a brief overview of the content provided here:
 
 * **[Amlit](./amlit.md)**
+* **[Amlit Helpdesk](./amlit-helpdesk.md)**

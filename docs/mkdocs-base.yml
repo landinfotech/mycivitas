@@ -91,6 +91,7 @@ nav:
                 - Manual: 
                         - developer/manual/index.md
                         - Amlit: developer/manual/amlit.md
+                        - Amlit Helpdesk: developer/manual/amlit-helpdesk.md
                 - Documentation Writing:
                         - developer/documentation/index.md
                         - Simple Workflow: developer/documentation/easy-workflow.md
