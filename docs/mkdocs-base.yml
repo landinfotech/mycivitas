@@ -69,6 +69,7 @@ nav:
                 - administrator/index.md
                 - Guide:
                         - administrator/guide/index.md
+                        - Accessing the Administration Site: administrator/guide/access-admin-site.md
                 - Manual:
                         - administrator/manual/index.md
                         - Admin: administrator/manual/admin.md
