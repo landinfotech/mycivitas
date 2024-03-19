@@ -19,7 +19,7 @@ This user manual will guide the user through the process of resetting their pass
 
 ![landing page](./img/forgot-password-1.png)
 
-1. **Sign-In button:** Begin by accessing the sign-in page of the application. The user can do this by clicking on the `Sign In` button available at the center of the page or can use the `Sign In` button available in the navigation bar. Upon clicking, the user will be redirected to the sign-in page.
+1. **Sign-In button:** Begin by accessing the sign-in page of the application. The user can do this by clicking on the `Sign In` button available at the centre of the page or can use the `Sign In` button available in the navigation bar. Upon clicking, the user will be redirected to the sign-in page.
 
 ## Sign In Page
 
