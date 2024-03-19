@@ -47,6 +47,8 @@ In 1️⃣ the provided field, enter your registered email address. Enter 2️�
 
 >Note: It is recommended to keep your login credentials confidential to ensure the security of your account. If you forget your password, use the `Forgot Password` option on the login page to reset it.
 
+Click on the 4️⃣ `Forgot Password?` link, to reset your password if you forget it. For detailed instructions on the reset password functionality click [here](../manual/forgot-password.md)
+
 ![Login 3](./img/register-login-logout-6.png)
 
 Congratulations! You have successfully logged in to your MyCivitas account.
