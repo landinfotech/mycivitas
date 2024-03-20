@@ -13,3 +13,5 @@ license: This program is free software; you can redistribute it and/or modify it
 # Administrator guide
 <!-- Narrative Instructions on how admin users will use the product/platform -->
 <!-- Replace all of the titles with relevant titles -->
+
+* **[Managing Users:](./manage-user.md)** This section describes how administrators can manage users ( i.e. their details, their permissions, etc.) on the MyCivitas platform.

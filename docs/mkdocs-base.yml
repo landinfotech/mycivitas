@@ -69,6 +69,7 @@ nav:
                 - administrator/index.md
                 - Guide:
                         - administrator/guide/index.md
+                        - Manage Users: administrator/guide/manage-user.md
                 - Manual:
                         - administrator/manual/index.md
                         - Admin: administrator/manual/admin.md
