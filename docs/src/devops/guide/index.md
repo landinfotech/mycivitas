@@ -11,4 +11,3 @@ license: This program is free software; you can redistribute it and/or modify it
 ---
 # DevOps guide
 <!-- Replace all of the titles with relevant titles -->
-<!-- More content to be added -->
