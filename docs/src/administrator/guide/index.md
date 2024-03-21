@@ -13,3 +13,5 @@ license: This program is free software; you can redistribute it and/or modify it
 # Administrator guide
 <!-- Narrative Instructions on how admin users will use the product/platform -->
 <!-- Replace all of the titles with relevant titles -->
+
+* **[Managing Organisations:](./manage-organisation.md)** This section describes how administrators can manage organisations (i.e. members, data, invites, etc ) on the MyCivitas platform.
