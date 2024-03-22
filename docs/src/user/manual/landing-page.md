@@ -105,6 +105,18 @@ Easily sign in if the user is an existing user or sign up to join the MyCivitas 
 
 8. **Message:** Welcome to MyCivitas. Read the welcoming message that introduces MyCivitas as an affordable, user-friendly asset management platform for small communities.
 
+9. **Open Source: Github Link:** Explore our open-source projects on [GitHub](https://github.com/landinfotech/mycivitas) to stay connected with our community and contribute to exciting initiatives.
+
+10. `Developed By` **LandInfo Technologies:** Visit the [LandInfo Technologies](https://www.landinfotech.com/) website to learn more about the organisation behind MyCivitas.
+
+![LandInfo Technologies](./img/sign-up-3.png)
+
+11. `Developed By` **Kartoza:** Explore the [Kartoza](https://kartoza.com/) website for additional information about the organisation that developed MyCivitas.
+
+![LandInfo Technologies](./img/sign-up-4.png)
+
+By following these steps and providing the necessary information, users can successfully create an account on `MyCivitas`.
+
 ## Landing Page After Login
 
 ### Navigation
@@ -112,6 +124,8 @@ Easily sign in if the user is an existing user or sign up to join the MyCivitas 
 Use the navigation bar to explore various sections of the landing page. From understanding how MyCivitas works to exploring pricing and our story, everything is at the user's fingertips.
 
 Easily sign in if the user is an existing user or sign up to join the MyCivitas community. MyCivitas' user-friendly registration process ensures a quick and hassle-free onboarding experience.
+
+![landing page](./img/landing-page-15.png)
 
 1. **MyCivitas:** Click on `MyCivitas` to swiftly return to the top of the landing page.
 
@@ -181,3 +195,15 @@ Easily sign in if the user is an existing user or sign up to join the MyCivitas 
     ![profile icon](./img/landing-page-14.png)
 
 11. **Message:** Welcome to MyCivitas. Read the welcoming message that introduces MyCivitas as an affordable, user-friendly asset management platform for small communities.
+
+12. **Open Source: Github Link:** Explore our open-source projects on [GitHub](https://github.com/landinfotech/mycivitas) to stay connected with our community and contribute to exciting initiatives.
+
+13. `Developed By` **LandInfo Technologies:** Visit the [LandInfo Technologies](https://www.landinfotech.com/) website to learn more about the organisation behind MyCivitas.
+
+![LandInfo Technologies](./img/sign-up-3.png)
+
+14. `Developed By` **Kartoza:** Explore the [Kartoza](https://kartoza.com/) website for additional information about the organisation that developed MyCivitas.
+
+![LandInfo Technologies](./img/sign-up-4.png)
+
+By following these steps and providing the necessary information, users can successfully create an account on `MyCivitas`.

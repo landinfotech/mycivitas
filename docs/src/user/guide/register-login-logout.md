@@ -13,16 +13,35 @@ On the Sign-Up page, you will find several fields that need to be completed.
 
 ![Registering 2](./img/register-login-logout-2.png)
 
-These include:
+These include two sections:
+
+#### Community and Account information section
+
+Fill in the community and account-related information, in 1️⃣ the `Community and Account` section.
+
 - Community Dropdown: Select your community from the dropdown list.
+
 - Email Address: Enter your valid email address. This will be used for communication and account recovery.
+
 - First Name: Provide your first name in the designated field.
+
 - Last Name: Enter your last name.
+
 - Password: Create a secure password for your account. Make sure it meets any specified password requirements.
+
 - Password Confirmation: Re-enter the password to confirm accuracy.
+
+#### Billing information section
+
+Fill in the billing-related information, in 2️⃣ the `Billing information` section.
+
 - Province Dropdown: Select your province from the dropdown list.
+
 - Country Dropdown: Choose your country from the provided dropdown options.
-- Create Account: After filling in all the required fields, double-check to ensure accuracy. Click on the `Create Account` button to proceed.
+
+#### Create Account Button
+
+After filling in all the required fields, double-check to ensure accuracy. Click on 3️⃣ the `Create Account` button to proceed.
 
 Welcome to MyCivitas, Congratulations! You have successfully created your MyCivitas account.
 You can now explore and engage with the community, connect with others, and enjoy the features Mycivitas has to offer.
@@ -46,6 +65,8 @@ Once you are on the login page, follow these steps:
 In 1️⃣ the provided field, enter your registered email address. Enter 2️⃣ your password in the designated field. To ensure accuracy, you can use the eye icon next to the password field to hide or reveal your password. Once you have entered 3️⃣ your email address and password, click on the `Sign In` button to proceed.
 
 >Note: It is recommended to keep your login credentials confidential to ensure the security of your account. If you forget your password, use the `Forgot Password` option on the login page to reset it.
+
+Click on the 4️⃣ `Forgot Password?` link, to reset your password if you forget it. For detailed instructions on the reset password functionality click [here](../manual/forgot-password.md)
 
 ![Login 3](./img/register-login-logout-6.png)
 

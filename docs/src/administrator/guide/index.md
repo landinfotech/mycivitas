@@ -14,4 +14,8 @@ license: This program is free software; you can redistribute it and/or modify it
 <!-- Narrative Instructions on how admin users will use the product/platform -->
 <!-- Replace all of the titles with relevant titles -->
 
+Welcome to the MyCivitas administrator guide. In this section of the documentation, we aim to show administrators common workflows for managing the platform effectively. Here is a brief overview of the content provided here:
+
+* **[Accessing the Administration Site:](./access-admin-site.md)** This section contains a quick description of how administrators can access the administration site of the MyCivitas platform.
+
 * **[Managing Organisations:](./manage-organisation.md)** This section describes how administrators can manage organisations (i.e. members, data, invites, etc ) on the MyCivitas platform.
