@@ -10,11 +10,47 @@ contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 ---
 
-# Developer Manual
+# Admin
 
-Welcome to the MyCivitas developer manual. The manual is intended to function as a reference for the application. For narrative/workflow based tutorials, you may prefer to work through our [developer guide](../guide/index.md). Here is a brief overview of the content provided here:
+::: core.admin
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true
 
-* **[Amlit](./amlit.md)**
-* **[Amlit Helpdesk](./amlit-helpdesk.md)**
-* **[Civitas](./civitas.md)**
-* **[Core](./core.md)**
+# Settings
+
+::: core.settings
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true
+
+<!-- # Static
+
+::: core.static
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true -->
+
+<!-- # Templates
+
+::: core.templates
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true -->
+
+# Templatetags
+
+::: core.templatetags
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true
