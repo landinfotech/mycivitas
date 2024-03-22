@@ -21,6 +21,7 @@ To get started, simply click on the `SIGN-UP` button in the top right corner. On
 ## Sign Up Page
 
 ![sign up page](./img/sign-up-2.png)
+
 The sign-up process is divided into two main sections:
 
 1. **Select Your Community and Create Your Account:** In this section, the user needs to choose their community from a dropdown menu. And needs to provide the following information:
@@ -42,15 +43,3 @@ The sign-up process is divided into two main sections:
     - **Country:** Choose your country from the dropdown menu.
 
 3. **Create Account Button:** Click the `Create Account` button to submit the form and create your account.
-
-4. **Open Source: Github Link:** Explore our open-source projects on [GitHub](https://github.com/landinfotech/mycivitas) to stay connected with our community and contribute to exciting initiatives.
-
-5. `Developed By` **LandInfo Technologies:** Visit the [LandInfo Technologies](https://www.landinfotech.com/) website to learn more about the organisation behind MyCivitas.
-
-![LandInfo Technologies](./img/sign-up-3.png)
-
-6. `Developed By` **Kartoza:** Explore the [Kartoza](https://kartoza.com/) website for additional information about the organisation that developed MyCivitas.
-
-![LandInfo Technologies](./img/sign-up-4.png)
-
-By following these steps and providing the necessary information, users can successfully create an account on `MyCivitas`.
