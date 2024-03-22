@@ -10,7 +10,6 @@ contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 ---
 
-
 # Documentation Overview
 
 This section provides an overview of how the documentation system works.
@@ -24,7 +23,7 @@ Our documentation system is based on the popular [mkdocs](https://www.mkdocs.org
 We use mkdocs because it has some great and useful features. Most especially:
 
 * The code and the documentation are versioned together. This means that for whatever version of the code we have in our production release, we can be sure the documentation matches that release. We can also look back at changes over time through the version history when needed.
-* It can render beautiful static (not needing a backend server) web sites with great features like search, styling, intuitive navigation etc.
+* It can render beautiful static (not needing a backend server) websites with great features like search, styling, intuitive navigation etc.
 * It can optionally render PDF documents from the same source markdown.
 * An ecosystem of plugins and themes makes mkdocs really flexible and extensible.
 
@@ -32,14 +31,14 @@ We use mkdocs because it has some great and useful features. Most especially:
 
 In our documentation, we have organised the information using a specific nomenclature:
 
-* **guide**: A guide is a multi-step workflow / tutorial that leads your through common activities.
-* **manual**: A collection of documents that describe each part of the project in a matter of fact way without presupposing any specific workflow is being undertaken.
+* **Guide**: A guide is a multi-step workflow/tutorial that leads you through common activities.
+* **Manual**: A collection of documents that describe each part of the project in a matter of fact way without presupposing any specific workflow is being undertaken.
 
 For each of the main topic areas (user, admin, developer, devops, api user) we provide guides and manuals as is appropriate.
 
 ### Organisation
 
-The documentation is broadly organised in the following structure. This structure may change over time as sections are added / moved / removed:
+The documentation is broadly organised in the following structure. This structure may change over time as sections are added/moved/removed:
 
 ```
 src
@@ -65,13 +64,13 @@ src
 
 Please follow these conventions when writing your documentation:
 
-1. Write file names in all lower case, with hyphens separating words (no spaces). e.g. ``important-file.md`` not ``Important File.md`` or other deviations.
-2. Place the image files in the img folder adjacent to your content.
+1. Write file names in all lowercase, with hyphens separating words (no spaces). e.g. `important-file.md` not `Important File.md` or other deviations.
+2. Place the image files in the `img` folder adjacent to your content.
 3. Do not abbreviate any words in file names - but try to use terse, descriptive names.
-4. Place your content into the appropriate place as outline in the structure above.
-5. Each file should only have one level one heading e.g. ``# Page title``
-6. Headings and subheadings should be written as a terse phrase starting with a capital letter and subsequent words in lower case unless they are proper nouns. Do not place a colon after the heading.
-7. Use unicode number markers to reference numbers in images e.g. 1️⃣
+4. Place your content in the appropriate place as outlined in the structure above.
+5. Each file should only have one level one heading e.g. `# Page title`.
+6. Headings and subheadings should be written as a terse phrase starting with a capital letter and subsequent words in lowercase unless they are proper nouns. Do not place a colon after the heading.
+7. Use Unicode number markers to reference numbers in images e.g. 1️⃣.
 8. Every heading / sub-heading should have a single line underneath it summarising the content that will follow. This sentence will be used in the help center in the application to give the user a reference point for the text that will follow. It also makes the help text more consistent and readable.
 9. For every section that images, the first image will be used as the thumbnail if the heading is referenced from the application.
 
@@ -82,6 +81,7 @@ Please follow these conventions when writing your documentation:
 To start adding to the documentation navigate to the [home page](https://github.com/landinfotech/mycivitas) of the repository.
 
 Once on the repository home page, 1️⃣ click on Fork
+
 ![Fork Repository 1](img/fork-repo-1.png)
 
 On the next page 1️⃣ Make sure your github account is selected as the owner and 2️⃣ make sure the "**Copy the** `main` **branch only**" option is ticked as you will only need the main branch.
