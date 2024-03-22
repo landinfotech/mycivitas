@@ -49,6 +49,7 @@ nav:
                   - Guide:
                           - user/guide/index.md
                           - Register/Login/Logout: user/guide/register-login-logout.md
+                          - Forgot Password: user/guide/forgot-password.md
                           - Organisation: user/guide/organisation.md
                           - User Profile: user/guide/user-profile.md
                           - Work Order: user/guide/work-order.md
@@ -59,6 +60,7 @@ nav:
                           - Landing Page: user/manual/landing-page.md
                           - Sign In: user/manual/sign-in.md
                           - Sign Up: user/manual/sign-up.md
+                          - Forgot Password: user/manual/forgot-password.md
                           - Logout: user/manual/logout.md
                           - View Table: user/manual/view-table.md
                           - Community Map: user/manual/community-map.md

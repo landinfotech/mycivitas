@@ -17,6 +17,8 @@ Welcome to the MyCivitas user guide. In this section of the documentation, we ai
 
 * **[Registering/Login/Logout:](./register-login-logout.md)** This page will show you how to `register`, `login` and `logout` on the platform.
 
+* **[Forgot Password:](./forgot-password.md)** This page will show you how to reset your password if you forget it.
+
 * **[Organisation:](./organisation.md)** This page will show you how to view and manage the organisation details and access.
 
 * **[User Profile:](./user-profile.md)** This page will guide you on how to view and edit the user profile.

@@ -20,6 +20,8 @@ This section of the documentation describes every page in the application and wh
 
 * **[Register:](./sign-up.md)** This documentation explains the sign-up page.
 
+* **[Forgot Password:](./forgot-password.md)** This documentation explains the forgot password functionality.
+
 * **[Logout:](./logout.md)** This documentation explains the logout functionality.
 
 * **[View Table:](./view-table.md)** This documentation explains the view table page.
