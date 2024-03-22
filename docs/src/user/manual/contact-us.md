@@ -16,7 +16,7 @@ Welcome to the `Contact` page user manual. This guide is designed to help the us
 
 ![landing page](./img/contact-us-1.png)
 
-Click on the `Sign-Up` button. This will redirect you to the sign-up page where you can find the `Contact Support` link.
+Click on the `Sign-Up` button. This will redirect the user to the sign-up page where you can find the `Contact Support` link.
 
 ## Sign-Up Page
 
