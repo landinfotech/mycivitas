@@ -14,7 +14,7 @@ license: This program is free software; you can redistribute it and/or modify it
 
 This section outlines the process of checking out the code for local development.
 
-Git Code check out [PROJECT_URL](https://github.com/landinfotech/mycivitas) <!-- Change this per project -->
+Git Code check out https://github.com/landinfotech/mycivitas
 
 ## 👩‍💻 Getting source code
 
