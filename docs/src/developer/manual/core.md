@@ -10,4 +10,47 @@ contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 ---
 
-# Examples of running instances 
+# Admin
+
+::: core.admin
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true
+
+# Settings
+
+::: core.settings
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true
+
+<!-- # Static
+
+::: core.static
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true -->
+
+<!-- # Templates
+
+::: core.templates
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true -->
+
+# Templatetags
+
+::: core.templatetags
+    handler: python
+    options:
+        docstring_style: sphinx
+        heading_level: 1
+        show_source: true

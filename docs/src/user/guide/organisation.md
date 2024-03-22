@@ -30,13 +30,21 @@ To see more detailed information about your organisation such as its name and me
 
 ## How do I manage the organisation access?
 
+### User Roles for Managing the Organisation
+
+- Super User: The Super User holds comprehensive control over the organisation. They can manage the organisation, invite users to join, and have the authority to change the role of any user within the organisation.
+
+- Manager: Managers possess the ability to invite users to the organisation and adjust the user roles. However, managers are restricted from changing their own user roles. Their scope of control extends to the users they invite and their respective roles, ensuring efficient delegation within the organisational structure.
+
+These role differentiations ensure a structured and secure management system within the organisation.
+
 ![Organisation 4](./img/organisation-4.png)
 
 To manage the organisation you can click on 1️⃣ the `Manage Access` option to open the organisation manage access page. Manage the access of the user by assigning the user role to the user to assign a user role click on 2️⃣ the role dropdown and select the role of your choice you want to assign the user if you want to remove user from the organisation. To remove a user from the organisation, click on the `Delete` icon in the respective row of that user's record.
 
 ## How do I invite a user to the organisation?
 
-To invite a new user to the organisation click on the 4️⃣ `Invite  user` button. When you click on this button the invite user form will open.
+To invite a new user to the organisation click on the 4️⃣ `Invite user` button. When you click on this button the invite user form will open.
 
 ![Organisation 5](./img/organisation-5.png)
 

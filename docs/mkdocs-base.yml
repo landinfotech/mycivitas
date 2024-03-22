@@ -49,6 +49,7 @@ nav:
                   - Guide:
                           - user/guide/index.md
                           - Register/Login/Logout: user/guide/register-login-logout.md
+                          - Forgot Password: user/guide/forgot-password.md
                           - Organisation: user/guide/organisation.md
                           - User Profile: user/guide/user-profile.md
                           - Work Order: user/guide/work-order.md
@@ -59,6 +60,7 @@ nav:
                           - Landing Page: user/manual/landing-page.md
                           - Sign In: user/manual/sign-in.md
                           - Sign Up: user/manual/sign-up.md
+                          - Forgot Password: user/manual/forgot-password.md
                           - Logout: user/manual/logout.md
                           - View Table: user/manual/view-table.md
                           - Community Map: user/manual/community-map.md
@@ -69,6 +71,7 @@ nav:
                 - administrator/index.md
                 - Guide:
                         - administrator/guide/index.md
+                        - Accessing the Administration Site: administrator/guide/access-admin-site.md
                         - Manage Users: administrator/guide/manage-user.md
                 - Manual:
                         - administrator/manual/index.md
@@ -89,7 +92,12 @@ nav:
                         # Pages to render but exclude from navigation
                         - "": developer/guide/templates/pull-request-template.md 
                         - "": developer/guide/templates/commit-message-convention.md
-                - Manual: developer/manual/index.md
+                - Manual: 
+                        - developer/manual/index.md
+                        - Amlit: developer/manual/amlit.md
+                        - Amlit Helpdesk: developer/manual/amlit-helpdesk.md
+                        - Civitas: developer/manual/civitas.md
+                        - Core: developer/manual/core.md
                 - Documentation Writing:
                         - developer/documentation/index.md
                         - Simple Workflow: developer/documentation/easy-workflow.md
