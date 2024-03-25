@@ -34,4 +34,6 @@ This section of the documentation describes every page in the application and wh
 
 * **[Profile options:](./work-order.md)** This documentation explains the profile options.
 
+* **[Contact Us:](./contact-us.md)** This documentation explains how the user can contact us.
+
 * **[User Roles:](./user-role.md)** This documentation explains the user roles.

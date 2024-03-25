@@ -30,3 +30,5 @@ Welcome to the MyCivitas user guide. In this section of the documentation, we ai
 * **[Dashboard:](./dashboard.md)** This page will show you how to download the PDFs of your reports and access important information about your MyCivitas account.
 
 * **[View Table:](./view-table.md)** This page will show you how to download CSV in all views on the view table page.
+
+* **[Contact Us:](./contact-us.md)** This page will show you how to contact the support team.
