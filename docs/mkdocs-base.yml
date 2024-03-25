@@ -42,7 +42,6 @@ nav:
         - Home:
                   - Home: index.md
                   - Code of Conduct: about/code-of-conduct.md
-                  - Running Instances: about/running-instances.md
         - User:
                   - user/index.md
                   - Quickstart: user/quickstart/index.md
@@ -50,6 +49,7 @@ nav:
                           - user/guide/index.md
                           - Register/Login/Logout: user/guide/register-login-logout.md
                           - Forgot Password: user/guide/forgot-password.md
+                          - Community Map: user/guide/community-map.md
                           - Organisation: user/guide/organisation.md
                           - User Profile: user/guide/user-profile.md
                           - Work Order: user/guide/work-order.md
@@ -67,6 +67,7 @@ nav:
                           - Dashboard: user/manual/dashboard.md
                           - Work Order: user/manual/work-order.md
                           - Profile Options: user/manual/profile.md
+                          - User Roles: user/manual/user-role.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
@@ -101,7 +102,6 @@ nav:
                         - developer/documentation/index.md
                         - Simple Workflow: developer/documentation/easy-workflow.md
                         - Advanced Workflow: developer/documentation/overview.md
-                        - Context Help: developer/documentation/context-help.md
                 - API:
                         - developer/api/index.md
                         - Reference: developer/api/manual/index.md

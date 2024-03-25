@@ -19,6 +19,8 @@ Welcome to the MyCivitas user guide. In this section of the documentation, we ai
 
 * **[Forgot Password:](./forgot-password.md)** This page will show you how to reset your password if you forget it.
 
+* **[Community Map:](./community-map.md)** This page will show you how to view the community map.
+
 * **[Organisation:](./organisation.md)** This page will show you how to view and manage the organisation details and access.
 
 * **[User Profile:](./user-profile.md)** This page will guide you on how to view and edit the user profile.
