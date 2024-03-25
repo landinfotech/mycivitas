@@ -72,6 +72,7 @@ nav:
                 - Guide:
                         - administrator/guide/index.md
                         - Accessing the Administration Site: administrator/guide/access-admin-site.md
+                        - Manage Users: administrator/guide/manage-user.md
                 - Manual:
                         - administrator/manual/index.md
                         - Admin: administrator/manual/admin.md
@@ -103,10 +104,10 @@ nav:
                         - Reference: developer/api/manual/index.md
                         - Guide: developer/api/guide/index.md
                 - License: about/license.md
-        - DevOps:
-                  - devops/index.md
-                  - Guide: devops/guide/index.md
-                  - Manual: devops/manual/index.md
+        # - DevOps:
+        #           - devops/index.md
+        #           - Guide: devops/guide/index.md
+        #           - Manual: devops/manual/index.md
         - About:
                   - About: about/index.md
                   - License: about/license.md
