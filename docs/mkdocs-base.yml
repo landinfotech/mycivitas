@@ -55,6 +55,7 @@ nav:
                           - Work Order: user/guide/work-order.md
                           - Dashboard: user/guide/dashboard.md
                           - View Table: user/guide/view-table.md
+                          - Contact Us: user/guide/contact-us.md
                   - Manual :
                           - user/manual/index.md
                           - Landing Page: user/manual/landing-page.md
@@ -67,6 +68,7 @@ nav:
                           - Dashboard: user/manual/dashboard.md
                           - Work Order: user/manual/work-order.md
                           - Profile Options: user/manual/profile.md
+                          - Contact Us: user/manual/contact-us.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
