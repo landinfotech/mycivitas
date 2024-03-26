@@ -75,6 +75,7 @@ nav:
                         - administrator/guide/index.md
                         - Accessing the Administration Site: administrator/guide/access-admin-site.md
                         - Manage Users: administrator/guide/manage-user.md
+                        - Manage Organisation: administrator/guide/manage-organisation.md
                 - Manual:
                         - administrator/manual/index.md
                         - Admin: administrator/manual/admin.md
