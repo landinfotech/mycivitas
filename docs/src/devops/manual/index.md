@@ -13,7 +13,7 @@ license: This program is free software; you can redistribute it and/or modify it
 # DevOps documentation
 <!-- Replace all of the titles with relevant titles -->
 
-## Containers used
+<!-- ## Containers used
 
 ## SDLC
 
@@ -25,4 +25,4 @@ license: This program is free software; you can redistribute it and/or modify it
 
 ### Deployments
 
-### Kubernetes
+### Kubernetes -->

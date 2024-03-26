@@ -18,4 +18,6 @@ Welcome to the MyCivitas administrator guide. In this section of the documentati
 
 * **[Accessing the Administration Site:](./access-admin-site.md)** This section contains a quick description of how administrators can access the administration site of the MyCivitas platform.
 
+* **[Managing Users:](./manage-user.md)** This section describes how administrators can manage users ( i.e. their details, their permissions, etc.) on the MyCivitas platform.
+ 
 * **[Managing Organisations:](./manage-organisation.md)** This section describes how administrators can manage organisations (i.e. members, data, invites, etc ) on the MyCivitas platform.

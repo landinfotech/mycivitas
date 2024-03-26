@@ -13,24 +13,24 @@ license: This program is free software; you can redistribute it and/or modify it
 # Project setup
 <!-- This needs to be changed per project -->
 
-## Clone [PROJECT_NAME] repository
+## Clone MyCivitas repository
 
-This will clone the [PROJECT_NAME] repository to your machine
+This will clone the MyCivitas repository to your machine
 ```
-git clone https://github.com/project/repository.git
+git clone https://github.com/landinfotech/mycivitas.git
 ```
 <!-- Change this to project repository -->
 
 ## Set up the project
 
-This will set up the [PROJECT_NAME] project on your machine
+This will set up the MyCivitas project on your machine
 
 ```
-cd [PROJECT_NAME]
+cd mycivitas
 cd deployment
 cp docker-compose.override.template.yml docker-compose.override.yml
+cp sites-enabled/default.conf.template sites-enabled/default.conf
 cp .template.env .env
-cd ..
 make up
 ```
 
@@ -41,7 +41,7 @@ After everything is done, open up a web browser and go to [http://127.0.0.1/](ht
 By Default, we can use the admin credential:
 
 ```
-username : admin
+username : admin@example.com
 password : admin
 ```
 
@@ -51,29 +51,36 @@ To set up different environment, for example the Default credential, or the port
 You can check the description below for each of variable.
 
 ```
-COMPOSE_PROJECT_NAME=[PROJECT_NAME]
-NGINX_TAG=0.0.1  -> Change this for different nginx image
-DJANGO_TAG=0.0.1 -> Change this for different django image
-DJANGO_DEV_TAG=0.0.1 -> Change this for different django dev image
+COMPOSE_PROJECT_NAME=amlit
 
-# Environments
-DJANGO_SETTINGS_MODULE=core.settings.prod -> Change this to use different django config file
-ADMIN_USERNAME=admin -> Default admin username 
+DB_PORT=5432
+INITIAL_FIXTURES=True -> Put true for django initial data.
+
+# Django env
+DATABASE_NAME=django -> Default django database name
+DATABASE_USERNAME=docker -> Default django database username
+DATABASE_PASSWORD=docker -> Default django database password
+DATABASE_HOST=db -> Default django database host
+
+DATABASE_CIVITAS_NAME=civitas -> Default civitas database name
+DATABASE_CIVITAS_HOST=db -> Default civitas database host
+DATABASE_CIVITAS_PORT=5432 -> Default civitas database port
+DATABASE_CIVITAS_USERNAME=docker -> Default civitas database username
+DATABASE_CIVITAS_PASSWORD=docker -> Default civitas database password
+
+# Email where altersAfter you change the desired variable and do `make up`. It will rerun the project with new environment.
+ should be sent. This will be used by let's encrypt and as the django admin email.
+ADMIN_EMAIL=admin@example.com -> Default admin username
 ADMIN_PASSWORD=admin -> Default admin password
-ADMIN_EMAIL=admin@example.com -> Default admin email
-INITIAL_FIXTURES=True
-HTTP_PORT=80 -> Change the port of nginx
 
-# Database Environment
-DATABASE_NAME=django -> Default database name
-DATABASE_USERNAME=docker -> Default database username
-DATABASE_PASSWORD=docker -> Default database password
-DATABASE_HOST=db -> Default database host. Change this if you use cloud database or any new docker container.
-RABBITMQ_HOST=rabbitmq
+# Email settings
+EMAIL_HOST_USER=noreply@kartoza.com
+EMAIL_HOST_PASSWORD=docker
+EMAIL_HOST=smtp
+EMAIL_HOST_DOMAIN=kartoza.com
 
-# Onedrive
-PUID=1000
-PGID=1000
+HTTP_HOST=80
+HTTPS_HOST=443
 ```
 
-After you change the desired variable and do `make up`. It will rerun the project with new environment.
+After you change the desired variable and do `make up`. It will rerun the project with the new environment.

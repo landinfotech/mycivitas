@@ -55,6 +55,7 @@ nav:
                           - Work Order: user/guide/work-order.md
                           - Dashboard: user/guide/dashboard.md
                           - View Table: user/guide/view-table.md
+                          - Contact Us: user/guide/contact-us.md
                   - Manual :
                           - user/manual/index.md
                           - Landing Page: user/manual/landing-page.md
@@ -67,11 +68,13 @@ nav:
                           - Dashboard: user/manual/dashboard.md
                           - Work Order: user/manual/work-order.md
                           - Profile Options: user/manual/profile.md
+                          - Contact Us: user/manual/contact-us.md
         - Administrators:
                 - administrator/index.md
                 - Guide:
                         - administrator/guide/index.md
                         - Accessing the Administration Site: administrator/guide/access-admin-site.md
+                        - Manage Users: administrator/guide/manage-user.md
                         - Manage Organisation: administrator/guide/manage-organisation.md
                 - Manual:
                         - administrator/manual/index.md
@@ -83,11 +86,7 @@ nav:
                         - Architecture: developer/guide/architecture.md
                         - Prerequisites: developer/guide/prerequisites.md
                         - Cloning: developer/guide/cloning.md
-                        - IDE Setup: developer/guide/ide-setup.md
                         - Configuration: developer/guide/configuration.md
-                        - Building: developer/guide/building.md
-                        - Design: developer/guide/design.md
-                        - Road Map: developer/guide/roadmap.md
                         - Workflows: developer/guide/workflows.md
                         # Pages to render but exclude from navigation
                         - "": developer/guide/templates/pull-request-template.md 
@@ -108,10 +107,10 @@ nav:
                         - Reference: developer/api/manual/index.md
                         - Guide: developer/api/guide/index.md
                 - License: about/license.md
-        - DevOps:
-                  - devops/index.md
-                  - Guide: devops/guide/index.md
-                  - Manual: devops/manual/index.md
+        # - DevOps:
+        #           - devops/index.md
+        #           - Guide: devops/guide/index.md
+        #           - Manual: devops/manual/index.md
         - About:
                   - About: about/index.md
                   - License: about/license.md
