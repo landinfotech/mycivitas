@@ -92,12 +92,12 @@ nav:
                         # Pages to render but exclude from navigation
                         - "": developer/guide/templates/pull-request-template.md 
                         - "": developer/guide/templates/commit-message-convention.md
-                - Manual: 
-                        - developer/manual/index.md
-                        - Amlit: developer/manual/amlit.md
-                        - Amlit Helpdesk: developer/manual/amlit-helpdesk.md
-                        - Civitas: developer/manual/civitas.md
-                        - Core: developer/manual/core.md
+                # - Manual: 
+                #         - developer/manual/index.md
+                #         - Amlit: developer/manual/amlit.md
+                #         - Amlit Helpdesk: developer/manual/amlit-helpdesk.md
+                #         - Civitas: developer/manual/civitas.md
+                #         - Core: developer/manual/core.md
                 - Documentation Writing:
                         - developer/documentation/index.md
                         - Simple Workflow: developer/documentation/easy-workflow.md

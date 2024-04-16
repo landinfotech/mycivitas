@@ -10,60 +10,33 @@ contact: support@civitas.ca
 license: This program is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 ---
 
-Welcome to MyCivitas
-
-An affordable, user-friendly asset management platform for small communities.
-MyCivitas is an all-inclusive, easy-to-use platform that lets you record and manage your assets in one powerful information system.
+# **Welcome to MyCivitas**
 
 ![mycivitas](./img/home-1.png)
 
-## Introduction
+Overview
 
-MyCivitas is a revolutionary project aimed at providing small communities with an affordable and user-friendly asset management platform. Our all-inclusive and easy-to-use platform is designed to empower you to record and manage your assets seamlessly within a powerful information system. MyCivitas is committed to simplifying the complex task of asset management, ensuring that even small communities can efficiently organise and oversee their valuable resources. Join us in embracing a solution that combines accessibility, affordability, and functionality for a streamlined approach to community asset management.
+MyCivitas is a user-friendly, cost-effective asset management platform designed specifically for smaller, budget-conscious municipalities.  Leveraging GIS technology, it seamlessly caters to both the strategic planning and day-to-day operational requirements of asset management.
 
-## Key concepts
+Users can view, locate and query their asset inventory data. MyCivitas calculates and reports Asset Management related information including the condition, replacement cost, life expectancy, probability of failure, consequence of failure and associated risk related to assets.  MyCivitas also includes a Computerized Maintenance Management Software (CMMS) module to create and manage work orders.
 
-**How does MyCivitas work?:** MyCivitas begins by providing a comprehensive map of your community, highlighting its assets and infrastructure. Users can capture and document essential information about the physical components within the community. With the gathered data, prioritise your community assets based on their significance and needs. MyCivitas allows you to assess and categorise assets for better management and decision-making. MyCivitas aids in capital planning by offering insights into the condition and importance of various community assets. This information supports strategic planning and budget allocation for effective infrastructure development. Streamline maintenance and improvement processes by setting up work orders within MyCivitas. Assign tasks, schedule activities, and track progress to ensure timely and efficient execution of projects. MyCivitas provides a robust platform for ongoing asset management. Monitor the status of infrastructure, track changes, and utilise the system to make informed decisions for the sustainable development of your community.
-
-**Capture your infrastructure:** Create a detailed asset inventory by leveraging powerful mapping software. Our data capture system utilises QGIS, a free and open-source desktop application, making it user-friendly and accessible.
-
-**Prioritize Your Assets:** Our system goes beyond simple inventory; it performs risk assessment analysis and preventative maintenance planning on your data. This ensures a nuanced understanding of asset priorities, allowing you to focus on areas that need immediate attention or mitigation.
-
-**Support Your Capital Planning:** MyCivitas empowers you to make informed decisions crucial for supporting your capital planning. By providing comprehensive insights into asset conditions and requirements, you can strategically allocate resources and budget effectively.
-
-**Set Up Work Order:** Streamline your maintenance processes by utilising the platform to plan both ad hoc and scheduled maintenance tasks. MyCivitas enables efficient task assignment, scheduling, and tracking, facilitating a proactive approach to infrastructure management.
-
-**We Are Here to Help:** Let us know if you need any help along the way, from capturing data to presenting to the council. We have a team of experienced staff available.
-
-Please note that support is not included in the hosting fee. A popular option for small communities is to sign an annual support contract. Please inquire (support@civitas.ca) and we will connect you with a team member near you
-
-**Enjoy Asset Management:** Practice effective and sustainable asset management on our affordable platform to benefit your community.
-
-### Disclaimer
-
-<div class="admonition warning">
-The software provided by this project is provided 'as is'. All information provided
-within the platform should be independently verified before using as the basis for
-action. The contributors and developers of this platform take no responsibility
-for any loss of revenue, life, physical harm or any other adverse outcome that may
-occur as a result of the use of this platform.
-</div>
+MyCivitas uses QGIS, a free open-source desktop GIS and is integrated with Mergin Maps for recording information on site using a mobile app.
 
 <!-- ### Purpose -->
 
-### Scope of project
+## Where to start
 
-Civitas was created as a way to present the captured data on a user-friendly platform, allow staff to query/analyze/understand said data, and perform various asset management-related calculations to assist in capital planning.
+We recommend the following three-step approach: 
 
 ![Scope](./img/scope-1.png)
 
 LandInfo developed a three-step methodology to support smaller communities in the development of their asset management plans:
 
-**Step 1: Asset Register:** The first step is creating an asset register. Assets are divided into classes including water supply, wastewater collection, stormwater collection, transportation, facilities, fleet and natural assets.
+## Step 1: Asset Register
 
-Assets are recorded from existing electronic data, hard-copy maps and reports. The remaining unknown assets are recorded through field surveys using Mergin Maps, an open-source mobile application. Civitas Asset Management, an open-source GIS-based application is used to capture the data in a predefined data model.
+Assets are captured in MyCivitas’s predefined data structure using QGIS.  Typically, data is obtained from existing electronic data, hard-copy maps and reports. The remaining unknown assets are recorded through field surveys using Mergin Maps, an open-source mobile application.
 
-Once the data is captured, Civitas is used to generate reports on the condition, life expectancy, replacement cost, etc. of assets. The goal is to answer the following asset management questions:
+Once the data is captured, MyCivitas is used to generate reports on the condition, life expectancy, replacement cost, etc. of assets. The goal is to answer the following asset management questions:
 
 - What do we own?
 
@@ -73,15 +46,21 @@ Once the data is captured, Civitas is used to generate reports on the condition,
 
 - What is the remaining life?
 
-**Step 2: Asset Prioritization:** The second phase is prioritizing assets based on risk. This phase is intended to identify the Village’s critical assets. The probability of failure and consequence of failure values are collected for all assets. Staff knowledge is vital for this phase to be successful. Deliverables at the completion of Phase 2 are:
+- What is the replacement value?
 
-- Prioritized asset registry.
+## Step 2: Asset Prioritization
 
-- Risk-based state of infrastructure reports breaking down the asset register by risk level.
+The second phase is prioritizing assets based on risk. This phase is intended to identify critical assets. The probability of failure and consequence of failure values are collected for all assets. The goal is to answer the following Asset Management questions: 
 
-**Step 3: Capital and Operational Strategies:** The third phase is integrating the asset management data from Phase 1 and Phase 2 into the Village’s current planning procedures.
+- What assets are the high priority?
 
-MyCivitas web application is available for staff, aiding in asset management and planning decisions.
+- What assets need to be replaced first?
+
+## Step 3: Capital and Operational Strategies
+
+Focusing on the high-priority assets identified in Step 2, the next step is to develop capital and operational strategies. A primary focus is to implement operational procedures to extend the life of assets and risk mitigation.
+
+MyCivitas automatically calculates renewal costs as well as the anticipated maintenance costs and annual averaged infrastructure demand requirements.
 
 <!-- ### Project roadmap
 
@@ -91,27 +70,19 @@ MyCivitas web application is available for staff, aiding in asset management and
 
 #### Contributing
 
-We would love to collaborate with you! But first, please read our [contributor
-guidelines](about/contributing.md) which describe how to report
-issues, plan and contribute feature additions etc.
+We would love to collaborate with you! But first, please read our [contributor guidelines](about/contributing.md) which describe how to report issues, plan and contribute feature additions etc.
 
 #### Code of conduct
 
-Our community in this project is aligned with our [Code of
-Conduct](about/code-of-conduct.md) - please be sure to read and abide by that
-document in all interactions with our community.
+Our community in this project is aligned with our [Code of Conduct](about/code-of-conduct.md) - please be sure to read and abide by that document in all interactions with our community.
 
 #### Diversity statement
 
 This project welcomes and encourages participation by everyone.
 
-No matter how you identify yourself or how others perceive you: we welcome you.
-We welcome contributions from everyone as long as they interact constructively
-with our community.
+No matter how you identify yourself or how others perceive you: we welcome you. We welcome contributions from everyone as long as they interact constructively with our community.
 
-While much of the work for our project is technical in nature, we value and
-encourage contributions from those with expertise in other areas, and welcome
-them into our community.
+While much of the work for our project is technical in nature, we value and encourage contributions from those with expertise in other areas, and welcome them into our community.
 
 <!-- ## Project partners -->
 
@@ -143,3 +114,7 @@ You can read our license to find out what rights this license bestows on users a
 
 <!-- Keep the Kartoza Logo at the bottom of the page if the project allows -->
 ![Kartoza Logo](img/KartozaLogo-320x132.png)
+
+## Disclaimer
+
+<div class="admonition warning"> The software provided by this project is provided 'as is'. All information provided within the platform should be independently verified before using as the basis for action. The contributors and developers of this platform take no responsibility for any loss of revenue, life, physical harm or any other adverse outcome that may occur as a result of the use of this platform. </div>
