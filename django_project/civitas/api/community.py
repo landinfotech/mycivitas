@@ -12,10 +12,12 @@ from django.http import HttpResponse, JsonResponse
 from amlit.serializer.organisation import OrganisationSerializer
 from civitas.models.community import Community
 from civitas.models.view.reporter_data import ReporterData
+from civitas.models.view.mc_exporter import McExporter
 from civitas.serializer.community import (
     CommunitySerializer, CommunityDetailSerializer
 )
 from civitas.serializer.reporter_data import ReporterDataSerializer
+from civitas.serializer.mc_exporter import McExporterDataSerializer
 from civitas.permissions import CommunityAccessPermission
 import json
 from django.core.serializers import serialize
@@ -152,7 +154,7 @@ class AssetDataDefaultAPI(APIView):
         )
         
         return Response(
-            ReporterData._showdefault(community)
+            McExporter._showdefault(community)
         )
     
 class AssetDataDetailedAPI(APIView):
@@ -168,7 +170,7 @@ class AssetDataDetailedAPI(APIView):
         )
         
         return Response(
-            ReporterData._showdetailed(community)
+            McExporter._showdetailed(community)
         )
     
 class AssetDataCustomAPI(APIView):
@@ -180,17 +182,18 @@ class AssetDataCustomAPI(APIView):
     def post(self, request):
         """ Return data of features """
         pk = request.POST["pk"]
-        selected  = request.POST.getlist("selected[]")
+        selected  = list(request.POST.getlist("selected[]"))
         
         community = get_object_or_404(
             Community, pk=pk
         )
 
+        if "feature_id" not in selected:
+            selected.insert(0, "feature_id")
+            
         final_list = []
         for item in selected:
-            final_list.append(ReporterData._showcustom(community, item))
-
-        print(final_list)
+            final_list.append(McExporter._showcustom(community, item))
         
         return Response(
             final_list
@@ -245,7 +248,9 @@ class AssetClassAPI(APIView):
                 mv_features.asset_identifier,
                 mv_features.def_stylename,
                 mv_features.type,
-                asset_class.description 
+                asset_class.description,
+                mv_features.view_name,
+                mv_features.combination_id
                 FROM asset_class 
                 LEFT JOIN mv_features ON mv_features.asset_identifier = asset_class.name 
                 WHERE mv_features.community_id = {pk};"""
@@ -259,21 +264,34 @@ class AssetClassAPI(APIView):
                 def_stylename = row[2]
                 asset_type = row[3]
                 asset_class = row[4]
+                view_name = row[5]
+                combination_id = row[6]
 
                 if not any(d['asset_class'] == asset_class for d in data):
                     data.append({
                         "asset_class": asset_class, 
                         "asset_identifier": asset_identifier, 
-                        "asset_sub_class": [{'asset': asset_sub_class, 'type': [asset_type]}], 
-                        "def_stylename": [def_stylename]
+                        "asset_sub_class": [{
+                            'asset': asset_sub_class, 
+                            'type': [asset_type], 
+                            'view_name': [view_name], 
+                            'combination_id': [combination_id]
+                        }], 
                     })
                 else:
                     index = [i for i,_ in enumerate(data) if _['asset_class'] == asset_class][0]    
                     if not any(d['asset'] == asset_sub_class for d in data[index]["asset_sub_class"]):
-                        data[index]["asset_sub_class"].append({'asset': asset_sub_class, 'type': [asset_type]})
+                        data[index]["asset_sub_class"].append({
+                            'asset': asset_sub_class, 
+                            'type': [asset_type], 
+                            'combination_id': [combination_id], 
+                            'view_name': [view_name]
+                        })
                     else:
                         _index = [i for i,_ in enumerate(data[index]["asset_sub_class"]) if _['asset'] == asset_sub_class][0]  
                         data[index]["asset_sub_class"][_index]["type"].append(asset_type)
+                        data[index]["asset_sub_class"][_index]["view_name"].append(view_name)
+                        data[index]["asset_sub_class"][_index]["combination_id"].append(combination_id)
         
         return Response(
             data

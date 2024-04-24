@@ -116,7 +116,6 @@ async function finish(bbox) {
             for(var i = 0; i < featuresArr.length; i++){
                 html_str += "<tr>";
                 var properties = features[i]["properties"]
-                console.log(properties["system_id"])
     
                 for(var x = 0; x < headerArr.length; x++){
                     var col = headerArr[x]
@@ -233,7 +232,6 @@ define([
                 const data = draw.getAll();
                 var coord = data["features"][0]["geometry"]["coordinates"][0]
                 // var features = turf.pointsWithinPolygon()
-                console.log(coord)
                 var polygonBoundingBox = turf.bbox(data["features"][0])
                 var southWest = [polygonBoundingBox[0], polygonBoundingBox[1]];
                 var northEast = [polygonBoundingBox[2], polygonBoundingBox[3]];
@@ -241,7 +239,6 @@ define([
                 var northEastPointPixel = map.project(northEast);
                 var southWestPointPixel = map.project(southWest);
 
-                console.log("bbox", polygonBoundingBox)
                 let all_layers = that.map.getStyle().layers
                 let layers = []
                 for(var i = 0; i < all_layers.length; i++){
@@ -256,12 +253,9 @@ define([
                         selectedFeatures.push(result[i]["properties"])
                     }
                 }
-                console.log("selectedFeatures",selectedFeatures)
             }
 
             document.getElementById("addToWorkOrderBtn").addEventListener("click", async function(){
-
-                console.log(featuresArr)
                 
                 var checkboxArr = [];
                 $('input[name="feature-create-ticket"]:checked').each(function() {

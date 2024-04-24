@@ -44,7 +44,6 @@ define([
 
                 if(featureArr != this.currentFeatureList){
                     this.currentFeatureList = featureArr
-                    console.log("featureArr map click", featureArr)
                     this.featureClicked(featureArr)
                 }
                 
@@ -153,6 +152,7 @@ define([
                 case 'risk':
                     this.load_style(riskStyleUrl)
                     break;
+                case 'default':
                 case 'widget-ticket':
                     this.load_style(styleUrl)
                     break;
@@ -185,7 +185,6 @@ define([
            
             try {
                 var finalArr = []
-                console.log("featuresArr function", featuresArr)
                 for(var i = 0; i < featuresArr.length; i++){
                     var id = featuresArr[i]["id"]
                     this.detailLoading = true
@@ -193,7 +192,7 @@ define([
                     const feature = await RequestFn.promiseGet(
                         urls.feature_data.replaceAll('0', id)
                     )
-                    console.log("feature clicked", feature)
+                    
                     finalArr.push(feature)
                 }
             event.trigger(evt.FEATURE_LIST_FETHCED, finalArr);
@@ -207,8 +206,8 @@ define([
         filterLayers: function () {
             const classes = this.classes
             const system_names = this.system_names
-            const asset_sub_class = this.asset_sub_class
-            const types = this.type
+            const view_name = this.view_name
+            const sub_types = this.sub_types
             this.layerIds.map(layerId => {
                 let filter = this.defaultFilter[layerId]
                 
@@ -225,17 +224,6 @@ define([
 
                 }
 
-                if(asset_sub_class){
-                    for(var i = 0; i < filter.length; i++){
-                        if(filter[i].includes("asset_sub_class")){
-                            filter.splice(i, 1)
-                        }
-                    }
-                    filter = filter.concat(
-                        [["in", "asset_sub_class", ...asset_sub_class]]
-                    )
-                }
-
                 if(system_names){
                     for(var i = 0; i < filter.length; i++){
                         if(filter[i].includes("system_name")){
@@ -247,14 +235,25 @@ define([
                     )
                 }
 
-                if(types){
+                if(view_name){
                     for(var i = 0; i < filter.length; i++){
-                        if(filter[i].includes("type")){
+                        if(filter[i].includes("view_name")){
                             filter.splice(i, 1)
                         }
                     }
                     filter = filter.concat(
-                        [["in", "type", ...types]]
+                        [["in", "view_name", ...view_name]]
+                    )
+                }
+
+                if(sub_types){
+                    for(var i = 0; i < filter.length; i++){
+                        if(filter[i].includes("combination_id")){
+                            filter.splice(i, 1)
+                        }
+                    }
+                    filter = filter.concat(
+                        [["in", "combination_id", ...sub_types]]
                     )
                 }
 

@@ -7,7 +7,7 @@
   "sources": {
     "MyCivitas": {
       "type": "vector",
-      "tiles": ["https://staging.mycivitas.ca/community-all-layer/{z}/{x}/{y}"],
+      "tiles": ["http://127.0.0.1:8000/community-all-layer/{z}/{x}/{y}"],
       "minZoom": 0,
       "maxZoom": 14
     },
@@ -30,7 +30,7 @@
       "maxzoom": 24
     }
   },
-  "sprite": "https://staging.mycivitas.ca/static/styling/MyCivitasSpritesV3",
+  "sprite": "http://127.0.0.1:8000/static/styling/MyCivitasSpritesV3",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cc4PpmmWZP73LjU1nsw3",
   "layers": [
     {

@@ -10,7 +10,7 @@
     <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/maplibre-gl.js' %}?"></script>
     <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/turf.min.js' %}?"></script>
     <script type="text/javascript" src="{% static 'libs/maplibre/2.4.0/mapbox-gl-draw.js' %}?"></script>
-    <link href="{% static 'css/map/main.css' %}?ver=2" rel="stylesheet" type="text/css" media="screen, projection"/>
+    <link href="{% static 'css/map/main.css' %}?" rel="stylesheet" type="text/css" media="screen, projection"/>
     <link href="{% static 'css/map/widget.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
     <link href="{% static 'css/filter_multi_select.css' %}" rel="stylesheet" type="text/css" media="screen, projection"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -257,45 +257,113 @@
     <div id="map"></div>
 
     <div id="left-top" class="side-panel">
-        <div id="filter-list">
+      
+      <div class="left-panel-flex">
+        <div id="filterList">
           <div class="flex">
-            <button id="hideLegendBtn" class="btn btn-primary">F</button>
-            <button id="showLegendBtn" class="btn btn-primary">L</button>
+            <button 
+            id="filterListBtn" 
+            style="background: rgba(255, 255, 255, 0.9);box-shadow: none;color: #aaa; margin-left: -2px;" 
+            id="showLegendBtn" 
+            class="btn toggle-button hidden"
+            data-toggle="tooltip" data-placement="right" title="Show Filter List">
+              F
+            </button>
+            <button 
+            id="filterLegendBtn" 
+            style="background: rgba(255, 255, 255, 0.9);box-shadow: none;color: #aaa; margin-left: -2px;" 
+            id="showLegendBtn" 
+            class="btn toggle-button hidden"
+            data-toggle="tooltip" data-placement="right" title="Show Legends">
+              L
+            </button>
           </div>
         </div>
-        <div class="inner full ui-overlay">
-            <div class="content full box-overlay">
-                <div id="community" class="section">
-                    <div class="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading community list</div>
-                    <div class="detail" style="display: none">
-                        <div class="selection">
-                            <div class="name"></div>
-                            <ul class="main-ul" style="display: none"></ul>
-                        </div>
-                        <div class="region"></div>
-                        <div class="province"></div>
-                    </div>
-                </div>
-                <div>
-                  <!-- <button onclick="selectionTool()" id="selection-tool" class="btn btn-primary">Selection Tool</button> -->
-                </div>
-                <div id="layer-list-toggle" class="section">
-                    <span id="see-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-down" aria-hidden="true"></i> See Layer List</span>
-                    <span id="hide-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-up" aria-hidden="true"></i> Hide Layer List</span>
-                </div>
-                <div style="overflow-y: scroll;">
-                  <div id="asset_list" class="section layer-list-show">
-                    <p>Classification</p>
-                  </div>
-                  <div id="risk_list" class="section layer-list-show">
-                    <p>Risk</p>
-                  </div>
-                  <div id="system_list" class="section layer-list-show">
-                    <p>Organization</p>
-                  </div>
-                </div>
+        <div id="expandLayer">
+          <div class="row">
+           <div class="col-md-4">
+              <div>
+                <p>Natural</p>
+                <img class="legendURL" src="/static/legends/1_natural_assets_.png">
+              </div>
+              <div>
+                <p>Stormwater Collection</p>
+                <img class="legendURL" src="/static/legends/2_stormwater_collection_.png">
+              </div>
+              <div>
+                <p>Structures</p>
+                <img class="legendURL" src="/static/legends/3_structures_.png">
+              </div>
+           </div>
+            <div class="col-md-4">
+              <div>
+                <p>Transportation Network</p>
+                <img class="legendURL" src="/static/legends/4_transportation_network_.png">
+              </div>
+              <div>
+                <p>Wastewater Collection</p>
+                <img class="legendURL" src="/static/legends/5_wastewater_collection_.png">
+              </div>
+              <div>
+                <p>Water Supply</p>
+                <img class="legendURL" src="/static/legends/6_water_supply_.png">
+              </div>
             </div>
+            <div class="col-md-4">
+              <div>
+                <p>Electrical Network</p>
+                <img class="legendURL" src="/static/legends/7_electrical_network_.png">
+              </div>
+              <div>
+                <p>Consequence of Failure</p>
+                <img class="legendURL" src="/static/legends/9_cof.png">
+              </div>
+              <div>
+                <p>Probability of Failure</p>
+                <img class="legendURL" src="/static/legends/pof.png">
+              </div>
+              <div>
+                <p>Risk</p>
+                <img class="legendURL" src="/static/legends/10_risk.png">
+              </div>
+            </div>
+          </div>
         </div>
+        <div id="innerFilterList" class="inner full ui-overlay" style="width: 270px;">
+          <div class="content full box-overlay">
+              <div id="community" class="section">
+                  <div class="loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading community list</div>
+                  <div class="detail" style="display: none">
+                      <div class="selection">
+                          <div class="name"></div>
+                          <ul class="main-ul" style="display: none"></ul>
+                      </div>
+                      <div class="region"></div>
+                      <div class="province"></div>
+                  </div>
+              </div>
+              <div>
+                <!-- <button onclick="selectionTool()" id="selection-tool" class="btn btn-primary">Selection Tool</button> -->
+              </div>
+              <!-- <div id="layer-list-toggle" class="section">
+                  <span id="see-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-down" aria-hidden="true"></i> See Layer List</span>
+                  <span id="hide-layer-list"><i style="margin-left: -17px;" class="fa fa-chevron-up" aria-hidden="true"></i> Hide Layer List</span>
+              </div> -->
+              <div style="overflow-y: scroll;display: block  !important;">
+                <div id="asset_list" class="section layer-list-show">
+                  <p>Classification</p>
+                </div>
+                <div id="risk_list" class="section layer-list-show">
+                  <p>Risk</p>
+                </div>
+                <div id="system_list" class="section layer-list-show">
+                  <p>Organization</p>
+                </div>
+              </div>
+          </div>
+      </div>
+      </div>
+        
     </div>
     <div id="top-center" class="ui-overlay box-overlay">
         <div id="styles">
@@ -473,162 +541,162 @@
 
     <script>
 
-        if(window.location.href.indexOf("view_table") > -1){
-          showTables()
+      $('#left-top').toggleClass('show');
+
+      if(window.location.href.indexOf("view_table") > -1){
+        showTables()
+      }
+
+      function selectionTool(){
+        event.trigger(evt.SELECTION_TOOL, "");
+      }
+
+      function showFeatureMap(id){
+        var td = document.getElementsByClassName("getFeatureMap")
+
+        for(var i = 0; i < td.length; i++){
+          td[i].parentNode.style.backgroundColor = 'white'
         }
 
-        function selectionTool(){
-          event.trigger(evt.SELECTION_TOOL, "");
-        }
-
-        function showFeatureMap(id){
-          var td = document.getElementsByClassName("getFeatureMap")
-
-          for(var i = 0; i < td.length; i++){
-            td[i].parentNode.style.backgroundColor = 'white'
-          }
-
-          $.ajax({
-              type: 'GET',
-              url: "/api/feature/"+id+"/data", //Replace your URL here
-              success: function(response){
-                  //code after success
-                  document.getElementById(id).parentNode.style.backgroundColor = '#97a1ba'
-                  var row = $(this).closest("tr");
-                  
-                  event.trigger(evt.FEATURE_LIST_FETHCED, [response]);
-                  event.trigger(evt.FEATURE_PAN, response);
-                  event.trigger(evt.FEATURE_HIGHLIGHTED, response);
-                  
-                  $("#modal_show").hide();
-              },
-              error: function () {
-                  // Code After Erroe
-              }
-          });
-        }
-
-        function tableToCSV() {
-
-          let data = "";
-          const tableData = [];
-          const rows = document.getElementsByClassName("exportfiltered");
-          var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-          var searchColumnsArr = document.getElementsByClassName('search-column');
-          var isEmpty = true;
-          for(var x = 0; x < searchColumnsArr.length; x++){
-            if(searchColumnsArr.value != ""){
-              isEmpty = false;
-              break;
+        $.ajax({
+            type: 'GET',
+            url: "/api/feature/"+id+"/data", //Replace your URL here
+            success: function(response){
+                //code after success
+                document.getElementById(id).parentNode.style.backgroundColor = '#97a1ba'
+                var row = $(this).closest("tr");
+                
+                event.trigger(evt.FEATURE_LIST_FETHCED, [response]);
+                event.trigger(evt.FEATURE_PAN, response);
+                event.trigger(evt.FEATURE_HIGHLIGHTED, response);
+                
+                $("#modal_show").hide();
+            },
+            error: function () {
+                // Code After Erroe
             }
+        });
+      }
+
+      function tableToCSV() {
+
+        let data = "";
+        const tableData = [];
+        const rows = document.getElementsByClassName("exportfiltered");
+        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+        var searchColumnsArr = document.getElementsByClassName('search-column');
+        var isEmpty = true;
+        for(var x = 0; x < searchColumnsArr.length; x++){
+          if(searchColumnsArr.value != ""){
+            isEmpty = false;
+            break;
           }
-          for (const row of rows) {
-            const rowData = [];
-            var count = 0;
-            if(isEmpty){
-              for (const [index, column] of row.querySelectorAll("th, td").entries()) {
-                // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
-                if(count != 0){
-                  if (format.test(column.innerText)) {
-                  rowData.push('"' + column.innerText + '"');
+        }
+        for (const row of rows) {
+          const rowData = [];
+          var count = 0;
+          if(isEmpty){
+            for (const [index, column] of row.querySelectorAll("th, td").entries()) {
+              // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
+              if(count != 0){
+                if (format.test(column.innerText)) {
+                  rowData.push(`"${column.innerText}"`);
+              } else {
+                rowData.push(`"${column.innerText}"`);
+              }
+              }
+              count++;
+            }
+            tableData.push(rowData.join(","));
+          }
+          else if($(row).hasClass('feature-filter') && isEmpty==false){
+            for (const [index, column] of row.querySelectorAll("th, td").entries()) {
+              // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
+              if(count!=0){
+                if (format.test(column.innerText)) {
+                  rowData.push(`"${column.innerText}"`);
                 } else {
-                  rowData.push('"' + column.innerText + '"');
+                  rowData.push(`"${column.innerText}"`);
                 }
-                }
-                count++;
               }
-              tableData.push(rowData.join(","));
+              count++;
             }
-            else if($(row).hasClass('feature-filter') && isEmpty==false){
-              for (const [index, column] of row.querySelectorAll("th, td").entries()) {
-                // To retain the commas in the "Description" column, we can enclose those fields in quotation marks.
-                if(count!=0){
-                  if (format.test(column.innerText)) {
-                  rowData.push('"' + column.innerText + '"');
-                  } else {
-                    rowData.push('"' + column.innerText + '"');
-                  }
-                }
-                count++;
-              }
-              tableData.push(rowData.join(","));
-            }
-
+            tableData.push(rowData.join(","));
           }
-          data += tableData.join("\n");
-          const a = document.createElement("a");
-          a.href = URL.createObjectURL(new Blob([data], { type: "text/csv" }));
-          a.setAttribute("download", "data.csv");
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
 
         }
+        data += tableData.join("\n");
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([data], { type: "text/csv" }));
+        a.setAttribute("download", "data.csv");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
 
-        function searchTable() {
+      }
 
-          document.getElementById("loadingScreenTable").style.display = "block";
-          document.getElementById("filteredTable").style.display = "none"
+      function searchTable() {
 
-          setTimeout(function(){
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("table_show");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-              $(tr[i]).removeClass('feature-filter')
-              td = tr[i].getElementsByTagName("td");
-              for(var x=0; x < td.length; x++){
-                if (td[x]) {
-                  txtValue =  td[x].textContent || td[x].innerText;
-                  if ( txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                    $(tr[i]).addClass('feature-filter')
-                    break;
-                  }
-                  else {
-                    tr[i].style.display = "none";
-                  }
-                }
-              }
-            }
-          }, 500)
+        document.getElementById("loadingScreenTable").style.display = "block";
+        document.getElementById("filteredTable").style.display = "none"
 
-          setTimeout(function(){
-            document.getElementById("loadingScreenTable").style.display = "none";
-            document.getElementById("filteredTable").style.display = "block";
-          }, 2000)
-
-        }
-
-        function clearSearch(){
-          function clearSearch(){
-          document.getElementById("loadingScreenTable").style.display = "block";
-          document.getElementById("filteredTable").style.display = "none";
-          setTimeout(function(){
-            document.getElementById("loadingScreenTable").style.display = "none";
-            document.getElementById("filteredTable").style.display = "block";
-          }, 500)
-          document.getElementById("myInput").value = "";
+        setTimeout(function(){
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
           table = document.getElementById("table_show");
           tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-              tr[i].style.display = "";
+          for (i = 0; i < tr.length; i++) {
+            $(tr[i]).removeClass('feature-filter')
+            td = tr[i].getElementsByTagName("td");
+            for(var x=0; x < td.length; x++){
+              if (td[x]) {
+                txtValue =  td[x].textContent || td[x].innerText;
+                if ( txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                  $(tr[i]).addClass('feature-filter')
+                  break;
+                }
+                else {
+                  tr[i].style.display = "none";
+                }
+              }
             }
           }
+        }, 500)
+
+        setTimeout(function(){
+          document.getElementById("loadingScreenTable").style.display = "none";
+          document.getElementById("filteredTable").style.display = "block";
+        }, 2000)
+
+      }
+
+      function clearSearch(){
+        function clearSearch(){
+        document.getElementById("loadingScreenTable").style.display = "block";
+        document.getElementById("filteredTable").style.display = "none";
+        setTimeout(function(){
+          document.getElementById("loadingScreenTable").style.display = "none";
+          document.getElementById("filteredTable").style.display = "block";
+        }, 500)
+        document.getElementById("myInput").value = "";
+        table = document.getElementById("table_show");
+        tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+            tr[i].style.display = "";
+          }
         }
+      }
 
-        function showTables(){
-          $("#modal_show").show();
-          
-        }
+      function showTables(){
+        $("#modal_show").show();
+        
+      }
 
-        function closeFilter(){
-          $("#modal_show").hide();
-        }
-
-
+      function closeFilter(){
+        $("#modal_show").hide();
+      }
     </script>
 
 {% endblock extrascripts %}

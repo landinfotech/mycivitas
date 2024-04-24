@@ -7,7 +7,7 @@
   "sources": {
     "MyCivitas": {
       "type": "vector",
-      "tiles": ["https://staging.mycivitas.ca/community-all-layer/{z}/{x}/{y}"],
+      "tiles": ["http://127.0.0.1:8000/community-all-layer/{z}/{x}/{y}"],
       "minZoom": 0,
       "maxZoom": 14
     },

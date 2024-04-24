@@ -85,34 +85,47 @@ define([
          * @param geojson
          */
         communityGeojsonChanged: function (geojson) {
+            var lat;
+            var lon;
             if (!geojson?.geometry?.coordinates || !geojson?.geometry?.coordinates[0]) {
-                return
+                try {
+                    var name = geojson.properties["name"];
+                    var province = geojson.properties["province"];
+
+                    $.ajax({
+                        type: 'GET',
+                        url: domain + "api/latlon/",
+                        data: {name: name, province: province, country: "Canada"},
+                        success: function(response){
+                            console.log(response);
+                            lat = response.lat;
+                            lon = response.lon;
+
+                            var sw = new maplibregl.LngLat(lon - 0.01, lat + 0.01);
+                            var ne = new maplibregl.LngLat(lon + 0.01, lat - 0.01);
+                            var bounds = new maplibregl.LngLatBounds(sw, ne);
+                            event.trigger(evt.MAP_FLY, bounds);
+
+                        },
+                        error: function(response){
+                            console.log(response)
+                        }
+                    });
+                    return;
+                } catch (error) {
+                    return
+                }
             }
-            const coordinates = geojson.geometry.coordinates[0][0]
             this.map.getSource(this.layerId).setData(geojson);
-            var bounds = coordinates.reduce(function (bounds, coord) {
-                return bounds.extend(coord);
-            }, new maplibregl.LngLatBounds(coordinates[0], coordinates[0]));
-            event.trigger(evt.MAP_FLY, bounds);
-        },
-        featureChanged: function (geojson) {
-            if (!geojson?.geometry?.coordinates || !geojson?.geometry?.coordinates[0]) {
-                return
+            try {
+                const coordinates = geojson.geometry.coordinates[0][0];
+                var sw = new maplibregl.LngLat(coordinates[0][1] - 0.01, coordinates[0][0] + 0.01);
+                var ne = new maplibregl.LngLat(coordinates[0][1] + 0.01, coordinates[0][0] - 0.01);
+                var bounds = new maplibregl.LngLatBounds(sw, ne);
+                event.trigger(evt.MAP_FLY, bounds);
+            } catch (error) {
+                console.log("could not fetch geomtry from geojson");
             }
-            var coordinates;
-            if(geojson.geometry.type === "Point"){
-                coordinates = geojson.geometry.coordinates
-            }
-            else if(geojson.geometry.type === "LineString"){
-                coordinates = geojson.geometry.coordinates[0]
-            }
-            else if(geojson.geometry.type === "Polygon"){
-                coordinates = geojson.geometry.coordinates[0][0]
-            }
-            var sw = new maplibregl.LngLat(coordinates[0] - 0.001, coordinates[1] - 0.001);
-            var ne = new maplibregl.LngLat(coordinates[0] + 0.001, coordinates[1] + 0.001);
-            var bounds = new maplibregl.LngLatBounds(sw, ne);
-            event.trigger(evt.MAP_FLY, bounds);
         },
     });
 });

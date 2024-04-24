@@ -3,6 +3,20 @@
 
 # import SECRET_KEY into current namespace
 from core.settings.utils import ABS_PATH
+import os
+
+if os.name == 'nt':
+    import platform
+
+    dirname = os.path.dirname(__file__)
+    OSGEO4W = os.path.join(dirname, "OSGeo4W")
+    # if '64' in platform.architecture()[0]:
+    #     OSGEO4W += "64"
+    assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
+    os.environ['OSGEO4W_ROOT'] = OSGEO4W
+    os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
+    os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
+    os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
 
 DEBUG = True
 
@@ -101,7 +115,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.project_version',
                 'amlit.context_processors.site_settings',
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -116,6 +129,9 @@ STATICFILES_FINDERS = (
 )
 
 INSTALLED_APPS = (
+    'django',
+    'translations',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

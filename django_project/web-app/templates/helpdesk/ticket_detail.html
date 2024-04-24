@@ -8,6 +8,12 @@
                 {{ form.title }}
             </div>
         </div>
+        <div class="section field">
+            <div class="title">Description</div>
+            <div class="field">
+                {{ form.body }}
+            </div>
+        </div>
     {% endif %}
     <div class="section">
         <div class="title">Priority</div>
@@ -22,6 +28,9 @@
         {% endif %}
     </div>
     <div class="section">
+        <div class="section field">
+            
+        </div>
         <div class="title">
             Start date
         </div>
@@ -38,6 +47,24 @@
             </div>
         {% endif %}
     </div>
+
+    <div class="section">
+        <div class="section field">
+            
+        </div>
+        <div class="title">
+            Link
+        </div>
+        <div class="value">
+            <a href="{{ extra_fields.link }}" style="word-wrap: break-word;">{{ extra_fields.link }}</a>
+        </div>
+        {% if form %}
+            <div class="field">
+                {{ form.link }}
+            </div>
+        {% endif %}
+    </div>
+
     <div class="section">
         <div class="title">
             Due date

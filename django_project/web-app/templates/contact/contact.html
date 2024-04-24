@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class>
+    <h1>Contact Us</h1>
+    <hr>
+    <p>We want to hear from you.</p>
+    <hr>
+    <br>
+    <form method="post">
+      {% csrf_token %}
+      {% if message %}
+        <div class="alert alert-success alert-dismissible fade show" alert="alert">
+          <h5>{{message}}</h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+      {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" alert="alert">
+          <h5>{{error}}</h5>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+      {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" alert="alert">
+        <button class="btn btn-close" type="button">
+
+        </button>
+        <h5>Your form has the following errors:</h5>
+            {% for field in form %}
+                {% if field.errors %}
+                {{ field.errors }}
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+   </form>
+</div>
+
+{% endblock content %}
+    
+
+
+    

@@ -15,13 +15,13 @@ class VectorTileAllApi(APIView):
         sql = f"""
             WITH mvtgeom AS
             (
-                SELECT id, description, label, cof, pof, risk,
+                SELECT id, description, label, cof, pof, risk, view_name, combination_id,
                     system_id, system_name, community_id, community_name,
                     region_code, region_name, province_code, province_name,
                     asset_class, asset_identifier, asset_sub_class, type,
                     brand, model, contractor, material, diameter, length, geometry_type, def_stylename,
                     ST_AsMVTGeom(
-                        ST_Transform(geom, 3857), ST_TileEnvelope({z}, {x}, {y}),
+                        ST_Transform(ST_Force2D(geom), 3857), ST_TileEnvelope({z}, {x}, {y}),
                         extent => 4096, buffer => 64
                     ) as geom
                     FROM mv_features AS feature

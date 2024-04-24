@@ -15,6 +15,8 @@ class Migration(migrations.Migration):
                 feature_base.description AS description,
                 feature_base.display_label AS label,
                 feature_base.geom AS geom, 
+                feature_base.view_name AS view_name, 
+                asset_classification_combination.id AS combination_id,
                 asset_classification_combination.def_stylename AS def_stylename,
                 (
 					CASE

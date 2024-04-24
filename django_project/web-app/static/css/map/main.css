@@ -103,7 +103,7 @@ html, body {
     height: auto;
     left: 8px;
     position: absolute;
-    width: 270px;
+    /* width: 270px; */
     z-index: 1000;
 }
 
@@ -236,7 +236,7 @@ html, body {
     color: #aaa;
 }
 
-.layer-row-sub, .layer-row-sub a {
+.layer-row-sub, .layer-row-sub a .layer-row-sub {
   color: #aaa;
 }
 
@@ -281,7 +281,29 @@ html, body {
     display: none;
 }
 
+.layer-row-type, .layer-row-type a {
+  color: #aaa;
+}
 
+.layer-row-type, .layer-row-type a {
+  color: #aaa;
+}
+
+.layer-row-type .fa-check-square {
+  display: none;
+}
+
+.layer-row-type .fa-square-o {
+  display: inline-block;
+}
+
+.layer-row-type.active, .layer-row-type.active a {
+  color: green;
+}
+
+.layer-row-type.active, .layer-row-type.active a {
+  color: green;
+}
 
 .layer-row.active img {
     filter: grayscale(0%);
@@ -653,11 +675,55 @@ html, body {
     background-color: #eee;
     padding: 50px 0;
   }
+
+  .left-panel-flex{
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+  }
   
-  #filter-list{
-    position: absolute;
+  #filterList{
+    margin-top: 20px;
+    /* position: absolute;
     right: -35px;
-    top: 90px;
+    top: 90px; */
+  }
+
+  #expandLayer{
+    /* position: absolute;
+    top: 90px; */
+    margin-top: 20px;
+    background-color: white;
+    padding: 10px;
+    left: 270px;
+    width: 80vh;
+    max-height: 90vh;
+    overflow-y: scroll;
+    display: none;
+  }
+
+  .moveFilterBtn{
+    position: absolute !important;
+    left: 80vh;
+    right: 0px !important;
+  }
+
+  .moveLegendBtn{
+    position: absolute !important;
+    left: 1030px;
+    right: 0px !important;
+  }
+
+  #showLegendBtn{
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: none;
+    color: #aaa;
+  }
+
+  .legendURL{
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: -10px !important;
   }
 
   .flex{

@@ -15,7 +15,7 @@ class VectorTileApi(APIView):
         sql = f"""
             WITH mvtgeom AS
             (
-                SELECT id, description, label, cof, pof, risk,
+                SELECT id, description, label, cof, pof, risk, view_name, combination_id,
                     system_id, system_name, community_id, community_name,
                     region_code, region_name, province_code, province_name,
                     asset_class, asset_identifier, asset_sub_class, type,

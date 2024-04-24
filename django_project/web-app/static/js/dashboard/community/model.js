@@ -47,7 +47,7 @@ define([
                     
                 }
 
-                htmlStr += "<td style='display:none'><a href='" + host + "/community-map/?feature=" + feature_id+"'>" + host + "/community-map/?feature=" + feature_id+"</a></td>";
+                htmlStr += `<td style='display:none'><a href='${host}/community-map/?feature=${feature_id}'>${host}/community-map/?feature=${feature_id}</a></td>`;
                 
                 htmlStr += "</tr>";
                 
@@ -121,7 +121,7 @@ define([
                        
                    }
 
-                   htmlStr += "<td style='display:none'><a href='" + host + "/community-map/?feature=" + feature_id+"'>" + host + "/community-map/?feature=" + feature_id+"</a></td>";
+                   htmlStr += `<td style='display:none'><a href='${host}/community-map/?feature=${feature_id}'>${host}/community-map/?feature=${feature_id}</a></td>`;
                    
                    htmlStr += "</tr>";
                    
@@ -144,34 +144,86 @@ define([
             var community_id = this.attributes.id
             
             custom_list = [
-                'feature_id', 
-                'class_name',
-                'sub_class_name',
-                'system_name',
-                'age',  
-                'area', 
-                'asset_type_description', 
-                'asset_type_name', 
-                'cof_name', 
-                'community_name', 
-                'condition_name', 
-                'deterioration_name', 
-                'length', 
-                'lifespan', 
-                'lifespan_method', 
-                'maintenance_cost_method',
-                'pof_name', 
-                'quantity', 
-                'remaining_years', 
-                'remaining_years_method', 
-                'renewal_cost_method', 
-                'risk_level', 
-                'risk_value', 
-                'sub_class_unit_description', 
-                'sub_class_unit_name', 
-                'annual_reserve',
-                'maintenance_cost',
-                'renewal_cost',
+                "feature_id",
+                "community_name",
+                "system_name",
+                "sub_class_name",
+                "asset_type_name",
+                "feature_description",
+                "quantity",
+                "sub_class_unit_description",
+                "reported_renewal_cost",
+                "condition_id",
+                "condition_name",
+                "inspection_date",
+                "install_date",
+                "age",
+                "remaining_years",
+                "pof_id",
+                "pof_name",
+                "cof_id",
+                "cof_name",
+                "risk_value",
+                "risk_level",
+                "area",
+                "reported_length",
+                "diameter",
+                "material",
+                "display_label",
+                "province_name",
+                "province_code",
+                "regoin_code",
+                "community_code",
+                "system_id",
+                "class_name",
+                "class_description",
+                "sub_class_id", 
+                "sub_class_description", 
+                "sub_class_unit_id", 
+                "sub_class_unit_name",
+                "type_id", 
+                "asset_type_description", 
+                "view_name", 
+                "reported_area", 
+                "lookup_unit_maintenance_cost", 
+                "lookup_unit_renewal_cost", 
+                "input_maintenance_cost", 
+                "input_renewal_cost", 
+                "maintenance_cost_calc_method", 
+                "renewal_cost_calc_method", 
+                "reported_maintenance_cost", 
+                "lookup_lifespan", 
+                "input_lifespan", 
+                "lifespan_calc_method", 
+                "reported_lifespan", 
+                "projected_sustainable_investment", 
+                "brand", 
+                "model", 
+                "contractor", 
+                "width", 
+                "display_id", 
+                "power_output", 
+                "size",
+                "load_rating", 
+                "depth", 
+                "footprint", 
+                "floor_area", 
+                "height", 
+                "structure_id", 
+                "service", 
+                "capacity", 
+                "stakeholder",
+                "species", 
+                "gauge", 
+                "phase", 
+                "specification", 
+                "cores", 
+                "primary_voltage", 
+                "secondary_voltage", 
+                "voltage", 
+                "current", 
+                "communication", 
+                "account", 
             ]
 
             //default view
@@ -197,6 +249,7 @@ define([
                             url: "/api/asset-default-download/" + community_id, //Replace your URL here
                             success: function(response){
                                 createTable(response)
+                                $("#custom_filter").hide();
                             },
                             error: function () {
                                 // Code After Erroe
@@ -210,6 +263,7 @@ define([
                             url: "/api/asset-detailed-download/" + community_id, //Replace your URL here
                             success: function(response){
                                 createTable(response)
+                                $("#custom_filter").hide();
                             },
                             error: function () {
                                 // Code After Erroe
@@ -263,15 +317,30 @@ define([
                                         document.getElementById("table_show").innerHTML = "";
                                         let htmlStr = "";
                                         let headStr = "";
+                                        var isFeatureBegin = false
+
+                                        for(var i = 0; i < selectedArr.length; i++){
+                                            if(selectedArr[i] == "feature_id"){
+                                                isFeatureBegin = true
+                                                break
+                                            }
+                                        }
+
+                                        if (!isFeatureBegin){
+                                            selectedArr.unshift("feature_id")
+                                        }
                                         
                                         headStr += "<tr class='exportfiltered feature-filter'>";
                                         for(var i = 0; i < selectedArr.length; i++){
                                             var str_a = selectedArr[i].replaceAll("name", "");
                                             str_a = str_a.replaceAll("_", " ");
                                             var str_b = str_a.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-                                            if(str_b == 'Feature Id'){
+                                            if(str_b == 'Feature Id' && isFeatureBegin ){
                                                 headStr += "<td class='getFeatureMap'>Zoom</td>"
                                                 headStr += "<td class='feature_id col-filter'>Feature ID</td>"
+                                            }
+                                            else if(str_b == 'Feature Id' && !isFeatureBegin ){
+                                                headStr += "<td class='getFeatureMap'>Zoom</td>"
                                             }
                                             else{
                                                 headStr += "<td class='"+ selectedArr[i] +" col-filter'>"+ str_b +"</td>"
@@ -293,7 +362,7 @@ define([
                                                 var key = selectedArr[x]
                                                 var item = response[x][i][key]
 
-                                                if(key==='feature_id'){
+                                                if(key==='feature_id' && isFeatureBegin){
                                                     feature_id = item
                                                     htmlStr += `<td class='getFeatureMap' id='${item}'>
                                                     <button class='btn btn-primary'onClick='showFeatureMap(${item})'>
@@ -302,6 +371,14 @@ define([
                                                     </td>`
                                                     htmlStr += "<td class='feature_id col-filter'>"+ item +"</td>";
                                                 }
+                                                else if(key==='feature_id' && !isFeatureBegin){
+                                                    feature_id = item
+                                                    htmlStr += `<td class='getFeatureMap' id='${item}'>
+                                                    <button class='btn btn-primary'onClick='showFeatureMap(${item})'>
+                                                    <span class='material-symbols-outlined'>search</span>
+                                                    </button>
+                                                    </td>`
+                                                }
                                                 else{
                                                     htmlStr += "<td class='"+ key +" col-filter'>"+ item +"</td>";
                                                 }
@@ -309,7 +386,7 @@ define([
 
                                             htmlStr += `
                                             <td style='display:none'>
-                                            <a href='${host}/community-map/?feature=${feature_id}'>" + host + "/community-map/?feature=${feature_id}</a>
+                                            <a href='${host}/community-map/?feature=${feature_id}'>${host}/community-map/?feature=${feature_id}</a>
                                             </td>`;
                                             
                                             htmlStr += "</tr>";
