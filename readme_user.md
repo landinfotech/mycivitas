@@ -21,10 +21,12 @@ The aim of this document is to explain how to set up your machine to run the exe
 ### Restoring databases via pgAdmin
 1. Open pgAdmin
 2. Create a user on your local postgreSQL named 'civitas_user'
-3. Create a database named `civitas`
-4. Open the pgAdmin Query Tool in the civitas database and execute the following script 'CREATE EXTENSION postgis;'
-5. Right click on the datbase and in the dropdown select `Restore`. The format is `Custom or tar`. Click on the folder icon of `Filename` field to upload the file called **`civitas_bc`** _(Note that we need to distribute only a 'template database' without infrastructure data included)_
-7. Create a database named `django`. Right click on the datbase and in the dropdown select `Restore`. The format is `Custom or tar`. Click on the folder icon of `Filename` field to upload the file called `django_bc`
+3. Create a user on your local postgreSQL named 'django_user'
+4. Create a database named `civitas`
+5. Open the pgAdmin Query Tool in the civitas database and execute the following script 'CREATE EXTENSION postgis;'
+6. Open the pgAdmin Query Tool in the django database and execute the following script 'CREATE EXTENSION postgis;
+7. Right click on the datbase and in the dropdown select `Restore`. The format is `Custom or tar`. Click on the folder icon of `Filename` field to upload the file called **`civitas_bc`** _(Note that we need to distribute only a 'template database' without infrastructure data included)_
+8. Create a database named `django`. Right click on the datbase and in the dropdown select `Restore`. The format is `Custom or tar`. Click on the folder icon of `Filename` field to upload the file called `django_bc`
 *If pgAdmin fails to restore the databases please see steps below*
 
 ### Restoring databases via command prompt
