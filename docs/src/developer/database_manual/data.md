@@ -17,7 +17,7 @@ Assets are organized hierarchically to reflect both their **real-world structure
 
 Assets themselves live in the `feature_base` table and are always associated with a **System**, which groups related assets within a Community. This allows each asset to have a clear owner and location context.
 
-<br>
+---
 
 ### Hierarchy Overview
 
@@ -165,33 +165,11 @@ Other typical fields include:
 
 ---
 
-### Flexible Properties (Mini-EAV)
+### Flexible Properties
 
-Additional asset-specific attributes are stored in the `feature_property` table using a simplified **Entity-Attribute-Value (EAV)** structure. This allows the database to store unique attributes (like *material* or *diameter*) without altering the schema for every new asset type.
+Some assets have unique attributes that don’t apply to all types — for example, *diameter* for a pipe or *surface type* for a road. To handle this without constantly changing the database schema, the system uses a simplified **Entity–Attribute–Value (EAV)** model.
 
-<br>
-
-**How it works:**
-
-- `feature_property` links each feature to one or more entries in the `property` lookup table.
-- Each entry stores a *property_id* (what the property is) and *value_text* (the actual value).
-- The `property` table defines all possible property names.
-
-<br>
-
-<div class="image-with-caption">
-  <img src="../img/data-3.png" alt="Attributes">
-</div>
-
-<br>
-
-**Example:**
-
-<div class="image-with-caption">
-  <img src="../img/data-4.png" alt="Example Attributes">
-</div>
-
-In this example, **Feature 173** has a property **material = PVC**. This structure makes the database adaptable to new asset attributes without requiring schema changes.
+Each feature can have one or more custom properties stored in the `feature_property` table, which links to definitions in the `property` lookup table. This makes it easy to add or modify attributes dynamically while keeping the database structure stable.
 
 ---
 
