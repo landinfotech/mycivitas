@@ -13,31 +13,138 @@ license: This program is free software; you can redistribute it and/or modify it
 
 ## Views for Technicians
 
-Technician-friendly views provide simplified access to asset data without requiring staff to manually join multiple tables. For example, the water_pipe view combines base records, geometry, and properties into a single query result. This allows technicians to query and visualize assets in GIS tools or reports without handling complex joins.
+Technician views provide simplified, ready-to-use datasets that merge all essential asset information (base attributes, geometry, and key property values) into a single query result. These views remove the need for technicians to manually join multiple tables and are optimized for direct use in GIS tools, dashboards, and field workflows.
 
-Views:
+<br>
 
-- Present only the attributes relevant to a technician’s workflow.
-- Ensure geometry and related properties are already joined.
-- Filter out unnecessary fields.
-- Enforce community-level access control.
+Technician views are designed to:
+
+- Include only the attributes required for day-to-day technician workflows.
+- Provide geometry and property values already joined and resolved.
+- Hide internal or administrative fields that are irrelevant to end users.
+- Enforce row-level security to restrict visibility to the technician’s community.
+
+---
+
+### Core Technician Views 
+
+**`water_pipe`** is an example of a standard technician-oriented view. It merges all relevant pipe information from `feature_base`, `feature_geometry`, and `feature_property`. It is automatically filtered to the current user’s community using `user_community` and `CURRENT_USER`.
+
+<br>
+
+This view provides a streamlined set of columns, including:
+
+- Core identifiers (`feature_id`)
+- Geometry (point, line, or polygon)
+- Pipe attributes (diameter, material, brand, model, contractor, length)
+- Classification-related context such as class, sub-class, type, and system
+
+<br>
+
+Because the joins, filters, and property lookups are preconfigured, technicians can immediately map, query, update, and export water pipe information without reconstructing the model manually. All other technician views follow the same pattern for their respective asset classes.
+
+---
 
 ## Database Processes
 
-Underlying tables are maintained using triggers that automatically handle inserts, updates, and deletes:
+To ensure a smooth user experience, the database uses **automated triggers** that manage inserts, updates, and deletions behind the scenes. Technicians interact with assets using simple SQL operations, while the triggers handle the more complex logic such as property lifecycle management, geometry validation, class assignment, and community permissions.
 
-- Insert triggers: Populate default values, assign user ownership, clean geometries, and insert required properties.
-- Update triggers: Ensure consistency across related tables (e.g. updating a pipe’s material updates the corresponding property record).
-- Delete triggers: Cascade deletions from feature_base into feature_geometry and feature_property to prevent orphaned records.
+Although the model includes many specialised triggers, they all follow the same principles. The triggers on `feature_base` form the foundation and illustrate the system’s behaviour clearly.
 
-These triggers allow technicians to interact with the database through standard insert/update/delete commands without needing to manage linked tables manually.
+---
+
+### Insert Triggers
+
+**`feature_base_inserter()`** is the primary insertion trigger and serves as the most common entry point for standard assets: 
+
+- Assigns `class_id`, `sub_class_id`, and `view_name` from arguments passed by the front end
+- Automatically sets `user_name` using the current user’s community (`user_community`).
+- Ensures new assets are created with correct classification, security, and view configuration
+- Executes BEFORE INSERT on `feature_base`
+
+---
+
+### Update Triggers
+
+**`feature_base_updater()`** manages all major updates to existing assets:
+
+- Updates core attributes (`install date`, `description`, `condition`, `costs`, etc.).
+- Preserves the user assignment by aligning `user_name` with `user_community`
+- Ensures that assets remain compliant with classification and system rules
+- Executes BEFORE UPDATE on `feature_base`
+
+---
+
+### Delete Triggers
+
+`feature_deleter()` handles complete removal of an asset and ensures the database remains clean. This prevents orphaned rows and maintains database integrity:
+
+- Deletes the row in `feature_base`
+- Deletes linked geometry from `feature_geometry`
+- Deletes all associated property records in `feature_property`
+
+A `feature_deleter_nogeom` variant handles assets that do not contain geometry.
+
+---
+
+### Geometry Triggers
+
+Geometry triggers ensure that all spatial data remains valid, standardised, and aligned with the correct SRID (EPSG:4326). Examples include `feature_geometry_point_inserter` and `feature_geometry_point_updater`, which manage point geometries.
+
+<br>
+
+For all geometry inserts and updates, these triggers:
+
+- Replace invalid `NaN` WKT values
+- Enforce the correct SRID
+- Assign `user_name` based on the feature’s system and community
+
+---
+
+### Property Triggers 
+
+Some asset classes use classification-specific property triggers. For example, water pipes use:
+
+<br>
+
+**pipe_property_inserter():**
+
+- Automatically inserts pipe-specific properties (brand, material, diameter, contractor)
+- Executed AFTER INSERT on `feature_base`
+
+<br>
+
+**pipe_property_updater():**
+
+- Updates the corresponding property records using `OLD.feature_id`
+- Executed AFTER UPDATE on feature_base
+
+<br>
+
+Many similar property triggers exist for other assets, each following the same pattern: automatic insert/update of the correct property set based on the feature’s classification.
+
+---
 
 ## Row-Level Security
 
-Access control is enforced via the user_name field in feature_base and its relationship with the user_community table. This ensures that:
+Row-level security (RLS) ensures technicians can only view and edit the assets they are allowed to access. It uses:
 
-- Users can only see or edit features linked to their community.
-- Queries run against views are automatically filtered to the current user’s community using CURRENT_USER.
-- Special roles (e.g. admin, technician) bypass these restrictions when needed.
+- `feature_base.user_name`
+- `user_community` (maps database users to communities)
+- `CURRENT_USER` (active database login)
 
-This mechanism allows the same database to serve multiple communities securely.
+<br>
+
+Row-Level Security guarantees that:
+
+- Technicians only interact with assets belonging to their assigned community
+- All technician views automatically apply the security filter, no extra WHERE clauses required
+- Admin and special roles may bypass these restrictions where appropriate
+
+<br>
+
+This enables a single shared database to securely support multiple municipalities or departments without data leakage between communities.
+
+---
+
+<br>
