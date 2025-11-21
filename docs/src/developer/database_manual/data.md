@@ -83,12 +83,23 @@ A more specific grouping within a class, linked to units of measurement and dete
 
 <br>
 
+**Examples of sub-classes include:**
+
+- Pipe
+- Meter
+- Monument
+- Grassland
+- Switchgear
+- Pedestrian Walkway
+
+<br>
+
 **Units include:**
 
 - Each arbitrary unit
 - Metre
-- Square meter
-- Cubic meter
+- Square metre
+- Cubic metre
 
 <br>
 
@@ -120,6 +131,15 @@ These are stored in the `asset_classification_combination` table, which defines:
 - `type_id` → links to `asset_type`
 - `name` and `description`
 - `def_stylename` → default styling for GIS or reports
+
+<br>
+
+**Examples of valid combination include:**
+
+- Water Supply - Box - Meter
+- Stormwater Collection - Motor - Gasoline
+- Structures - Building - Substructure
+- Natural Assets - Wetland - Swamp
 
 <br>
 

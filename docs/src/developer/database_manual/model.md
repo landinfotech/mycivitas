@@ -25,9 +25,11 @@ The asset database is built on a set of core source tables that store essential 
 
 The `feature_base` table is the **central repository** for all assets in the system. Each record represents a single feature and contains its core identifiers, classifications, ownership, and cost information.
 
+A critical aspect of this table is that its primary key, `id`, serves as the **unique feature identifier** across the entire platform. This ID is used not only within the database for relational integrity but also in the **front-end user interface**, ensuring that every asset is referenced, displayed, and managed consistently throughout the system.
+
 <br>
 
-It stores key references such as:
+It also stores key references such as:
 
 - `system_id` – links each feature to its parent system
 - `class_id`, `sub_class_id`, `type_id` – define what the feature is
@@ -114,7 +116,7 @@ This design provides balance between **structure** and **extensibility**, allowi
 
 ### How It Works
 
-The `feature_property` table acts as a *link table* between `feature_base` (the asset record) and `property` (the property definitions).Each record in `feature_property` defines a single attribute for a feature, storing:
+The `feature_property` table acts as a *link table* between `feature_base` (the asset record) and `property` (the property definitions). Each record in `feature_property` defines a single attribute for a feature, storing:
 
 - `feature_id` → the asset being described
 - `property_id` → what the attribute represents (e.g., “material”)
