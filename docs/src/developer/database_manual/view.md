@@ -43,6 +43,12 @@ This view provides a streamlined set of columns, including:
 
 Because the joins, filters, and property lookups are preconfigured, technicians can immediately map, query, update, and export water pipe information without reconstructing the model manually. All other technician views follow the same pattern for their respective asset classes.
 
+<br>
+
+<div class="image-with-caption">
+  <img src="../img/view-1.png" alt="Example View">
+</div>
+
 ---
 
 ## Database Processes
@@ -77,7 +83,7 @@ Although the model includes many specialised triggers, they all follow the same 
 
 ### Delete Triggers
 
-`feature_deleter()` handles complete removal of an asset and ensures the database remains clean. This prevents orphaned rows and maintains database integrity:
+**`feature_deleter()`** handles complete removal of an asset and ensures the database remains clean. This prevents orphaned rows and maintains database integrity:
 
 - Deletes the row in `feature_base`
 - Deletes linked geometry from `feature_geometry`
@@ -127,11 +133,22 @@ Many similar property triggers exist for other assets, each following the same p
 
 ## Row-Level Security
 
-Row-level security (RLS) ensures technicians can only view and edit the assets they are allowed to access. It uses:
+Row-level security (RLS) ensures that technicians only see and modify assets that belong to their assigned community. This is achieved through a combination of:
 
 - `feature_base.user_name`
-- `user_community` (maps database users to communities)
+- `user_community` mapping table
+- `system.community_id`
 - `CURRENT_USER` (active database login)
+
+<br>
+
+Every database session has a PostgreSQL login username. `CURRENT_USER` is compared to `user_community.user_name` to determine which community the user belongs to. The `user_community` table then maps each PostgreSQL login to a specific `community_id`. This ensures a technician only sees their own municipality/department.
+
+<br>
+
+<div class="image-with-caption" style="text-align: center;">
+  <img src="../img/view-2.png" alt="Security">
+</div>
 
 <br>
 
