@@ -11,27 +11,118 @@ license: This program is free software; you can redistribute it and/or modify it
 
 # Data Exports & Reporting
 
+The reporting system is built around **materialized views** and **export datasets**, which together provide fast, consistent, and secure access to asset information. 
+
+Raw asset tables are transformed into technician-friendly views, consolidated reporting tables, and finally community-filtered export layers used by dashboards, spreadsheets, and external systems.
+
+---
+
 ## Materialized Views
 
-Materialized views are used for reporting and calculations. They store query results for performance reasons and are refreshed via a scheduled script.
+Materialized views act as **pre-calculated reporting tables**. Instead of recalculating complex queries every time a report runs, the system stores the results in advance.
+
+A scheduled **refresher script** updates these materialized views at set intervals (for example, nightly). This ensures that all summary reports, projections, and performance dashboards run quickly while still reflecting recent changes.
+
+This avoids slow queries and provides a consistent data snapshot for analysis and reporting.
+
+<br>
+
+<div class="image-with-caption" style="text-align: center;">
+  <img src="../img/export-1.png" alt="Materialized Views">
+</div>
+
+---
 
 ## Export Datasets
 
-- mc_exporter: master export combining all asset types.
-- exp_water_pipe: export slice focusing only on water pipes.
-- mc_water_pipe: security-filtered version of exp_water_pipe limited to the logged-in user’s community.
+Export datasets provide asset information in a clean, reporting-ready format. They follow a structured pipeline that moves from raw asset tables to fully filtered, user-specific outputs. Water pipes are used here as an example of this export flow.
 
-Pipeline model:
+---
 
-feature_base + feature_geometry + feature_property → water_pipe → mc_exporter → exp_water_pipe → mc_water_pipe.
+### Technician View (`water_pipe`)
 
-## How It Fits Together
+The technician-facing starting point. This view joins `feature_base`, `feature_geometry`, and pipe-specific `feature_property` values into a single, clean dataset. It already includes user and community filtering, making it suitable for day-to-day mapping and field workflows.
 
-1. Insert: Triggers populate base fields (class_id, view_name, user_name).
-2. Geometry: Geometry triggers enforce SRID and ownership.
-3. Properties: Property triggers insert relevant default attributes.
-4. Update: Triggers ensure consistency across base, geometry, and properties.
-5. Delete: Cascade deletes remove related geometry and properties.
-6. Views: Views (mv_features, aim_projection) present GIS-ready layers and planning metrics.
-7. Capital Planning: Triggers assign features to community projects and calculate renewal costs.
-8. Ownership: All triggers update user_name to maintain correct access control.
+<br>
+
+**Source Tables:**
+
+- `feature_base`
+- `feature_geometry`
+- `feature_property`
+- `system`
+- `user_community`
+
+---
+
+### Master Export (`mc_exporter`)
+
+A unified export layer that merges **all asset types** into one comprehensive table. It flattens classifications, quantities, lifespan, risk scores, and property values into a single record per feature. All export slices, such as water pipes, roads, buildings, and amenities, are derived from this view.
+
+<br>
+
+**Source Tables:**
+
+- Core asset tables (`feature_base`, `feature_geometry`, `feature_property`)
+- Classification tables (`asset_class`, `asset_sub_class`, `asset_type`)
+- Dimensional tables (`system`, `community`, `region`, `province`, `country`)
+- Lifecycle and risk tables (`condition`, `pof`, `cof`, `deterioration`)
+- Calculation tables (`feature_quantity`, `feature_calculation`, `feature_projection`)
+- Many more (full flattening logic)
+
+---
+
+### Export Slice (`exp_water_pipe`)
+
+A focused subset of the master export containing only water pipe assets. This layer has no security filtering and serves as the intermediate dataset before community-level access rules are applied.
+
+<br>
+
+**Source Tables:** 
+
+- `mc_exporter`
+
+---
+
+### User-Secure Export (`mc_water_pipe`)
+
+The final, community-filtered export for water pipes. It ensures users only access data for their own municipality, while administrators and technicians retain full visibility across all communities.
+
+<br>
+
+**Source Tables:**
+
+- `exp_water_pipe`
+- `user_community`
+
+---
+
+<br>
+
+<div class="image-with-caption">
+  <img src="../img/export-2.png" alt="Example View">
+</div>
+
+---
+
+## Summary
+
+| Dataset            | Purpose                           | Security | Source                   |
+| ------------------ | --------------------------------- | -------- | ------------------------ |
+| **water_pipe**     | Technician view of pipe assets    | Yes      | Base Tables              |
+| **mc_exporter**    | Master export of all assets       | No       | All core + lookup tables |
+| **exp_water_pipe** | Water pipe export slice           | No       | `mc_exporter`            |
+| **mc_water_pipe**  | Secure, community-filtered export | Yes      | `exp_water_pipe`         |
+
+<br>
+
+This staged approach ensures:
+
+- Consistent data structures across all assets
+- Fast reporting and dashboards
+- Role-based, community-based access control
+- Predictable outputs for integrations and external exports
+
+---
+
+<br>
