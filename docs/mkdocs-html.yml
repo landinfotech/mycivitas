@@ -88,8 +88,6 @@ plugins:
             show_root_full_path: true
             show_root_members_full_path: true
             merge_init_into_class: true
-            docstring_options:
-              ignore_init_summary: false
 
   - redirects:
       redirect_maps:
